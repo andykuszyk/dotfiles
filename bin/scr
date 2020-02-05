@@ -1,0 +1,2 @@
+#!/bin/bash
+maim --noopengl -s -d 1 | xclip -selection clipboard -t image/png
