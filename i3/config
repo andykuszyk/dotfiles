@@ -157,6 +157,9 @@ bar {
         status_command i3status
 }
 
+# i3gaps
+gaps inner 5
+
 # lock screen
 bindsym $mod+o exec ~/dotfiles/i3/lock.sh
 
