@@ -14,4 +14,4 @@ gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg
 feh --randomize --bg-fill ~/Pictures/wallpapers/
 
 # Start compton
-compton --daemon --config ~/dotfiles/compton.conf
+compton --daemon --config ~/.config/compton.conf
