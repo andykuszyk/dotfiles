@@ -161,11 +161,11 @@ bar {
 gaps inner 5
 
 # lock screen
-bindsym $mod+o exec ~/dotfiles/i3/lock.sh
+bindsym $mod+o exec ~/.config/i3/lock.sh
 
 # bind workspace cycling
 bindsym $mod+Prior workspace prev
 bindsym $mod+Next workspace next
 
 # Run statup scripts
-exec --no-startup-id ~/dotfiles/i3/startup.sh
+exec --no-startup-id ~/.config/i3/startup.sh
