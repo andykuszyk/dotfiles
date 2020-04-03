@@ -103,8 +103,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gl='git log -n 100 --oneline --graph --all'
-alias idea='intellij-idea-ultimate . &> /dev/null &'
-alias gol='goland . &> /dev/null &'
+alias idea='intellij-idea-ultimate . &> /dev/null &!'
+alias gol='goland . &> /dev/null &!'
 alias cdf='cd ~/go/src/github.com/form3tech/'
 alias k='kubectl'
 alias f='f3 auth dev'
