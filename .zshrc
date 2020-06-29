@@ -69,10 +69,6 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git
-    minikube
-    kubectl
-    web-search
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -105,9 +101,11 @@ source $ZSH/oh-my-zsh.sh
 alias gl='git log -n 100 --oneline --graph --all'
 alias idea='intellij-idea-ultimate . &> /dev/null &!'
 alias gol='goland . &> /dev/null &!'
+alias pycharm='pycharm-professional . &> /dev/null &!'
 alias cdf='cd ~/go/src/github.com/form3tech/'
 alias k='kubectl'
 alias f='f3 auth dev'
+alias x='exit'
 source <(kubectl completion zsh)
 complete -F __start_kubectl k
 
