@@ -5,8 +5,13 @@ autocmd Filetype yaml setlocal ts=2 sw=2 sts=2 expandtab
 set nocompatible
 filetype off
 
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
+set laststatus=2
+
 call plug#begin('~/.vim/plugged')
-Plug 'vim-airline/vim-airline'
 call plug#end()
 
 set nocompatible              " be iMproved, required
