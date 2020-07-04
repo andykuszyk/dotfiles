@@ -1,8 +1,7 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$PATH:/usr/local/bin"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/andy/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -103,10 +102,14 @@ alias idea='intellij-idea-ultimate . &> /dev/null &!'
 alias gol='goland . &> /dev/null &!'
 alias pycharm='pycharm-professional . &> /dev/null &!'
 alias cdf='cd ~/go/src/github.com/form3tech/'
-alias k='kubectl'
-alias f='f3 auth dev'
+if [[ "$(which kubectl)" != "kubectl not found" ]]; then
+    alias k='kubectl'
+    source <(kubectl completion zsh)
+fi
+if [[ "$(which f3)" != "f3 not found" ]]; then
+    alias f='f3 auth dev'
+fi
 alias x='exit'
-source <(kubectl completion zsh)
 complete -F __start_kubectl k
 
 function grepr() {

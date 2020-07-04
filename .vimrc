@@ -4,6 +4,8 @@ autocmd Filetype go setlocal ts=4 sw=4 sts=0 noexpandtab
 autocmd Filetype yaml setlocal ts=2 sw=2 sts=2 expandtab
 set nocompatible
 filetype off
+syntax on
+set backspace=indent,eol,start
 
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
