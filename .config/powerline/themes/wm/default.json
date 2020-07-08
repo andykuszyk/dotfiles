@@ -1,0 +1,30 @@
+{
+	"segments": {
+        "left": [
+            {
+                "function": "powerline.segments.i3wm.workspaces"
+            }
+        ],
+		"right": [
+            {
+                "function": "powerline.segments.common.players.spotify",
+                "name": "player"
+            },
+			{
+				"function": "powerline.segments.common.bat.battery"
+			},
+			{
+				"function": "powerline.segments.common.time.date"
+			},
+			{
+				"function": "powerline.segments.common.time.date",
+				"name": "time",
+				"args": {
+					"format": "%H:%M:%S",
+					"istime": true
+				}
+			}
+	
+        ]
+    }
+}

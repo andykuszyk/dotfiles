@@ -11,11 +11,14 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# start firefox
+bindsym $mod+BackSpace exec firefox
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+space exec dmenu_run
+bindsym $mod+space exec dmenu_run -fn 'pango:monospace 10'
 
 # change focus
 bindsym $mod+j focus left
@@ -122,7 +125,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         position top
-        status_command i3status
+        status_command python3 /home/andy/.local/lib/python3.8/site-packages/powerline/bindings/i3/powerline-i3.py
+        font pango:DejaVu Sans Mono for Powerline book 10
 }
 
 # i3gaps

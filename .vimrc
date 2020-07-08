@@ -7,6 +7,8 @@ filetype off
 syntax on
 set backspace=indent,eol,start
 
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
@@ -14,7 +16,11 @@ python3 del powerline_setup
 set laststatus=2
 
 call plug#begin('~/.vim/plugged')
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
