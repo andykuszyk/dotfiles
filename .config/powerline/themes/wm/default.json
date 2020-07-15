@@ -1,10 +1,5 @@
 {
 	"segments": {
-        "left": [
-            {
-                "function": "powerline.segments.i3wm.workspaces"
-            }
-        ],
 		"right": [
             {
                 "function": "powerline.segments.common.players.spotify",
@@ -14,7 +9,10 @@
 				"function": "powerline.segments.common.bat.battery"
 			},
 			{
-				"function": "powerline.segments.common.time.date"
+				"function": "powerline.segments.common.time.date",
+                "args": {
+                    "format": "%A %d-%m-%Y"
+                }
 			},
 			{
 				"function": "powerline.segments.common.time.date",
