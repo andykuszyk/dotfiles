@@ -1,0 +1,8 @@
+#!/bin/bash
+slk &
+my-hours &
+pavucontrol &
+zoom &
+outlook &
+outlook-calendar &
+firefox &
