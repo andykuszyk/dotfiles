@@ -1,2 +1,9 @@
 *.swp
-*
+/*
+!.config/i3/*
+!.config/powerline/themes/*
+!.config/compton.conf
+!.local/bin/*
+!.vimrc
+!.zshrc
+!.gitignore
