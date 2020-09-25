@@ -11,6 +11,9 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# take a screenshpt
+bindsym $mod+Shift+Return exec scr
+
 # start firefox
 bindsym $mod+BackSpace exec firefox
 
