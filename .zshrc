@@ -9,12 +9,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
 
-. /home/andy/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+if [[ "$(uname)" == "Darwin" ]]; then
+    . /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+    export TMUX_POWERLINE_CONF_PATH="/usr/local/lib/python3.7/site-packages/powerline/bindings/tmux/powerline.conf"
+else
+    . $HOME/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
+    export TMUX_POWERLINE_CONF_PATH="/home/andy/.local/lib/python3.8/site-packages/powerline/bindings/tmux/powerline.conf"
+fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
