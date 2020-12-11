@@ -21,6 +21,7 @@ call plug#end()
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+au filetype go inoremap <buffer> . .<C-x><C-o>
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
