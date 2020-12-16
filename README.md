@@ -3,5 +3,9 @@ This repo contains the dotfiles that I use for Linux desktop configuration. Most
 
 More information about my use of i3 can be found in my [blog post](https://andykuszyk.github.io/2020-02-18-demystifying-i3.html) on the subject.
 
+## Usage
+* Clone this repo somewhere.
+* Run `make` to copy the files into your home directory.
+
 ## Vim
 * Vim plugins use [`vim-plug`](https://github.com/junegunn/vim-plug). To install run `curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`, open Vim and run `:PlugInstall`.
