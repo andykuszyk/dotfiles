@@ -72,9 +72,11 @@ fi
 plugins=(
 )
 
-autoload -U colors; colors
-source $HOME/repos/zsh-kubectl-prompt/kubectl.zsh
-RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+if [[ -e $HOME/repos/zsh-kubectl-prompt/kubectl.zsh ]]; then
+    autoload -U colors; colors
+    source $HOME/repos/zsh-kubectl-prompt/kubectl.zsh
+    RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+fi
 
 source $ZSH/oh-my-zsh.sh
 
