@@ -12,6 +12,7 @@ More information about my use of i3 can be found in my [blog post](https://andyk
 
 ## Dependencies
 * Clone https://github.com/superbrothers/zsh-kubectl-prompt into `$HOME/repos/`
+* `pip3 install powerline-status`
 
 ## Useful utilities
 * Adjusting colour balance at night: `redshift`
