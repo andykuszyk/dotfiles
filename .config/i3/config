@@ -1,7 +1,12 @@
 # Use the super key as the i3 modifier.
 set $mod Mod4
+
+# Remove container titles
 new_window 1pixel
+
+# Increase the default border size
 default_border pixel 2
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 10
@@ -94,8 +99,10 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -131,6 +138,7 @@ bar {
         position top
         status_command python3 /home/andy/.local/lib/python3.8/site-packages/powerline/bindings/i3/powerline-i3.py
         font pango:DejaVu Sans Mono for Powerline book 10
+        tray_output none
 }
 
 # i3gaps
