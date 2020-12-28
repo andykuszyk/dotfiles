@@ -12,6 +12,7 @@ ZSH_THEME="robbyrussell"
 if [[ "$(uname)" == "Darwin" ]]; then
     . /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
     export TMUX_POWERLINE_CONF_PATH="/usr/local/lib/python3.7/site-packages/powerline/bindings/tmux/powerline.conf"
+    export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 else
     . $HOME/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
     export TMUX_POWERLINE_CONF_PATH="/home/andy/.local/lib/python3.8/site-packages/powerline/bindings/tmux/powerline.conf"
