@@ -16,6 +16,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     . $HOME/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
     export TMUX_POWERLINE_CONF_PATH="/home/andy/.local/lib/python3.8/site-packages/powerline/bindings/tmux/powerline.conf"
+    powerline-config tmux setup
 fi
 
 # Uncomment the following line to use case-sensitive completion.
