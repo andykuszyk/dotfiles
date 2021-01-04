@@ -17,6 +17,7 @@ set laststatus=2
 
 call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 let g:go_def_mode='gopls'
