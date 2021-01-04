@@ -5,7 +5,7 @@ set $mod Mod4
 new_window 1pixel
 
 # Increase the default border size
-default_border pixel 2
+default_border pixel 3
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
