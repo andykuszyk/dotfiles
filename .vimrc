@@ -30,3 +30,4 @@ filetype off                  " required
 filetype plugin indent on    " required
 
 set cursorline
+colorscheme delek
