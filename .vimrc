@@ -18,6 +18,7 @@ set laststatus=2
 call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'tpope/vim-fugitive'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 let g:go_def_mode='gopls'
@@ -30,4 +31,7 @@ filetype off                  " required
 filetype plugin indent on    " required
 
 set cursorline
-colorscheme delek
+
+let g:gruvbox_contrast_dark = 'hard'
+autocmd vimenter * ++nested colorscheme gruvbox
+set background=dark
