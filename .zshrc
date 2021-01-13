@@ -125,3 +125,5 @@ alias x='exit'
 complete -F __start_kubectl k
 
 export GOPRIVATE=github.com/form3tech/*
+
+export TERM=xterm-256color
