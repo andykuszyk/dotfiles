@@ -15,3 +15,5 @@ feh --randomize --bg-fill ~/Pictures/planet-wallpapers/
 
 # Start compton
 compton --daemon --config ~/.config/compton.conf
+
+redshift -O 4000 -P

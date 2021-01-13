@@ -1,2 +1,3 @@
-watson stop
 poweroff
+cd ~/repos/andykuszyk/captains-log
+./lg stop

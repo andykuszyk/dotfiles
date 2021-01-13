@@ -1,9 +1,9 @@
 #!/bin/bash
 slk &
-my-hours &
 pavucontrol &
 zoom &
 outlook &
 outlook-calendar &
 firefox &
-watson start form3
+cd ~/repos/andykuszyk/captains-log
+./lg start
