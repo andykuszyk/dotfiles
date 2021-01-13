@@ -13,7 +13,4 @@ gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg
 # Wallpaper
 feh --randomize --bg-fill ~/Pictures/planet-wallpapers/
 
-# Start compton
-compton --daemon --config ~/.config/compton.conf
-
 redshift -O 4000 -P
