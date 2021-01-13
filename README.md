@@ -10,6 +10,9 @@ More information about my use of i3 can be found in my [blog post](https://andyk
 ## Vim
 * Vim plugins use [`vim-plug`](https://github.com/junegunn/vim-plug). To install run `curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`, open Vim and run `:PlugInstall`.
 
+## Terminal theme
+Terminal themes provided by https://github.com/Mayccoll/Gogh. Current theme is `gruvbox dark`.
+
 ## Dependencies
 * Clone https://github.com/superbrothers/zsh-kubectl-prompt into `$HOME/repos/`
 * `pip3 install powerline-status`
