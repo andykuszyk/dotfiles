@@ -78,7 +78,7 @@ if [[ -e $HOME/repos/zsh-kubectl-prompt/kubectl.zsh ]]; then
     autoload -U colors; colors
     source $HOME/repos/zsh-kubectl-prompt/kubectl.zsh
     f3="-"
-    RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT) - $(if [[ -n $F3_SESS_EXPIRY ]]; then date -d @$F3_SESS_EXPIRY --rfc-3339=seconds; fi)%{$reset_color%}'
+    RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT) - $(if [[ -n $F3_SESS_EXPIRY ]]; then date -u -d @$(($F3_SESS_EXPIRY-$(date +%s))) +"%T"; fi)%{$reset_color%}'
 fi
 
 source $ZSH/oh-my-zsh.sh
