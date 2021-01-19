@@ -141,9 +141,6 @@ bar {
         tray_output none
 }
 
-# i3gaps
-gaps inner 0
-
 # lock screen
 bindsym $mod+o exec ~/.config/i3/lock.sh
 
