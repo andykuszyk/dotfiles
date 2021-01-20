@@ -72,6 +72,8 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    tmux
+    fzf-tab
 )
 
 if [[ -e $HOME/repos/zsh-kubectl-prompt/kubectl.zsh ]]; then
