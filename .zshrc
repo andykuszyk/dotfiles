@@ -116,6 +116,7 @@ alias idea='intellij-idea-ultimate . &> /dev/null &!'
 alias gol='goland . &> /dev/null &!'
 alias pycharm='pycharm-professional . &> /dev/null &!'
 alias cdf='cd ~/go/src/github.com/form3tech/'
+alias cdr='cd ~/repos/andykuszyk'
 if [[ "$(which kubectl)" != "kubectl not found" ]]; then
     alias k='kubectl'
     source <(kubectl completion zsh)
