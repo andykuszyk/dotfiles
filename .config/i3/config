@@ -137,7 +137,7 @@ bindsym $mod+r mode "resize"
 bar {
         position top
         status_command python3 /home/andy/.local/lib/python3.8/site-packages/powerline/bindings/i3/powerline-i3.py
-        font pango:DejaVu Sans Mono for Powerline book 10
+        font pango:DejaVu Sans Mono for Powerline book 8
         tray_output none
 }
 
