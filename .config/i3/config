@@ -150,3 +150,8 @@ bindsym $mod+Next workspace next
 
 # Run statup scripts
 exec --no-startup-id ~/.config/i3/startup.sh
+
+# Assign workspaces to screens
+workspace 1 output DP-1
+workspace 2 output DP-7
+workspace 3 output DP-5
