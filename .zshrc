@@ -129,3 +129,4 @@ alias x='exit'
 complete -F __start_kubectl k
 
 export GOPRIVATE=github.com/form3tech/*
+source "/home/andy/.sdkman/bin/sdkman-init.sh"
