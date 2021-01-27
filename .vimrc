@@ -16,6 +16,7 @@ python3 del powerline_setup
 set laststatus=2
 
 call plug#begin('~/.vim/plugged')
+Plug 'preservim/nerdtree'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
