@@ -40,4 +40,3 @@ autocmd vimenter * ++nested colorscheme gruvbox
 set background=dark
 
 set nofoldenable
-autocmd VimEnter * NERDTree
