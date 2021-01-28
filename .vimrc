@@ -21,6 +21,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'kien/ctrlp.vim'
 call plug#end()
 
 let g:go_def_mode='gopls'
@@ -39,3 +40,4 @@ autocmd vimenter * ++nested colorscheme gruvbox
 set background=dark
 
 set nofoldenable
+autocmd VimEnter * NERDTree
