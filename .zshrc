@@ -111,6 +111,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export VIRTUAL_ENV_DISABLE_PROMPT=
+alias ip=ipython
 alias gl='git log -n 100 --oneline --graph --all'
 alias idea='intellij-idea-ultimate . &> /dev/null &!'
 alias gol='goland . &> /dev/null &!'
