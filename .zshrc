@@ -72,6 +72,7 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    colored-man-pages
     tmux
     fzf-tab
 )
@@ -131,3 +132,5 @@ complete -F __start_kubectl k
 
 export GOPRIVATE=github.com/form3tech/*
 source "/home/andy/.sdkman/bin/sdkman-init.sh"
+
+zstyle ':fzf-tab:complete:*:*' extra-opts --preview=$extract'(bat --color=always --pager=never ${realpath} || colorls --color=always --long -A --sort-dirs --git-status ${realpath}) 2>/dev/null'
