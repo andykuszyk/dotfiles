@@ -19,6 +19,7 @@ Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kien/ctrlp.vim'
 Plug 'PhilRunninger/nerdtree-buffer-ops'
+Plug 'ludovicchabant/vim-gutentags'
 call plug#end()
 
 set nocompatible              " be iMproved, required
