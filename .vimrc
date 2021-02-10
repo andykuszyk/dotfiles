@@ -20,6 +20,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'kien/ctrlp.vim'
 Plug 'PhilRunninger/nerdtree-buffer-ops'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'hashivim/vim-terraform'
+Plug 'vim-syntastic/syntastic'
+Plug 'juliosueiras/vim-terraform-completion'
 call plug#end()
 
 set nocompatible              " be iMproved, required
