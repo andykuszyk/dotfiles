@@ -1,6 +1,5 @@
 #!/bin/bash
 slk &
-pavucontrol &
 zoom &
 outlook &
 outlook-calendar &
