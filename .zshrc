@@ -126,6 +126,7 @@ fi
 if [[ "$(which f3)" != "f3 not found" ]]; then
     alias f='f3 auth login'
     alias fa='f3 aws cli'
+    alias fp='f3 github pr'
 fi
 alias x='exit'
 complete -F __start_kubectl k
