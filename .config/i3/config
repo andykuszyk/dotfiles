@@ -26,8 +26,8 @@ bindsym $mod+BackSpace exec firefox
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+space exec dmenu_run -fn 'pango:monospace 8'
+# start rofi (a program launcher)
+bindsym $mod+space exec rofi -combi-modi drun#ssh#window -modi combi#form3:~/.config/rofi/f3.py -show combi
 
 # change focus
 bindsym $mod+j focus left
