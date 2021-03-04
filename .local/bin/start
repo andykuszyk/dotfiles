@@ -1,5 +1,5 @@
 #!/bin/bash
-slk &
+slack &
 pavucontrol &
 zoom &
 outlook &
