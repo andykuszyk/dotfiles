@@ -39,5 +39,6 @@ set background=dark
 set nofoldenable
 
 let NERDTreeShowHidden=1
+map <C-n> :NERDTreeToggle<CR>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_show_hidden = 1
