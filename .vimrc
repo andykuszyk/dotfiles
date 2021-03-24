@@ -42,3 +42,4 @@ map <C-n> :NERDTreeToggle<CR>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_show_hidden = 1
 tnoremap <Esc><Esc> <C-\><C-n>
+autocmd TerminalOpen * setlocal nonumber norelativenumber
