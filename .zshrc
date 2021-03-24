@@ -77,6 +77,7 @@ plugins=(
     colored-man-pages
     tmux
     fzf-tab
+    git
 )
 
 if [[ -e $HOME/repos/zsh-kubectl-prompt/kubectl.zsh ]]; then
