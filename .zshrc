@@ -77,7 +77,6 @@ plugins=(
     colored-man-pages
     tmux
     fzf-tab
-    git
 )
 
 if [[ -e $HOME/repos/zsh-kubectl-prompt/kubectl.zsh ]]; then
@@ -132,6 +131,10 @@ if [[ "$(which f3)" != "f3 not found" ]]; then
     alias fp='f3 github pr'
 fi
 alias x='exit'
+alias gs='git status'
+alias gap='git add -p'
+alias gp='git push'
+alias gc='git commit'
 complete -F __start_kubectl k
 
 export GOPRIVATE=github.com/form3tech/*
