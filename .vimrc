@@ -22,6 +22,7 @@ Plug 'PhilRunninger/nerdtree-buffer-ops'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
+Plug 'pprovost/vim-ps1'
 call plug#end()
 
 set nocompatible              " be iMproved, required
