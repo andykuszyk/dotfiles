@@ -135,6 +135,7 @@ alias gs='git status'
 alias gap='git add -p'
 alias gp='git push'
 alias gc='git commit'
+alias rn='tmux rename-window $(pwd | sed "s/.*\///g")'
 complete -F __start_kubectl k
 
 export GOPRIVATE=github.com/form3tech/*
