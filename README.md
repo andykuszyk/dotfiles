@@ -12,6 +12,10 @@ More information about my use of i3 can be found in my [blog post](https://andyk
 
 Tag generation is handled by [`ctags`](https://github.com/universal-ctags/ctags).
 
+After installing the plugins, install these `coc` specific extentions:
+- `:CocInstall coc-java`
+- `:CocInstall coc-go`
+
 ## Terminal theme
 Terminal themes provided by https://github.com/Mayccoll/Gogh. Current theme is `One Dark`.
 
