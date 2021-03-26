@@ -129,6 +129,7 @@ if [[ "$(which f3)" != "f3 not found" ]]; then
     alias f='f3 auth login'
     alias fa='f3 aws cli'
     alias fp='f3 github pr'
+    alias fad='f3 aws cli dev -w'
 fi
 alias x='exit'
 alias gs='git status'
