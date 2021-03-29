@@ -16,6 +16,8 @@ After installing the plugins, install these `coc` specific extentions:
 - `:CocInstall coc-java`
 - `:CocInstall coc-go`
 
+For the Terraform langauge server, install https://github.com/hashicorp/terraform-ls.
+
 ## Terminal theme
 Terminal themes provided by https://github.com/Mayccoll/Gogh. Current theme is `One Dark`.
 
