@@ -46,3 +46,4 @@ tnoremap <Esc><Esc> <C-\><C-n>
 autocmd TerminalOpen * setlocal nonumber norelativenumber
 
 set clipboard+=unnamedplus
+let g:go_fmt_command = "goimports"
