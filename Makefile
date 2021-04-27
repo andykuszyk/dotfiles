@@ -27,7 +27,7 @@ dirs:
 	mkdir -p ~/repos
 
 install-packages:
-	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake nodejs npm
+	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake nodejs npm pavucontrol
 	pip3 install powerline-status i3ipc ipython PyGithub==1.54.1
 
 new-machine: install-packages vim-plug shell bat vim-plugin dirs zsh-kubectl-prompt powerline-fonts default
