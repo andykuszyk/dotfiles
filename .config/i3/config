@@ -23,6 +23,9 @@ bindsym $mod+Shift+Return exec scr
 # start firefox
 bindsym $mod+BackSpace exec firefox
 
+# focus 1password
+bindsym $mod+p [title="1Password"] focus
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
