@@ -47,3 +47,7 @@ autocmd TerminalOpen * setlocal nonumber norelativenumber
 
 set clipboard+=unnamedplus
 let g:go_fmt_command = "goimports"
+
+set guioptions-=m  "menu bar
+set guioptions-=T  "toolbar
+set guioptions-=r  "scrollbar
