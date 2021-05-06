@@ -143,3 +143,5 @@ export GOPRIVATE=github.com/form3tech/*
 source "/home/andy/.sdkman/bin/sdkman-init.sh"
 
 zstyle ':fzf-tab:complete:*:*' extra-opts --preview=$extract'(bat --color=always --pager=never ${realpath} || colorls --color=always --long -A --sort-dirs --git-status ${realpath}) 2>/dev/null'
+
+eval $(ssh-agent)
