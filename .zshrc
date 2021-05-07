@@ -136,6 +136,7 @@ alias gs='git status'
 alias gap='git add -p'
 alias gp='git push'
 alias gc='git commit'
+alias gd='git diff'
 alias rn='tmux rename-window $(pwd | sed "s/.*\///g")'
 complete -F __start_kubectl k
 
