@@ -144,13 +144,4 @@ export GOPRIVATE=github.com/form3tech/*
 source "/home/andy/.sdkman/bin/sdkman-init.sh"
 
 # fzf-tab settings
-local extract="
-# trim input(what you select)
-local in=\${\${\"\$(<{f})\"%\$'\0'*}#*\$'\0'}
-# get ctxt for current completion(some thing before or after the current word)
-local -A ctxt=(\"\${(@ps:\2:)CTXT}\")
-# real path
-local realpath=\${ctxt[IPREFIX]}\${ctxt[hpre]}\$in
-realpath=\${(Qe)~realpath}
-"
-zstyle ':fzf-tab:complete:*:*' extra-opts --preview=$extract'(bat --color=always --pager=never ${realpath} || colorls --color=always --long -A --sort-dirs --git-status ${realpath}) 2>/dev/null'
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat $realpath 2> /dev/null || colorls $realpath 2> /dev/null'
