@@ -136,10 +136,12 @@ alias gs='git status'
 alias gap='git add -p'
 alias gp='git push'
 alias gc='git commit'
+alias gd='git diff'
 alias rn='tmux rename-window $(pwd | sed "s/.*\///g")'
 complete -F __start_kubectl k
 
 export GOPRIVATE=github.com/form3tech/*
 source "/home/andy/.sdkman/bin/sdkman-init.sh"
 
-zstyle ':fzf-tab:complete:*:*' extra-opts --preview=$extract'(bat --color=always --pager=never ${realpath} || colorls --color=always --long -A --sort-dirs --git-status ${realpath}) 2>/dev/null'
+# fzf-tab settings
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat $realpath 2> /dev/null || colorls $realpath 2> /dev/null'

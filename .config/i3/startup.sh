@@ -14,3 +14,5 @@ gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg
 feh --randomize --bg-fill ~/Pictures/planet-wallpapers/
 
 redshift -O 4000 -P
+
+eval $(ssh-agent)
