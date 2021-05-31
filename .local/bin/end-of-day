@@ -1,3 +1,2 @@
-cd ~/repos/andykuszyk/captains-log
-./lg stop
+git track stop
 poweroff
