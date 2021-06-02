@@ -45,7 +45,6 @@ let g:ctrlp_show_hidden = 1
 tnoremap <Esc><Esc> <C-\><C-n>
 autocmd TerminalOpen * setlocal nonumber norelativenumber
 
-set clipboard+=unnamedplus
 let g:go_fmt_command = "goimports"
 
 set guioptions-=m  "menu bar
