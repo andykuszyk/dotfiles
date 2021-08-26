@@ -147,3 +147,4 @@ source "/home/andy/.sdkman/bin/sdkman-init.sh"
 
 # fzf-tab settings
 zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat $realpath 2> /dev/null || colorls $realpath 2> /dev/null'
+source /home/andy/.gvm/scripts/gvm
