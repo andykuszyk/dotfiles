@@ -23,6 +23,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'pprovost/vim-ps1'
+Plug 'chrisbra/NrrwRgn'
 call plug#end()
 
 set nocompatible              " be iMproved, required

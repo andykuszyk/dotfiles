@@ -11,6 +11,9 @@ powerline-fonts:
 zsh-kubectl-prompt:
 	git clone https://github.com/superbrothers/zsh-kubectl-prompt ~/repos/zsh-kubectl-prompt
 
+zsh-completions:
+	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
 bat:
 	ln -s /usr/bin/batcat ~/.local/bin/bat
 
