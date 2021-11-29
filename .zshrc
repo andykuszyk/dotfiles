@@ -148,6 +148,9 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 # fzf-tab settings
 zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat $realpath 2> /dev/null || colorls $realpath 2> /dev/null'
 
+# set zsh auto suggestion colour to something compatible with vim
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
+
 source $HOME/.gvm/scripts/gvm
 
 # Disable auto-update on every brew command

@@ -1,2 +1,4 @@
 #!/bin/bash
-maim --noopengl -s -d 1 | xclip -selection clipboard -t image/png
+file=~/Pictures/$(date +%s).png
+maim --noopengl -s -d 1 "$file"
+cat "$file" | xclip -selection clipboard -t image/png
