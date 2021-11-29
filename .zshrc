@@ -143,11 +143,15 @@ alias rn='tmux rename-window $(pwd | sed "s/.*\///g")'
 complete -F __start_kubectl k
 
 export GOPRIVATE=github.com/form3tech/*
-source "/home/andy/.sdkman/bin/sdkman-init.sh"
+source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # fzf-tab settings
 zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat $realpath 2> /dev/null || colorls $realpath 2> /dev/null'
-source /home/andy/.gvm/scripts/gvm
 
 # set zsh auto suggestion colour to something compatible with vim
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
+
+source $HOME/.gvm/scripts/gvm
+
+# Disable auto-update on every brew command
+HOMEBREW_NO_AUTO_UPDATE=1
