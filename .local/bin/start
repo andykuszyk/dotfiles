@@ -1,9 +1,0 @@
-#!/bin/bash
-slack &
-pavucontrol &
-zoom &
-outlook &
-outlook-calendar &
-spotify &
-1password &
-git track start
