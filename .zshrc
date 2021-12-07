@@ -151,4 +151,4 @@ zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat $realpath 2> /dev/null || colorl
 source $HOME/.gvm/scripts/gvm
 
 # Disable auto-update on every brew command
-HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_AUTO_UPDATE=1

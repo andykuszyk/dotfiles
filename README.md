@@ -5,7 +5,11 @@ More information about my use of i3 can be found in my [blog post](https://andyk
 
 ## Usage
 * Clone this repo somewhere.
-* Run `make` to copy the files into your home directory.
+* `make install-packages` to install system dependencies.
+* `make new-machine` to set things up.
+* After any further changes to files, run `make` to copy the files into your home directory.
+
+Alternatively, run a sandbox environment with `make run`.
 
 ## Vim
 * Vim plugins use [`vim-plug`](https://github.com/junegunn/vim-plug). To install run `curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`, open Vim and run `:PlugInstall`.

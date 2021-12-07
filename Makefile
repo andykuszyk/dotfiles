@@ -30,12 +30,16 @@ dirs:
 	mkdir -p ~/.local/bin
 
 install-packages:
-	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake nodejs npm vim-gtk3 pavucontrol ruby-dev entr
-	pip3 install powerline-status i3ipc ipython PyGithub==1.54.1
+	sudo apt install -y i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake nodejs npm vim-gtk3 pavucontrol ruby-dev entr curl
+	pip3 install powerline-status i3ipc ipython PyGithub==1.54.1 seaborn pandas jupyterlab
 	sudo gem install colorls
 
 git-track:
 	git clone https://github.com/andykuszyk/git-track ~/repos/git-track
 	cp ~/repos/git-track/git* ~/.local/bin
 
-new-machine: install-packages vim-plug shell vim-plugin dirs bat zsh-kubectl-prompt powerline-fonts default git-track
+new-machine: vim-plug shell dirs bat zsh-kubectl-prompt powerline-fonts default git-track
+
+run:
+	docker build -t dotfiles .
+	docker run -v "~/:/home/andy/" -it dotfiles
