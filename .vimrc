@@ -16,16 +16,31 @@ syntax on
 " Set normal backspace behaviour.
 set backspace=indent,eol,start
 
-" Include the python powerline plugin for the status bar.
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-
 " Ensure every window as a status line.
 set laststatus=2
 
+" Set encoding for powerline fonts.
+set encoding=UTF-8
+
+" Enable incremental search.
+set incsearch
+
+" Highlight all search results for incremental search.
+set hlsearch
+
+" Enable powerline fonts
+let g:airline_powerline_fonts = 1
+
+" Enable airline tab bar
+let g:airline#extensions#tabline#enabled = 1
+
+" Set airline theme.
+let g:airline_theme='base16'
+
 " Plugins using vim-plug (https://github.com/junegunn/vim-plug)
 call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'                        " Powerline style status bar, without Python
+Plug 'vim-airline/vim-airline-themes'                 " Colour styles for the status bar
 Plug 'preservim/nerdtree'                             " file browser
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }    " go support
 Plug 'tpope/vim-fugitive'                             " git support
