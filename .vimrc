@@ -53,6 +53,7 @@ Plug 'hashivim/vim-terraform'                         " terraform support
 Plug 'vim-syntastic/syntastic'                        " automatic syntax checking
 Plug 'pprovost/vim-ps1'                               " powershell support
 Plug 'chrisbra/NrrwRgn'                               " narrow region/focus
+Plug 'airblade/vim-gitgutter'                         " Git highlighting by buffer line numbers
 call plug#end()
 
 " Default vim settings.
