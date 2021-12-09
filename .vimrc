@@ -25,9 +25,6 @@ set encoding=UTF-8
 " Enable incremental search.
 set incsearch
 
-" Highlight all search results for incremental search.
-set hlsearch
-
 " Enable powerline fonts
 let g:airline_powerline_fonts = 1
 
