@@ -21,8 +21,14 @@
 					"format": "%H:%M:%S",
 					"istime": true
 				}
-			}
-	
+			},
+            {
+                "function": "powerline_swissarmyknife.execute",
+                "args": {
+                    "commandLine": "if [ \"$(curl https://hotmail.com -v -w \"STATUS:%{http_code}\n\" 2> /dev/null | grep 503 | sed 's/.*STATUS://g')\" = \"503\" ]; then echo \"GP ON \"; else echo \"GP OFF\"; fi",
+                    "postContent": ""
+                }
+            }
         ]
     }
 }
