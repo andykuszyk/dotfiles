@@ -51,6 +51,8 @@ Plug 'vim-syntastic/syntastic'                        " automatic syntax checkin
 Plug 'pprovost/vim-ps1'                               " powershell support
 Plug 'chrisbra/NrrwRgn'                               " narrow region/focus
 Plug 'airblade/vim-gitgutter'                         " Git highlighting by buffer line numbers
+Plug 'godlygeek/tabular'                              " Markdown text alignment
+Plug 'plasticboy/vim-markdown'                        " Improved markdown support
 call plug#end()
 
 " Default vim settings.
