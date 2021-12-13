@@ -94,4 +94,4 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
 source $HOME/.gvm/scripts/gvm
 
 # Disable auto-update on every brew command
-HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_AUTO_UPDATE=1
