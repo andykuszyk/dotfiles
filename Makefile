@@ -29,8 +29,12 @@ dirs:
 	mkdir -p ~/repos
 	mkdir -p ~/.local/bin
 
+node:
+	wget -O ~/node.tar.xz https://nodejs.org/dist/v16.13.1/node-v16.13.1-linux-x64.tar.xz
+	cd ~/ && tar xvf node.tar.xz
+
 install-packages:
-	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake nodejs npm vim-gtk3 pavucontrol ruby-dev entr
+	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake vim-gtk3 pavucontrol ruby-dev entr
 	pip3 install powerline-status i3ipc ipython PyGithub==1.54.1 powerline-swissarmyknife
 	sudo gem install colorls
 

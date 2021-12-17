@@ -2,6 +2,7 @@
 export PATH="$PATH:/usr/local/bin:/home/andy/go/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:/home/andy/.tfenv/bin"
+export PATH="$PATH:/home/andy/node-v16.13.1-linux-x64/bin"
 
 # Oh my zsh configuration.
 export ZSH="$HOME/.oh-my-zsh"
