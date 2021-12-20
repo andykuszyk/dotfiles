@@ -53,6 +53,7 @@ Plug 'chrisbra/NrrwRgn'                               " narrow region/focus
 Plug 'airblade/vim-gitgutter'                         " Git highlighting by buffer line numbers
 Plug 'godlygeek/tabular'                              " Markdown text alignment
 Plug 'plasticboy/vim-markdown'                        " Improved markdown support
+Plug 'mtdl9/vim-log-highlighting'                     " Log file highlighting for log files
 call plug#end()
 
 " Default vim settings.
