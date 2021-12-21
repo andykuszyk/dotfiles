@@ -1,6 +1,24 @@
 default:
 	./install.sh
 
+termux-pkgs:
+	pkg update
+	pkg upgrade
+	pkg in openssl openssh git make vim zsh wget automake pkg-config gcc clang binutils
+
+ctags:
+	git clone https://github.com/universal-ctags/ctags.git ~/repos/ctags
+	cd ~/repos/ctags && ./autogen.sh && ./configure --prefix $HOME/.local/bin && make && make install
+
+oh-my-zsh:
+	sh -c "$$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+termux: termux-pkgs dirs shell powerline-fonts zsh-completions vim-plug oh-my-zsh ctags
+
+git-config:
+	git config --global user.email "andy@kuszyk.com"
+	git config --global user.name "andykuszyk"
+
 shell:
 	chsh -s $$(which zsh)
 
