@@ -1,8 +1,10 @@
 # Add executable locations to PATH
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/usr/local/bin:/home/andy/go/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:/home/andy/.tfenv/bin"
 export PATH="$PATH:$HOME/node-v16.13.1-linux-x64/bin"
+export PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.0.0/bin"
 
 # Oh my zsh configuration.
 export ZSH="$HOME/.oh-my-zsh"
@@ -12,11 +14,15 @@ ZSH_THEME="robbyrussell"
 
 # Mac OS and Linux specific configuration.
 if [[ "$(uname)" == "Darwin" ]]; then
-    # Powerline setup.
-    . /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+    site_packages="$(python3 -m site | grep ^USER_SITE | sed 's/.*\(\/Users.*packages\).*/\1/g')"
+    python_bin=$(python3 -m site | grep USER_BASE | sed "s/.*\(\/Users.*\)'.*/\1/g")/bin
+    export PATH="$PATH:$python_bin"
 
     # Tmux powerline setup.
-    export TMUX_POWERLINE_CONF_PATH="/usr/local/lib/python3.7/site-packages/powerline/bindings/tmux/powerline.conf"
+    export TMUX_POWERLINE_CONF_PATH="$site_packages/powerline/bindings/tmux/powerline.conf"
+
+    # Powerline setup.
+    . "$site_packages/powerline/bindings/zsh/powerline.zsh"
 
     # Use gnu sed.
     export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"

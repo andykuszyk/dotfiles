@@ -8,7 +8,7 @@ termux-pkgs:
 
 ctags:
 	git clone https://github.com/universal-ctags/ctags.git ~/repos/ctags
-	cd ~/repos/ctags && ./autogen.sh && ./configure --prefix $HOME/.local/bin && make && make install
+	cd ~/repos/ctags && ./autogen.sh && ./configure --prefix $$HOME/.local/&& make && make install
 
 oh-my-zsh:
 	sh -c "$$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -47,13 +47,29 @@ dirs:
 	mkdir -p ~/repos
 	mkdir -p ~/.local/bin
 
+fzf-tab:
+	git clone https://github.com/Aloxaf/fzf-tab $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+
+sdkman:
+	curl -s "https://get.sdkman.io" | bash
+	source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 node:
 	wget -O ~/node.tar.xz https://nodejs.org/dist/v16.13.1/node-v16.13.1-linux-x64.tar.xz
 	cd ~/ && tar xvf node.tar.xz
 
-install-packages:
+install-packages: install-linux-packages install-python-packages install-ruby-packages
+
+install-mac-packages:
+	brew install tmux bat fzf automake ruby entr wget pkg-config
+
+install-linux-packages:
 	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake vim-gtk3 pavucontrol ruby-dev entr
+
+install-python-packages:
 	pip3 install powerline-status i3ipc ipython PyGithub==1.54.1 powerline-swissarmyknife
+
+install-ruby-packages:
 	sudo gem install colorls
 
 git-track:
