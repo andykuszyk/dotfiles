@@ -6,6 +6,10 @@ autocmd Filetype yaml setlocal ts=2 sw=2 sts=2 expandtab
 " Auto commit/push in notes repo.
 autocmd BufWritePost */form3-notes/*.md !make
 
+" Write swap files to a specific directory (and not the working
+" directory of files being edited).
+set directory=$HOME/.vim/swapfiles//
+
 " Set relative line numbers, and the absolute line number
 " on the current line.
 set number relativenumber
