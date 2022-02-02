@@ -40,6 +40,7 @@ vim-plug:
 
 dirs:
 	mkdir -p ~/.config/i3
+	mkdir -p ~/.config/gtk-3.0
 	mkdir -p ~/.config/powerline/themes/wm
 	mkdir -p ~/.config/powerline/themes/tmux
 	mkdir -p ~/.config/powerline/themes/shell
