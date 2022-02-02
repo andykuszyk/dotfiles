@@ -98,9 +98,7 @@ autocmd TerminalOpen * setlocal nonumber norelativenumber
 let g:go_fmt_command = "goimports"
 
 " Turn off GUI elements in gvim.
-set guioptions-=m  "menu bar
-set guioptions-=T  "toolbar
-set guioptions-=r  "scrollbar
+set guioptions=
 
 " Format Terraform files when saving.
 let g:terraform_fmt_on_save=1
