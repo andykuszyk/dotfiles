@@ -6,6 +6,10 @@ autocmd Filetype yaml setlocal ts=2 sw=2 sts=2 expandtab
 " Auto commit/push in notes repo.
 autocmd BufWritePost */form3-notes/*.md !make
 
+" Write swap files to a specific directory (and not the working
+" directory of files being edited).
+set directory=$HOME/.vim/swapfiles//
+
 " Set relative line numbers, and the absolute line number
 " on the current line.
 set number relativenumber
@@ -53,6 +57,7 @@ Plug 'chrisbra/NrrwRgn'                               " narrow region/focus
 Plug 'airblade/vim-gitgutter'                         " Git highlighting by buffer line numbers
 Plug 'godlygeek/tabular'                              " Markdown text alignment
 Plug 'plasticboy/vim-markdown'                        " Improved markdown support
+Plug 'mtdl9/vim-log-highlighting'                     " Log file highlighting for log files
 call plug#end()
 
 " Default vim settings.
@@ -93,9 +98,7 @@ autocmd TerminalOpen * setlocal nonumber norelativenumber
 let g:go_fmt_command = "goimports"
 
 " Turn off GUI elements in gvim.
-set guioptions-=m  "menu bar
-set guioptions-=T  "toolbar
-set guioptions-=r  "scrollbar
+set guioptions=
 
 " Format Terraform files when saving.
 let g:terraform_fmt_on_save=1
