@@ -4,7 +4,7 @@ default:
 termux-pkgs:
 	pkg update
 	pkg upgrade
-	pkg in openssl openssh git make vim zsh wget automake pkg-config gcc clang binutils
+	pkg in openssl openssh git make vim zsh wget automake pkg-config gcc clang binutils tmux zip fzf
 
 ctags:
 	git clone https://github.com/universal-ctags/ctags.git ~/repos/ctags
@@ -54,7 +54,7 @@ fzf-tab:
 
 sdkman:
 	curl -s "https://get.sdkman.io" | bash
-	source "$HOME/.sdkman/bin/sdkman-init.sh"
+	source "$$HOME/.sdkman/bin/sdkman-init.sh"
 
 node:
 	wget -O ~/node.tar.xz https://nodejs.org/dist/v16.13.1/node-v16.13.1-linux-x64.tar.xz
