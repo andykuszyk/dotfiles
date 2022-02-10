@@ -38,6 +38,9 @@ bindsym $mod+space exec dmenu_run -fn 'pango:monospace 10'
 # launch notes binary, if it is in PATH
 bindsym $mod+n exec notes
 
+# toggle mute
+bindsym F12 exec mute
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
