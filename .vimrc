@@ -103,3 +103,6 @@ set guioptions=
 
 " Format Terraform files when saving.
 let g:terraform_fmt_on_save=1
+
+" Bind set paste to F10.
+map <F10> :set paste<CR>
