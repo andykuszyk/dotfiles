@@ -5,6 +5,7 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:/home/andy/.tfenv/bin"
 export PATH="$PATH:$HOME/node-v16.13.1-linux-x64/bin"
 export PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.0.0/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # Oh my zsh configuration.
 export ZSH="$HOME/.oh-my-zsh"
