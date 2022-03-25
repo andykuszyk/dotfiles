@@ -49,3 +49,4 @@ font:
     family: 'DejaVu Sans Mono for Powerline'
   bold_italic:
     family: 'DejaVu Sans Mono for Powerline'
+  size: 9
