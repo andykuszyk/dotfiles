@@ -15,7 +15,7 @@ ZSH_THEME="robbyrussell"
 
 # Mac OS and Linux specific configuration.
 if [[ "$(uname)" == "Darwin" ]]; then
-    site_packages="$(python3 -m site | grep ^USER_SITE | sed 's/.*\(\/Users.*packages\).*/\1/g')"
+    site_packages="$(python3 -m site | grep lib | grep site-packages | grep homebrew | grep -v '@' | sed "s/.*\(\/opt.*\)',/\1/g")"
     python_bin=$(python3 -m site | grep USER_BASE | sed "s/.*\(\/Users.*\)'.*/\1/g")/bin
     export PATH="$PATH:$python_bin"
 
