@@ -1,3 +1,7 @@
+shell:
+  program: tmux
+window:
+  dynamic_title: false
 colors:
   primary:
     background:        &gruvbox_dark_bg '#282828'
