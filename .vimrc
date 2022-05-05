@@ -101,6 +101,9 @@ let g:go_fmt_command = "goimports"
 " Turn off GUI elements in gvim.
 set guioptions=
 
+" Set GUI font to make sure gvim uses the right font
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+
 " Format Terraform files when saving.
 let g:terraform_fmt_on_save=1
 
