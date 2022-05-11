@@ -6,8 +6,8 @@
 (package-initialize)
 
 (use-package markdown-mode :ensure t)
-(load-theme 'deeper-blue)
+(load-theme 'deeper-blue t)
 
-(display-line-numbers-mode)
-(setq display-line-numbers 'relative)
-(hl-line-mode)
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode)
+(global-hl-line-mode)
