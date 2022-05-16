@@ -109,3 +109,6 @@ let g:terraform_fmt_on_save=1
 
 " Bind set paste to F10.
 map <F10> :set paste<CR>
+
+" Enable syntax concealing
+set conceallevel=2
