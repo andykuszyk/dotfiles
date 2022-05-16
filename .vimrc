@@ -111,4 +111,4 @@ let g:terraform_fmt_on_save=1
 map <F10> :set paste<CR>
 
 " Enable syntax concealing
-set conceallevel=2
+autocmd BufRead *.md set conceallevel=2
