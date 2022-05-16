@@ -74,7 +74,7 @@ let g:gruvbox_contrast_dark = 'hard'
 autocmd vimenter * ++nested colorscheme gruvbox
 set background=dark
 
-" Disable code folding
+" Disable code folding when Vim starts.
 set nofoldenable
 
 " Display hidden files in file browser.
