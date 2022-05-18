@@ -114,4 +114,4 @@ map <F10> :set paste<CR>
 autocmd BufRead *.md set conceallevel=2
 
 " Set line length for markdown files
-autocmd BufRead *.md set colorcolumn=74
+autocmd BufRead *.md set colorcolumn=80
