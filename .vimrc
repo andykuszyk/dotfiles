@@ -110,5 +110,8 @@ let g:terraform_fmt_on_save=1
 " Bind set paste to F10.
 map <F10> :set paste<CR>
 
-" Enable syntax concealing
+" Enable syntax concealing for markdown files
 autocmd BufRead *.md set conceallevel=2
+
+" Set line length for markdown files
+autocmd BufRead *.md set colorcolumn=74
