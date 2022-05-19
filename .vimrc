@@ -115,3 +115,8 @@ autocmd BufRead *.md set conceallevel=2
 
 " Set line length for markdown files
 autocmd BufRead *.md set colorcolumn=80
+
+" Allow virtual editing in markdown files
+" to allow jumping to columns thst dont exist
+" yet with `80|`.
+autocmd BufRead *.md set virtualedit=all
