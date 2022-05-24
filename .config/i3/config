@@ -29,6 +29,9 @@ bindsym $mod+p [title="1Password"] focus
 # focus Slack
 bindsym $mod+l [class="Slack"] focus
 
+# start gvim
+bindsym $mod+g exec gvim
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
