@@ -1,6 +1,9 @@
 default:
 	./install.sh
 
+arch-pkgs:
+	sudo pacman -Syu openssh git vim tmux make i3-wm networkmanager sudo xorg-server xorg-xinit zsh dmenu xterm firefox wget bat fzf maim xclip scrot imagemagick automake pavucontrol entr python python-pip zip unzip
+
 termux-pkgs:
 	pkg update
 	pkg upgrade
