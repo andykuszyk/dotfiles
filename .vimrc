@@ -59,6 +59,7 @@ Plug 'airblade/vim-gitgutter'                         " Git highlighting by buff
 Plug 'godlygeek/tabular'                              " Markdown text alignment
 Plug 'plasticboy/vim-markdown'                        " Improved markdown support
 Plug 'mtdl9/vim-log-highlighting'                     " Log file highlighting for log files
+Plug 'dhruvasagar/vim-table-mode'                     " Advanced table management
 call plug#end()
 
 " Default vim settings.
