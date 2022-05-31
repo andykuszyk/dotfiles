@@ -38,3 +38,6 @@
 ; Powerline
 (require 'powerline)
 (powerline-center-evil-theme)
+
+; Neotree file browser
+(use-package neotree :ensure t)
