@@ -2,10 +2,14 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 
-; Install MELP package repository
+; Install MELPA package repository
 (require 'package)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
+
+; Install use-package
+(eval-when-compile
+  (require 'use-package))
 
 ; Install markdown package
 (use-package markdown-mode :ensure t)
@@ -22,3 +26,11 @@
 
 ; Re-map alt-3 to hash on mac keyboard
 (define-key key-translation-map (kbd "M-3") (kbd "#"))
+
+; Evil mode vim emulation
+(use-package evil :ensure t)
+(require 'evil)
+(evil-mode 1)
+
+;; vterm terminal emulator
+(use-package vterm :ensure t)
