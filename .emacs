@@ -32,5 +32,9 @@
 (require 'evil)
 (evil-mode 1)
 
-;; vterm terminal emulator
+; vterm terminal emulator
 (use-package vterm :ensure t)
+
+; Powerline
+(require 'powerline)
+(powerline-center-evil-theme)
