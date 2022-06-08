@@ -34,6 +34,7 @@
 
 ; vterm terminal emulator
 (use-package vterm :ensure t)
+(use-package multi-vterm :ensure t)
 
 ; Powerline
 (require 'powerline)
