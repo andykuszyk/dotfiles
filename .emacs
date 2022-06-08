@@ -42,10 +42,6 @@
 ; Neotree file browser
 (use-package neotree :ensure t)
 
-; Emacs application framework
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
-(require 'eaf)
-
 ; Projectile
 (use-package projectile
     :ensure t
@@ -54,3 +50,7 @@
     :bind (:map projectile-mode-map
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
+
+; Emacs application framework
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
+(require 'eaf)
