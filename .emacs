@@ -45,7 +45,6 @@
 ; Emacs application framework
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
 (require 'eaf)
-(require 'eaf-browser)
 
 ; Projectile
 (use-package projectile
