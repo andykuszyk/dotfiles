@@ -7,7 +7,7 @@ arch-pkgs:
 termux-pkgs:
 	pkg update
 	pkg upgrade
-	pkg in openssl openssh git make vim zsh wget automake pkg-config gcc clang binutils tmux zip fzf cmake
+	pkg in openssl openssh git make vim zsh wget automake pkg-config gcc clang binutils tmux zip fzf cmake libvterm bat
 
 ctags:
 	git clone https://github.com/universal-ctags/ctags.git ~/repos/ctags
