@@ -51,6 +51,7 @@ dirs:
 	mkdir -p ~/repos
 	mkdir -p ~/.local/bin
 	mkdir -p ~/.vim/swapfiles
+	mkdir -p ~/.termux/
 
 fzf-tab:
 	git clone https://github.com/Aloxaf/fzf-tab $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
