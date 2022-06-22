@@ -2,6 +2,9 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 
+; Always show tab bar
+(tab-bar-mode 1)
+
 ; Install MELPA package repository
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
