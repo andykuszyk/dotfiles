@@ -17,8 +17,9 @@
 ; Install markdown package
 (use-package markdown-mode :ensure t)
 
-; Dark theme
-(load-theme 'deeper-blue t)
+; Spacemacs theme
+(use-package spacemacs-theme :ensure t)
+(load-theme 'spacemacs-dark t)
 
 ; Use relative line numbers
 (setq display-line-numbers-type 'relative)
