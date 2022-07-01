@@ -77,3 +77,6 @@
 (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
 (global-set-key (kbd "C-x C-f") #'helm-find-files)
 (helm-mode 1)
+
+; Magit
+(use-package magit :ensure t)
