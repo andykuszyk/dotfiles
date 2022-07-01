@@ -40,6 +40,10 @@
 ; vterm terminal emulator
 (use-package vterm :ensure t)
 (use-package multi-vterm :ensure t)
+(defun vterm-hook()
+  (display-line-numbers-mode -1))
+(add-hook 'vterm-mode-hook 'vterm-hook)
+(add-hook 'multi-vterm-mode-hook 'vterm-hook)
 
 ; Powerline
 (require 'powerline)
@@ -47,6 +51,10 @@
 
 ; Neotree file browser
 (use-package neotree :ensure t)
+(defun neotree-hook()
+  (display-line-numbers-mode -1))
+(add-hook 'neotree-mode-hook 'neotree-hook)
+
 
 ; Projectile
 (use-package projectile
