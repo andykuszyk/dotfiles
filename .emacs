@@ -88,5 +88,9 @@
 (use-package lsp-mode :ensure t)
 
 ; Auto-completion
-(use-package auto-complete :ensure t)
-(ac-config-default)
+(use-package company :ensure t)
+(company-mode)
+
+; Go support
+(use-package go-mode :ensure t)
+(add-hook 'go-mode-hook #'lsp)
