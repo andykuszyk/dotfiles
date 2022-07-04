@@ -80,3 +80,10 @@
 
 ; Magit
 (use-package magit :ensure t)
+
+; LSP
+(use-package lsp-mode :ensure t)
+
+; Auto-completion
+(use-package auto-complete :ensure t)
+(ac-config-default)
