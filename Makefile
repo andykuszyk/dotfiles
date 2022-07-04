@@ -9,6 +9,12 @@ termux-pkgs:
 	pkg upgrade
 	pkg in openssl openssh git make vim zsh wget automake pkg-config gcc clang binutils tmux zip fzf cmake libvterm bat
 
+install-linux-packages:
+	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake vim-gtk3 pavucontrol ruby-dev entr
+
+install-fedora-packages:
+	sudo dnf install vim zsh tmux bat fzf automake emacs cmake libtool util-linux-user python-pip
+
 ctags:
 	git clone https://github.com/universal-ctags/ctags.git ~/repos/ctags
 	cd ~/repos/ctags && ./autogen.sh && ./configure --prefix $$HOME/.local/&& make && make install
@@ -68,9 +74,6 @@ install-packages: install-linux-packages install-python-packages install-ruby-pa
 
 install-mac-packages:
 	brew install tmux bat fzf automake ruby entr wget pkg-config
-
-install-linux-packages:
-	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake vim-gtk3 pavucontrol ruby-dev entr
 
 install-python-packages:
 	pip3 install powerline-status i3ipc ipython PyGithub==1.54.1 powerline-swissarmyknife
