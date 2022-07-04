@@ -69,7 +69,8 @@
 (if (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/")
     (progn
 	(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
-	(require 'eaf)))
+	(require 'eaf)
+	(require 'eaf-browser)))
 
 ; Helm completion
 (use-package helm :ensure t)
