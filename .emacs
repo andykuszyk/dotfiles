@@ -98,3 +98,9 @@
 ; Go support
 (use-package go-mode :ensure t)
 (add-hook 'go-mode-hook #'lsp)
+
+; Terraform support
+(use-package terraform-mode :ensure t)
+
+; YAML support
+(use-package yaml-mode :ensure t)
