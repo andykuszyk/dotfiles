@@ -17,6 +17,10 @@
 
 ; Install markdown package
 (use-package markdown-mode :ensure t)
+(defun markdown-hook()
+  (auto-fill-mode)
+  (set-fill-column 80))
+(add-hook 'markdown-mode-hook 'markdown-hook)
 
 ; Spacemacs theme
 (use-package spacemacs-theme :ensure t)
