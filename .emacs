@@ -120,3 +120,7 @@
 
 ;; YAML support
 (use-package yaml-mode :ensure t)
+
+(defun sync-notes()
+  (magit-stage-file 'buffer-file-name)
+  (magit-commit-create "-m 'auto-commit from emacs'"))
