@@ -25,6 +25,7 @@
   (auto-fill-mode)
   (set-fill-column 80))
 (add-hook 'markdown-mode-hook 'markdown-hook)
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 
 ;; Spacemacs theme
 (use-package spacemacs-theme
