@@ -121,6 +121,10 @@
 ;; YAML support
 (use-package yaml-mode :ensure t)
 
+;; Function for synchronising notes files with git
 (defun sync-notes()
   (magit-stage-file 'buffer-file-name)
-  (magit-commit-create "-m 'auto-commit from emacs'"))
+  (magit-commit-create (list "-m" "auto-commit from emacs"))
+  ;; TODO: pull rebase
+  ;; TODO: push
+  )
