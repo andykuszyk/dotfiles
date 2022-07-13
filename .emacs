@@ -111,7 +111,7 @@
 
 ;; Auto-completion
 (use-package company :ensure t)
-(company-mode)
+(add-hook 'after-init-hook 'global-company-mode) ; Enable company mode in all buffers
 
 ;; Go support
 (use-package go-mode :ensure t)
