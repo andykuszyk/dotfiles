@@ -102,8 +102,9 @@
 (global-set-key (kbd "C-x C-f") #'helm-find-files)
 (helm-mode 1)
 
-;; Magit and Forge
+;; Magit
 (use-package magit :ensure t)
+(setq magit-diff-refine-hunk (quote all)) ; Use word diffs when showing diffs
 
 ;; LSP
 (use-package lsp-mode :ensure t)
