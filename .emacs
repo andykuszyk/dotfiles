@@ -125,8 +125,10 @@
 
 ;; Function for synchronising notes files with git
 (defun sync-notes()
-  (magit-stage-file buffer-file-name)
-  (magit-commit-create (list "-m" "auto-commit from emacs"))
-  (magit-fetch-all ())
-  (magit-rebase-branch "origin/master" ())
-  (magit-push-current-to-upstream ()))
+  (when (string-match-p (regexp-quote "notes") buffer-file-name)
+    (magit-stage-file buffer-file-name)
+    (magit-commit-create (list "-m" "auto-commit from emacs"))
+    (magit-fetch-all ())
+    (magit-rebase-branch "origin/master" ())
+    (magit-push-current-to-upstream ())))
+(add-hook 'after-save-hook 'sync-notes)
