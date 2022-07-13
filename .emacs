@@ -127,6 +127,6 @@
 (defun sync-notes()
   (magit-stage-file buffer-file-name)
   (magit-commit-create (list "-m" "auto-commit from emacs"))
-  (magit-fetch-all)
+  (magit-fetch-all ())
   (magit-rebase-branch "origin/master" ())
   (magit-push-current-to-upstream ()))
