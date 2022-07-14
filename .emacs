@@ -28,11 +28,13 @@
 
 ;; Install markdown package
 (use-package markdown-mode :ensure t)
-(defun markdown-hook()
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+
+;; Function for configuring text-width
+(defun set-text-width()
+  (interactive)
   (auto-fill-mode)
   (set-fill-column 80))
-(add-hook 'markdown-mode-hook 'markdown-hook)
-(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 
 ;; Spacemacs theme
 (use-package spacemacs-theme
