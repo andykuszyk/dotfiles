@@ -124,6 +124,7 @@
 ;; Go support
 (use-package go-mode :ensure t)
 (add-hook 'go-mode-hook #'lsp)
+(setq gofmt-command "goimports")
 
 ;; Terraform support
 (use-package terraform-mode :ensure t)
