@@ -32,6 +32,9 @@ bindsym $mod+l [class="Slack"] focus
 # start gvim
 bindsym $mod+g exec gvim
 
+# start emacs client
+bindsym $mod+m exec emacsclient -c
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
