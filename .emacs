@@ -86,6 +86,7 @@
   (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter))
 (add-hook 'neotree-mode-hook 'neotree-hook)
 (setq-default neo-show-hidden-files t)
+(global-set-key [f8] 'neotree-toggle)
 
 ;; Projectile
 (use-package projectile
