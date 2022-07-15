@@ -142,6 +142,8 @@
     (magit-fetch-all ())
     (magit-rebase-branch "origin/master" ())
     (magit-push-current-to-upstream ())))
+
+;; Auto commit/push files after saving for notes repos.
 (add-hook 'after-save-hook 'sync-notes)
 
 ;; Org mode customisation
