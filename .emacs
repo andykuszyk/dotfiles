@@ -134,3 +134,6 @@
     (magit-rebase-branch "origin/master" ())
     (magit-push-current-to-upstream ())))
 (add-hook 'after-save-hook 'sync-notes)
+
+;; Org mode customisation
+(setq org-startup-folded t)
