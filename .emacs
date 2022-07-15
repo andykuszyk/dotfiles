@@ -63,6 +63,12 @@
 (require 'evil)
 (evil-mode 1)
 
+;; Additional vim-style keybindings for window management
+(define-key evil-normal-state-map (kbd "C-w <left>") 'windmove-left)
+(define-key evil-normal-state-map (kbd "C-w <right>") 'windmove-right)
+(define-key evil-normal-state-map (kbd "C-w <up>") 'windmove-u)
+(define-key evil-normal-state-map (kbd "C-w <down>") 'windmove-down)
+
 ;; vterm terminal emulator
 (use-package vterm :ensure t)
 (use-package multi-vterm :ensure t)
