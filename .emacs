@@ -143,3 +143,6 @@
 
 ;; Org mode customisation
 (setq org-startup-folded t)
+
+;; FZF
+(use-package fzf :ensure t)
