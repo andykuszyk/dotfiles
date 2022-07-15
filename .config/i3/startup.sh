@@ -13,6 +13,11 @@ gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg
 # Wallpaper
 feh --randomize --bg-fill ~/Pictures/planet-wallpapers/
 
+# Set screen temperature
 redshift -O 4000 -P
 
+# Start ssh-agent
 eval $(ssh-agent)
+
+# Start emacs server
+emacs --daemon
