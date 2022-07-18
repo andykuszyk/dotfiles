@@ -38,6 +38,7 @@
 ;; Install markdown package
 (use-package markdown-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+(setq markdown-fontify-code-blocks-natively t)
 
 ;; Function for configuring text-width
 (defun set-text-width()
