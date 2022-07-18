@@ -165,3 +165,8 @@
 
 ;; FZF
 (use-package fzf :ensure t)
+
+;; Convenience make function
+(defun make ()
+  (interactive)
+  (shell-command "make"))
