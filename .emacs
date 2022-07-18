@@ -143,6 +143,7 @@
 ;; Terraform support
 (use-package terraform-mode :ensure t)
 (add-hook 'terraform-mode-hook #'lsp)
+(add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
 
 ;; YAML support
 (use-package yaml-mode :ensure t)
