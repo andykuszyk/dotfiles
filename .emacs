@@ -16,9 +16,11 @@
 (setq initial-scratch-message nil)
 
 ;; Add Go and local bin paths to the exec path
-(setq exec-path (append exec-path '("/home/andy/go/bin" "/home/andy/.local/bin")))
-(setenv "PATH" (concat (getenv "PATH") ":/home/andy/go/bin:/home/andy/.local/bin"))
-(setenv "GOPATH" "/home/andy/go")
+(let ((go-bin-path (concat gnus-home-directory "go/bin"))
+      (local-bin-path (concat gnus-home-directory ".local/bin")))
+      (setq exec-path (append exec-path '(go-bin-path local-bin-path)))
+      (setenv "PATH" (concat (getenv "PATH") ":" go-bin-path ":" local-bin-path)))
+(setenv "GOPATH" (concat gnus-home-directory "go"))
 
 ;; Save backup files in /tmp
 (setq backup-directory-alist
