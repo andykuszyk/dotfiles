@@ -3,10 +3,10 @@
 (tool-bar-mode -1)
 
 ;; Hide scroll bars
-(add-hook 'after-make-frame-functions
-    (lambda ()
-	(when (display-graphic-p)
-	    (scroll-bar-mode -1))))
+(defun scroll-bar-hook ()
+  (when (display-graphic-p)
+    (scroll-bar-mode -1)))
+(add-hook 'after-make-frame-functions #'scroll-bar-hook)
 
 ;; Always show tab bar
 (tab-bar-mode 1)
@@ -85,18 +85,18 @@
 (defun vterm-hook()
   (display-line-numbers-mode -1)
   (hl-line-mode -1))
-(add-hook 'vterm-mode-hook 'vterm-hook)
-(add-hook 'multi-vterm-mode-hook 'vterm-hook)
+(add-hook 'vterm-mode-hook #'vterm-hook)
+(add-hook 'multi-vterm-mode-hook #'vterm-hook)
 
 ;; Neotree file browser
 (use-package neotree :ensure t)
 (defun neotree-hook()
   (display-line-numbers-mode -1)
-  (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
-  (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter))
+  (define-key evil-normal-state-local-map (kbd "TAB") #'neotree-enter)
+  (define-key evil-normal-state-local-map (kbd "RET") #'neotree-enter))
 (add-hook 'neotree-mode-hook 'neotree-hook)
 (setq-default neo-show-hidden-files t)
-(global-set-key [f8] 'neotree-toggle)
+(global-set-key [f8] #'neotree-toggle)
 
 ;; Projectile
 (use-package projectile
@@ -130,16 +130,17 @@
 
 ;; Auto-completion
 (use-package company :ensure t)
-(add-hook 'after-init-hook 'global-company-mode) ; Enable company mode in all buffers
+(add-hook 'after-init-hook #'global-company-mode) ; Enable company mode in all buffers
 
 ;; Go support
 (use-package go-mode :ensure t)
 (add-hook 'go-mode-hook #'lsp)
 (setq gofmt-command "goimports")
-(add-hook 'before-save-hook 'gofmt-before-save)
+(add-hook 'before-save-hook #'gofmt-before-save)
 
 ;; Terraform support
 (use-package terraform-mode :ensure t)
+(add-hook 'terraform-mode-hook #'lsp)
 
 ;; YAML support
 (use-package yaml-mode :ensure t)
@@ -154,7 +155,7 @@
     (magit-push-current-to-upstream ())))
 
 ;; Auto commit/push files after saving for notes repos.
-(add-hook 'after-save-hook 'sync-notes)
+(add-hook 'after-save-hook #'sync-notes)
 
 ;; Org mode customisation
 (setq org-startup-folded t)
