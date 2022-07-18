@@ -15,6 +15,9 @@
 (setq inhibit-startup-message t) 
 (setq initial-scratch-message nil)
 
+;; Add Go and local bin paths to the exec path
+(setq exec-path (append exec-path '("/home/andy/go/bin" "/home/andy/.local/bin")))
+
 ;; Save backup files in /tmp
 (setq backup-directory-alist
 	`((".*" . ,temporary-file-directory)))
