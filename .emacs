@@ -18,6 +18,7 @@
 ;; Add Go and local bin paths to the exec path
 (setq exec-path (append exec-path '("/home/andy/go/bin" "/home/andy/.local/bin")))
 (setenv "PATH" (concat (getenv "PATH") ":/home/andy/go/bin:/home/andy/.local/bin"))
+(setenv "GOPATH" "/home/andy/go")
 
 ;; Save backup files in /tmp
 (setq backup-directory-alist
