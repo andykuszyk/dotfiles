@@ -11,6 +11,9 @@
 ;; Always show tab bar
 (tab-bar-mode 1)
 
+;; Show the time in the modeline
+(display-time-mode)
+
 ;; Disable splash screen and startup message
 (setq inhibit-startup-message t) 
 (setq initial-scratch-message nil)
@@ -59,6 +62,7 @@
   :config
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
+(spaceline-helm-mode)
 
 ;; Use relative line numbers
 (setq display-line-numbers-type 'relative)
@@ -74,6 +78,11 @@
 (use-package evil :ensure t)
 (require 'evil)
 (evil-mode 1)
+
+;; Fancy battery indicator
+(use-package fancy-battery :ensure t)
+(add-hook 'after-init-hook #'fancy-battery-mode)
+(setq fancy-battery-show-percentage t)
 
 ;; Additional vim-style keybindings for window management
 (define-key evil-normal-state-map (kbd "C-w <left>") 'windmove-left)
