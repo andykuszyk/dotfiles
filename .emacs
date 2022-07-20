@@ -75,9 +75,18 @@
 (define-key key-translation-map (kbd "M-3") (kbd "#"))
 
 ;; Evil mode vim emulation
-(use-package evil :ensure t)
-(require 'evil)
-(evil-mode 1)
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
 ;; Fancy battery indicator
 (use-package fancy-battery :ensure t)
