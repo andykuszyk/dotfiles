@@ -13,6 +13,8 @@
 
 ;; Show the time in the modeline
 (display-time-mode)
+(setq display-time-24hr-format t)
+(setq display-time-default-load-average nil)
 
 ;; Disable splash screen and startup message
 (setq inhibit-startup-message t) 
