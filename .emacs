@@ -22,10 +22,12 @@
 
 ;; Add Go and local bin paths to the exec path
 (let ((go-bin-path "~/go/bin")
-      (local-bin-path "~/.local/bin"))
-      (setq exec-path (append exec-path (list go-bin-path local-bin-path)))
-      (setenv "PATH" (concat (getenv "PATH") ":" go-bin-path ":" local-bin-path)))
+      (local-bin-path "~/.local/bin")
+      (go-root-bin "/usr/local/go/bin"))
+      (setq exec-path (append exec-path (list go-bin-path local-bin-path go-root-bin)))
+      (setenv "PATH" (concat (getenv "PATH") ":" go-bin-path ":" local-bin-path ":" go-root-bin)))
 (setenv "GOPATH" "~/go")
+(setenv "GOROOT" "/usr/local/go")
 
 ;; Save backup files in /tmp
 (setq backup-directory-alist
