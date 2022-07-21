@@ -27,7 +27,7 @@ bindsym $mod+BackSpace exec firefox
 bindsym $mod+p [title="1Password"] focus
 
 # focus Slack
-bindsym $mod+l [class="Slack"] focus
+bindsym $mod+n [class="Slack"] focus
 
 # start gvim
 bindsym $mod+g exec gvim
@@ -40,9 +40,6 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+space exec dmenu_run -fn 'pango:monospace 10'
-
-# focus gvim
-bindsym $mod+n [title=".*form3\-notes.*"] focus
 
 # toggle mute
 bindsym F12 exec mute
