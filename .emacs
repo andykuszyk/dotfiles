@@ -3,7 +3,7 @@
 (tool-bar-mode -1)
 
 ;; Hide scroll bars
-(defun scroll-bar-hook ()
+(defun scroll-bar-hook (frame)
   (when (display-graphic-p)
     (scroll-bar-mode -1)))
 (add-hook 'after-make-frame-functions #'scroll-bar-hook)
