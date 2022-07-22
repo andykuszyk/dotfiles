@@ -199,6 +199,7 @@
 (use-package fzf :ensure t)
 
 ;; Convenience make function
+;; Alternatively, `M-!, make` can be used.
 (defun make ()
   (interactive)
-  (shell-command "make"))
+  (shell-command "make &> /dev/null" nil))
