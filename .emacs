@@ -139,12 +139,14 @@
               ("C-c p" . projectile-command-map)))
 
 ;; Emacs application framework
-(if (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/")
-    (progn
-	(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
-	(require 'eaf)
-	(require 'eaf-browser)
-	(require 'eaf-terminal)))
+(defun eaf-enabled ()
+  nil)
+(when (and (eaf-enabled) (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/"))
+    (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
+    (require 'eaf)
+    (require 'eaf-browser)
+    (require 'eaf-mermaid)
+    (require 'eaf-terminal))
 
 ;; Helm completion
 (use-package helm :ensure t)
