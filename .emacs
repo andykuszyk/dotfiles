@@ -3,10 +3,8 @@
 (tool-bar-mode -1)
 
 ;; Hide scroll bars
-(defun scroll-bar-hook (frame)
-  (when (display-graphic-p)
-    (scroll-bar-mode -1)))
-(add-hook 'after-make-frame-functions #'scroll-bar-hook)
+(add-to-list 'default-frame-alist '(vertical-scroll-bars . nil))
+(add-to-list 'default-frame-alist '(horizontal-scroll-bars . nil))
 
 ;; Always show tab bar
 (tab-bar-mode 1)
