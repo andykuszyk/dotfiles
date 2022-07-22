@@ -117,6 +117,7 @@
   (hl-line-mode -1))
 (add-hook 'vterm-mode-hook #'vterm-hook)
 (add-hook 'multi-vterm-mode-hook #'vterm-hook)
+(global-set-key (kbd "C-x v") #'vterm)
 
 ;; Neotree file browser
 (use-package neotree :ensure t)
