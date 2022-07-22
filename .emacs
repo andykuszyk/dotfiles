@@ -142,7 +142,8 @@
     (progn
 	(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
 	(require 'eaf)
-	(require 'eaf-browser)))
+	(require 'eaf-browser)
+	(require 'eaf-terminal)))
 
 ;; Helm completion
 (use-package helm :ensure t)
