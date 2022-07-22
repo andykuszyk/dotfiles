@@ -30,9 +30,10 @@
 (setenv "GOROOT" "/usr/local/go")
 
 ;; Experiment with exwm
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-example)
+(unless (eq (shell-command "wmctrl -m > /dev/null; echo $?") 0)
+  (require 'exwm)
+  (require 'exwm-config)
+  (exwm-config-example))
 
 ;; Save backup files in /tmp
 (setq backup-directory-alist
