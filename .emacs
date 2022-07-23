@@ -6,9 +6,6 @@
 (add-to-list 'default-frame-alist '(vertical-scroll-bars . nil))
 (add-to-list 'default-frame-alist '(horizontal-scroll-bars . nil))
 
-;; Always show tab bar
-(tab-bar-mode 1)
-
 ;; Show the time in the modeline
 (display-time-mode)
 (setq display-time-24hr-format t)
