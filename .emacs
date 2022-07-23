@@ -25,10 +25,46 @@
 (setenv "GOROOT" "/usr/local/go")
 
 ;; Experiment with exwm
-(unless (eq (shell-command "wmctrl -m > /dev/null; echo $?") 0)
-  (require 'exwm)
-  (require 'exwm-config)
-  (exwm-config-example))
+(require 'exwm)
+(setq exwm-workspace-number 4) ; set 4 as the default number of workspaces
+;; Ensure exwm buffers have sensible names
+(add-hook 'exwm-update-class-hook
+          (lambda ()
+            (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+                        (string= "gimp" exwm-instance-name))
+              (exwm-workspace-rename-buffer exwm-class-name))))
+(add-hook 'exwm-update-title-hook
+          (lambda ()
+            (when (or (not exwm-instance-name)
+                      (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+                      (string= "gimp" exwm-instance-name))
+              (exwm-workspace-rename-buffer exwm-title))))
+;; Global keybindings
+(setq exwm-input-global-keys
+      `(
+	((kbd "s-r") . exwm-reset) ; exit char/fullscreen mode
+	;; Bind "s-0" to "s-9" to switch to a workspace by its index.
+        ,@(mapcar (lambda (i)
+                    `(,(kbd (format "s-%d" i)) .
+                      (lambda ()
+                        (interactive)
+                        (exwm-workspace-switch-create ,i))))
+                  (number-sequence 0 9))
+	((kbd "s-SPC") . (lambda (command)
+		     (interactive (list (read-shell-command "$ ")))
+		     (start-process-shell-command command nil command)))
+	((kbd "C-w w") . evil-window-next)
+	((kbd "C-w h") . evil-window-left)
+	((kbd "C-w l") . evil-window-right)
+	((kbd "C-w j") . evil-window-down)
+	((kbd "C-w k") . evil-window-up)
+	((kbd "C-w H") . evil-window-move-far-left)
+	((kbd "C-w L") . evil-window-move-far-right)
+	((kbd "C-w J") . evil-window-move-very-bottom)
+	((kbd "C-w K") . evil-window-move-very-top)
+	((kbd ":") . evil-ex)
+	))
+(exwm-enable)
 
 ;; Save backup files in /tmp
 (setq backup-directory-alist
