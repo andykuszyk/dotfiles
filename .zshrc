@@ -33,7 +33,9 @@ else
 
     # Tmux powerline setup.
     export TMUX_POWERLINE_CONF_PATH="/home/andy/.local/lib/python3.8/site-packages/powerline/bindings/tmux/powerline.conf"
-    powerline-config tmux setup
+    if [[ "$(env | grep TERM | grep screen)" != "" ]]; then
+	powerline-config tmux setup
+    fi
 fi
 
 # Zsh plugins.
