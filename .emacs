@@ -15,14 +15,12 @@
 (setq inhibit-startup-message t) 
 (setq initial-scratch-message nil)
 
-;; Add Go and local bin paths to the exec path
-(let ((go-bin-path "~/go/bin")
-      (local-bin-path "~/.local/bin")
-      (go-root-bin "/usr/local/go/bin"))
-      (setq exec-path (append exec-path (list go-bin-path local-bin-path go-root-bin)))
-      (setenv "PATH" (concat (getenv "PATH") ":" go-bin-path ":" local-bin-path ":" go-root-bin)))
-(setenv "GOPATH" "~/go")
-(setenv "GOROOT" "/usr/local/go")
+;; Inherit environment from default shell
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-envs (list "GOROOT" "GOPATH")))
 
 ;; Experiment with exwm
 (require 'exwm)
