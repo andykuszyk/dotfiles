@@ -40,7 +40,7 @@
 ;; Global keybindings
 (setq exwm-input-global-keys
       `(
-	((kbd "s-r") . exwm-reset) ; exit char/fullscreen mode
+	([?\s-r] . exwm-reset) ; exit char/fullscreen mode
 	;; Bind "s-0" to "s-9" to switch to a workspace by its index.
         ,@(mapcar (lambda (i)
                     `(,(kbd (format "s-%d" i)) .
@@ -48,19 +48,21 @@
                         (interactive)
                         (exwm-workspace-switch-create ,i))))
                   (number-sequence 0 9))
-	((kbd "s-SPC") . (lambda (command)
+	([?\s-&] . (lambda (command)
 		     (interactive (list (read-shell-command "$ ")))
 		     (start-process-shell-command command nil command)))
-	((kbd "C-w w") . evil-window-next)
-	((kbd "C-w h") . evil-window-left)
-	((kbd "C-w l") . evil-window-right)
-	((kbd "C-w j") . evil-window-down)
-	((kbd "C-w k") . evil-window-up)
-	((kbd "C-w H") . evil-window-move-far-left)
-	((kbd "C-w L") . evil-window-move-far-right)
-	((kbd "C-w J") . evil-window-move-very-bottom)
-	((kbd "C-w K") . evil-window-move-very-top)
-	((kbd ":") . evil-ex)
+	([?\s-h] . evil-window-left)
+	([?\s-l] . evil-window-right)
+	([?\s-j] . evil-window-down)
+	([?\s-k] . evil-window-up)
+	([?\s-H] . evil-window-move-far-left)
+	([?\s-L] . evil-window-move-far-right)
+	([?\s-J] . evil-window-move-very-bottom)
+	([?\s-K] . evil-window-move-very-top)
+	([?\s-c] . evil-ex)
+	([?\s-s] . evil-window-split)
+	([?\s-v] . evil-window-vsplit)
+	([?\s-f] . (lambda () (start-process-shell-command "firefox" nil "firefox")))
 	))
 (exwm-enable)
 
