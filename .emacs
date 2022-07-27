@@ -224,7 +224,8 @@
 (add-hook 'after-save-hook #'sync-notes)
 
 ;; Org mode customisation
-(setq org-startup-folded t)
+(setq org-startup-folded t) ; open org files folded, rather than expanded
+(setq org-edit-src-content-indentation 0) ; do not indent code in source blocks
 
 ;; FZF
 (use-package fzf :ensure t)
