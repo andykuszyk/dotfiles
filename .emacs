@@ -235,3 +235,11 @@
 (defun make ()
   (interactive)
   (shell-command "make &> /dev/null" nil))
+
+;; Perspective
+(use-package perspective
+  :ensure t
+  :custom
+  (persp-mode-prefix-key (kbd "C-c M-p"))
+  :init
+  (persp-mode))
