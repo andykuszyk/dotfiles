@@ -15,6 +15,21 @@
 (setq inhibit-startup-message t) 
 (setq initial-scratch-message nil)
 
+;; Save backup files in /tmp
+(setq backup-directory-alist
+	`((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+	`((".*" ,temporary-file-directory t)))
+
+;; Install MELPA package repository
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
+;; Install use-package
+(eval-when-compile
+  (require 'use-package))
+
 ;; Inherit environment from default shell
 (use-package exec-path-from-shell
   :ensure t
@@ -23,7 +38,7 @@
   (exec-path-from-shell-copy-envs (list "GOROOT" "GOPATH")))
 
 ;; Experiment with exwm
-(require 'exwm)
+(use-package exwm :ensure t)
 (setq exwm-workspace-number 4) ; set 4 as the default number of workspaces
 ;; Ensure exwm buffers have sensible names
 (add-hook 'exwm-update-class-hook
@@ -65,21 +80,6 @@
 	([?\s-f] . (lambda () (start-process-shell-command "firefox" nil "firefox")))
 	))
 (exwm-enable)
-
-;; Save backup files in /tmp
-(setq backup-directory-alist
-	`((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-	`((".*" ,temporary-file-directory t)))
-
-;; Install MELPA package repository
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-
-;; Install use-package
-(eval-when-compile
-  (require 'use-package))
 
 ;; Install markdown package
 (use-package markdown-mode :ensure t)
