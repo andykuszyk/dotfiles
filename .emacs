@@ -243,3 +243,7 @@
   (persp-mode-prefix-key (kbd "C-c M-p"))
   :init
   (persp-mode))
+
+;; Dockerfile mode
+(use-package dockerfile-mode :ensure t)
+(add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
