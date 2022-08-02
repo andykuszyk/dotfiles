@@ -253,3 +253,6 @@
 
 ;; Numbered window switcher
 (use-package ace-window :ensure t)
+
+;; Better JSON support
+(use-package json-mode :ensure t)
