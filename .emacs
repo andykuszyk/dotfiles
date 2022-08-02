@@ -243,3 +243,6 @@
 ;; Dockerfile mode
 (use-package dockerfile-mode :ensure t)
 (add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
+
+;; Numbered window switcher
+(use-package ace-window :ensure t)
