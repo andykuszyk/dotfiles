@@ -150,15 +150,11 @@
 (add-hook 'multi-vterm-mode-hook #'vterm-hook)
 (global-set-key (kbd "C-x v") #'vterm)
 
-;; Neotree file browser
-(use-package neotree :ensure t)
-(defun neotree-hook()
-  (display-line-numbers-mode -1)
-  (define-key evil-normal-state-local-map (kbd "TAB") #'neotree-enter)
-  (define-key evil-normal-state-local-map (kbd "RET") #'neotree-enter))
-(add-hook 'neotree-mode-hook 'neotree-hook)
-(setq-default neo-show-hidden-files t)
-(global-set-key [f8] #'neotree-toggle)
+;; Treemacs file browser
+(use-package treemacs :ensure t)
+(use-package treemacs-evil :ensure t)
+(use-package treemacs-projectile :ensure t)
+(global-set-key [f8] #'treemacs)
 
 ;; Projectile
 (use-package projectile
