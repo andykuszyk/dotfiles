@@ -51,7 +51,7 @@
 	([?\s-&] . (lambda (command)
 		     (interactive (list (read-shell-command "$ ")))
 		     (start-process-shell-command command nil command)))
-	([?\s-w ?\s-w] . evil-window-next)
+	([?\s-w ?w] . evil-window-next)
 	([?\s-h] . evil-window-left)
 	([?\s-l] . evil-window-right)
 	([?\s-j] . evil-window-down)
