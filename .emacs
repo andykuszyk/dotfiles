@@ -244,7 +244,7 @@
 (use-package perspective
   :ensure t
   :custom
-  (persp-mode-prefix-key (kbd "C-c M-p"))
+  (persp-mode-prefix-key (kbd "C-x x"))
   :init
   (persp-mode))
 
