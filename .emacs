@@ -66,19 +66,30 @@
 	([?\s-&] . (lambda (command)
 		     (interactive (list (read-shell-command "$ ")))
 		     (start-process-shell-command command nil command)))
-	([?\s-h] . evil-window-left)
-	([?\s-l] . evil-window-right)
-	([?\s-j] . evil-window-down)
-	([?\s-k] . evil-window-up)
-	([?\s-H] . evil-window-move-far-left)
-	([?\s-L] . evil-window-move-far-right)
-	([?\s-J] . evil-window-move-very-bottom)
-	([?\s-K] . evil-window-move-very-top)
-	([?\s-c] . evil-ex)
-	([?\s-s] . evil-window-split)
-	([?\s-v] . evil-window-vsplit)
-	([?\s-f] . (lambda () (start-process-shell-command "firefox" nil "firefox")))
+	([?\s-w ?w] . evil-window-next)
+	([?\s-w ?\s-w] . evil-window-next)
+	([?\s-w ?h] . evil-window-left)
+	([?\s-w ?l] . evil-window-right)
+	([?\s-w ?j] . evil-window-down)
+	([?\s-w ?k] . evil-window-up)
+	([?\s-w ?H] . evil-window-move-far-left)
+	([?\s-w ?L] . evil-window-move-far-right)
+	([?\s-w ?J] . evil-window-move-very-bottom)
+	([?\s-w ?K] . evil-window-move-very-top)
+	([?\s-w ?c] . evil-window-delete)
+	([?\s-\;] . evil-ex)
+	([?\s-w ?s] . evil-window-split)
+	([?\s-w ?v] . evil-window-vsplit)
+	([?\s-a] . ace-window)
+	([?\s-f] . (lambda (command) (start-process-shell-command "firefox" nil "firefox")))
 	))
+(require 'exwm-randr)
+(setq exwm-randr-workspace-output-plist '(0 "DP-1" 1 "DP-5" 2 "DP-7"))
+(add-hook 'exwm-randr-screen-change-hook
+          (lambda ()
+            (start-process-shell-command
+             "xrandr" nil "xrandr --output DP-0 --off --output DP-1 --mode 1920x1080 --pos 0x840 --rotate normal --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --mode 1920x1080 --pos 1920x840 --rotate normal --output DP-6 --off --output DP-7 --mode 1920x1080 --pos 3840x0 --rotate left")))
+(exwm-randr-enable)
 (exwm-enable)
 
 ;; Install markdown package
@@ -150,15 +161,11 @@
 (add-hook 'multi-vterm-mode-hook #'vterm-hook)
 (global-set-key (kbd "C-x v") #'vterm)
 
-;; Neotree file browser
-(use-package neotree :ensure t)
-(defun neotree-hook()
-  (display-line-numbers-mode -1)
-  (define-key evil-normal-state-local-map (kbd "TAB") #'neotree-enter)
-  (define-key evil-normal-state-local-map (kbd "RET") #'neotree-enter))
-(add-hook 'neotree-mode-hook 'neotree-hook)
-(setq-default neo-show-hidden-files t)
-(global-set-key [f8] #'neotree-toggle)
+;; Treemacs file browser
+(use-package treemacs :ensure t)
+(use-package treemacs-evil :ensure t)
+(use-package treemacs-projectile :ensure t)
+(global-set-key [f8] #'treemacs)
 
 ;; Projectile
 (use-package projectile
@@ -235,3 +242,21 @@
 (defun make ()
   (interactive)
   (shell-command "make &> /dev/null" nil))
+
+;; Perspective
+(use-package perspective
+  :ensure t
+  :custom
+  (persp-mode-prefix-key (kbd "C-x x"))
+  :init
+  (persp-mode))
+
+;; Dockerfile mode
+(use-package dockerfile-mode :ensure t)
+(add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
+
+;; Numbered window switcher
+(use-package ace-window :ensure t)
+
+;; Better JSON support
+(use-package json-mode :ensure t)
