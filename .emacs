@@ -166,6 +166,9 @@
 (use-package treemacs-evil :ensure t)
 (use-package treemacs-projectile :ensure t)
 (global-set-key [f8] #'treemacs)
+(defun treemacs-hook ()
+    (display-line-numbers-mode -1))
+(add-hook 'treemacs-mode-hook 'treemacs-hook)
 
 ;; Projectile
 (use-package projectile
