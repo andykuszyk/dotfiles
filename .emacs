@@ -265,6 +265,7 @@
 
 ;; Numbered window switcher
 (use-package ace-window :ensure t)
+(global-set-key (kbd "C-a") #'ace-window)
 
 ;; Better JSON support
 (use-package json-mode :ensure t)
