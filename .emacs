@@ -269,3 +269,7 @@
 
 ;; Better JSON support
 (use-package json-mode :ensure t)
+
+;; Clojure support
+(use-package clojure-mode :ensure t)
+(add-hook 'clojure-mode-hook #'lsp)
