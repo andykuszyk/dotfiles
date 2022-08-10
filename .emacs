@@ -277,6 +277,7 @@
 
 ;; Numbered window switcher
 (use-package winum :ensure t)
+(setq winum-auto-setup-mode-line nil)
 (winum-mode)
 (global-set-key (kbd "C-a") #'winum-select-window-by-number)
 
