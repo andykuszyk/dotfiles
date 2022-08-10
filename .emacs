@@ -94,6 +94,13 @@
 (setq exwm-workspace-show-all-buffers t) ; show all buffers on each workspace
 (setq exwm-layout-show-all-buffers t) ; allow swetching to buffers from another workspace
 
+;; Re-map keys for exwm
+(defun remap-modifier-keys-for-exwm ()
+  (shell-command "xmodmap -e \"clear Mod5\"")
+  (shell-command "xmodmap -e \"keycode 108 = Super_R\"")
+  (shell-command "xmodmap -e \"keycode 92 = Super_R\""))
+(add-hook 'exwm-init-hook #'remap-modifier-keys-for-exwm)
+
 ;; Install markdown package
 (use-package markdown-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
