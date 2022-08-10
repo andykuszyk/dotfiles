@@ -134,7 +134,7 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
-  (customize-save-variable evil-undo-system #'undo-redo)
+  (customize-save-variable 'evil-undo-system #'undo-redo)
   :config
   (evil-mode 1))
 (use-package evil-collection
