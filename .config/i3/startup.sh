@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Additional key mapping for alt gr to also be a super modifer
+xmodmap -e "clear Mod5"
 xmodmap -e "keycode 108 = Super_R"
 xmodmap -e "keycode 92 = Super_R"
 
