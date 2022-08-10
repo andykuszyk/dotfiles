@@ -80,7 +80,7 @@
 	([?\s-\;] . evil-ex)
 	([?\s-w ?s] . evil-window-split)
 	([?\s-w ?v] . evil-window-vsplit)
-	([?\s-a] . ace-window)
+	([?\s-a] . winum-select-window-by-number)
 	([?\s-f] . (lambda (command) (start-process-shell-command "firefox" nil "firefox")))
 	))
 (require 'exwm-randr)
@@ -267,8 +267,9 @@
 (add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
 
 ;; Numbered window switcher
-(use-package ace-window :ensure t)
-(global-set-key (kbd "C-a") #'ace-window)
+(use-package winum :ensure t)
+(winum-mode)
+(global-set-key (kbd "C-a") #'winum-select-window-by-number)
 
 ;; Better JSON support
 (use-package json-mode :ensure t)
