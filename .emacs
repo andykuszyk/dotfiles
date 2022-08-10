@@ -37,7 +37,7 @@
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-envs (list "GOROOT" "GOPATH")))
 
-;; Experiment with exwm
+;; Exwm configuration
 (use-package exwm :ensure t)
 (setq exwm-workspace-number 4) ; set 4 as the default number of workspaces
 ;; Ensure exwm buffers have sensible names
@@ -90,7 +90,6 @@
             (start-process-shell-command
              "xrandr" nil "xrandr --output DP-0 --off --output DP-1 --mode 1920x1080 --pos 0x0 --rotate right --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --mode 1920x1080 --pos 1080x221 --rotate normal --output DP-6 --off --output DP-7 --mode 1920x1080 --pos 3000x0 --rotate left")))
 (exwm-randr-enable)
-(exwm-enable)
 (setq exwm-workspace-show-all-buffers t) ; show all buffers on each workspace
 (setq exwm-layout-show-all-buffers t) ; allow swetching to buffers from another workspace
 
@@ -100,6 +99,9 @@
   (shell-command "xmodmap -e \"keycode 108 = Super_R\"")
   (shell-command "xmodmap -e \"keycode 92 = Super_R\""))
 (add-hook 'exwm-init-hook #'remap-modifier-keys-for-exwm)
+
+;; Finally, start exwm
+(exwm-enable)
 
 ;; Install markdown package
 (use-package markdown-mode :ensure t)
