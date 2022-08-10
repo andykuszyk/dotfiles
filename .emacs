@@ -126,6 +126,7 @@
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
 (spaceline-helm-mode)
+(spaceline-toggle-window-number-off) ; otherwise the evil state indicator isn't shown
 
 ;; Use relative line numbers
 (setq display-line-numbers-type 'relative)
@@ -277,7 +278,6 @@
 
 ;; Numbered window switcher
 (use-package winum :ensure t)
-(setq winum-auto-setup-mode-line nil)
 (winum-mode)
 (global-set-key (kbd "C-a") #'winum-select-window-by-number)
 
