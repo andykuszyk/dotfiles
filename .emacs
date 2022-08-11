@@ -126,7 +126,9 @@
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
 (spaceline-helm-mode)
-(spaceline-toggle-window-number-off) ; otherwise the evil state indicator isn't shown
+(spaceline-toggle-window-number-off)          ; otherwise the evil state indicator isn't shown
+(spaceline-toggle-minor-modes-off)            ; don't show minor modes
+(spaceline-toggle-buffer-encoding-abbrev-off) ; don't show file encoding
 
 ;; Use relative line numbers
 (setq display-line-numbers-type 'relative)
