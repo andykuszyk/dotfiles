@@ -42,6 +42,26 @@
   (interactive)
   (start-process-shell-command "firefox" nil "firefox"))
 
+;; Extension functions for exwm
+(defun exwm-ext-close-all-windows ()
+  (while (> (count-windows) 1)
+    (evil-window-delete)))
+
+(defun exwm-ext-open-in-splits (names)
+  (exwm-ext-close-all-windows)
+  (let ((i (length names)))
+    (while (> i 1)
+      (evil-window-split)
+      (setq i (1- i))))
+       
+  (let (name) 
+    (dolist (name names)
+      (message name)
+      (start-process-shell-command name nil name)
+      (sleep-for 1)
+      (other-window 1))))
+
+
 ;; Exwm configuration
 (use-package exwm :ensure t)
 (setq exwm-workspace-number 4) ; set 4 as the default number of workspaces
