@@ -37,6 +37,11 @@
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-envs (list "GOROOT" "GOPATH")))
 
+;; Functions for launching X11 applications
+(defun firefox ()
+  (interactive)
+  (start-process-shell-command "firefox" nil "firefox"))
+
 ;; Exwm configuration
 (use-package exwm :ensure t)
 (setq exwm-workspace-number 4) ; set 4 as the default number of workspaces
@@ -81,7 +86,7 @@
 	([?\s-w ?s] . evil-window-split)
 	([?\s-w ?v] . evil-window-vsplit)
 	([?\s-a] . winum-select-window-by-number)
-	([?\s-f] . (lambda (command) (start-process-shell-command "firefox" nil "firefox")))
+	([?\s-f] . firefox)
 	))
 (require 'exwm-randr)
 (setq exwm-randr-workspace-output-plist '(0 "DP-1" 1 "DP-5" 2 "DP-7"))
