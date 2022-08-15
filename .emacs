@@ -52,15 +52,17 @@
   (let ((i (length names)))
     (while (> i 1)
       (evil-window-split)
+      (sleep-for 1)
       (setq i (1- i))))
-       
+  (message "split complete")
+  (sleep-for 5)
   (let (name) 
     (dolist (name names)
       (message name)
+      (sleep-for 1)
       (start-process-shell-command name nil name)
       (sleep-for 1)
       (other-window 1))))
-
 
 ;; Exwm configuration
 (use-package exwm :ensure t)
