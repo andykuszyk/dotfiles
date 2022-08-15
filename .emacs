@@ -44,10 +44,16 @@
 
 ;; Extension functions for exwm
 (defun exwm-ext-close-all-windows ()
+  "Closes all open windows in the frame, leaving just one open."
   (while (> (count-windows) 1)
     (evil-window-delete)))
 
 (defun exwm-ext-open-in-splits (names)
+  "Closes all open windows in the frame, and replaces them with them
+  X11 programs provided, tiled horizontally.
+  e.g. (exwm-ext-open-in-splits '(\"firefox\" \"gnome-terminal\"))
+  will replace the current frame with two windows tiled one above the other,
+  with firefox at the top and gnome-terminal at the bottom."
   (exwm-ext-close-all-windows)
   (let ((i (length names)))
     (while (> i 1)
