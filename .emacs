@@ -19,7 +19,10 @@
 (setq backup-directory-alist
 	`((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
-	`((".*" ,temporary-file-directory t)))
+      `((".*" ,temporary-file-directory t)))
+
+;; Always start emacs in server mode
+(server-start)
 
 ;; Install MELPA package repository
 (require 'package)
