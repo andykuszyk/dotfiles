@@ -211,6 +211,7 @@
 (add-hook 'vterm-mode-hook #'vterm-hook)
 (add-hook 'multi-vterm-mode-hook #'vterm-hook)
 (global-set-key (kbd "C-x v") #'vterm)
+(global-set-key (kbd "C-x m") #'multi-vterm)
 
 ;; Treemacs file browser
 (use-package treemacs :ensure t)
