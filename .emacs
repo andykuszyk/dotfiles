@@ -7,9 +7,10 @@
 (add-to-list 'default-frame-alist '(horizontal-scroll-bars . nil))
 
 ;; Show the time in the modeline
-(display-time-mode)
 (setq display-time-24hr-format t)
 (setq display-time-default-load-average nil)
+(setq display-time-day-and-date t)
+(display-time-mode)
 
 ;; Disable splash screen and startup message
 (setq inhibit-startup-message t) 
