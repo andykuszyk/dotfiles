@@ -296,6 +296,10 @@
  '((python . t)
    (emacs-lisp . t)))
 
+;; Export org files to reveal.js presentations
+(use-package ox-reveal :ensure t)
+(load-library "ox-reveal")
+
 ;; FZF
 (use-package fzf :ensure t)
 
