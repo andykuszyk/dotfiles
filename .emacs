@@ -187,6 +187,7 @@
 (spaceline-compile
   ; left side
   '(
+    window-number
     (evil-state :face highlight-face :priority 100)
     ((buffer-modified buffer-id) :priority 98)
     (major-mode :priority 79)
