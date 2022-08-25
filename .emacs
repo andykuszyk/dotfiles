@@ -44,7 +44,8 @@
 ;; Bind mute toggle to f12
 (defun toggle-mute ()
   (interactive)
-  (start-process "mute" nil "mute"))
+  (start-process "mute" nil "mute")
+  (force-mode-line-update t))
 (global-set-key [f12] #'toggle-mute)
 
 ;; Functions for launching X11 applications
@@ -173,7 +174,7 @@
 (setq mute-segment (make-symbol "mute-segment"))
 (spaceline-define-segment mute-segment
   "Displays the current mute status of the system"
-  (if (eq (shell-command-to-string "pacmd list-sources | grep muted | grep yes") "")
+  (if (eq (length (shell-command-to-string "pacmd list-sources | grep muted | grep yes")) 0)
       "🔈"
     "🔇"))
 (setq status-segment (make-symbol "status-segment"))
@@ -197,12 +198,10 @@
    )
   ; right side
   '(
-    (battery :when active)
-    (selection-info :priority 95)
-    input-method
     mute-segment
+    (battery)
     (global)
-    (buffer-position :priority 99)
+    (buffer-position)
    ))
 
 ;; Use relative line numbers
