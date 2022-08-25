@@ -169,11 +169,40 @@
   :config
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
+;; Define custom segments
+(setq mute-segment (make-symbol "mute-segment"))
+(spaceline-define-segment mute-segment
+  "Displays the current mute status of the system"
+  (if (eq (shell-command-to-string "pacmd list-sources | grep muted | grep yes") "")
+      "🔈"
+    "🔇"))
+(setq status-segment (make-symbol "status-segment"))
+(spaceline-define-segment status-segment
+  "Displays the current system status"
+  (shell-command-to-string "status"))
+;; Configure spaceline
 (spaceline-helm-mode)
-(spaceline-toggle-window-number-off)          ; otherwise the evil state indicator isn't shown
-(spaceline-toggle-minor-modes-off)            ; don't show minor modes
-(spaceline-toggle-buffer-encoding-abbrev-off) ; don't show file encoding
+(spaceline-toggle-window-number-off)                                      ; otherwise the evil state indicator isn't shown
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state) ; colorise the modeline based on the evil state
+(spaceline-compile
+  ; left side
+  '(
+    (evil-state :face highlight-face :priority 100)
+    ((buffer-modified buffer-id) :priority 98)
+    (major-mode :priority 79)
+    (process :when active)
+    (version-control :when active)
+    ((flycheck-error flycheck-warning flycheck-info) :when active :priority 89)
+   )
+  ; right side
+  '(
+    (battery :when active)
+    (selection-info :priority 95)
+    input-method
+    mute-segment
+    (global)
+    (buffer-position :priority 99)
+   ))
 
 ;; Use relative line numbers
 (setq display-line-numbers-type 'relative)
