@@ -41,6 +41,12 @@
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-envs (list "GOROOT" "GOPATH")))
 
+;; Bind mute toggle to f12
+(defun toggle-mute ()
+  (interactive)
+  (start-process "mute" nil "mute"))
+(global-set-key [f12] #'toggle-mute)
+
 ;; Functions for launching X11 applications
 (defun firefox ()
   (interactive)
@@ -119,6 +125,7 @@
 	([?\s-w ?v] . evil-window-vsplit)
 	([?\s-a] . winum-select-window-by-number)
 	([?\s-f] . firefox)
+	([f12] . toggle-mute)
 	))
 (require 'exwm-randr)
 (setq exwm-randr-workspace-output-plist '(0 "DP-1" 1 "DP-5" 2 "DP-7"))
