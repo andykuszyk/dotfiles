@@ -314,7 +314,7 @@
 ;; Alternatively, `M-!, make` can be used.
 (defun make ()
   (interactive)
-  (shell-command "make &> /dev/null" nil))
+  (start-process "make" nil "make"))
 
 ;; Perspective
 (use-package perspective
