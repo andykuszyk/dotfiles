@@ -323,6 +323,9 @@
 ;; Auto commit/push files after saving for notes repos.
 (add-hook 'after-save-hook #'sync-notes)
 
+;; Org babel support for go
+(use-package ob-go :ensure t)
+
 ;; Org mode customisation
 (setq org-startup-folded t) ; open org files folded, rather than expanded
 (setq org-edit-src-content-indentation 0) ; do not indent code in source blocks
@@ -330,6 +333,7 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
+   (go . t)
    (emacs-lisp . t)))
 
 ;; Export org files to reveal.js presentations
