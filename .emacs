@@ -373,3 +373,7 @@
 ;; Clojure support
 (use-package clojure-mode :ensure t)
 (add-hook 'clojure-mode-hook #'lsp)
+
+;; Keystroke visualisation
+(use-package keypression :ensure t)
+(keypression-mode)
