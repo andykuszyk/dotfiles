@@ -376,4 +376,3 @@
 
 ;; Keystroke visualisation
 (use-package keypression :ensure t)
-(keypression-mode)
