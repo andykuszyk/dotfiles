@@ -330,11 +330,16 @@
 ;; Org mode customisation
 (setq org-startup-folded t) ; open org files folded, rather than expanded
 (setq org-edit-src-content-indentation 0) ; do not indent code in source blocks
-;; active Babel languages
+
+;; Mermaid babel support
+(use-package ob-mermaid :ensure t)
+
+;; Org Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
    (go . t)
+   (mermaid . t)
    (emacs-lisp . t)))
 
 ;; Export org files to reveal.js presentations
@@ -376,3 +381,6 @@
 
 ;; Keystroke visualisation
 (use-package keypression :ensure t)
+
+;; Mermaid mode
+(use-package mermaid-mode :ensure t)
