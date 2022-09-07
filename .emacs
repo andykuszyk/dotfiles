@@ -53,6 +53,22 @@
   (interactive)
   (start-process-shell-command "firefox" nil "firefox"))
 
+;; Helm completion
+(use-package helm :ensure t)
+(global-set-key (kbd "M-x") #'helm-M-x)
+(global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+(global-set-key (kbd "C-x C-f") #'helm-find-files)
+(global-set-key (kbd "C-x b") #'helm-buffers-list)
+(helm-mode 1)
+
+;; Helm posframe, which displays minibuffer in center of screen.
+(use-package helm-posframe
+  :ensure t
+  :after helm
+  :config
+  (setq helm-posframe-parameters '((parent-frame . nil)))
+  (helm-posframe-enable))
+
 ;; Extension functions for exwm
 (defun exwm-ext-close-all-windows ()
   "Closes all open windows in the frame, leaving just one open."
@@ -278,14 +294,6 @@
     (require 'eaf-browser)
     (require 'eaf-mermaid)
     (require 'eaf-terminal))
-
-;; Helm completion
-(use-package helm :ensure t)
-(global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
-(global-set-key (kbd "C-x C-f") #'helm-find-files)
-(global-set-key (kbd "C-x b") #'helm-buffers-list)
-(helm-mode 1)
 
 ;; Magit
 (use-package magit :ensure t)
