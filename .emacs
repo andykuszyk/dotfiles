@@ -156,6 +156,7 @@
 
 ;; Re-map keys for exwm
 (defun remap-modifier-keys-for-exwm ()
+  (interactive)
   (shell-command "xmodmap -e \"clear Mod5\"")
   (shell-command "xmodmap -e \"keycode 108 = Super_R\"")
   (shell-command "xmodmap -e \"keycode 92 = Super_R\""))
