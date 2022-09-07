@@ -390,6 +390,7 @@
 
 ;; Keystroke visualisation
 (use-package keypression :ensure t)
+(global-set-key [f11] #'keypression-mode)
 
 ;; Mermaid mode
 (use-package mermaid-mode :ensure t)
