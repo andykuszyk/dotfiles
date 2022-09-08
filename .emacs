@@ -125,7 +125,7 @@
                         (interactive)
                         (exwm-workspace-switch-create ,i))))
                   (number-sequence 0 9))
-	([?\s-&] . (lambda (command)
+	([?\s-d] . (lambda (command)
 		     (interactive (list (read-shell-command "$ ")))
 		     (start-process-shell-command command nil command)))
 	([?\s-w ?w] . evil-window-next)
