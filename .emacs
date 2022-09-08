@@ -53,21 +53,23 @@
   (interactive)
   (start-process-shell-command "firefox" nil "firefox"))
 
-;; Helm completion
-(use-package helm :ensure t)
-(global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
-(global-set-key (kbd "C-x C-f") #'helm-find-files)
-(global-set-key (kbd "C-x b") #'helm-buffers-list)
-(helm-mode 1)
+;; Ivy
+(use-package counsel :ensure t)
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
+(global-set-key (kbd "C-s") 'swiper-isearch)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x b") 'persp-ivy-switch-buffer)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
 
-;; Helm posframe, which displays minibuffer in center of screen.
-(use-package helm-posframe
-  :ensure t
-  :after helm
-  :config
-  (setq helm-posframe-parameters '((parent-frame . nil)))
-  (helm-posframe-enable))
+;; Ivy posframe
+(use-package ivy-posframe :ensure t)
+(setq ivy-posframe-parameters '((parent-frame . nil)))
+(ivy-posframe-mode)
+(setq ivy-posframe-parameters
+      '((left-fringe . 8)
+        (right-fringe . 8)))
 
 ;; Extension functions for exwm
 (defun exwm-ext-close-all-windows ()
@@ -137,7 +139,7 @@
 	([?\s-w ?J] . evil-window-move-very-bottom)
 	([?\s-w ?K] . evil-window-move-very-top)
 	([?\s-w ?c] . evil-window-delete)
-	([?\s-\;] . helm-M-x)
+	([?\s-\;] . counsel-M-x)
 	([?\s-w ?s] . evil-window-split)
 	([?\s-w ?v] . evil-window-vsplit)
 	([?\s-a] . winum-select-window-by-number)
@@ -201,7 +203,6 @@
   "Displays the current system status"
   (shell-command-to-string "status"))
 ;; Configure spaceline
-(spaceline-helm-mode)
 (spaceline-toggle-window-number-off)                                      ; otherwise the evil state indicator isn't shown
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state) ; colorise the modeline based on the evil state
 (spaceline-compile
