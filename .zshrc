@@ -95,8 +95,8 @@ export GOPRIVATE=github.com/form3tech/*
 # Initialise sdkman
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# set zsh auto suggestion colour to something compatible with vim
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7"
+# set zsh auto suggestion colour to something compatible with emacs
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=241"
 
 # Initialise gvm
 source $HOME/.gvm/scripts/gvm
