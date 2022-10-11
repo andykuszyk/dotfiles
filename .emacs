@@ -205,7 +205,9 @@
 ;; Configure spaceline
 (spaceline-toggle-window-number-off)                                      ; otherwise the evil state indicator isn't shown
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state) ; colorise the modeline based on the evil state
-(setq powerline-default-separator "wave")
+(setq powerline-default-separator "arrow")
+(setq spaceline-separator-dir-left '(left . left))
+(setq spaceline-separator-dir-right '(right . right))
 (spaceline-compile
   ; left side
   '(
