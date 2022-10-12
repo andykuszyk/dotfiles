@@ -378,6 +378,26 @@
   :init
   (persp-mode))
 
+;; Function to add and switch to buffer in perspective
+(defun persp-add-and-switch-buffer (buffer-or-name)
+  (interactive
+   (list
+    (let ((read-buffer-function nil))
+      (read-buffer "Add buffer to perspective: "))))
+  (persp-add-buffer buffer-or-name)
+  (switch-to-buffer buffer-or-name))
+
+;; Function to switch to a new perspective, and add the current buffer
+(defun persp-switch-and-add-buffer ()
+  (interactive)
+  (let ((buffer (buffer-name)))
+    (persp-switch ())
+    (persp-add-and-switch-buffer buffer)))
+
+;; Key bindings for replacement buffer switch, and buffer moving commands
+(define-key perspective-map (kbd "a") 'persp-add-and-switch-buffer)
+(define-key perspective-map (kbd "S") 'persp-switch-and-add-buffer)
+
 ;; Dockerfile mode
 (use-package dockerfile-mode :ensure t)
 (add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
