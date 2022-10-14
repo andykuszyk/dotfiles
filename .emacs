@@ -345,6 +345,7 @@
 ;; Org mode customisation
 (setq org-startup-folded t) ; open org files folded, rather than expanded
 (setq org-edit-src-content-indentation 0) ; do not indent code in source blocks
+(setq org-startup-with-inline-images t) ; always show inline images
 
 ;; Mermaid babel support
 (use-package ob-mermaid :ensure t)
