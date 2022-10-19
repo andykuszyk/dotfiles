@@ -375,6 +375,7 @@
 (use-package perspective
   :ensure t
   :custom
+  (setq persp-sort 'access)
   (persp-mode-prefix-key (kbd "C-x x"))
   :init
   (persp-mode))
