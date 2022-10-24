@@ -421,7 +421,7 @@
 ;; Convenience make function
 ;; Alternatively, `M-!, make` can be used.
 (defun make ()
-  (interactive)
+  (interactive))
 #+end_src
   (start-process "make" nil "make"))
 * Perspective workspaces
