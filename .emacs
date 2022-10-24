@@ -453,3 +453,9 @@
 ;  (markdown-xwidget-github-theme "dark");
 ;  (markdown-xwidget-mermaid-theme "dark");
 ;  (markdown-xwidget-code-block-theme "default"));
+
+;; Calendar
+(use-package calfw :ensure t)
+(use-package calfw-ical :ensure t)
+(defun ak/open-pd ()
+    (cfw:open-ical-calendar "https://form3.pagerduty.com/private/f0bc0c4f47ebaf99c603bccb7b0b2215233ff70caf7348679ffa0c01e4fd3c6a/feed"))
