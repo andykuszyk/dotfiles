@@ -465,6 +465,16 @@ If you change this variable, run ~M-x lsp-workspace-restart~ to restart ~gopls~.
 #+begin_src elisp
 (setq lsp-go-env '((GOFLAGS . "-tags=associations")))
 #+end_src
+*** Go test support
+#+begin_src elisp
+(use-package gotest :ensure t)
+#+end_src
+To run a test that the cursor is in, use ~M-x go-test-current-test~.
+
+If the file has a build flag on it, first set a buffer-local variable with the build flag.
+
+For example, for the build flag ~foo~, run ~(setq go-test-args "-tags='foo'")~.
+
 ** Terraform support
 #+begin_src elisp
 ;; Terraform support
