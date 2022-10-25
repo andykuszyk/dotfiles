@@ -191,13 +191,6 @@
 ;; Finally, start exwm
 (exwm-enable)
 #+end_src
-* Markdown support
-#+begin_src elisp
-;; Install markdown package
-(use-package markdown-mode :ensure t)
-(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
-(setq markdown-fontify-code-blocks-natively t)
-#+end_src
 * Command for setting text width
 #+begin_src elisp
 ;; Function for configuring text-width
@@ -344,43 +337,11 @@
 (use-package magit :ensure t)
 (setq magit-diff-refine-hunk (quote all)) ; Use word diffs when showing diffs
 #+end_src
-* lsp mode
-#+begin_src elisp
-;; LSP
-(use-package lsp-mode :ensure t)
-(use-package lsp-ui :ensure t)
-(use-package dap-mode :ensure t)
-#+end_src
 * Auto completion with company mode
 #+begin_src elisp
 ;; Auto-completion
 (use-package company :ensure t)
 (add-hook 'after-init-hook #'global-company-mode) ; Enable company mode in all buffers
-#+end_src
-* Golang support
-** Go mode
-#+begin_src elisp
-(use-package go-mode :ensure t)
-(add-hook 'go-mode-hook #'lsp) ; enter lsp mode when entering go mode
-(setq gofmt-command "goimports") ; format files with goimports
-(add-hook 'before-save-hook #'gofmt-before-save) ; format files on save
-#+end_src
-** Custom build flags
-If you change this variable, run ~M-x lsp-workspace-restart~ to restart ~gopls~.
-#+begin_src elisp
-(setq lsp-go-env '((GOFLAGS . "-tags=associations")))
-#+end_src
-* Terraform support
-#+begin_src elisp
-;; Terraform support
-(use-package terraform-mode :ensure t)
-(add-hook 'terraform-mode-hook #'lsp)
-(add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
-#+end_src
-* Yaml support
-#+begin_src elisp
-;; YAML support
-(use-package yaml-mode :ensure t)
 #+end_src
 * Function for synchronising note files with git
 #+begin_src elisp
@@ -460,29 +421,12 @@ If you change this variable, run ~M-x lsp-workspace-restart~ to restart ~gopls~.
 (define-key perspective-map (kbd "a") 'persp-add-and-switch-buffer)
 (define-key perspective-map (kbd "S") 'persp-switch-and-add-buffer)
 #+end_src
-* Dockerfile support
-#+begin_src elisp
-;; Dockerfile mode
-(use-package dockerfile-mode :ensure t)
-(add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
-#+end_src
 * Window switcher
 #+begin_src elisp
 ;; Numbered window switcher
 (use-package winum :ensure t)
 (winum-mode)
 (global-set-key (kbd "C-a") #'winum-select-window-by-number)
-#+end_src
-* JSON support
-#+begin_src elisp
-;; Better JSON support
-(use-package json-mode :ensure t)
-#+end_src
-* Clojure support
-#+begin_src elisp
-;; Clojure support
-(use-package clojure-mode :ensure t)
-(add-hook 'clojure-mode-hook #'lsp)
 #+end_src
 * Experimental calendar viewer
 #+begin_src elisp
@@ -491,4 +435,62 @@ If you change this variable, run ~M-x lsp-workspace-restart~ to restart ~gopls~.
 (use-package calfw-ical :ensure t)
 (defun ak/open-pd ()
     (cfw:open-ical-calendar "https://form3.pagerduty.com/private/f0bc0c4f47ebaf99c603bccb7b0b2215233ff70caf7348679ffa0c01e4fd3c6a/feed"))
+#+end_src
+
+* Language support
+** LSP mode
+#+begin_src elisp
+(use-package lsp-mode :ensure t)
+(setq lsp-enable-file-watchers nil)
+(use-package lsp-ui :ensure t)
+(use-package dap-mode :ensure t)
+#+end_src
+** Markdown support
+#+begin_src elisp
+;; Install markdown package
+(use-package markdown-mode :ensure t)
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+(setq markdown-fontify-code-blocks-natively t)
+#+end_src
+** Golang support
+*** Go mode
+#+begin_src elisp
+(use-package go-mode :ensure t)
+(add-hook 'go-mode-hook #'lsp) ; enter lsp mode when entering go mode
+(setq gofmt-command "goimports") ; format files with goimports
+(add-hook 'before-save-hook #'gofmt-before-save) ; format files on save
+#+end_src
+*** Custom build flags
+If you change this variable, run ~M-x lsp-workspace-restart~ to restart ~gopls~.
+#+begin_src elisp
+(setq lsp-go-env '((GOFLAGS . "-tags=associations")))
+#+end_src
+** Terraform support
+#+begin_src elisp
+;; Terraform support
+(use-package terraform-mode :ensure t)
+(add-hook 'terraform-mode-hook #'lsp)
+(add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
+#+end_src
+** Yaml support
+#+begin_src elisp
+;; YAML support
+(use-package yaml-mode :ensure t)
+#+end_src
+** Clojure support
+#+begin_src elisp
+;; Clojure support
+(use-package clojure-mode :ensure t)
+(add-hook 'clojure-mode-hook #'lsp)
+#+end_src
+** JSON support
+#+begin_src elisp
+;; Better JSON support
+(use-package json-mode :ensure t)
+#+end_src
+** Dockerfile support
+#+begin_src elisp
+;; Dockerfile mode
+(use-package dockerfile-mode :ensure t)
+(add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
 #+end_src
