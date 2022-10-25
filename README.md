@@ -1,11 +1,14 @@
 # Andy Kuszyk's dotfiles
-This repo contains the dotfiles that I use for Linux desktop configuration. Most of them relate to my use of i3, at which I am a beginner - this repo is not a primary source of i3 information!
-
-More information about my use of i3 can be found in my [blog post](https://andykuszyk.github.io/2020-02-18-demystifying-i3.html) on the subject.
+This repo contains the dotfiles that I use for Emacs, Vim, Zsh, i3wm, and a few other tools. I use these files on Ubuntu, Fedora, Mac OS, and Termux.
 
 ## Usage
 * Clone this repo somewhere.
 * Run `make` to copy the files into your home directory.
+
+> Check out the other Make targets for platform-specific instructions, e.g. for fedora or termux.
+
+## Emacs
+Some hacking might be required to get the Emacs config to work first time, since I rarely apply it from the beginning. My Emacs config takes the form of an Org file which is tangled into an init file by org-babel. See the [config](./.emacs.d/emacs.org) for more details.
 
 ## Vim
 * Vim plugins use [`vim-plug`](https://github.com/junegunn/vim-plug). To install run `curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`, open Vim and run `:PlugInstall`.
