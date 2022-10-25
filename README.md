@@ -10,6 +10,12 @@ This repo contains the dotfiles that I use for Emacs, Vim, Zsh, i3wm, and a few 
 ## Emacs
 Some hacking might be required to get the Emacs config to work first time, since I rarely apply it from the beginning. My Emacs config takes the form of an Org file which is tangled into an init file by org-babel. See the [config](./.emacs.d/emacs.org) for more details.
 
+I use Emacs with EXWM as a window manager on Linux. For this to work, the `emacs.desktop` file needs to be copied to the xsessions directory, e.g:
+
+```sh
+$ sudo cp emacs.desktop /usr/share/xsessions
+```
+
 ## Vim
 * Vim plugins use [`vim-plug`](https://github.com/junegunn/vim-plug). To install run `curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`, open Vim and run `:PlugInstall`.
 
