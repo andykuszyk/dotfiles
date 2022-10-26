@@ -474,7 +474,11 @@ To run a test that the cursor is in, use ~M-x go-test-current-test~.
 If the file has a build flag on it, first set a buffer-local variable with the build flag.
 
 For example, for the build flag ~foo~, run ~(setq go-test-args "-tags='foo'")~.
-
+*** Go debugging
+This relies on ~dap-mode~ and ~lsp-mode~.
+#+begin_src elisp
+(require 'dap-dlv-go)
+#+end_src
 ** Terraform support
 #+begin_src elisp
 ;; Terraform support
