@@ -488,11 +488,17 @@ If you change this variable, run ~M-x lsp-workspace-restart~ to restart ~gopls~.
 #+begin_src elisp
 (setq lsp-go-env '((GOFLAGS . "-tags=associations")))
 #+end_src
+This will enable the language server to recognise files with build flags, although this won't help debugging.
+
+Delve supports Go build flags, but not via DAP. This means that debugging a file with build flags will fail.
+
+To work around this problem, temporarily remove the build flags.
 **** Go test support
 #+begin_src elisp
 (use-package gotest :ensure t)
 (setq go-test-verbose t)
 #+end_src
+
 To run a test that the cursor is in, use ~M-x go-test-current-test~.
 
 If the file has a build flag on it, first set a buffer-local variable with the build flag.
@@ -503,10 +509,10 @@ This relies on ~dap-mode~ and ~lsp-mode~.
 #+begin_src elisp
 (require 'dap-dlv-go)
 #+end_src
-
-#+RESULTS:
-: dap-dlv-go
-
+Files with build flags will fail. At the moment, the only way I know of to solve this is to temporarily remove the build flags.
+**** TL;DR
+- ~M-x go-test-current-test~ to run a test.
+- ~M-x dap-debug~ to start a debugging sesssion.
 *** Terraform support
 #+begin_src elisp
 ;; Terraform support
