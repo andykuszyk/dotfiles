@@ -542,3 +542,26 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (use-package dockerfile-mode :ensure t)
 (add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
 #+end_src
+
+** Experimental go log highlighting
+This function (~go-log-highlight~) is a prototype for a minor mode that could be used
+to highlight log output from ~go test~. The idea is that you would open a buffer containing
+log output from ~go test~, switch to ~Fundamental mode~, and then run ~go-log-highlight~.
+#+begin_src elisp
+(defgroup go-log-highlight-group nil
+  "Go log highlighting"
+  :group 'go)
+
+(defface go-log--error-face
+  '((t (:foreground "#FF0000")))
+  "Error face"
+  :group 'go-log-highlight-group)
+go-log--error-face
+
+(defun go-log-highlight ()
+  (interactive)
+  (font-lock-add-keywords
+   nil
+   '(("^\s*=== RUN.*" . 'go-log--error-face)))
+  (font-lock-fontify-buffer))
+#+end_src
