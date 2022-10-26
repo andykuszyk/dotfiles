@@ -1,4 +1,27 @@
-* GUI customisation
+* Things to learn about
+** TODO kill ring, copy and paste history (vim registers)
+** TODO [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Dotted-Pair-Notation.html][dotted pair notation]]
+** TODO what is a rectangle?
+** TODO clojure for the brave and true
+** TODO paredit mode
+* Things to configure
+** TODO try dap-mode for Go debugging
+** TODO split buffer and open scratch (e.g. for e-mail or slack message composition)
+** TODO go test log file syntax highlighting (see [[https://github.com/doublep/logview][logview]] package)
+** TODO make super-f behave like c-x v
+** TODO magit forge for issues, pr reviews, and gh notifications
+** TODO re-work keybindings to have more consistent and ergonomic interface
+** TODO auto-push function isn't working for the latest commit on linux machine
+** TODO page up/down don't work in normal mode in vterm
+** TODO command to open email and calendar, and rename buffer
+** TODO show the result of ~status~ in the modeline
+** TODO try [[https://github.com/jcinnamond/el-presenti][john's presentation mode]]
+** TODO disable line numbers in image mode
+** TODO exwm on mac using x11 forwarding for firefox
+** TODO rebind right alt to ctrl on macbook
+** TODO exwm suspend
+* Config
+** GUI customisation
 #+begin_src elisp
 ;; Disable GUI menu bars
 (menu-bar-mode -1)
@@ -12,7 +35,7 @@
 (setq inhibit-startup-message t) 
 (setq initial-scratch-message nil)
 #+end_src
-* Display time configuration
+** Display time configuration
 #+begin_src elisp
 ;; Show the time in the modeline
 (setq display-time-24hr-format t)
@@ -20,7 +43,7 @@
 (setq display-time-day-and-date t)
 (display-time-mode)
 #+end_src
-* Backup file configuration
+** Backup file configuration
 #+begin_src elisp
 ;; Save backup files in /tmp
 (setq backup-directory-alist
@@ -28,12 +51,12 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 #+end_src
-* Server mode
+** Server mode
 #+begin_src elisp
 ;; Always start emacs in server mode
 (server-start)
 #+end_src
-* Package manager configuration
+** Package manager configuration
 #+begin_src elisp
 ;; Install MELPA package repository
 (require 'package)
@@ -44,7 +67,7 @@
 (eval-when-compile
   (require 'use-package))
 #+end_src
-* Inherit environment from shell
+** Inherit environment from shell
 #+begin_src elisp
 ;; Inherit environment from default shell
 (use-package exec-path-from-shell
@@ -53,7 +76,7 @@
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-envs (list "GOROOT" "GOPATH")))
 #+end_src
-* Mute control bound to f12
+** Mute control bound to f12
 #+begin_src elisp
 ;; Bind mute toggle to f12
 (defun toggle-mute ()
@@ -62,14 +85,14 @@
   (force-mode-line-update t))
 (global-set-key [f12] #'toggle-mute)
 #+end_src
-* Command for launching firefox
+** Command for launching firefox
 #+begin_src elisp
 ;; Functions for launching X11 applications
 (defun firefox ()
   (interactive)
   (start-process-shell-command "firefox" nil "firefox"))
 #+end_src
-* Ivy
+** Ivy
 #+begin_src elisp
 ;; Ivy
 (use-package counsel :ensure t)
@@ -89,7 +112,7 @@
       '((left-fringe . 8)
         (right-fringe . 8)))
 #+end_src
-* Experimental functions for launching and arranging x windows
+** Experimental functions for launching and arranging x windows
 #+begin_src elisp
 ;; Extension functions for exwm
 (defun exwm-ext-close-all-windows ()
@@ -119,7 +142,7 @@
       (sleep-for 1)
       (other-window 1))))
 #+end_src
-* EXWM
+** EXWM
 #+begin_src elisp
 ;; Exwm configuration
 (use-package exwm :ensure t)
@@ -191,7 +214,7 @@
 ;; Finally, start exwm
 (exwm-enable)
 #+end_src
-* Command for setting text width
+** Command for setting text width
 #+begin_src elisp
 ;; Function for configuring text-width
 (defun set-text-width()
@@ -199,14 +222,14 @@
   (auto-fill-mode)
   (set-fill-column 80))
 #+end_src
-* Spacemacs theme
+** Spacemacs theme
 #+begin_src elisp
 ;; Spacemacs theme
 (use-package spacemacs-theme
   :defer t
   :init (load-theme 'spacemacs-dark t))
 #+end_src
-* Spaceline modeline
+** Spaceline modeline
 #+begin_src elisp
 ;; Spaceline status bar
 (use-package spaceline
@@ -250,23 +273,23 @@
     (buffer-position)
    ))
 #+end_src
-* Use relative line numbers
+** Use relative line numbers
 #+begin_src elisp
 ;; Use relative line numbers
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
 #+end_src
-* Line highlighting
+** Line highlighting
 #+begin_src elisp
 ;; Highlight current line
 (global-hl-line-mode)
 #+end_src
-* Hash mapping for mac
+** Hash mapping for mac
 #+begin_src elisp
 ;; Re-map alt-3 to hash on mac keyboard
 (define-key key-translation-map (kbd "M-3") (kbd "#"))
 #+end_src
-* Evil mode
+** Evil mode
 #+begin_src elisp
 ;; Evil mode vim emulation
 (use-package evil
@@ -289,14 +312,14 @@
 (define-key evil-normal-state-map (kbd "C-w <up>") 'windmove-u)
 (define-key evil-normal-state-map (kbd "C-w <down>") 'windmove-down)
 #+end_src
-* Battery indicator
+** Battery indicator
 #+begin_src elisp
 ;; Fancy battery indicator
 (use-package fancy-battery :ensure t)
 (add-hook 'after-init-hook #'fancy-battery-mode)
 (setq fancy-battery-show-percentage t)
 #+end_src
-* Vterm terminal emulator
+** Vterm terminal emulator
 #+begin_src elisp
 ;; vterm terminal emulator
 (use-package vterm :ensure t)
@@ -309,7 +332,7 @@
 (global-set-key (kbd "C-x v") #'vterm)
 (global-set-key (kbd "C-x m") #'multi-vterm)
 #+end_src
-* Treemacs
+** Treemacs
 #+begin_src elisp
 ;; Treemacs file browser
 (use-package treemacs :ensure t)
@@ -320,7 +343,7 @@
     (display-line-numbers-mode -1))
 (add-hook 'treemacs-mode-hook 'treemacs-hook)
 #+end_src
-* Projectile
+** Projectile
 #+begin_src elisp
 ;; Projectile
 (use-package projectile
@@ -331,19 +354,19 @@
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
 #+end_src
-* Magit
+** Magit
 #+begin_src elisp
 ;; Magit
 (use-package magit :ensure t)
 (setq magit-diff-refine-hunk (quote all)) ; Use word diffs when showing diffs
 #+end_src
-* Auto completion with company mode
+** Auto completion with company mode
 #+begin_src elisp
 ;; Auto-completion
 (use-package company :ensure t)
 (add-hook 'after-init-hook #'global-company-mode) ; Enable company mode in all buffers
 #+end_src
-* Function for synchronising note files with git
+** Function for synchronising note files with git
 #+begin_src elisp
 ;; Function for synchronising notes files with git
 (defun sync-notes()
@@ -357,7 +380,7 @@
 ;; Auto commit/push files after saving for notes repos.
 (add-hook 'after-save-hook #'sync-notes)
 #+end_src
-* Org mode customisation
+** Org mode customisation
 #+begin_src elisp
 ;; Org babel support for go
 (use-package ob-go :ensure t)
@@ -382,7 +405,7 @@
 (use-package ox-reveal :ensure t)
 (load-library "ox-reveal")
 #+end_src
-* Function for running make
+** Function for running make
 #+begin_src elisp
 ;; Convenience make function
 ;; Alternatively, `M-!, make` can be used.
@@ -390,7 +413,7 @@
   (interactive))
 #+end_src
   (start-process "make" nil "make"))
-* Perspective workspaces
+** Perspective workspaces
 #+begin_src elisp
 ;; Perspective
 (use-package perspective
@@ -421,14 +444,14 @@
 (define-key perspective-map (kbd "a") 'persp-add-and-switch-buffer)
 (define-key perspective-map (kbd "S") 'persp-switch-and-add-buffer)
 #+end_src
-* Window switcher
+** Window switcher
 #+begin_src elisp
 ;; Numbered window switcher
 (use-package winum :ensure t)
 (winum-mode)
 (global-set-key (kbd "C-a") #'winum-select-window-by-number)
 #+end_src
-* Experimental calendar viewer
+** Experimental calendar viewer
 #+begin_src elisp
 ;; Calendar
 (use-package calfw :ensure t)
@@ -437,72 +460,77 @@
     (cfw:open-ical-calendar "https://form3.pagerduty.com/private/f0bc0c4f47ebaf99c603bccb7b0b2215233ff70caf7348679ffa0c01e4fd3c6a/feed"))
 #+end_src
 
-* Language support
-** LSP mode
+** Language support
+*** LSP mode
 #+begin_src elisp
 (use-package lsp-mode :ensure t)
 (setq lsp-enable-file-watchers nil)
 (use-package lsp-ui :ensure t)
 (use-package dap-mode :ensure t)
 #+end_src
-** Markdown support
+*** Markdown support
 #+begin_src elisp
 ;; Install markdown package
 (use-package markdown-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (setq markdown-fontify-code-blocks-natively t)
 #+end_src
-** Golang support
-*** Go mode
+*** Golang support
+**** Go mode
 #+begin_src elisp
 (use-package go-mode :ensure t)
 (add-hook 'go-mode-hook #'lsp) ; enter lsp mode when entering go mode
 (setq gofmt-command "goimports") ; format files with goimports
 (add-hook 'before-save-hook #'gofmt-before-save) ; format files on save
 #+end_src
-*** Custom build flags
+**** Custom build flags
 If you change this variable, run ~M-x lsp-workspace-restart~ to restart ~gopls~.
 #+begin_src elisp
 (setq lsp-go-env '((GOFLAGS . "-tags=associations")))
 #+end_src
-*** Go test support
+**** Go test support
 #+begin_src elisp
 (use-package gotest :ensure t)
+(setq go-test-verbose t)
 #+end_src
 To run a test that the cursor is in, use ~M-x go-test-current-test~.
 
 If the file has a build flag on it, first set a buffer-local variable with the build flag.
 
 For example, for the build flag ~foo~, run ~(setq go-test-args "-tags='foo'")~.
-*** Go debugging
+**** Go debugging
 This relies on ~dap-mode~ and ~lsp-mode~.
 #+begin_src elisp
 (require 'dap-dlv-go)
 #+end_src
-** Terraform support
+
+#+RESULTS:
+: dap-dlv-go
+
+*** Terraform support
 #+begin_src elisp
 ;; Terraform support
 (use-package terraform-mode :ensure t)
 (add-hook 'terraform-mode-hook #'lsp)
 (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
 #+end_src
-** Yaml support
+*** Yaml support
 #+begin_src elisp
 ;; YAML support
 (use-package yaml-mode :ensure t)
 #+end_src
-** Clojure support
+*** Clojure support
 #+begin_src elisp
 ;; Clojure support
 (use-package clojure-mode :ensure t)
 (add-hook 'clojure-mode-hook #'lsp)
 #+end_src
-** JSON support
+*** JSON support
 #+begin_src elisp
 ;; Better JSON support
 (use-package json-mode :ensure t)
 #+end_src
-** Dockerfile support
+*** Dockerfile support
 #+begin_src elisp
 ;; Dockerfile mode
 (use-package dockerfile-mode :ensure t)
