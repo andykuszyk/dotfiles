@@ -143,8 +143,8 @@
       (other-window 1))))
 #+end_src
 ** EXWM
+*** Initialisation
 #+begin_src elisp
-;; Exwm configuration
 (use-package exwm :ensure t)
 (setq exwm-workspace-number 4) ; set 4 as the default number of workspaces
 ;; Ensure exwm buffers have sensible names
@@ -159,7 +159,9 @@
                       (string-prefix-p "sun-awt-X11-" exwm-instance-name)
                       (string= "gimp" exwm-instance-name))
               (exwm-workspace-rename-buffer exwm-title))))
-;; Global keybindings
+#+end_src
+*** Keybindings
+#+begin_src elisp
 (setq exwm-input-global-keys
       `(
 	([?\s-r] . exwm-reset) ; exit char/fullscreen mode
@@ -193,25 +195,40 @@
 	([?\s-l] . exwm-input-toggle-keyboard)
 	([f12] . toggle-mute)
 	))
+#+end_src
+*** Multi-monitor support
+#+begin_src elisp
 (require 'exwm-randr)
-(setq exwm-randr-workspace-output-plist '(0 "DP-1" 1 "DP-5" 2 "DP-7"))
-(add-hook 'exwm-randr-screen-change-hook
-          (lambda ()
-            (start-process-shell-command
-             "xrandr" nil "xrandr --output DP-0 --off --output DP-1 --mode 1920x1080 --pos 0x0 --rotate right --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --mode 1920x1080 --pos 1080x221 --rotate normal --output DP-6 --off --output DP-7 --mode 1920x1080 --pos 3000x0 --rotate left")))
+(if (string= system-name "emacos")
+  (setq exwm-randr-workspace-output-plist '(0 "eDP-1" 1 "HDMI-1"))
+  (setq exwm-randr-workspace-output-plist '(0 "DP-1" 1 "DP-5" 2 "DP-7")))
+
+(let ((xrandr-args "xrandr --output DP-0 --off --output DP-1 --mode 1920x1080 --pos 0x0 --rotate right --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --mode 1920x1080 --pos 1080x221 --rotate normal --output DP-6 --off --output DP-7 --mode 1920x1080 --pos 3000x0 --rotate left"))
+  (if (string= system-name "emacos")
+    (setq xrandr-args "xrandr --output eDP-1 --primary --mode 1366x768 --pos 277x1080 --rotate normal --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output HDMI-2 --off --output DP-2 --off"))
+  (add-hook 'exwm-randr-screen-change-hook
+    (lambda ()
+    (start-process-shell-command "xrandr" nil xrandr-args))))
+
 (exwm-randr-enable)
+#+end_src
+*** Allow buffers to be shared between all exwm workspaces
+I use Perspective for managing workspaces.
+#+begin_src elisp
 (setq exwm-workspace-show-all-buffers t) ; show all buffers on each workspace
 (setq exwm-layout-show-all-buffers t) ; allow swetching to buffers from another workspace
-
-;; Re-map keys for exwm
+#+end_src
+*** Modifier key remapping
+#+begin_src elisp
 (defun remap-modifier-keys-for-exwm ()
   (interactive)
   (shell-command "xmodmap -e \"clear Mod5\"")
   (shell-command "xmodmap -e \"keycode 108 = Super_R\"")
   (shell-command "xmodmap -e \"keycode 92 = Super_R\""))
 (add-hook 'exwm-init-hook #'remap-modifier-keys-for-exwm)
-
-;; Finally, start exwm
+#+end_src
+*** Start exwm
+#+begin_src elisp
 (exwm-enable)
 #+end_src
 ** Command for setting text width
