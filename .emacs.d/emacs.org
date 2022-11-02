@@ -114,10 +114,8 @@
 #+end_src
 ** Avy
 #+begin_src elisp
-(use-package avy
-  :ensure t
-  :config
-  (global-set-key (kbd "/") 'avy-goto-char-timer))
+(use-package avy :ensure t)
+(global-set-key (kbd "C-;") #'avy-goto-char-timer)
 #+end_src
 ** Experimental functions for launching and arranging x windows
 #+begin_src elisp
