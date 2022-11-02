@@ -605,26 +605,30 @@ log output from ~go test~, switch to ~Fundamental mode~, and then run ~go-log-hi
   :group 'go-log-highlight-group)
 
 (defface go-log--field-face
-  '((t (:foreground "gray")))
+  '((t (:foreground "#009bff")))
   "Field face"
   :group 'go-log-highlight-group)
 
-(defun go-log-highlight ()
-  (interactive)
-  (font-lock-add-keywords
-   nil
-   '(
-      ("^\s*=== RUN.*" . 'go-log--run-face)
-      ("^\s*--- PASS.*" . 'go-log--pass-face)
-      ("^\s*--- FAIL.*" . 'go-log--fail-face)
-      ("level=info" . 'go-log--info-face)
-      ("level=warning" . 'go-log--warning-face)
-      ("level=error" . 'go-log--warning-face)
-      ("@timestamp=\"[0-9\-T\:\.\+]+\"" . 'go-log--timestamp-face)
-      ("[A-Za-z\-]+=" . 'go-log--field-face)
-    ))
-  (font-lock-fontify-buffer))
-#+end_src
+(defvar go-log-highlight-keywords
+  '(
+    ("^\s*=== RUN.*" . 'go-log--run-face)
+    ("^\s*--- PASS.*" . 'go-log--pass-face)
+    ("^\s*--- FAIL.*" . 'go-log--fail-face)
+    ("level=info" . 'go-log--info-face)
+    ("level=warning" . 'go-log--warning-face)
+    ("level=error" . 'go-log--warning-face)
+    ("@timestamp=\"[0-9\-T\:\.\+]+\"" . 'go-log--timestamp-face)
+    ("message=" . 'go-log--field-face)
+  ))
 
-#+RESULTS:
-: go-log-highlight
+(define-minor-mode go-log-highlight-minor-mode
+  "Minor mode for making go logs more readable"
+  :init-value 1
+  :group 'go-log-highlight-group
+  (when (bound-and-true-p go-log-highlight-minor-mode)
+    (font-lock-add-keywords nil go-log-highlight-keywords)
+    (font-lock-fontify-buffer))
+  (when (not (bound-and-true-p go-log-highlight-minor-mode))
+    (font-lock-remove-keywords nil go-log-highlight-keywords)
+    (font-lock-fontify-buffer)))
+#+end_src
