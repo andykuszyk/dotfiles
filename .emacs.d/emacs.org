@@ -570,54 +570,50 @@ log output from ~go test~, switch to ~Fundamental mode~, and then run ~go-log-hi
   :group 'go)
 
 (defface go-log--fail-face
-  '((t (:foreground "#FF0000")))
+  '((t (:foreground "red")))
   "Fail face"
   :group 'go-log-highlight-group)
 
 (defface go-log--run-face
-  '((t (:foreground "#46ff00")))
+  '((t (:foreground "magenta")))
   "Run face"
   :group 'go-log-highlight-group)
 
 (defface go-log--pass-face
-  '((t (:foreground "#46ff00")))
+  '((t (:foreground "green")))
   "Pass face"
   :group 'go-log-highlight-group)
 
 (defface go-log--info-face
-  '((t (:foreground "#46ff00")))
+  '((t (:foreground "green")))
   "Info face"
   :group 'go-log-highlight-group)
 
 (defface go-log--warning-face
-  '((t (:foreground "#fbff00")))
+  '((t (:foreground "yellow")))
   "Warning face"
   :group 'go-log-highlight-group)
 
 (defface go-log--error-face
-  '((t (:foreground "#FF0000")))
+  '((t (:foreground "red")))
   "Error face"
   :group 'go-log-highlight-group)
 
-(defface go-log--timestamp-face
-  '((t (:foreground "#009bff" :background "#ffffff")))
-  "Timestamp face"
-  :group 'go-log-highlight-group)
-
 (defface go-log--field-face
-  '((t (:foreground "#009bff")))
+  '((t (:foreground "dim gray")))
   "Field face"
   :group 'go-log-highlight-group)
 
 (defvar go-log-highlight-keywords
   '(
-    ("^\s*=== RUN.*" . 'go-log--run-face)
-    ("^\s*--- PASS.*" . 'go-log--pass-face)
-    ("^\s*--- FAIL.*" . 'go-log--fail-face)
-    ("level=info" . 'go-log--info-face)
-    ("level=warning" . 'go-log--warning-face)
-    ("level=error" . 'go-log--warning-face)
-    ("@timestamp=\"[0-9\-T\:\.\+]+\"" . 'go-log--timestamp-face)
+    ("^\s*=== RUN" . 'go-log--run-face)
+    ("^\s*--- PASS" . 'go-log--pass-face)
+    ("^\s*--- FAIL" . 'go-log--fail-face)
+    ("info" . 'go-log--info-face)
+    ("warning" . 'go-log--warning-face)
+    ("error" . 'go-log--warning-face)
+    ("timestamp=" . 'go-log--field-face)
+    ("level=" . 'go-log--field-face)
     ("message=" . 'go-log--field-face)
   ))
 
