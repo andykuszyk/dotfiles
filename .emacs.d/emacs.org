@@ -600,21 +600,35 @@ log output from ~go test~, switch to ~Fundamental mode~, and then run ~go-log-hi
   :group 'go-log-highlight-group)
 
 (defface go-log--field-face
-  '((t (:foreground "dim gray")))
+  '((t (:foreground "gray")))
+  "Field face"
+  :group 'go-log-highlight-group)
+
+(defface go-log--string-face
+  '((t (:foreground "cyan")))
+  "Field face"
+  :group 'go-log-highlight-group)
+
+(defface go-log--uuid-face
+  '((t (:foreground "salmon")))
+  "Field face"
+  :group 'go-log-highlight-group)
+
+(defface go-log--number-face
+  '((t (:foreground "khaki")))
   "Field face"
   :group 'go-log-highlight-group)
 
 (defvar go-log-highlight-keywords
   '(
-    ("^\s*=== RUN" . 'go-log--run-face)
-    ("^\s*--- PASS" . 'go-log--pass-face)
-    ("^\s*--- FAIL" . 'go-log--fail-face)
-    ("info" . 'go-log--info-face)
-    ("warning" . 'go-log--warning-face)
-    ("error" . 'go-log--warning-face)
-    ("timestamp=" . 'go-log--field-face)
-    ("level=" . 'go-log--field-face)
-    ("message=" . 'go-log--field-face)
+    ("^\s*=== RUN" . 'go-log--run-face t)
+    ("^\s*--- PASS" . 'go-log--pass-face t)
+    ("^\s*--- FAIL" . 'go-log--fail-face t)
+    ("level=\\(info\\)" 1 'go-log--info-face t)
+    ("level=\\(warning\\)" 1 'go-log--warning-face t)
+    ("level=\\(error\\)" 1 'go-log--warning-face t)
+    ("[a-zA-z\\-]+=" . 'go-log--field-face t)
+    ("=\\(\"[^\"]+\\)" 1 go-log--string-face t)
   ))
 
 (define-minor-mode go-log-highlight-minor-mode
