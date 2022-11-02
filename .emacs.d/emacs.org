@@ -204,17 +204,10 @@
 *** Multi-monitor support
 #+begin_src elisp
 (require 'exwm-randr)
-(if (string= system-name "emacos")
-  (setq exwm-randr-workspace-output-plist '(0 "eDP-1" 1 "HDMI-1"))
-  (setq exwm-randr-workspace-output-plist '(0 "DP-1" 1 "DP-5" 2 "DP-7")))
-
-(let ((xrandr-args "xrandr --output DP-0 --off --output DP-1 --mode 1920x1080 --pos 0x0 --rotate right --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --mode 1920x1080 --pos 1080x221 --rotate normal --output DP-6 --off --output DP-7 --mode 1920x1080 --pos 3000x0 --rotate left"))
-  (if (string= system-name "emacos")
-    (setq xrandr-args "xrandr --output eDP-1 --primary --mode 1366x768 --pos 277x1080 --rotate normal --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output HDMI-2 --off --output DP-2 --off"))
-  (add-hook 'exwm-randr-screen-change-hook
-    (lambda ()
-    (start-process-shell-command "xrandr" nil xrandr-args))))
-
+(setq exwm-randr-workspace-output-plist '(0 "DP-1" 1 "DP-5" 2 "DP-7"))
+(add-hook 'exwm-randr-screen-change-hook
+  (lambda ()
+  (start-process-shell-command "xrandr" nil "xrandr --output DP-0 --off --output DP-1 --mode 1920x1080 --pos 0x0 --rotate right --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --mode 1920x1080 --pos 1080x221 --rotate normal --output DP-6 --off --output DP-7 --mode 1920x1080 --pos 3000x0 --rotate left")))
 (exwm-randr-enable)
 #+end_src
 *** Allow buffers to be shared between all exwm workspaces
