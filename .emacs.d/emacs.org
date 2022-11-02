@@ -112,6 +112,13 @@
       '((left-fringe . 8)
         (right-fringe . 8)))
 #+end_src
+** Avy
+#+begin_src elisp
+(use-package avy
+  :ensure t
+  :config
+  (global-set-key (kbd "/") 'avy-goto-char-timer))
+#+end_src
 ** Experimental functions for launching and arranging x windows
 #+begin_src elisp
 ;; Extension functions for exwm
