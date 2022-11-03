@@ -39,3 +39,4 @@ Terminal themes provided by https://github.com/Mayccoll/Gogh. Current theme is `
 * Managing network connections: `nmtui`
 * [`gvm`](https://github.com/moovweb/gvm) for managing Go versions
 * [`tfenv`](https://github.com/tfutils/tfenv) for managing Terraform versions
+
