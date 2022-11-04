@@ -481,7 +481,12 @@ I use Perspective for managing workspaces.
 (use-package lsp-mode :ensure t)
 (setq lsp-enable-file-watchers nil)
 (use-package lsp-ui :ensure t)
+#+end_src
+*** DAP mode
+#+begin_src elisp
 (use-package dap-mode :ensure t)
+(add-hook 'dap-stopped-hook
+          (lambda (arg) (call-interactively #'dap-hydra)))
 #+end_src
 *** Markdown support
 #+begin_src elisp
