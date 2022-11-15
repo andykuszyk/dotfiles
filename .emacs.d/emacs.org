@@ -404,6 +404,7 @@ I use Perspective for managing workspaces.
 (setq org-startup-folded t) ; open org files folded, rather than expanded
 (setq org-edit-src-content-indentation 0) ; do not indent code in source blocks
 (setq org-startup-with-inline-images t) ; always show inline images
+(setq org-adapt-indentation nil) ; do not indent headline contents with headline
 
 ;; Mermaid babel support
 (use-package ob-mermaid :ensure t)
