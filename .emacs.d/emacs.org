@@ -466,6 +466,10 @@ I use Perspective for managing workspaces.
 (winum-mode)
 (global-set-key (kbd "C-a") #'winum-select-window-by-number)
 #+end_src
+** Window resizing
+#+begin_src elisp
+(use-package resize-window :ensure t)
+#+end_src
 ** Experimental calendar viewer
 #+begin_src elisp
 ;; Calendar
