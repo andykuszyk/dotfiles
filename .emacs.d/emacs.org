@@ -509,6 +509,21 @@ I use Perspective for managing workspaces.
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (setq markdown-fontify-code-blocks-natively t)
 #+end_src
+**** Markdown preview in xwidget
+#+begin_src elisp
+(use-package markdown-xwidget
+  :after markdown-mode
+  :quelpa (markdown-xwidget
+             :fetcher github
+             :repo "cfclrk/markdown-xwidget"
+             :files (:defaults "resources"))
+  :bind (:map markdown-mode-command-map
+              ("x" . markdown-xwidget-preview-mode)))
+#+end_src
+**** Disable double buffering to fix markdown rendering issue
+#+begin_src elisp
+(modify-frame-parameters nil '((inhibit-double-buffering . t)))
+#+end_src
 *** Golang support
 **** Go mode
 #+begin_src elisp
