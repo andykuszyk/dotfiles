@@ -67,6 +67,15 @@
 (eval-when-compile
   (require 'use-package))
 #+end_src
+** Quelpa for installing packages from git
+#+begin_src elisp
+(use-package quelpa :ensure t)
+(quelpa
+ '(quelpa-use-package
+   :fetcher git
+   :url "https://github.com/quelpa/quelpa-use-package.git"))
+(require 'quelpa-use-package)
+#+end_src
 ** Inherit environment from shell
 #+begin_src elisp
 ;; Inherit environment from default shell
