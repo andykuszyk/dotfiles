@@ -1,4 +1,4 @@
 [Desktop Entry]
 Name=Emacs
-Exec=SNAP=1 SNAP_NAME=1 SNAP_REVISION=1 emacs
+Exec=env SNAP=1 SNAP_NAME=1 SNAP_REVISION=1 emacs
 Type=Application
