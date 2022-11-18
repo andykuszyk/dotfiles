@@ -608,6 +608,13 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (use-package bazel :ensure t)
 (add-to-list 'auto-mode-alist '("Tiltfile.*" . bazel-starlark-mode))
 #+end_src
+** EAF
+#+begin_src elisp
+(when (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
+  (require 'eaf)
+  (require 'eaf-markdown-previewer))
+#+end_src
 ** Experimental go log highlighting
 This function (~go-log-highlight~) is a prototype for a minor mode that could be used
 to highlight log output from ~go test~. The idea is that you would open a buffer containing
