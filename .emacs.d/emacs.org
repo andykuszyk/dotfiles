@@ -20,6 +20,11 @@
 ** TODO exwm on mac using x11 forwarding for firefox
 ** TODO rebind right alt to ctrl on macbook
 ** TODO exwm suspend
+* Compilation
+./configure --with-xwidgets --with-json
+make
+make check
+sudo make install
 * Config
 ** GUI customisation
 #+begin_src elisp
