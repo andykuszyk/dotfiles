@@ -615,6 +615,11 @@ Files with build flags will fail. At the moment, the only way I know of to solve
   (require 'eaf)
   (require 'eaf-markdown-previewer))
 #+end_src
+** Which key
+#+begin_src elisp
+(use-package which-key :ensure t)
+(which-key-mode)
+#+end_src
 ** Experimental go log highlighting
 This function (~go-log-highlight~) is a prototype for a minor mode that could be used
 to highlight log output from ~go test~. The idea is that you would open a buffer containing
