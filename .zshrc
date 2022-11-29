@@ -87,6 +87,7 @@ alias gc='git commit'
 alias gd='git diff'
 alias gcm='git checkout master'
 alias rn='tmux rename-window $(pwd | sed "s/.*\///g")'
+alias e="emacsclient -n"
 complete -F __start_kubectl k
 
 # Use private form3 libraries with Go.
