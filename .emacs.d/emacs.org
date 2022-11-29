@@ -607,6 +607,12 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 #+begin_src elisp
 (use-package bazel :ensure t)
 (add-to-list 'auto-mode-alist '("Tiltfile.*" . bazel-starlark-mode))
+
+(add-to-list 'lsp-language-id-configuration '(bazel-starlark-mode . "starlark"))
+(lsp-register-client
+ (make-lsp-client :new-connection (lsp-stdio-connection '("tilt" "lsp" "start"))
+		  :activation-fn (lsp-activate-on "starlark")
+		  :server-id 'tilt))
 #+end_src
 ** EAF
 #+begin_src elisp
