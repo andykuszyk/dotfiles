@@ -420,6 +420,7 @@ I use Perspective for managing workspaces.
  '((python . t)
    (go . t)
    (mermaid . t)
+   (shell . t)
    (emacs-lisp . t)))
 
 ;; Export org files to reveal.js presentations
