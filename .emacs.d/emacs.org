@@ -72,19 +72,6 @@ sudo make install
 (eval-when-compile
   (require 'use-package))
 #+end_src
-** Quelpa for installing packages from git
-#+begin_src elisp
-(unless (package-installed-p 'quelpa)
-  (with-temp-buffer
-    (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
-    (eval-buffer)
-    (quelpa-self-upgrade)))
-(quelpa
- '(quelpa-use-package
-   :fetcher git
-   :url "https://github.com/quelpa/quelpa-use-package.git"))
-(require 'quelpa-use-package)
-#+end_src
 ** Inherit environment from shell
 #+begin_src elisp
 ;; Inherit environment from default shell
@@ -517,21 +504,6 @@ I use Perspective for managing workspaces.
 (use-package markdown-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (setq markdown-fontify-code-blocks-natively t)
-#+end_src
-**** Markdown preview in xwidget
-#+begin_src elisp
-(use-package markdown-xwidget
-  :after markdown-mode
-  :quelpa (markdown-xwidget
-             :fetcher github
-             :repo "cfclrk/markdown-xwidget"
-             :files (:defaults "resources"))
-  :bind (:map markdown-mode-command-map
-              ("x" . markdown-xwidget-preview-mode)))
-#+end_src
-**** Disable double buffering to fix markdown rendering issue
-#+begin_src elisp
-(modify-frame-parameters nil '((inhibit-double-buffering . t)))
 #+end_src
 *** Golang support
 **** Go mode
