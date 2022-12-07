@@ -363,6 +363,11 @@ I use Perspective for managing workspaces.
     (display-line-numbers-mode -1))
 (add-hook 'treemacs-mode-hook 'treemacs-hook)
 #+end_src
+*** Keybindings
+#+begin_src elisp
+(global-set-key (kbd "C-x t o") #'treemacs-add-and-display-current-project-exclusively)
+(global-set-key (kbd "C-x t c") #'treemacs)
+#+end_src
 ** Projectile
 #+begin_src elisp
 ;; Projectile
