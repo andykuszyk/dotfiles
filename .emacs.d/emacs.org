@@ -21,10 +21,20 @@
 ** TODO rebind right alt to ctrl on macbook
 ** TODO exwm suspend
 * Compilation
+** To configure with xwidgets
+#+begin_src bash
 ./configure --with-xwidgets --with-json
+#+end_src
+** To configure with x11 support on mac os
+#+begin_src bash
+./configure --prefix='/opt/emacs-x11' --without-ns --with-x --with-x-toolkit='lucid' --with-xft="$WITH_XFT" --without-makeinfo --with-gif='no' --enable-symbols PKG_CONFIG_PATH='/opt/X11/lib/pkgconfig/' --with-jpeg=ifavailable --with-tiff=ifavailable --with-native-compilation
+#+end_src
+** To build and install
+#+begin_src bash
 make
 make check
 sudo make install
+#+end_src
 * Config
 ** GUI customisation
 #+begin_src elisp
