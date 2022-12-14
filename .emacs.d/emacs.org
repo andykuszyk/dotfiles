@@ -112,7 +112,7 @@ sudo make install
 ;; Ivy posframe
 (use-package ivy-posframe :ensure t)
 (setq ivy-posframe-parameters '((parent-frame . nil)))
-(ivy-posframe-mode)
+;; (ivy-posframe-mode) ; disable posframe mode for now
 (setq ivy-posframe-parameters
       '((left-fringe . 8)
         (right-fringe . 8)))
