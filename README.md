@@ -16,6 +16,19 @@ I use Emacs with EXWM as a window manager on Linux. For this to work, the `emacs
 $ sudo cp emacs.desktop /usr/share/xsessions
 ```
 
+## EXWM on Mac OS
+Some special configuration is required to use Emacs as an X11 window manager on Mac OS.
+
+### Key re-bindings
+Add these key bindings to `~/.Xmodmap`:
+
+```
+keycode 66 = Super_L
+keycode 69 = Super_L
+clear mod1
+add mod1 = Super_L
+```
+
 ## Vim
 * Vim plugins use [`vim-plug`](https://github.com/junegunn/vim-plug). To install run `curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`, open Vim and run `:PlugInstall`.
 
