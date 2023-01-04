@@ -288,6 +288,17 @@ I use Perspective for managing workspaces.
 (setq powerline-default-separator "arrow")
 (setq spaceline-separator-dir-left '(left . left))
 (setq spaceline-separator-dir-right '(right . right))
+(setq spaceline-right-segment '(
+    mute-segment
+    (battery)
+    (global)
+    (buffer-position)))
+(when (string= system-type "darwin")
+    (setq spaceline-right-segment '( ; do not include the mute-segment on mac os, because it is very slow
+	(battery)
+	(global)
+	(buffer-position)
+    )))
 (spaceline-compile
   ; left side
   '(
@@ -300,12 +311,8 @@ I use Perspective for managing workspaces.
     ((flycheck-error flycheck-warning flycheck-info) :when active :priority 89)
    )
   ; right side
-  '(
-    mute-segment
-    (battery)
-    (global)
-    (buffer-position)
-   ))
+  spaceline-right-segment
+  )
 #+end_src
 ** Use relative line numbers
 #+begin_src elisp
