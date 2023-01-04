@@ -448,10 +448,13 @@ I use Perspective for managing workspaces.
    (mermaid . t)
    (shell . t)
    (emacs-lisp . t)))
-
+#+end_src
+*** Export org files as revealjs presentations
+#+begin_src elisp
 ;; Export org files to reveal.js presentations
 (use-package ox-reveal :ensure t)
 (load-library "ox-reveal")
+(use-package htmlize :ensure t) ; required for source block highlighting
 #+end_src
 ** Function for running make
 #+begin_src elisp
