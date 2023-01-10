@@ -118,14 +118,6 @@ sudo make install
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x b") 'persp-ivy-switch-buffer)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-
-;; Ivy posframe
-(use-package ivy-posframe :ensure t)
-(setq ivy-posframe-parameters '((parent-frame . nil)))
-;; (ivy-posframe-mode) ; disable posframe mode for now
-(setq ivy-posframe-parameters
-      '((left-fringe . 8)
-        (right-fringe . 8)))
 #+end_src
 ** Avy
 #+begin_src elisp
