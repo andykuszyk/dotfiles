@@ -427,19 +427,21 @@ I use Perspective for managing workspaces.
 (add-hook 'after-save-hook #'sync-notes)
 #+end_src
 ** Org mode customisation
+*** Org config and key bindings
 #+begin_src elisp
-;; Org babel support for go
-(use-package ob-go :ensure t)
-
 ;; Org mode customisation
 (setq org-startup-folded t) ; open org files folded, rather than expanded
 (setq org-edit-src-content-indentation 0) ; do not indent code in source blocks
 (setq org-startup-with-inline-images t) ; always show inline images
 (setq org-adapt-indentation nil) ; do not indent headline contents with headline
-
+(define-key org-mode-map (kbd "C-c C-s") #'org-insert-structure-template)
+#+end_src
+*** Org babel config
+#+begin_src elisp
+;; Org babel support for go
+(use-package ob-go :ensure t)
 ;; Mermaid babel support
 (use-package ob-mermaid :ensure t)
-
 ;; Org Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
