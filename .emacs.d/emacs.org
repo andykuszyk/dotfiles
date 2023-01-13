@@ -36,6 +36,10 @@ make check
 sudo make install
 #+end_src
 * Config
+** Tab width
+#+begin_src elisp
+(setq tab-width 4)
+#+end_src
 ** GUI customisation
 #+begin_src elisp
 ;; Disable GUI menu bars
