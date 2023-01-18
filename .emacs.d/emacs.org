@@ -440,8 +440,13 @@ I use Perspective for managing workspaces.
 #+begin_src elisp
 ;; Org babel support for go
 (use-package ob-go :ensure t)
+
 ;; Mermaid babel support
 (use-package ob-mermaid :ensure t)
+
+;; Use python3 for python blocks
+(setq org-babel-python-command "python3")
+
 ;; Org Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
