@@ -528,6 +528,7 @@ I use Perspective for managing workspaces.
 (use-package lsp-mode :ensure t)
 (setq lsp-enable-file-watchers nil)
 (use-package lsp-ui :ensure t)
+(setq lsp-lens-enable nil)
 #+end_src
 *** DAP mode
 #+begin_src elisp
