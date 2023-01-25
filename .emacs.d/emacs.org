@@ -442,6 +442,7 @@ I use Perspective for managing workspaces.
 (use-package ob-go :ensure t)
 
 ;; Mermaid babel support
+(use-package mermaid-mode :ensure t) ; load mermaid-mode before ob-mermaid, because ob-mermaid has a better babel function
 (use-package ob-mermaid :ensure t)
 
 ;; Use python3 for python blocks
