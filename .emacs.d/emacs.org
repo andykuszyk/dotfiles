@@ -126,7 +126,7 @@ sudo make install
 ** Avy
 #+begin_src elisp
 (use-package avy :ensure t)
-(global-set-key (kbd "C-;") #'avy-goto-char-timer)
+(global-set-key (kbd "C-a") #'avy-goto-char-timer)
 #+end_src
 ** Experimental functions for launching and arranging x windows
 #+begin_src elisp
@@ -508,7 +508,6 @@ I use Perspective for managing workspaces.
 ;; Numbered window switcher
 (use-package winum :ensure t)
 (winum-mode)
-(global-set-key (kbd "C-a") #'winum-select-window-by-number)
 #+end_src
 ** Window resizing
 #+begin_src elisp
