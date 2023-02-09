@@ -523,6 +523,12 @@ I use Perspective for managing workspaces.
 #+end_src
 
 ** Language support
+*** Python support
+**** Use ~ipython~ as the python shell
+#+begin_src elisp
+(when (executable-find "ipython")
+  (setq python-shell-interpreter "ipython"))
+#+end_src
 *** LSP mode
 #+begin_src elisp
 (use-package lsp-mode :ensure t)
