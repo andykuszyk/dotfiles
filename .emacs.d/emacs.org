@@ -604,8 +604,11 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 *** Clojure support
 #+begin_src elisp
 ;; Clojure support
+(use-package paredit :ensure t)
 (use-package clojure-mode :ensure t)
 (add-hook 'clojure-mode-hook #'lsp)
+(add-hook 'clojure-mode-hook #'paredit-mode)
+(use-package cider :ensure t)
 #+end_src
 *** JSON support
 #+begin_src elisp
