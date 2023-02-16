@@ -635,6 +635,11 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 		  :activation-fn (lsp-activate-on "starlark")
 		  :server-id 'tilt))
 #+end_src
+*** Helm/tpl syntax higlighting
+#+begin_src elisp
+(use-package k8s-mode :ensure t)
+(add-to-list 'auto-mode-alist '("\\.tpl\\'" . k8s-mode))
+#+end_src
 ** EAF
 #+begin_src elisp
 (when (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/")
