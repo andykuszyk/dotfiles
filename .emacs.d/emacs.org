@@ -518,6 +518,11 @@ I use Perspective for managing workspaces.
     (cfw:open-ical-calendar "https://form3.pagerduty.com/private/f0bc0c4f47ebaf99c603bccb7b0b2215233ff70caf7348679ffa0c01e4fd3c6a/feed"))
 #+end_src
 
+** Git linking
+This let's you copy the URL to the current line in the git forge using ~M-x git-link~.
+#+begin_src elisp
+(use-package git-link :ensure t)
+#+end_src
 ** Language support
 *** Python support
 **** Use ~ipython~ as the python shell
