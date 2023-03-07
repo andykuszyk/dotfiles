@@ -656,3 +656,16 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (use-package which-key :ensure t)
 (which-key-mode)
 #+end_src
+
+** Reading mode
+#+begin_src elisp
+(defun ak/reading ()
+  (interactive)
+  (let ((width (window-width)))
+    (let ((margin (/ width 4)))
+      (set-window-margins nil margin margin))))
+
+(defun ak/unreading ()
+  (interactive)
+  (set-window-margins nil 0 0))
+#+end_src
