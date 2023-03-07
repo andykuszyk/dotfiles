@@ -36,10 +36,6 @@ make check
 sudo make install
 #+end_src
 * Config
-** Tab width
-#+begin_src elisp
-(setq tab-width 4)
-#+end_src
 ** GUI customisation
 #+begin_src elisp
 ;; Disable GUI menu bars
@@ -555,7 +551,10 @@ I use Perspective for managing workspaces.
 **** Go mode
 #+begin_src elisp
 (use-package go-mode :ensure t)
+(defun go-set-tab-width ()
+  (setq tab-width 4))
 (add-hook 'go-mode-hook #'lsp) ; enter lsp mode when entering go mode
+(add-hook 'go-mode-hook #'go-set-tab-width) ; set tab width when opening go files
 (setq gofmt-command "goimports") ; format files with goimports
 (add-hook 'before-save-hook #'gofmt-before-save) ; format files on save
 #+end_src
