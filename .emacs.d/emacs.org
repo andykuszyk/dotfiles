@@ -662,22 +662,14 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (defun ak/reading-margin ()
   (/ (window-width) 4))
 
-(defun ak/center-reading ()
-  (interactive)
-  (visual-line-mode)
-  (set-window-margins nil (ak/reading-margin) (ak/reading-margin)))
+(defmacro ak/reading-func (name left right)
+  (list 'defun (intern (format "ak/%s-reading" name)) ()
+    (list 'interactive)
+    (list 'visual-line-mode)
+    (list 'set-window-margins nil (if left (ak/reading-margin) 0) (if right (ak/reading-margin) 0))))
 
-(defun ak/left-reading ()
-  (interactive)
-  (visual-line-mode)
-  (set-window-margins nil 0 (ak/reading-margin)))
-
-(defun ak/right-reading ()
-  (interactive)
-  (visual-line-mode)
-  (set-window-margins nil (ak/reading-margin) 0))
-
-(defun ak/reset-reading ()
-  (interactive)
-  (set-window-margins nil 0 0))
+(ak/reading-func center t t)
+(ak/reading-func "left" t nil)
+(ak/reading-func "right" nil t)
+(ak/reading-func "reset" nil nil)
 #+end_src
