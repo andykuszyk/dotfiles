@@ -660,7 +660,7 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 ** Reading mode
 #+begin_src elisp
 (defun ak/reading-margin ()
-  (/ (window-width) 4))
+  (/ (window-width) 3))
 
 (defmacro ak/reading-func (name left right)
   (list 'defun (intern (format "ak/%s-reading" name)) ()
