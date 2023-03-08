@@ -661,6 +661,7 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 #+begin_src elisp
 (defun ak/reading ()
   (interactive)
+  (visual-line-mode)
   (let ((width (window-width)))
     (let ((margin (/ width 4)))
       (set-window-margins nil margin margin))))
