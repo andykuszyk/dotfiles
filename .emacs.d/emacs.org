@@ -666,7 +666,7 @@ Files with build flags will fail. At the moment, the only way I know of to solve
   (list 'defun (intern (format "ak/%s-reading" name)) ()
     (list 'interactive)
     (list 'visual-line-mode)
-    (list 'set-window-margins nil (if left (ak/reading-margin) 0) (if right (ak/reading-margin) 0))))
+    (list 'set-window-margins nil (if left '(ak/reading-margin) 0) (if right '(ak/reading-margin) 0))))
 
 (ak/reading-func center t t)
 (ak/reading-func "left" t nil)
