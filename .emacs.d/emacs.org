@@ -661,7 +661,8 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (which-key-mode)
 #+end_src
 
-** Reading mode
+** Horizontal margin padding for reading on wide screens
+These functions
 #+begin_src elisp
 (defun ak/reading-margin ()
   (/ (window-width) 3))
@@ -676,4 +677,8 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (ak/reading-func "left" t nil)
 (ak/reading-func "right" nil t)
 (ak/reading-func "reset" nil nil)
+#+end_src
+** Vertical margin padding for reading on tall screens
+#+begin_src elisp
+(use-package topspace :ensure t)
 #+end_src
