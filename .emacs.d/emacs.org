@@ -616,6 +616,10 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (add-hook 'clojure-mode-hook #'paredit-mode)
 (use-package cider :ensure t)
 #+end_src
+*** Elisp customisations
+#+begin_src elisp
+(add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+#+end_src
 *** JSON support
 #+begin_src elisp
 ;; Better JSON support
