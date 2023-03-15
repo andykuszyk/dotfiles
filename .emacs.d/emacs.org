@@ -36,10 +36,6 @@ make check
 sudo make install
 #+end_src
 * Config
-** Tab width
-#+begin_src elisp
-(setq tab-width 4)
-#+end_src
 ** GUI customisation
 #+begin_src elisp
 ;; Disable GUI menu bars
@@ -522,6 +518,11 @@ I use Perspective for managing workspaces.
     (cfw:open-ical-calendar "https://form3.pagerduty.com/private/f0bc0c4f47ebaf99c603bccb7b0b2215233ff70caf7348679ffa0c01e4fd3c6a/feed"))
 #+end_src
 
+** Git linking
+This let's you copy the URL to the current line in the git forge using ~M-x git-link~.
+#+begin_src elisp
+(use-package git-link :ensure t)
+#+end_src
 ** Language support
 *** Python support
 **** Use ~ipython~ as the python shell
@@ -535,6 +536,8 @@ I use Perspective for managing workspaces.
 (setq lsp-enable-file-watchers nil)
 (use-package lsp-ui :ensure t)
 (setq lsp-lens-enable nil)
+(use-package flycheck :ensure t)
+(global-flycheck-mode)
 #+end_src
 *** DAP mode
 #+begin_src elisp
@@ -553,7 +556,10 @@ I use Perspective for managing workspaces.
 **** Go mode
 #+begin_src elisp
 (use-package go-mode :ensure t)
+(defun go-set-tab-width ()
+  (setq tab-width 4))
 (add-hook 'go-mode-hook #'lsp) ; enter lsp mode when entering go mode
+(add-hook 'go-mode-hook #'go-set-tab-width) ; set tab width when opening go files
 (setq gofmt-command "goimports") ; format files with goimports
 (add-hook 'before-save-hook #'gofmt-before-save) ; format files on save
 #+end_src
@@ -633,6 +639,11 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 		  :activation-fn (lsp-activate-on "starlark")
 		  :server-id 'tilt))
 #+end_src
+*** Helm/tpl syntax higlighting
+#+begin_src elisp
+(use-package k8s-mode :ensure t)
+(add-to-list 'auto-mode-alist '("\\.tpl\\'" . k8s-mode))
+#+end_src
 ** EAF
 #+begin_src elisp
 (when (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/")
@@ -644,4 +655,21 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 #+begin_src elisp
 (use-package which-key :ensure t)
 (which-key-mode)
+#+end_src
+
+** Reading mode
+#+begin_src elisp
+(defun ak/reading-margin ()
+  (/ (window-width) 3))
+
+(defmacro ak/reading-func (name left right)
+  (list 'defun (intern (format "ak/%s-reading" name)) ()
+    (list 'interactive)
+    (list 'visual-line-mode)
+    (list 'set-window-margins nil (if left '(ak/reading-margin) 0) (if right '(ak/reading-margin) 0))))
+
+(ak/reading-func center t t)
+(ak/reading-func "left" t nil)
+(ak/reading-func "right" nil t)
+(ak/reading-func "reset" nil nil)
 #+end_src
