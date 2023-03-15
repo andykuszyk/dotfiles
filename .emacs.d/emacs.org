@@ -123,8 +123,12 @@ sudo make install
 (use-package consult :ensure t)
 (global-set-key (kbd "C-s") 'consult-line)
 (global-set-key (kbd "M-x") 'execute-extended-command)
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 #+end_src
-
 ** Avy
 #+begin_src elisp
 (use-package avy :ensure t)
