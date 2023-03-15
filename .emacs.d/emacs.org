@@ -111,14 +111,20 @@ sudo make install
 #+begin_src elisp
 ;; Ivy
 (use-package counsel :ensure t)
-(ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d) ")
-(global-set-key (kbd "C-s") 'swiper-isearch)
-(global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x b") 'persp-ivy-switch-buffer)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 #+end_src
+** Vertico and friends
+#+begin_src elisp
+(use-package vertico :ensure t :init (vertico-mode))
+(use-package marginalia :ensure t :init (marginalia-mode))
+(use-package consult :ensure t)
+(global-set-key (kbd "C-s") 'consult-line)
+(global-set-key (kbd "M-x") 'execute-extended-command)
+#+end_src
+
 ** Avy
 #+begin_src elisp
 (use-package avy :ensure t)
