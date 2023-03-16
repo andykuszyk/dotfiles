@@ -151,7 +151,7 @@ However, I disable orderless for Company, because I find it affects performance 
 ;; https://www.reddit.com/r/emacs/comments/nichkl/comment/gz1jr3s/
 (defun company-completion-styles (capf-fn &rest args)
   (let ((completion-styles '(basic partial-completion)))
-    (apply capf-fn args))
+    (apply capf-fn args)))
 (advice-add 'company-capf :around #'company-completion-styles)
 #+end_src
 ** Avy
