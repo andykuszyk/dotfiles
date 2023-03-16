@@ -1,7 +1,7 @@
 * Things to learn about
-** TODO kill ring, copy and paste history (vim registers)
+** DONE kill ring, copy and paste history (vim registers)
 ** TODO [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Dotted-Pair-Notation.html][dotted pair notation]]
-** TODO what is a rectangle?
+** DONE what is a rectangle?
 ** TODO clojure for the brave and true
 ** DONE paredit mode
 * Things to configure
