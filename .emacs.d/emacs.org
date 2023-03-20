@@ -734,3 +734,8 @@ These functions
 #+begin_src elisp
 (use-package topspace :ensure t)
 #+end_src
+** Emoji support
+Allows emojis to easily be inserted from a completion menu.
+#+begin_src elisp
+(use-package emojify :ensure t)
+#+end_src
