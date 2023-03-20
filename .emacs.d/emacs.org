@@ -488,6 +488,10 @@ I use Perspective for managing workspaces.
    (mermaid . t)
    (shell . t)
    (emacs-lisp . t)))
+
+(defun ak/org-babel-confirm (lang body)
+  (not (string= lang "mermaid")))
+(setq org-confirm-babel-evaluate #'ak/org-babel-confirm)
 #+end_src
 *** Export org files as revealjs presentations
 #+begin_src elisp
