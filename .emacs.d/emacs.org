@@ -6,7 +6,7 @@
 ** DONE paredit mode
 * Things to configure
 ** DONE try dap-mode for Go debugging
-** TODO split buffer and open scratch (e.g. for e-mail or slack message composition)
+** DONE split buffer and open scratch (e.g. for e-mail or slack message composition)
 ** DONE go test log file syntax highlighting (see [[https://github.com/doublep/logview][logview]] package)
 ** TODO make super-f behave like c-x v
 ** DONE magit forge for issues, pr reviews, and gh notifications
@@ -742,4 +742,23 @@ These functions
 Allows emojis to easily be inserted from a completion menu.
 #+begin_src elisp
 (use-package emojify :ensure t)
+#+end_src
+
+** Split and draft function
+#+begin_src elisp
+(defun ak/split-and-draft-enter ()
+  (interactive)
+  (split-window)
+  (other-window 1)
+  (set-window-buffer nil (set-buffer (generate-new-buffer "ak/draft")))
+  (markdown-mode))
+
+(defun ak/split-and-draft-exit ()
+  (interactive)
+  (mark-whole-buffer)
+  (kill-region nil nil t)
+  (kill-buffer-and-window))
+
+(global-set-key (kbd "C-c s e") #'ak/split-and-draft-enter)
+(global-set-key (kbd "C-c s x") #'ak/split-and-draft-exit)
 #+end_src
