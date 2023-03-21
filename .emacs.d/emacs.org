@@ -555,6 +555,16 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 (define-key perspective-map (kbd "a") 'persp-add-and-switch-buffer)
 (define-key perspective-map (kbd "S") 'persp-switch-and-add-buffer)
 #+end_src
+*** Switch to workspace for a projectile project
+#+begin_src elisp
+(defun ak/persp-project-switch ()
+  (interactive)
+  (persp-switch "persp-project-switch")
+  (projectile-switch-project)
+  (persp-rename (projectile-project-name)))
+
+(define-key perspective-map (kbd "P") #'ak/persp-project-switch)
+#+end_src
 ** Window switcher
 #+begin_src elisp
 ;; Numbered window switcher
