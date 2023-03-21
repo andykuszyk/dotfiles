@@ -752,8 +752,8 @@ These functions
 Allows emojis to easily be inserted from a completion menu.
 #+begin_src elisp
 (use-package emojify :ensure t)
+(global-set-key (kbd "C-c i") #'emojify-insert-emoji)
 #+end_src
-
 ** Split and draft function
 #+begin_src elisp
 (defun ak/split-and-draft-enter ()
