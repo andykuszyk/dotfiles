@@ -467,6 +467,9 @@ I use Perspective for managing workspaces.
 (setq org-adapt-indentation nil) ; do not indent headline contents with headline
 (define-key org-mode-map (kbd "C-c C-s") #'org-insert-structure-template)
 (setq org-image-actual-width nil) ; allow image widths to be overridden with #+ATTR_ORG: :width 100
+(defun ak/org-mode-hook ()
+  (flyspell-mode))
+(add-hook 'org-mode-hook #'ak/org-mode-hook)
 #+end_src
 *** Org babel config
 #+begin_src elisp
@@ -617,6 +620,10 @@ This let's you copy the URL to the current line in the git forge using ~M-x git-
 (use-package markdown-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (setq markdown-fontify-code-blocks-natively t)
+
+(defun ak/markdown-mode-hook ()
+  (flyspell-mode))
+(add-hook 'markdown-mode-hook #'ak/markdown-mode-hook)
 #+end_src
 *** Golang support
 **** Go mode
