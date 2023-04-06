@@ -439,6 +439,7 @@ I use Perspective for managing workspaces.
 (use-package forge :ensure t :after magit)
 (use-package code-review :ensure t)
 (setq auth-sources '("~/.authinfo.gpg"))
+(setq code-review-auth-login-marker 'forge)
 #+end_src
 ** Auto completion with company mode
 #+begin_src elisp
