@@ -437,6 +437,7 @@ I use Perspective for managing workspaces.
 (use-package magit :ensure t)
 (setq magit-diff-refine-hunk (quote all)) ; Use word diffs when showing diffs
 (use-package forge :ensure t :after magit)
+(use-package code-review :ensure t)
 (setq auth-sources '("~/.authinfo.gpg"))
 #+end_src
 ** Auto completion with company mode
