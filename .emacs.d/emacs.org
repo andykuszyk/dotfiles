@@ -432,13 +432,19 @@ I use Perspective for managing workspaces.
               ("C-c p" . projectile-command-map)))
 #+end_src
 ** Magit
+*** Magit
 #+begin_src elisp
-;; Magit
 (use-package magit :ensure t)
 (setq magit-diff-refine-hunk (quote all)) ; Use word diffs when showing diffs
+#+end_src
+*** Forge
+#+begin_src elisp
 (use-package forge :ensure t :after magit)
-(use-package code-review :ensure t)
 (setq auth-sources '("~/.authinfo.gpg"))
+#+end_src
+*** Code-review
+#+begin_src elisp
+(use-package code-review :ensure t :after forge)
 (setq code-review-auth-login-marker 'forge)
 #+end_src
 ** Auto completion with company mode

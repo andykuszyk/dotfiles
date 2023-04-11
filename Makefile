@@ -10,7 +10,7 @@ termux-pkgs:
 	pkg in openssl openssh git make vim zsh wget automake pkg-config gcc clang binutils tmux zip fzf cmake libvterm bat
 
 install-linux-packages:
-	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake vim-gtk3 pavucontrol ruby-dev entr libjansson-dev
+	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake vim-gtk3 pavucontrol ruby-dev entr libjansson-dev sqlite3
 
 install-fedora-packages:
 	sudo dnf install vim zsh tmux bat fzf automake emacs cmake libtool util-linux-user python-pip
