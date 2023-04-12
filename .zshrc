@@ -90,6 +90,9 @@ alias rn='tmux rename-window $(pwd | sed "s/.*\///g")'
 alias e="emacsclient -n"
 complete -F __start_kubectl k
 
+# Use Emacs as default editor
+export EDITOR=emacsclient
+
 # Use private form3 libraries with Go.
 export GOPRIVATE=github.com/form3tech/*
 
