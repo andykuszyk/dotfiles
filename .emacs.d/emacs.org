@@ -431,6 +431,17 @@ I use Perspective for managing workspaces.
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
 #+end_src
+** Create and open PRs using ~gh~ CLI and projectile
+#+begin_src elisp
+(defun ak/gh-create-pr ()
+  (interactive)
+  (projectile-run-shell-command-in-root "gh pr create --web"))
+(defun ak/gh-view-pr ()
+  (interactive)
+  (projectile-run-shell-command-in-root "gh pr view --web"))
+(define-key projectile-mode-map (kbd "C-c p G c") #'ak/projectile-create-pr)
+(define-key projectile-mode-map (kbd "C-c p G v") #'ak/projectile-view-pr)
+#+end_src
 ** Magit
 *** Magit
 #+begin_src elisp
