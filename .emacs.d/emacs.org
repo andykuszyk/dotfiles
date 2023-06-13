@@ -480,13 +480,16 @@ I use Perspective for managing workspaces.
 #+end_src
 ** Org mode customisation
 *** Org config and key bindings
-#+begin_src elisp
+#+begin_src elisp :results none
 ;; Org mode customisation
 (setq org-startup-folded t) ; open org files folded, rather than expanded
 (setq org-edit-src-content-indentation 0) ; do not indent code in source blocks
 (setq org-startup-with-inline-images t) ; always show inline images
 (setq org-adapt-indentation nil) ; do not indent headline contents with headline
 (define-key org-mode-map (kbd "C-c C-s") #'org-insert-structure-template)
+(define-key org-mode-map (kbd "C-c o c") #'org-capture)
+(define-key org-agenda-mode-map (kbd "C-c o c") #'org-capture)
+(define-key org-mode-map (kbd "C-c o a") #'org-agenda)
 (setq org-image-actual-width nil) ; allow image widths to be overridden with #+ATTR_ORG: :width 100
 (defun ak/org-mode-hook ()
   (flyspell-mode))
