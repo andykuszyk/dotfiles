@@ -804,3 +804,8 @@ Allows emojis to easily be inserted from a completion menu.
 (global-set-key (kbd "C-c s e") #'ak/split-and-draft-enter)
 (global-set-key (kbd "C-c s x") #'ak/split-and-draft-exit)
 #+end_src
+
+** Keybinding for visual-line-mode
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x V") #'visual-line-mode)
+#+end_src
