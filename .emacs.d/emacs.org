@@ -809,3 +809,10 @@ Allows emojis to easily be inserted from a completion menu.
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x V") #'visual-line-mode)
 #+end_src
+
+** Render ansi escape codes in a log file
+#+begin_src elisp :results none
+(defun ak/display-ansi-colors ()
+  (interactive)
+  (ansi-color-apply-on-region (point-min) (point-max)))
+#+end_src
