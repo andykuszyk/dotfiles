@@ -489,6 +489,7 @@ I use Perspective for managing workspaces.
 (setq org-adapt-indentation nil) ; do not indent headline contents with headline
 (define-key org-mode-map (kbd "C-c C-s") #'org-insert-structure-template)
 (define-key org-mode-map (kbd "C-c o c") #'org-capture)
+(require 'org-agenda)
 (define-key org-agenda-mode-map (kbd "C-c o c") #'org-capture)
 (define-key org-mode-map (kbd "C-c o a") #'org-agenda)
 (setq org-image-actual-width nil) ; allow image widths to be overridden with #+ATTR_ORG: :width 100
