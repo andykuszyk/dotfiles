@@ -132,9 +132,9 @@ Marginalia adds useful metadata to items in Vertico's completion results, e.g. d
 #+end_src
 *** Consult
 Consult offers a wide range of searching commands. I just use it as a replacement for swiper, because it feels faster.
-#+begin_src elisp
+#+begin_src elisp :results none
 (use-package consult :ensure t)
-(global-set-key (kbd "C-s") 'consult-line)
+(global-set-key (kbd "C-s s") 'consult-line)
 #+end_src
 *** Orderless
 Orderless provides a completion style for Vertico that allows matches to be narrowed using space separated terms, much like Ivy does out of the box
@@ -155,10 +155,9 @@ However, I disable orderless for Company, because I find it affects performance 
 (advice-add 'company-capf :around #'company-completion-styles)
 #+end_src
 ** Avy
-#+begin_src elisp
+#+begin_src elisp :results none
 (use-package avy :ensure t)
-(global-set-key (kbd "C-a") #'avy-goto-char-timer)
-(global-set-key (kbd "C-c a") #'avy-goto-char-timer)
+(global-set-key (kbd "C-s a") #'avy-goto-char-timer)
 #+end_src
 ** Experimental functions for launching and arranging x windows
 #+begin_src elisp
