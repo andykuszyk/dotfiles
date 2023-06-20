@@ -345,10 +345,10 @@ I use Perspective for managing workspaces.
   spaceline-right-segment
   )
 #+end_src
-** Use relative line numbers
-#+begin_src elisp
+** Use absolute line numbers
+#+begin_src elisp :results none
 ;; Use relative line numbers
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type t)
 (global-display-line-numbers-mode)
 #+end_src
 ** Line highlighting
