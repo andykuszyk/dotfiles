@@ -362,7 +362,7 @@ I use Perspective for managing workspaces.
 (define-key key-translation-map (kbd "M-3") (kbd "#"))
 #+end_src
 ** Evil mode
-#+begin_src elisp
+#+begin_src elisp :results none
 ;; Evil mode vim emulation
 (use-package evil
   :ensure t
@@ -383,7 +383,10 @@ I use Perspective for managing workspaces.
 (define-key evil-normal-state-map (kbd "C-w <right>") 'windmove-right)
 (define-key evil-normal-state-map (kbd "C-w <up>") 'windmove-u)
 (define-key evil-normal-state-map (kbd "C-w <down>") 'windmove-down)
+
+(setq evil-default-state 'emacs)
 #+end_src
+
 ** Battery indicator
 #+begin_src elisp
 ;; Fancy battery indicator
