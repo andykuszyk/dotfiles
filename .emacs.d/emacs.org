@@ -372,11 +372,6 @@ I use Perspective for managing workspaces.
   (customize-save-variable 'evil-undo-system #'undo-redo)
   :config
   (evil-mode 1))
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
 
 ;; Additional vim-style keybindings for window management
 (define-key evil-normal-state-map (kbd "C-w <left>") 'windmove-left)
