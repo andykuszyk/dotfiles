@@ -157,7 +157,7 @@ However, I disable orderless for Company, because I find it affects performance 
 ** Avy
 #+begin_src elisp :results none
 (use-package avy :ensure t)
-(global-set-key (kbd "M-s") #'avy-goto-char-timer)
+(global-set-key (kbd "M-a") #'avy-goto-char-timer)
 #+end_src
 ** Experimental functions for launching and arranging x windows
 #+begin_src elisp
