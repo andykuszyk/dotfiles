@@ -814,3 +814,8 @@ Allows emojis to easily be inserted from a completion menu.
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
 #+end_src
+
+** Man customisation
+#+begin_src elisp
+(setq Man-notify-method 'pushy)
+#+end_src
