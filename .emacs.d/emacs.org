@@ -819,3 +819,8 @@ Allows emojis to easily be inserted from a completion menu.
 #+begin_src elisp
 (setq Man-notify-method 'pushy)
 #+end_src
+
+** Enable disabled commands
+#+begin_src elisp
+(put 'narrow-to-region 'disabled nil)
+#+end_src
