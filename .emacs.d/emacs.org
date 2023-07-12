@@ -824,3 +824,13 @@ Allows emojis to easily be inserted from a completion menu.
 #+begin_src elisp
 (put 'narrow-to-region 'disabled nil)
 #+end_src
+
+** Info customisation
+#+begin_src elisp :results none
+(use-package adaptive-wrap :ensure t)
+(defun ak/info-mode-hook ()
+  (visual-line-mode)
+  (adaptive-wrap-prefix-mode)
+  (display-line-numbers-mode -1))
+(add-hook 'Info-mode-hook #'ak/info-mode-hook)
+#+end_src
