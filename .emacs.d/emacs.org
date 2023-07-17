@@ -371,7 +371,7 @@ I use Perspective for managing workspaces.
   (setq evil-want-keybinding nil)
   (customize-save-variable 'evil-undo-system #'undo-redo)
   :config
-  (evil-mode 1))
+  (evil-mode -1))
 
 ;; Additional vim-style keybindings for window management
 (define-key evil-normal-state-map (kbd "C-w <left>") 'windmove-left)
