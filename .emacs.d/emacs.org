@@ -832,6 +832,7 @@ Allows emojis to easily be inserted from a completion menu.
   (adaptive-wrap-prefix-mode)
   (display-line-numbers-mode -1))
 (add-hook 'Info-mode-hook #'ak/info-mode-hook)
+#+end_src
 ** Kubernetes
 *** Kubernetes overview package
 #+begin_src elisp
