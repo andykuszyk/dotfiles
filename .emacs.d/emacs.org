@@ -597,10 +597,16 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 (use-package winum :ensure t)
 (winum-mode)
 #+end_src
-** Window resizing
+** Window management
+*** Resizing windows
 #+begin_src elisp
 (use-package resize-window :ensure t)
-(global-set-key (kbd "C-x R") #'resize-window)
+(global-set-key (kbd "C-x R r") #'resize-window)
+#+end_src
+*** Rotating window layouts
+#+begin_src elisp
+(use-package rotate :ensure t)
+(global-set-key (kbd "C-x R l") #'rotate-layout)
 #+end_src
 ** Experimental calendar viewer
 #+begin_src elisp
