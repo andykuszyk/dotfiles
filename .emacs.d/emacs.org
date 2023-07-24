@@ -600,6 +600,7 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 ** Window resizing
 #+begin_src elisp
 (use-package resize-window :ensure t)
+(global-set-key (kbd "C-x R") #'resize-window)
 #+end_src
 ** Experimental calendar viewer
 #+begin_src elisp
