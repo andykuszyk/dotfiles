@@ -859,3 +859,7 @@ Allows emojis to easily be inserted from a completion menu.
     (narrow-to-region start (+ 1 (point))))
   (json-pretty-print-buffer))
 #+end_src
+** Join line
+#+begin_src elisp
+(global-set-key (kbd "M-j") #'join-line)
+#+end_src
