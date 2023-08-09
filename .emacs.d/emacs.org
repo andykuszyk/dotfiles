@@ -295,41 +295,50 @@ I use Perspective for managing workspaces.
   :init (load-theme 'spacemacs-dark t))
 #+end_src
 ** Spaceline modeline
+*** Install spaceline
 #+begin_src elisp
-;; Spaceline status bar
 (use-package spaceline
   :ensure t
   :config
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
-;; Define custom segments
+#+end_src
+*** Define mute segment
+#+begin_src elisp
 (setq mute-segment (make-symbol "mute-segment"))
 (spaceline-define-segment mute-segment
   "Displays the current mute status of the system"
-  (if (eq (length (shell-command-to-string "pacmd list-sources | grep muted | grep yes")) 0)
-      "🔈"
-    "🔇"))
-(setq status-segment (make-symbol "status-segment"))
-(spaceline-define-segment status-segment
-  "Displays the current system status"
-  (shell-command-to-string "status"))
-;; Configure spaceline
+  (if (string= system-type "darwin") "-" ; do not include the mute-segment on mac os, because it is very slow
+    (if (eq (length (shell-command-to-string "pacmd list-sources | grep muted | grep yes")) 0)
+	"🔈"
+      "🔇")))
+#+end_src
+*** Perspective segment
+#+begin_src elisp
+(setq perspective-segment (make-symbol "perspective-segment"))
+(spaceline-define-segment perspective-segment
+  "Displays the current perspective"
+  (persp-current-name))
+#+end_src
+*** Time segments
+#+begin_src elisp
+(setq time-segment (make-symbol "time-segment"))
+(spaceline-define-segment time-segment
+  "Displays the current time"
+  (format-time-string "%a %b %e %H:%M"))
+(setq utc-segment (make-symbol "utc-segment"))
+(spaceline-define-segment utc-segment
+  "Displays the current utc"
+  (format-time-string "%H:%M UTC" nil t))
+#+end_src
+*** Configure modeline
+#+begin_src elisp
 (spaceline-toggle-window-number-off)                                      ; otherwise the evil state indicator isn't shown
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state) ; colorise the modeline based on the evil state
 (setq powerline-default-separator "arrow")
 (setq spaceline-separator-dir-left '(left . left))
 (setq spaceline-separator-dir-right '(right . right))
-(setq spaceline-right-segment '(
-    mute-segment
-    (battery)
-    (global)
-    (buffer-position)))
-(when (string= system-type "darwin")
-    (setq spaceline-right-segment '( ; do not include the mute-segment on mac os, because it is very slow
-	(battery)
-	(global)
-	(buffer-position)
-    )))
+
 (spaceline-compile
   ; left side
   '(
@@ -342,9 +351,17 @@ I use Perspective for managing workspaces.
     ((flycheck-error flycheck-warning flycheck-info) :when active :priority 89)
    )
   ; right side
-  spaceline-right-segment
+  '(
+    mute-segment
+    (battery)
+    (time-segment)
+    (utc-segment)
+    (perspective-segment)
+    (buffer-position)
+   )
   )
 #+end_src
+
 ** Use absolute line numbers
 #+begin_src elisp :results none
 ;; Use relative line numbers
