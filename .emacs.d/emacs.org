@@ -638,8 +638,9 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 
 ** Git linking
 This let's you copy the URL to the current line in the git forge using ~M-x git-link~.
-#+begin_src elisp
+#+begin_src elisp :results none
 (use-package git-link :ensure t)
+(define-key projectile-mode-map (kbd "C-c p G l") #'git-link)
 #+end_src
 ** Language support
 *** Python support
