@@ -494,6 +494,12 @@ I use Perspective for managing workspaces.
 ;; Auto commit/push files after saving for notes repos.
 (add-hook 'after-save-hook #'sync-notes)
 #+end_src
+** Flyspell in text mode
+#+begin_src elisp :results none
+(defun ak/text-mode-hook ()
+  (flyspell-mode))
+(add-hook 'text-mode-hook #'ak/text-mode-hook)
+#+end_src
 ** Org mode customisation
 *** Org config and key bindings
 #+begin_src elisp :results none
