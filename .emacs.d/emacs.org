@@ -469,7 +469,7 @@ I use Perspective for managing workspaces.
 (use-package forge :ensure t :after magit)
 (setq auth-sources '("~/.authinfo.gpg"))
 ;; Open forge edit buffers in the same window
-(setq display-buffer-alist '(("[0-9]+;[0-9]+" display-buffer-same-window)))
+(setq display-buffer-alist '(("[0-9]+;*[0-9]+" display-buffer-same-window)))
 #+end_src
 *** Code-review
 #+begin_src elisp
