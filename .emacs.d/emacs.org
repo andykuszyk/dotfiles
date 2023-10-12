@@ -520,6 +520,8 @@ I use Perspective for managing workspaces.
 (defun ak/org-mode-hook ()
   (flyspell-mode))
 (add-hook 'org-mode-hook #'ak/org-mode-hook)
+(setq org-todo-keywords
+           '((sequence "TODO" "PROG" "|" "DONE")))
 #+end_src
 *** Org babel config
 #+begin_src elisp
