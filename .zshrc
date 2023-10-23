@@ -16,34 +16,14 @@ ZSH_THEME="robbyrussell"
 
 # Mac OS and Linux specific configuration.
 if [[ "$(uname)" == "Darwin" ]]; then
-    site_packages="$(python3 -m site | grep lib | grep site-packages | grep homebrew | grep -v '@' | sed "s/.*\(\/opt.*\)',/\1/g")"
-    python_bin=$(python3 -m site | grep USER_BASE | sed "s/.*\(\/Users.*\)'.*/\1/g")/bin
-    export PATH="$PATH:$python_bin"
-
-    # Tmux powerline setup.
-    export TMUX_POWERLINE_CONF_PATH="$site_packages/powerline/bindings/tmux/powerline.conf"
-
-    # Powerline setup.
-    . "$site_packages/powerline/bindings/zsh/powerline.zsh"
-
     # Use gnu sed.
     export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-else
-    # Powerline setup.
-    . $HOME/.local/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
-
-    # Tmux powerline setup.
-    export TMUX_POWERLINE_CONF_PATH="/home/andy/.local/lib/python3.8/site-packages/powerline/bindings/tmux/powerline.conf"
-    if [[ "$(echo $TERM | grep screen)" != "" ]]; then
-	powerline-config tmux setup
-    fi
 fi
 
 # Zsh plugins.
 plugins=(
     zsh-autosuggestions # Auto-completion prompts.
     colored-man-pages   # Colourised man pages. 
-    tmux                # Basic tmux support.
     fzf-tab             # Fuzzy file finding with tab.
 )
 
@@ -64,20 +44,10 @@ export VIRTUAL_ENV_DISABLE_PROMPT=
 # Aliases.
 alias ip=ipython
 alias gl='git log -n 100 --oneline --graph --all'
-alias idea='intellij-idea-ultimate . &> /dev/null &!'
-alias gol='goland . &> /dev/null &!'
-alias pycharm='pycharm-professional . &> /dev/null &!'
-alias cdf='cd ~/go/src/github.com/form3tech/'
 alias cdr='cd ~/repos/andykuszyk'
 if [[ "$(which kubectl)" != "kubectl not found" ]]; then
     alias k='kubectl'
     source <(kubectl completion zsh)
-fi
-if [[ "$(which f3)" != "f3 not found" ]]; then
-    alias f='f3 auth login'
-    alias fa='f3 aws cli'
-    alias fp='f3 github pr'
-    alias fad='f3 aws cli development -w'
 fi
 alias x='exit'
 alias gs='git status'
@@ -86,15 +56,11 @@ alias gp='git push'
 alias gc='git commit'
 alias gd='git diff'
 alias gcm='git checkout master'
-alias rn='tmux rename-window $(pwd | sed "s/.*\///g")'
 alias e="emacsclient -n"
 complete -F __start_kubectl k
 
 # Use Emacs as default editor
 export EDITOR=emacsclient
-
-# Use private form3 libraries with Go.
-export GOPRIVATE=github.com/form3tech/*
 
 # Initialise sdkman
 source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -103,7 +69,9 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=241"
 
 # Initialise gvm
-source $HOME/.gvm/scripts/gvm
+if [[ -a $HOME/.gvm/scripts/gvm ]]; then
+    source $HOME/.gvm/scripts/gvm
+fi
 
 # Disable auto-update on every brew command
 export HOMEBREW_NO_AUTO_UPDATE=1
