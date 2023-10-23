@@ -1,0 +1,29 @@
+IMAPAccount pairofsocks
+Host outlook.office365.com
+# machine smtp.office365.com login <email-address> password "<password>" port 587
+UserCmd "gpg -d .authinfo.gpg | grep pairofsocks | awk '{print $4}'"
+PassCmd "gpg -d .authinfo.gpg | grep pairofsocks | awk '{print $6}' | sed 's/\"//g'"
+SSLType IMAPS
+SSLVersion TLSv1.2
+# Increase timeout to avoid o365 IMAP hiccups
+Timeout 120
+PipelineDepth 50
+
+IMAPStore pairofsocks-remote
+Account pairofsocks
+
+MaildirStore pairofsocks-local
+# Note the trailing slash on the Path statement!
+Path ~/.mail/pairofsocks/
+Inbox ~/.mail/pairofsocks/Inbox
+SubFolders Legacy
+
+Channel pairofsocks
+Far :pairofsocks-remote:
+Near :pairofsocks-local:
+#Include everything
+Patterns *
+# Sync changes (creations/deletions) with the server
+Create Both
+Expunge Both
+Sync All
