@@ -898,12 +898,12 @@ Allows emojis to easily be inserted from a completion menu.
 (global-set-key (kbd "M-j") #'join-line)
 #+end_src
 ** Mu4e
-#+begin_src elisp
+#+begin_src elisp :results none
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
 (setq mu4e-get-mail-command "mbsync -a")
-(add-to-list 'mu4e-bookmarks
-       '( :name  "Unread pairofsoxks"
+(setq mu4e-bookmarks
+       '( :name  "Unread pairofsocks"
           :query "flag:unread maildir:/pairofsocks/Inbox"
           :key   ?p))
 #+end_src
