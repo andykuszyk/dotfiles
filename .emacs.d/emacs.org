@@ -1,25 +1,3 @@
-* Things to learn about
-** DONE kill ring, copy and paste history (vim registers)
-** TODO [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Dotted-Pair-Notation.html][dotted pair notation]]
-** DONE what is a rectangle?
-** TODO clojure for the brave and true
-** DONE paredit mode
-* Things to configure
-** DONE try dap-mode for Go debugging
-** DONE split buffer and open scratch (e.g. for e-mail or slack message composition)
-** DONE go test log file syntax highlighting (see [[https://github.com/doublep/logview][logview]] package)
-** TODO make super-f behave like c-x v
-** DONE magit forge for issues, pr reviews, and gh notifications
-** TODO re-work keybindings to have more consistent and ergonomic interface
-** TODO auto-push function isn't working for the latest commit on linux machine
-** TODO page up/down don't work in normal mode in vterm
-** TODO command to open email and calendar, and rename buffer
-** TODO show the result of ~status~ in the modeline
-** TODO try [[https://github.com/jcinnamond/el-presenti][john's presentation mode]]
-** TODO disable line numbers in image mode
-** DONE exwm on mac using x11 forwarding for firefox
-** DONE rebind right alt to ctrl on macbook
-** TODO exwm suspend
 * Compilation
 ** To configure with xwidgets
 #+begin_src bash
