@@ -1,8 +1,8 @@
 IMAPAccount pairofsocks
 Host outlook.office365.com
 # machine smtp.office365.com login <email-address> password "<password>" port 587
-UserCmd "gpg -d .authinfo.gpg | grep pairofsocks | awk '{print $4}'"
-PassCmd "gpg -d .authinfo.gpg | grep pairofsocks | awk '{print $6}' | sed 's/\"//g'"
+UserCmd "gpg -d ~/.authinfo.gpg | grep pairofsocks | awk '{print $4}'"
+PassCmd "gpg -d ~/.authinfo.gpg | grep pairofsocks | awk '{print $6}' | sed 's/\"//g'"
 SSLType IMAPS
 SSLVersion TLSv1.2
 # Increase timeout to avoid o365 IMAP hiccups
