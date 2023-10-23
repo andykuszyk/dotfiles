@@ -201,21 +201,6 @@ However, I disable orderless for Company, because I find it affects performance 
 	([?\s-d] . (lambda (command)
 		     (interactive (list (read-shell-command "$ ")))
 		     (start-process-shell-command command nil command)))
-	([?\s-w ?w] . evil-window-next)
-	([?\s-w ?\s-w] . evil-window-next)
-	([?\s-w ?h] . evil-window-left)
-	([?\s-w ?l] . evil-window-right)
-	([?\s-w ?j] . evil-window-down)
-	([?\s-w ?k] . evil-window-up)
-	([?\s-w ?H] . evil-window-move-far-left)
-	([?\s-w ?L] . evil-window-move-far-right)
-	([?\s-w ?J] . evil-window-move-very-bottom)
-	([?\s-w ?K] . evil-window-move-very-top)
-	([?\s-w ?c] . evil-window-delete)
-	([?\s-\;] . counsel-M-x)
-	([?\s-w ?s] . evil-window-split)
-	([?\s-w ?v] . evil-window-vsplit)
-	([?\s-a] . winum-select-window-by-number)
 	([?\s-f] . firefox)
 	([?\s-r] . rename-buffer)
 	([?\s-l] . exwm-input-toggle-keyboard)
@@ -357,27 +342,6 @@ I use Perspective for managing workspaces.
 ;; Re-map alt-3 to hash on mac keyboard
 (define-key key-translation-map (kbd "M-3") (kbd "#"))
 #+end_src
-** Evil mode
-#+begin_src elisp :results none
-;; Evil mode vim emulation
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (customize-save-variable 'evil-undo-system #'undo-redo)
-  :config
-  (evil-mode -1))
-
-;; Additional vim-style keybindings for window management
-(define-key evil-normal-state-map (kbd "C-w <left>") 'windmove-left)
-(define-key evil-normal-state-map (kbd "C-w <right>") 'windmove-right)
-(define-key evil-normal-state-map (kbd "C-w <up>") 'windmove-u)
-(define-key evil-normal-state-map (kbd "C-w <down>") 'windmove-down)
-
-(setq evil-default-state 'emacs)
-#+end_src
-
 ** Battery indicator
 #+begin_src elisp
 ;; Fancy battery indicator
