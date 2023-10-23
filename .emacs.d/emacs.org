@@ -903,7 +903,7 @@ Allows emojis to easily be inserted from a completion menu.
 (require 'mu4e)
 (setq mu4e-get-mail-command "mbsync -a")
 (setq mu4e-bookmarks
-       '( :name  "Unread pairofsocks"
-          :query "flag:unread maildir:/pairofsocks/Inbox"
-          :key   ?p))
+       '(( :name  "Unread pairofsocks"
+           :query "flag:unread maildir:/pairofsocks/Inbox"
+           :key   ?p)))
 #+end_src
