@@ -401,11 +401,6 @@ I use Perspective for managing workspaces.
 ;; Open forge edit buffers in the same window
 (setq display-buffer-alist '(("[0-9]+;*[0-9]+" display-buffer-same-window)))
 #+end_src
-*** Code-review
-#+begin_src elisp
-(use-package code-review :ensure t :after forge)
-(setq code-review-auth-login-marker 'forge)
-#+end_src
 ** Auto completion with company mode
 #+begin_src elisp
 ;; Auto-completion
