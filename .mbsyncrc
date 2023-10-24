@@ -27,3 +27,33 @@ Patterns *
 Create Both
 Expunge Both
 Sync All
+
+IMAPAccount andykuszyk
+Host outlook.office365.com
+# machine smtp.office365.com login <email-address> password "<password>" port 587
+UserCmd "gpg -d ~/.authinfo.gpg | grep andykuszyk | awk '{print $4}'"
+PassCmd "gpg -d ~/.authinfo.gpg | grep andykuszyk | awk '{print $6}' | sed 's/\"//g'"
+SSLType IMAPS
+SSLVersion TLSv1.2
+# Increase timeout to avoid o365 IMAP hiccups
+Timeout 120
+PipelineDepth 50
+
+IMAPStore andykuszyk-remote
+Account andykuszyk
+
+MaildirStore andykuszyk-local
+# Note the trailing slash on the Path statement!
+Path ~/.mail/andykuszyk/
+Inbox ~/.mail/andykuszyk/Inbox
+SubFolders Legacy
+
+Channel andykuszyk
+Far :andykuszyk-remote:
+Near :andykuszyk-local:
+#Include everything
+Patterns *
+# Sync changes (creations/deletions) with the server
+Create None
+Expunge None
+Sync All
