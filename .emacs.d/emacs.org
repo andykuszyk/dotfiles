@@ -447,6 +447,7 @@ I use Perspective for managing workspaces.
 (add-hook 'org-mode-hook #'ak/org-mode-hook)
 (setq org-todo-keywords
            '((sequence "TODO" "PROG" "|" "DONE")))
+(setq org-icalendar-store-UID t) ; export tp ical with persistent ids
 #+end_src
 *** Org babel config
 #+begin_src elisp
