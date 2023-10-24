@@ -742,10 +742,19 @@ These functions
 (use-package topspace :ensure t)
 #+end_src
 ** Emoji support
+*** Package for inserting emojis
 Allows emojis to easily be inserted from a completion menu.
-#+begin_src elisp
+#+begin_src elisp :results none
 (use-package emojify :ensure t)
+(setq emojify-display-style 'unicode)
+(setq emojify-emoji-styles '(unicode))
 (global-set-key (kbd "C-c i") #'emojify-insert-emoji)
+#+end_src
+*** Emoji-enabled font
+#+begin_src elisp :results none
+(when (member "Noto Color Emoji" (font-family-list))
+  (set-fontset-font
+    t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
 #+end_src
 ** Split and draft function
 #+begin_src elisp
