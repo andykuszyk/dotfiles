@@ -708,10 +708,11 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (add-to-list 'auto-mode-alist '("\\.tpl\\'" . k8s-mode))
 #+end_src
 ** EAF
-#+begin_src elisp
+#+begin_src elisp :results none
 (when (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
   (require 'eaf)
+  (require 'eaf-browser)
   (require 'eaf-markdown-previewer))
 #+end_src
 ** Which key
