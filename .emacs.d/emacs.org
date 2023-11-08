@@ -493,6 +493,15 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 
 (define-key org-mode-map (kbd "C-x C-l") 'farynaio/org-link-copy)
 #+end_src
+*** Org latex export
+#+begin_src elisp :results none
+(add-to-list 'org-latex-classes
+             '("letter"
+               "\\documentclass{letter}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+#+end_src
 
 ** Function for running make
 #+begin_src elisp
