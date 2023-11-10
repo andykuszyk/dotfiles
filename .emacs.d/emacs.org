@@ -351,7 +351,6 @@ I use Perspective for managing workspaces.
 #+begin_src elisp
 ;; Treemacs file browser
 (use-package treemacs :ensure t)
-(use-package treemacs-evil :ensure t)
 (use-package treemacs-projectile :ensure t)
 (global-set-key [f8] #'treemacs)
 (defun treemacs-hook ()
