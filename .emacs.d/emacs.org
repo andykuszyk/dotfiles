@@ -576,6 +576,10 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x R b") #'rename-buffer)
 #+end_src
+*** Swap windows
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x R s") #'ace-swap-window)
+#+end_src
 ** Experimental calendar viewer
 #+begin_src elisp
 ;; Calendar
