@@ -572,6 +572,10 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 (use-package rotate :ensure t)
 (global-set-key (kbd "C-x R l") #'rotate-layout)
 #+end_src
+*** Renaming buffers
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x R b") #'rename-buffer)
+#+end_src
 ** Experimental calendar viewer
 #+begin_src elisp
 ;; Calendar
