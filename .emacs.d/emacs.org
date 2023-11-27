@@ -471,6 +471,7 @@ I use Perspective for managing workspaces.
 	   (string= lang "mermaid")
 	   (string= lang "shell")
 	   (string= lang "sh")
+	   (string= lang "python")
 	   (string= lang "bash"))))
 (setq org-confirm-babel-evaluate #'ak/org-babel-confirm)
 #+end_src
