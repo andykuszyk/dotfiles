@@ -672,11 +672,16 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 - ~M-x go-test-current-test~ to run a test.
 - ~M-x dap-debug~ to start a debugging sesssion.
 *** Terraform support
+**** Language server
 #+begin_src elisp
 ;; Terraform support
 (use-package terraform-mode :ensure t)
 (add-hook 'terraform-mode-hook #'lsp)
 (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
+#+end_src
+**** Docs
+#+begin_src elisp :results none
+(use-package terraform-doc :ensure t)
 #+end_src
 *** Yaml support
 #+begin_src elisp
