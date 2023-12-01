@@ -1,0 +1,9 @@
+* MacOS-specific configuration
+** Start fullscreen
+#+begin_src elisp :results none
+(toggle-frame-maximized)
+#+end_src
+** Always open new windows by splitting vertically
+#+begin_src elisp :results none
+(setq split-height-threshold 1000) ; this essentially means that splitting horizontally is not possible
+#+end_src
