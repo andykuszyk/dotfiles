@@ -69,22 +69,6 @@ sudo make install
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-envs (list "GOROOT" "GOPATH")))
 #+end_src
-** Mute control bound to f12
-#+begin_src elisp
-;; Bind mute toggle to f12
-(defun toggle-mute ()
-  (interactive)
-  (start-process "mute" nil "mute")
-  (force-mode-line-update t))
-(global-set-key [f12] #'toggle-mute)
-#+end_src
-** Command for launching firefox
-#+begin_src elisp
-;; Functions for launching X11 applications
-(defun firefox ()
-  (interactive)
-  (start-process-shell-command "firefox" nil "firefox"))
-#+end_src
 ** Ivy
 I install Ivy, because I like the buffer switcher and the file finder. The buffer switcher is compatible with Perspective, and the file finder is nice. I install the ~counsel~ package, but don't enable ~ivy-mode~.
 #+begin_src elisp
@@ -137,108 +121,6 @@ However, I disable orderless for Company, because I find it affects performance 
 (use-package avy :ensure t)
 (global-set-key (kbd "M-a") #'avy-goto-char-timer)
 (global-set-key (kbd "M-g g") #'avy-goto-line)
-#+end_src
-** Experimental functions for launching and arranging x windows
-#+begin_src elisp
-;; Extension functions for exwm
-(defun exwm-ext-close-all-windows ()
-  "Closes all open windows in the frame, leaving just one open."
-  (while (> (count-windows) 1)
-    (evil-window-delete)))
-
-(defun exwm-ext-open-in-splits (names)
-  "Closes all open windows in the frame, and replaces them with them
-  X11 programs provided, tiled horizontally.
-  e.g. (exwm-ext-open-in-splits '(\"firefox\" \"gnome-terminal\"))
-  will replace the current frame with two windows tiled one above the other,
-  with firefox at the top and gnome-terminal at the bottom."
-  (exwm-ext-close-all-windows)
-  (let ((i (length names)))
-    (while (> i 1)
-      (evil-window-split)
-      (sleep-for 1)
-      (setq i (1- i))))
-  (message "split complete")
-  (sleep-for 5)
-  (let (name) 
-    (dolist (name names)
-      (message name)
-      (sleep-for 1)
-      (start-process-shell-command name nil name)
-      (sleep-for 1)
-      (other-window 1))))
-#+end_src
-** EXWM
-*** Initialisation
-#+begin_src elisp
-(use-package exwm :ensure t)
-(setq exwm-workspace-number 4) ; set 4 as the default number of workspaces
-;; Ensure exwm buffers have sensible names
-(add-hook 'exwm-update-class-hook
-          (lambda ()
-            (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
-                        (string= "gimp" exwm-instance-name))
-              (exwm-workspace-rename-buffer exwm-class-name))))
-(add-hook 'exwm-update-title-hook
-          (lambda ()
-            (when (or (not exwm-instance-name)
-                      (string-prefix-p "sun-awt-X11-" exwm-instance-name)
-                      (string= "gimp" exwm-instance-name))
-              (exwm-workspace-rename-buffer exwm-title))))
-#+end_src
-*** Keybindings
-#+begin_src elisp
-(setq exwm-input-global-keys
-      `(
-	([?\s-r] . exwm-reset) ; exit char/fullscreen mode
-	;; Bind "s-0" to "s-9" to switch to a workspace by its index.
-        ,@(mapcar (lambda (i)
-                    `(,(kbd (format "s-%d" i)) .
-                      (lambda ()
-                        (interactive)
-                        (exwm-workspace-switch-create ,i))))
-                  (number-sequence 0 9))
-	([?\s-d] . (lambda (command)
-		     (interactive (list (read-shell-command "$ ")))
-		     (start-process-shell-command command nil command)))
-	([?\s-f] . firefox)
-	([?\s-r] . rename-buffer)
-	([?\s-l] . exwm-input-toggle-keyboard)
-	([f12] . toggle-mute)
-	))
-#+end_src
-*** Multi-monitor support
-#+begin_src elisp
-  (require 'exwm-randr)
-  ;; Fedora laptop
-  (when (string-equal (system-name) "localhost-live")
-      (setq exwm-randr-workspace-output-plist '(0 "HDMI-1" 1 "eDP-1"))
-      (add-hook 'exwm-randr-screen-change-hook
-	  (lambda ()
-	  (start-process-shell-command "xrandr" nil "xrandr --output eDP-1 --mode 1366x768 --pos 277x1080 --rotate normal --output VGA-1 --off --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output HDMI-2 --off --output DP-2 --off"))))
-  ;; Arch desktop
-  (when (string-equal (system-name) "kuszykconsulting-desktop")
-      (setq exwm-randr-workspace-output-plist '(0 "HDMI-1")))
-  (exwm-randr-enable)
-#+end_src
-*** Allow buffers to be shared between all exwm workspaces
-I use Perspective for managing workspaces.
-#+begin_src elisp
-(setq exwm-workspace-show-all-buffers t) ; show all buffers on each workspace
-(setq exwm-layout-show-all-buffers t) ; allow swetching to buffers from another workspace
-#+end_src
-*** Modifier key remapping
-#+begin_src elisp
-(defun remap-modifier-keys-for-exwm ()
-  (interactive)
-  (shell-command "xmodmap -e \"clear Mod5\"")
-  (shell-command "xmodmap -e \"keycode 108 = Super_R\"")
-  (shell-command "xmodmap -e \"keycode 92 = Super_R\""))
-(add-hook 'exwm-init-hook #'remap-modifier-keys-for-exwm)
-#+end_src
-*** Start exwm
-#+begin_src elisp
-(exwm-enable)
 #+end_src
 ** Command for setting text width
 #+begin_src elisp
