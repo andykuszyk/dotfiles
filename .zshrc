@@ -38,10 +38,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=
 alias ip=ipython
 alias gl='git log -n 100 --oneline --graph --all'
 alias cdr='cd ~/repos/andykuszyk'
-if [[ "$(which kubectl)" != "kubectl not found" ]]; then
-    alias k='kubectl'
-    source <(kubectl completion zsh)
-fi
 alias x='exit'
 alias gs='git status'
 alias gap='git add -p'
@@ -54,6 +50,19 @@ complete -F __start_kubectl k
 
 # Use Emacs as default editor
 export EDITOR=emacsclient
+
+# kubectl command completion
+if which kubectl; then
+    alias k='kubectl'
+    source <(kubectl completion zsh)
+fi
+
+# AWS CLI command completion
+if which aws; then
+    autoload bashcompinit && bashcompinit
+    autoload -Uz compinit && compinit
+    complete -C '/usr/local/bin/aws_completer' aws
+fi
 
 # Initialise sdkman
 source "$HOME/.sdkman/bin/sdkman-init.sh"
