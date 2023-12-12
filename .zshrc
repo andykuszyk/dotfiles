@@ -23,7 +23,6 @@ fi
 
 # Zsh plugins.
 plugins=(
-    zsh-autosuggestions # Auto-completion prompts.
     colored-man-pages   # Colourised man pages. 
     fzf-tab             # Fuzzy file finding with tab.
 )
@@ -46,22 +45,22 @@ alias gc='git commit'
 alias gd='git diff'
 alias gcm='git checkout master'
 alias e="emacsclient -n"
-complete -F __start_kubectl k
 
 # Use Emacs as default editor
 export EDITOR=emacsclient
 
 # kubectl command completion
-if which kubectl; then
+if $(which kubectl > /dev/null); then
     alias k='kubectl'
     source <(kubectl completion zsh)
+    complete -F __start_kubectl k
 fi
 
 # AWS CLI command completion
-if which aws; then
+if $(which aws > /dev/null); then
     autoload bashcompinit && bashcompinit
     autoload -Uz compinit && compinit
-    complete -C '/usr/local/bin/aws_completer' aws
+    complete -C $(which aws_completer) aws
 fi
 
 # Initialise sdkman
