@@ -4,6 +4,8 @@
 
 ;;; Code
 
+(setq display-buffer-alist '(("jira" display-buffer-same-window)))
+
 (defun jira--parse-issue-reference (text)
   "Tries to parse the JIRA issue reference from the provided text"
   "NEC-1127")
@@ -45,6 +47,7 @@
 	(erase-buffer)
 	(call-process "sh" nil buffer nil "-c" (format "jira issue view %s | cat" reference))
 	(jira--set-keys)
+	(ansi-color-apply-on-region (point-min) (point-max))
 	(read-only-mode t)
 	(goto-char (point-min))))))
 
