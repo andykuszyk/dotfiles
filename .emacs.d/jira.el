@@ -8,7 +8,9 @@
 
 (defun jira--parse-issue-reference (text)
   "Tries to parse the JIRA issue reference from the provided text"
-  "NEC-1127")
+  (if (string-match "[A-Z]+\\-[0-9]+" text)
+      (match-string 0 text)
+    nil))
 
 (defun jira--view-current-issue ()
   "Views the issue represented by the current line"
@@ -51,4 +53,5 @@
 	(read-only-mode t)
 	(goto-char (point-min))))))
 
+(provide 'jira)
 ;;; jira.el ends here
