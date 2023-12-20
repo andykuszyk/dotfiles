@@ -753,4 +753,11 @@ Allows emojis to easily be inserted from a completion menu.
             :query "flag:unread maildir:/pairofsocks/Inbox"
             :key   ?p))))
 #+end_src
+** PDF tools
+#+begin_src elisp :results none
+(pdf-tools-install)
+(defun ak/pdf-view-mode-hook ()
+  (display-line-numbers-mode -1)
+  (pdf-view-midnight-minor-mode))
+(add-hook 'pdf-view-mode-hook #'ak/pdf-view-mode-hook)
 #+end_src
