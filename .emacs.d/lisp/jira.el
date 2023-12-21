@@ -17,22 +17,39 @@
   (interactive)
   (jira-view-issue (jira--parse-issue-reference (buffer-substring-no-properties (line-beginning-position) (line-end-position)))))
 
+(defun jira--view-in-browser ()
+  "Opens the current issue in the browser"
+  (interactive)
+  (message "not implemented"))
+
 (defun jira--set-keys ()
   "Sets key bindings for JIRA buffers"
   (local-set-key (kbd "q") #'quit-window)
   (local-set-key (kbd "n") #'next-line)
   (local-set-key (kbd "p") #'previous-line)
-  (local-set-key (kbd "l") #'jira-list-my-issues)
+  (local-set-key (kbd "l") #'jira-list-my-assigned-issues)
+  (local-set-key (kbd "a") #'jira-list-my-assigned-issues)
+  (local-set-key (kbd "r") #'jira-list-my-reported-issues)
+  (local-set-key (kbd "o") #'jira---view-in-browser)
   (local-set-key (kbd "RET") #'jira--view-current-issue))
 
-(defun jira-list-my-issues ()
-  "Lists the issues assigned to you"
+(defun jira-list-my-assigned-issues ()
+  "Lists issues assigned to you"
   (interactive)
+  (jira--list-my-issues "-a"))
+
+(defun jira-list-my-reported-issues ()
+  "Lists issues reported by you"
+  (interactive)
+  (jira--list-my-issues "-r"))
+
+(defun jira--list-my-issues (flag)
+  "Lists the issues assigned or reported to you"
   (let ((buffer (get-buffer-create "jira")))
     (with-current-buffer buffer
       (read-only-mode -1)
       (erase-buffer)
-      (call-process "sh" nil buffer nil "-c" "jira issues list -a $(jira me) -s~Done --plain")
+      (call-process "sh" nil buffer nil "-c" (format "jira issues list %s $(jira me) -s~Done --plain" flag))
       (jira--set-keys)
       (read-only-mode t)
       (goto-char (point-min)))
@@ -48,6 +65,7 @@
 	(read-only-mode -1)
 	(erase-buffer)
 	(call-process "sh" nil buffer nil "-c" (format "jira issue view %s | cat" reference))
+	(setq-local jira--reference reference)
 	(jira--set-keys)
 	(ansi-color-apply-on-region (point-min) (point-max))
 	(read-only-mode t)
