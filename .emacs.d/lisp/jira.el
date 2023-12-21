@@ -71,7 +71,7 @@
     (with-current-buffer buffer
       (read-only-mode -1)
       (erase-buffer)
-      (call-process "sh" nil buffer nil "-c" (format "jira issues list %s $(jira me) -s~Done --plain" flag))
+      (call-process "sh" nil buffer nil "-c" (format "jira issues list %s $(jira me) -s~Done --plain --columns 'TYPE,KEY,SUMMARY,STATUS,ASSIGNEE,REPORTER'" flag))
       (jira--set-keys)
       (read-only-mode t)
       (goto-char (point-min)))
