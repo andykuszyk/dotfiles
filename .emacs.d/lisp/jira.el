@@ -1,6 +1,23 @@
 ;;;  jira.el --- a simple wrapper around the JIRA CLI
 
 ;;; Commentary:
+;;; This file contains some simple functions that wrap around the JIRA CLI.
+;;; You will need the JIRA CLI in order to run them, and it can be installed
+;;; from here:
+;;;
+;;;     https://github.com/ankitpokhrel/jira-cli
+;;;
+;;; Follow the steps in the README to set-up an API token for the CLI, and
+;;; then try running:
+;;;
+;;;     M-x jira RET.
+;;;
+;;; This will open a buffer with your assigned issues, with the following
+;;; keybindings:
+;;;
+;;; l    -  list issues assigned to you
+;;; r    -  list issues reported to you
+;;; RET  -  open a plain-text preview of the issue at point
 
 ;;; Code
 
@@ -32,6 +49,11 @@
   (local-set-key (kbd "r") #'jira-list-my-reported-issues)
   (local-set-key (kbd "o") #'jira---view-in-browser)
   (local-set-key (kbd "RET") #'jira--view-current-issue))
+
+(defun jira ()
+  "Lists issues assigned to you"
+  (interactive)
+  (jira-list-my-assigned-issues))
 
 (defun jira-list-my-assigned-issues ()
   "Lists issues assigned to you"
