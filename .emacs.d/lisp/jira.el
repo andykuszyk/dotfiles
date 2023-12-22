@@ -18,10 +18,22 @@
 ;;; l    -  list issues assigned to you
 ;;; r    -  list issues reported to you
 ;;; RET  -  open a plain-text preview of the issue at point
+;;; o    -  open issue in a web browser
+;;;
+;;; In order for web browser previews to work, you must set the
+;;; jira-host variable. For example:
+;;;
+;;;    (setq jira-host "https://my-org.atlassian.net")
 
 ;;; Code
 
+(setq jira-host "")
+
 (setq display-buffer-alist '(("jira" display-buffer-same-window)))
+
+(setq jira--current-issue-reference nil)
+
+(setq jira--current-screen "list")
 
 (defun jira--parse-issue-reference (text)
   "Tries to parse the JIRA issue reference from the provided text"
@@ -29,15 +41,25 @@
       (match-string 0 text)
     nil))
 
+(defun jira--get-current-issue-reference ()
+  "Gets the current line's jira issue reference"
+  (jira--parse-issue-reference (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+
 (defun jira--view-current-issue ()
   "Views the issue represented by the current line"
   (interactive)
-  (jira-view-issue (jira--parse-issue-reference (buffer-substring-no-properties (line-beginning-position) (line-end-position)))))
+  (jira-view-issue (jira--get-current-issue-reference)))
+
+(defun jira--open-in-browser (reference)
+  (message (format "opening issue in browser: %s" (format "%s/browse/%s" jira-host reference)))
+  (browse-url (format "%s/browse/%s" jira-host reference)))
 
 (defun jira--view-in-browser ()
   "Opens the current issue in the browser"
   (interactive)
-  (message "not implemented"))
+  (if (string= jira--current-screen "list")
+      (jira--open-in-browser (jira--get-current-issue-reference))
+    (jira--open-in-browser jira--current-issue-reference)))
 
 (defun jira--set-keys ()
   "Sets key bindings for JIRA buffers"
@@ -47,7 +69,7 @@
   (local-set-key (kbd "l") #'jira-list-my-assigned-issues)
   (local-set-key (kbd "a") #'jira-list-my-assigned-issues)
   (local-set-key (kbd "r") #'jira-list-my-reported-issues)
-  (local-set-key (kbd "o") #'jira---view-in-browser)
+  (local-set-key (kbd "o") #'jira--view-in-browser)
   (local-set-key (kbd "RET") #'jira--view-current-issue))
 
 (defun jira ()
@@ -67,6 +89,7 @@
 
 (defun jira--list-my-issues (flag)
   "Lists the issues assigned or reported to you"
+  (setq jira--current-screen "list")
   (let ((buffer (get-buffer-create "jira")))
     (with-current-buffer buffer
       (read-only-mode -1)
@@ -80,6 +103,8 @@
 (defun jira-view-issue (reference)
   "Prints the description of an issue"
   (interactive "sEnter the issue number: ")
+  (setq jira--current-screen "view")
+  (setq jira--current-issue-reference reference)
   (if (string= reference "")
       (message "No reference provided")
     (let ((buffer (get-buffer-create "jira")))
@@ -87,7 +112,6 @@
 	(read-only-mode -1)
 	(erase-buffer)
 	(call-process "sh" nil buffer nil "-c" (format "jira issue view %s | cat" reference))
-	(setq-local jira--reference reference)
 	(jira--set-keys)
 	(ansi-color-apply-on-region (point-min) (point-max))
 	(read-only-mode t)
