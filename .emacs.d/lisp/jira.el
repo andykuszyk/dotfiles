@@ -19,6 +19,7 @@
 ;;; r    -  list issues reported to you
 ;;; RET  -  open a plain-text preview of the issue at point
 ;;; o    -  open issue in a web browser
+;;; w    -  save the current issue reference to the kill ring
 ;;;
 ;;; In order for web browser previews to work, you must set the
 ;;; jira-host variable. For example:
@@ -43,7 +44,15 @@
 
 (defun jira--get-current-issue-reference ()
   "Gets the current line's jira issue reference"
-  (jira--parse-issue-reference (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+  (if (string= jira--current-screen "list")
+      (jira--parse-issue-reference (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+    jira--current-issue-reference))
+
+(defun jira--kill-ring-save-reference ()
+  (interactive)
+  (let ((reference (jira--get-current-issue-reference)))
+    (message (format "killed reference: %s" reference))
+    (kill-new reference)))
 
 (defun jira--view-current-issue ()
   "Views the issue represented by the current line"
@@ -57,9 +66,7 @@
 (defun jira--view-in-browser ()
   "Opens the current issue in the browser"
   (interactive)
-  (if (string= jira--current-screen "list")
-      (jira--open-in-browser (jira--get-current-issue-reference))
-    (jira--open-in-browser jira--current-issue-reference)))
+  (jira--open-in-browser (jira--get-current-issue-reference)))
 
 (defun jira--set-keys ()
   "Sets key bindings for JIRA buffers"
@@ -70,6 +77,7 @@
   (local-set-key (kbd "a") #'jira-list-my-assigned-issues)
   (local-set-key (kbd "r") #'jira-list-my-reported-issues)
   (local-set-key (kbd "o") #'jira--view-in-browser)
+  (local-set-key (kbd "w") #'jira--kill-ring-save-reference)
   (local-set-key (kbd "RET") #'jira--view-current-issue))
 
 (defun jira ()
