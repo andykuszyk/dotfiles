@@ -761,3 +761,11 @@ Allows emojis to easily be inserted from a completion menu.
   (pdf-view-midnight-minor-mode))
 (add-hook 'pdf-view-mode-hook #'ak/pdf-view-mode-hook)
 #+end_src
+** Emacs lisp customisation
+#+begin_src elisp :results none
+(defun ak/emacs-lisp-hook ()
+  (setq fill-column 80)
+  (auto-fill-mode)
+  (display-fill-column-indicator-mode))
+(add-hook 'emacs-lisp-mode-hook #'ak/emacs-lisp-hook)
+#+end_src
