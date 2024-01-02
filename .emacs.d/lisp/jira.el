@@ -77,7 +77,7 @@
   "Opens the current issue REFERENCE in an external web browser."
   (let ((url (format "%s/browse/%s" jira-host reference)))
     (message (format "opening issue in browser: %s" url))
-    (browse-url (format "%s/browse/%s" jira-host url))))
+    (browse-url url)))
 
 (defun jira--view-in-browser ()
   "Opens the current issue in the browser."
