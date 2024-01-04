@@ -32,6 +32,11 @@
 
 (defvar jira--last-reported-flag)
 
+(defvar jira--current-project
+  nil
+  "The current project used for filtering results.
+If nil the default is used from ~/.config/.jira/.config.yml")
+
 (defvar jira--last-exclude-done t)
 
 (defvar jira-host
@@ -84,12 +89,47 @@
   (interactive)
   (jira--open-in-browser (jira--get-current-issue-reference)))
 
+(defun jira ()
+  "Lists issues assigned to you."
+  (interactive)
+  (jira-list-my-assigned-issues))
+
+(defun jira-list-issues-jql (jql)
+  "Lists issues found by searching with JQL."
+  (interactive "MJQL: ")
+  (jira--list-issues nil nil jql))
+
+(defun jira-list-my-assigned-issues ()
+  "Lists issues assigned to you."
+  (interactive)
+  (jira--list-issues "-a" jira--last-exclude-done nil))
+
+(defun jira-list-my-reported-issues ()
+  "Lists issues reported by you."
+  (interactive)
+  (jira--list-issues "-r" jira--last-exclude-done nil))
+
+(defun jira-toggle-exclude-done-issues ()
+  "Toggle whether or not to display done issues."
+  (interactive)
+  (jira--list-issues
+   jira--last-reported-flag
+   (not  jira--last-exclude-done)
+   nil))
+
+(defun jira-set-project (project)
+  "Sets the current project to PROJECT."
+  (interactive "MProject:")
+  (setq jira--current-project project))
+
 (defun jira--set-keys ()
   "Set key bindings for JIRA buffers."
   (local-set-key (kbd "q") #'quit-window)
   (local-set-key (kbd "n") #'next-line)
   (local-set-key (kbd "p") #'previous-line)
+  (local-set-key (kbd "P") #'jira-set-project)
   (local-set-key (kbd "l") #'jira-list-my-assigned-issues)
+  (local-set-key (kbd "j") #'jira-list-issues-jql)
   (local-set-key (kbd "a") #'jira-list-my-assigned-issues)
   (local-set-key (kbd "r") #'jira-list-my-reported-issues)
   (local-set-key (kbd "x") #'jira-toggle-exclude-done-issues)
@@ -97,31 +137,9 @@
   (local-set-key (kbd "w") #'jira--kill-ring-save-reference)
   (local-set-key (kbd "RET") #'jira--view-current-issue))
 
-(defun jira ()
-  "Lists issues assigned to you."
-  (interactive)
-  (jira-list-my-assigned-issues))
-
-(defun jira-list-my-assigned-issues ()
-  "Lists issues assigned to you."
-  (interactive)
-  (jira--list-my-issues "-a" jira--last-exclude-done))
-
-(defun jira-list-my-reported-issues ()
-  "Lists issues reported by you."
-  (interactive)
-  (jira--list-my-issues "-r" jira--last-exclude-done))
-
-(defun jira-toggle-exclude-done-issues ()
-  "Toggle whether or not to display done issues."
-  (interactive)
-  (jira--list-my-issues
-   jira--last-reported-flag
-   (not  jira--last-exclude-done)))
-
-(defun jira--list-my-issues (reported-flag exclude-done)
+(defun jira--list-issues (reported-flag exclude-done jql)
   "Lists the issues assigned or reported to you, according to REPORTED-FLAG \\
-and EXCLUDE-DONE."
+and EXCLUDE-DONE, or by running the query JQL."
   (setq jira--last-reported-flag reported-flag)
   (setq jira--last-exclude-done exclude-done)
   (setq jira--current-screen "list")
@@ -135,13 +153,16 @@ and EXCLUDE-DONE."
        buffer
        nil
        "-c"
-       (format (concat
-		"jira issues list"
-		" %s $(jira me)"
-		(if exclude-done " -s~Done" "")
-		" --plain"
-		" --columns 'TYPE,KEY,SUMMARY,STATUS,ASSIGNEE,REPORTER'")
-	       reported-flag))
+       (concat
+	"jira issues list"
+	(if (not jql) (format " %s $(jira me)" reported-flag) "")
+	(if (not jql) (if exclude-done " -s~Done" "") "")
+	(if jql (format " --jql '%s'" jql))
+	(if jira--current-project
+	    (format " --project %s" jira--current-project)
+	  "")
+	" --plain"
+	" --columns 'TYPE,KEY,SUMMARY,STATUS,ASSIGNEE,REPORTER'"))
       (jira--set-keys)
       (read-only-mode t)
       (goto-char (point-min)))
