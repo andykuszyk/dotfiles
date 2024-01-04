@@ -667,24 +667,23 @@ Allows emojis to easily be inserted from a completion menu.
     t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
 #+end_src
 ** Split and draft function
-#+begin_src elisp
-(defun ak/split-and-draft-enter ()
-  (interactive)
-  (split-window)
-  (other-window 1)
-  (set-window-buffer nil (set-buffer (generate-new-buffer "ak/draft")))
-  (markdown-mode))
-
+#+begin_src elisp :results none
 (defun ak/split-and-draft-exit ()
   (interactive)
   (mark-whole-buffer)
   (kill-region nil nil t)
   (kill-buffer-and-window))
 
-(global-set-key (kbd "C-c s e") #'ak/split-and-draft-enter)
-(global-set-key (kbd "C-c s x") #'ak/split-and-draft-exit)
-#+end_src
+(defun ak/split-and-draft-enter ()
+  (interactive)
+  (split-window)
+  (other-window 1)
+  (set-window-buffer nil (set-buffer (generate-new-buffer "ak/draft")))
+  (markdown-mode)
+  (local-set-key (kbd "C-c C-c") #'ak/split-and-draft-exit))
 
+(global-set-key (kbd "C-x D") #'ak/split-and-draft-enter)
+#+end_src
 ** Keybinding for visual-line-mode
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x V") #'visual-line-mode)
