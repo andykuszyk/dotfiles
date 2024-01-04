@@ -277,7 +277,7 @@ However, I disable orderless for Company, because I find it affects performance 
 (use-package forge :ensure t :after magit)
 (setq auth-sources '("~/.authinfo.gpg"))
 ;; Open forge edit buffers in the same window
-(setq display-buffer-alist '(("[0-9]+;*[0-9]+" display-buffer-same-window)))
+(add-to-list 'display-buffer-alist '("[0-9]+;*[0-9]+" display-buffer-same-window))
 #+end_src
 ** Auto completion with company mode
 #+begin_src elisp
