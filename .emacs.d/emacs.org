@@ -754,11 +754,13 @@ Allows emojis to easily be inserted from a completion menu.
 #+end_src
 ** PDF tools
 #+begin_src elisp :results none
-(pdf-tools-install)
-(defun ak/pdf-view-mode-hook ()
-  (display-line-numbers-mode -1)
-  (pdf-view-midnight-minor-mode))
-(add-hook 'pdf-view-mode-hook #'ak/pdf-view-mode-hook)
+(when (display-graphic-p)
+  (use-package pdf-tools :ensure t)
+  (pdf-tools-install)
+  (defun ak/pdf-view-mode-hook ()
+    (display-line-numbers-mode -1)
+    (pdf-view-midnight-minor-mode))
+  (add-hook 'pdf-view-mode-hook #'ak/pdf-view-mode-hook))
 #+end_src
 ** Emacs lisp customisation
 #+begin_src elisp :results none
