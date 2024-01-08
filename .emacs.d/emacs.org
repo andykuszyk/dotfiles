@@ -535,9 +535,10 @@ Delve supports Go build flags, but not via DAP. This means that debugging a file
 
 To work around this problem, temporarily remove the build flags.
 **** Go test support
-#+begin_src elisp
+#+begin_src elisp :results none
 (use-package gotest :ensure t)
 (setq go-test-verbose t)
+(add-to-list 'display-buffer-alist '(".*godoc.*" display-buffer-same-window))
 #+end_src
 
 To run a test that the cursor is in, use ~M-x go-test-current-test~.
@@ -554,6 +555,12 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 **** TL;DR
 - ~M-x go-test-current-test~ to run a test.
 - ~M-x dap-debug~ to start a debugging sesssion.
+**** Keymap customisation
+#+begin_src elisp :results none
+(define-key go-mode-map (kbd "C-c C-t t") #'go-test-current-test)
+(define-key go-mode-map (kbd "C-c C-t C-t") #'go-test-current-test)
+(define-key go-mode-map (kbd "C-c C-t c") #'go-test-current-test-cache)
+#+end_src
 *** Terraform support
 **** Language server
 #+begin_src elisp
