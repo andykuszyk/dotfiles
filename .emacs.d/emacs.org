@@ -438,6 +438,13 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 
 (define-key perspective-map (kbd "P") #'ak/persp-project-switch)
 #+end_src
+*** Rename current perspective to current project name
+#+begin_src elisp :results none
+(defun ak/rename-perspective-to-current-project ()
+  (interactive)
+  (persp-rename (projectile-project-name)))
+(define-key perspective-map (kbd "R") #'ak/rename-perspective-to-current-project)
+#+end_src
 ** Window switcher
 #+begin_src elisp
 ;; Numbered window switcher
