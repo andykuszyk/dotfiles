@@ -486,12 +486,6 @@ This let's you copy the URL to the current line in the git forge using ~M-x git-
 (define-key projectile-mode-map (kbd "C-c p G l") #'git-link)
 #+end_src
 ** Language support
-*** Python support
-**** Use ~ipython~ as the python shell
-#+begin_src elisp
-(when (executable-find "ipython")
-  (setq python-shell-interpreter "ipython"))
-#+end_src
 *** LSP mode
 #+begin_src elisp
 (use-package lsp-mode :ensure t)
@@ -500,6 +494,17 @@ This let's you copy the URL to the current line in the git forge using ~M-x git-
 (setq lsp-lens-enable nil)
 (use-package flycheck :ensure t)
 (global-flycheck-mode)
+#+end_src
+*** Python support
+#+begin_src elisp :results none
+(defun ak/python/mode-hook ()
+  (lsp))
+(add-hook 'python-mode-hook #'ak/python-mode-hook)
+#+end_src
+**** Use ~ipython~ as the python shell
+#+begin_src elisp
+(when (executable-find "ipython")
+  (setq python-shell-interpreter "ipython"))
 #+end_src
 *** DAP mode
 #+begin_src elisp
