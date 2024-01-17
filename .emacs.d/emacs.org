@@ -497,7 +497,7 @@ This let's you copy the URL to the current line in the git forge using ~M-x git-
 #+end_src
 *** Python support
 #+begin_src elisp :results none
-(defun ak/python/mode-hook ()
+(defun ak/python-mode-hook ()
   (lsp))
 (add-hook 'python-mode-hook #'ak/python-mode-hook)
 #+end_src
