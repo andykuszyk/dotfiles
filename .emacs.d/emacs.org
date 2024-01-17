@@ -789,6 +789,10 @@ Allows emojis to easily be inserted from a completion menu.
   (display-fill-column-indicator-mode))
 (add-hook 'emacs-lisp-mode-hook #'ak/emacs-lisp-hook)
 #+end_src
+** Keybinding for ~yank-from-kill-ring~
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x y") #'yank-from-kill-ring)
+#+end_src
 ** EWW keybinding
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x E") #'eww)
