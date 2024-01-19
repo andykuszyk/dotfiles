@@ -506,6 +506,10 @@ This let's you copy the URL to the current line in the git forge using ~M-x git-
 (when (executable-find "ipython")
   (setq python-shell-interpreter "ipython"))
 #+end_src
+**** venv support
+#+begin_src elisp :results none
+(use-package pyvenv :ensure t)
+#+end_src
 *** DAP mode
 #+begin_src elisp
 (use-package dap-mode :ensure t)
