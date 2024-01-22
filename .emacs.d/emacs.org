@@ -576,6 +576,7 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (define-key go-mode-map (kbd "C-c C-t t") #'go-test-current-test)
 (define-key go-mode-map (kbd "C-c C-t C-t") #'go-test-current-test)
 (define-key go-mode-map (kbd "C-c C-t c") #'go-test-current-test-cache)
+(define-key go-mode-map (kbd "C-c C-t f") #'go-test-current-file)
 #+end_src
 *** Terraform support
 **** Language server
