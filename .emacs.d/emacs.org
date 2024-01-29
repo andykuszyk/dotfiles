@@ -122,14 +122,6 @@ However, I disable orderless for Company, because I find it affects performance 
 (global-set-key (kbd "M-a") #'avy-goto-char-timer)
 (global-set-key (kbd "M-g g") #'avy-goto-line)
 #+end_src
-** Command for setting text width
-#+begin_src elisp
-;; Function for configuring text-width
-(defun set-text-width()
-  (interactive)
-  (auto-fill-mode)
-  (set-fill-column 80))
-#+end_src
 ** Spacemacs theme
 #+begin_src elisp :results none
 ;; Spacemacs theme
@@ -193,9 +185,8 @@ However, I disable orderless for Company, because I find it affects performance 
    )
   )
 #+end_src
-** Use absolute line numbers
+** Display line numbers
 #+begin_src elisp :results none
-;; Use relative line numbers
 (setq display-line-numbers-type t)
 (global-display-line-numbers-mode)
 #+end_src
@@ -229,22 +220,8 @@ However, I disable orderless for Company, because I find it affects performance 
 (global-set-key (kbd "C-x v") #'vterm)
 (global-set-key (kbd "C-x m") #'multi-vterm)
 #+end_src
-** Treemacs
-#+begin_src elisp
-;; Treemacs file browser
-(use-package treemacs :ensure t)
-(use-package treemacs-projectile :ensure t)
-(global-set-key [f8] #'treemacs)
-(defun treemacs-hook ()
-    (display-line-numbers-mode -1))
-(add-hook 'treemacs-mode-hook 'treemacs-hook)
-#+end_src
-*** Keybindings
-#+begin_src elisp
-(global-set-key (kbd "C-x t o") #'treemacs-add-and-display-current-project-exclusively)
-(global-set-key (kbd "C-x t c") #'treemacs)
-#+end_src
 ** Projectile
+*** Install and configure projectile
 #+begin_src elisp
 ;; Projectile
 (use-package projectile
@@ -252,10 +229,9 @@ However, I disable orderless for Company, because I find it affects performance 
     :init
     (projectile-mode +1)
     :bind (:map projectile-mode-map
-              ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
 #+end_src
-** Create and open PRs using ~gh~ CLI and projectile
+*** Create and open PRs using ~gh~ CLI and projectile
 #+begin_src elisp
 (defun ak/gh-create-pr ()
   (interactive)
@@ -389,14 +365,6 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 #+end_src
 
-** Function for running make
-#+begin_src elisp
-;; Convenience make function
-;; Alternatively, `M-!, make` can be used.
-(defun make ()
-  (interactive))
-#+end_src
-  (start-process "make" nil "make"))
 ** Perspective workspaces
 #+begin_src elisp
 ;; Perspective
@@ -470,171 +438,11 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x R s") #'ace-swap-window)
 #+end_src
-** Experimental calendar viewer
-#+begin_src elisp
-;; Calendar
-(use-package calfw :ensure t)
-(use-package calfw-ical :ensure t)
-(defun ak/open-pd ()
-    (cfw:open-ical-calendar "https://form3.pagerduty.com/private/f0bc0c4f47ebaf99c603bccb7b0b2215233ff70caf7348679ffa0c01e4fd3c6a/feed"))
-#+end_src
-
 ** Git linking
 This let's you copy the URL to the current line in the git forge using ~M-x git-link~.
 #+begin_src elisp :results none
 (use-package git-link :ensure t)
 (define-key projectile-mode-map (kbd "C-c p G l") #'git-link)
-#+end_src
-** Language support
-*** LSP mode
-#+begin_src elisp
-(use-package lsp-mode :ensure t)
-(setq lsp-enable-file-watchers nil)
-(use-package lsp-ui :ensure t)
-(setq lsp-lens-enable nil)
-(use-package flycheck :ensure t)
-(global-flycheck-mode)
-#+end_src
-*** Python support
-#+begin_src elisp :results none
-(defun ak/python-mode-hook ()
-  (lsp))
-(add-hook 'python-mode-hook #'ak/python-mode-hook)
-#+end_src
-**** Use ~ipython~ as the python shell
-#+begin_src elisp
-(when (executable-find "ipython")
-  (setq python-shell-interpreter "ipython"))
-#+end_src
-**** venv support
-#+begin_src elisp :results none
-(use-package pyvenv :ensure t)
-#+end_src
-*** DAP mode
-#+begin_src elisp
-(use-package dap-mode :ensure t)
-(add-hook 'dap-stopped-hook
-          (lambda (arg) (call-interactively #'dap-hydra)))
-#+end_src
-*** Markdown support
-#+begin_src elisp
-;; Install markdown package
-(use-package markdown-mode :ensure t)
-(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
-(setq markdown-fontify-code-blocks-natively t)
-
-(defun ak/markdown-mode-hook ()
-  (flyspell-mode))
-(add-hook 'markdown-mode-hook #'ak/markdown-mode-hook)
-#+end_src
-*** Golang support
-**** Go mode
-#+begin_src elisp
-(use-package go-mode :ensure t)
-(defun go-set-tab-width ()
-  (setq tab-width 4))
-(add-hook 'go-mode-hook #'lsp) ; enter lsp mode when entering go mode
-(add-hook 'go-mode-hook #'go-set-tab-width) ; set tab width when opening go files
-(setq gofmt-command "goimports") ; format files with goimports
-(add-hook 'before-save-hook #'gofmt-before-save) ; format files on save
-#+end_src
-**** Custom build flags
-If you change this variable, run ~M-x lsp-workspace-restart~ to restart ~gopls~.
-
-#+begin_src elisp
-(setq lsp-go-env '((GOFLAGS . "-tags=associations")))
-#+end_src
-
-This will enable the language server to recognise files with build flags, although this won't help debugging.
-
-Delve supports Go build flags, but not via DAP. This means that debugging a file with build flags will fail.
-
-To work around this problem, temporarily remove the build flags.
-**** Go test support
-#+begin_src elisp :results none
-(use-package gotest :ensure t)
-(setq go-test-verbose t)
-(add-to-list 'display-buffer-alist '(".*godoc.*" display-buffer-same-window))
-#+end_src
-
-To run a test that the cursor is in, use ~M-x go-test-current-test~.
-
-If the file has a build flag on it, first set a buffer-local variable with the build flag.
-
-For example, for the build flag ~foo~, run ~(setq go-test-args "-tags='foo'")~.
-**** Go debugging
-This relies on ~dap-mode~ and ~lsp-mode~.
-#+begin_src elisp
-(require 'dap-dlv-go)
-#+end_src
-Files with build flags will fail. At the moment, the only way I know of to solve this is to temporarily remove the build flags.
-**** TL;DR
-- ~M-x go-test-current-test~ to run a test.
-- ~M-x dap-debug~ to start a debugging sesssion.
-**** Keymap customisation
-#+begin_src elisp :results none
-(define-key go-mode-map (kbd "C-c C-t t") #'go-test-current-test)
-(define-key go-mode-map (kbd "C-c C-t C-t") #'go-test-current-test)
-(define-key go-mode-map (kbd "C-c C-t c") #'go-test-current-test-cache)
-(define-key go-mode-map (kbd "C-c C-t f") #'go-test-current-file)
-#+end_src
-*** Terraform support
-**** Language server
-#+begin_src elisp
-;; Terraform support
-(use-package terraform-mode :ensure t)
-(add-hook 'terraform-mode-hook #'lsp)
-(add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
-#+end_src
-**** Docs
-#+begin_src elisp :results none
-(use-package terraform-doc :ensure t)
-#+end_src
-*** Yaml support
-#+begin_src elisp
-;; YAML support
-(use-package yaml-mode :ensure t)
-#+end_src
-*** Clojure support
-#+begin_src elisp
-;; Clojure support
-(use-package paredit :ensure t)
-(use-package clojure-mode :ensure t)
-(add-hook 'clojure-mode-hook #'lsp)
-(add-hook 'clojure-mode-hook #'paredit-mode)
-(use-package cider :ensure t)
-#+end_src
-*** Elisp customisations
-#+begin_src elisp
-(add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-#+end_src
-*** JSON support
-#+begin_src elisp
-;; Better JSON support
-(use-package json-mode :ensure t)
-#+end_src
-*** Dockerfile support
-#+begin_src elisp
-;; Dockerfile mode
-(use-package dockerfile-mode :ensure t)
-(add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
-#+end_src
-
-*** Bazel/starlark/tiltfile support
-#+begin_src elisp
-(use-package bazel :ensure t)
-(add-to-list 'auto-mode-alist '("Tiltfile.*" . bazel-starlark-mode))
-
-(add-to-list 'lsp-language-id-configuration '(bazel-starlark-mode . "starlark"))
-(lsp-register-client
- (make-lsp-client :new-connection (lsp-stdio-connection '("tilt" "lsp" "start"))
-		  :activation-fn (lsp-activate-on "starlark")
-		  :server-id 'tilt))
-#+end_src
-*** Helm/tpl syntax higlighting
-#+begin_src elisp
-(use-package k8s-mode :ensure t)
-(add-to-list 'auto-mode-alist '("\\.tpl\\'" . k8s-mode))
 #+end_src
 ** EAF
 #+begin_src elisp :results none
@@ -653,7 +461,6 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (use-package which-key :ensure t)
 (which-key-mode)
 #+end_src
-
 ** Horizontal margin padding for reading on wide screens
 These functions
 #+begin_src elisp
@@ -708,18 +515,12 @@ Allows emojis to easily be inserted from a completion menu.
 
 (global-set-key (kbd "C-x D") #'ak/split-and-draft-enter)
 #+end_src
-** Keybinding for visual-line-mode
-#+begin_src elisp :results none
-(global-set-key (kbd "C-x V") #'visual-line-mode)
-#+end_src
-
 ** Render ansi escape codes in a log file
 #+begin_src elisp :results none
 (defun ak/display-ansi-colors ()
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
 #+end_src
-
 ** Man customisation
 #+begin_src elisp
 (setq Man-notify-method 'pushy)
@@ -761,10 +562,6 @@ Allows emojis to easily be inserted from a completion menu.
     (narrow-to-region start (+ 1 (point))))
   (json-pretty-print-buffer))
 #+end_src
-** Join line
-#+begin_src elisp
-(global-set-key (kbd "M-j") #'join-line)
-#+end_src
 ** Mu4e
 #+begin_src elisp :results none
 (when (executable-find "mu4e")
@@ -786,19 +583,16 @@ Allows emojis to easily be inserted from a completion menu.
     (pdf-view-midnight-minor-mode))
   (add-hook 'pdf-view-mode-hook #'ak/pdf-view-mode-hook))
 #+end_src
-** Emacs lisp customisation
+** Display buffer customisation
 #+begin_src elisp :results none
-(defun ak/emacs-lisp-hook ()
-  (setq fill-column 80)
-  (auto-fill-mode)
-  (display-fill-column-indicator-mode))
-(add-hook 'emacs-lisp-mode-hook #'ak/emacs-lisp-hook)
+(add-to-list 'display-buffer-alist '(".*noman.*" display-buffer-same-window))
+(add-to-list 'display-buffer-alist '("jira" display-buffer-same-window))
+(add-to-list 'display-buffer-alist '(".*onfluence.*" display-buffer-same-window))
 #+end_src
-** Keybinding for ~yank-from-kill-ring~
-#+begin_src elisp :results none
-(global-set-key (kbd "C-x y") #'yank-from-kill-ring)
-#+end_src
-** EWW keybinding
+** Custom global keybindings for common commands
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x E") #'eww)
+(global-set-key (kbd "C-x y") #'yank-from-kill-ring)
+(global-set-key (kbd "M-j") #'join-line)
+(global-set-key (kbd "C-x V") #'visual-line-mode)
 #+end_src

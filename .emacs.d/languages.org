@@ -1,0 +1,154 @@
+* LSP mode
+#+begin_src elisp
+(use-package lsp-mode :ensure t)
+(setq lsp-enable-file-watchers nil)
+(use-package lsp-ui :ensure t)
+(setq lsp-lens-enable nil)
+(use-package flycheck :ensure t)
+(global-flycheck-mode)
+#+end_src
+* Python support
+#+begin_src elisp :results none
+(defun ak/python-mode-hook ()
+  (lsp))
+(add-hook 'python-mode-hook #'ak/python-mode-hook)
+#+end_src
+** Use ~ipython~ as the python shell
+#+begin_src elisp
+(when (executable-find "ipython")
+  (setq python-shell-interpreter "ipython"))
+#+end_src
+** venv support
+#+begin_src elisp :results none
+(use-package pyvenv :ensure t)
+#+end_src
+* DAP mode
+#+begin_src elisp
+(use-package dap-mode :ensure t)
+(add-hook 'dap-stopped-hook
+          (lambda (arg) (call-interactively #'dap-hydra)))
+#+end_src
+* Markdown support
+#+begin_src elisp
+;; Install markdown package
+(use-package markdown-mode :ensure t)
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+(setq markdown-fontify-code-blocks-natively t)
+
+(defun ak/markdown-mode-hook ()
+  (flyspell-mode))
+(add-hook 'markdown-mode-hook #'ak/markdown-mode-hook)
+#+end_src
+* Golang support
+** Go mode
+#+begin_src elisp
+(use-package go-mode :ensure t)
+(defun go-set-tab-width ()
+  (setq tab-width 4))
+(add-hook 'go-mode-hook #'lsp) ; enter lsp mode when entering go mode
+(add-hook 'go-mode-hook #'go-set-tab-width) ; set tab width when opening go files
+(setq gofmt-command "goimports") ; format files with goimports
+(add-hook 'before-save-hook #'gofmt-before-save) ; format files on save
+#+end_src
+** Custom build flags
+If you change this variable, run ~M-x lsp-workspace-restart~ to restart ~gopls~.
+
+#+begin_src elisp
+(setq lsp-go-env '((GOFLAGS . "-tags=associations")))
+#+end_src
+
+This will enable the language server to recognise files with build flags, although this won't help debugging.
+
+Delve supports Go build flags, but not via DAP. This means that debugging a file with build flags will fail.
+
+To work around this problem, temporarily remove the build flags.
+** Go test support
+#+begin_src elisp :results none
+(use-package gotest :ensure t)
+(setq go-test-verbose t)
+(add-to-list 'display-buffer-alist '(".*godoc.*" display-buffer-same-window))
+#+end_src
+
+To run a test that the cursor is in, use ~M-x go-test-current-test~.
+
+If the file has a build flag on it, first set a buffer-local variable with the build flag.
+
+For example, for the build flag ~foo~, run ~(setq go-test-args "-tags='foo'")~.
+** Go debugging
+This relies on ~dap-mode~ and ~lsp-mode~.
+#+begin_src elisp
+(require 'dap-dlv-go)
+#+end_src
+Files with build flags will fail. At the moment, the only way I know of to solve this is to temporarily remove the build flags.
+** TL;DR
+- ~M-x go-test-current-test~ to run a test.
+- ~M-x dap-debug~ to start a debugging sesssion.
+** Keymap customisation
+#+begin_src elisp :results none
+(define-key go-mode-map (kbd "C-c C-t t") #'go-test-current-test)
+(define-key go-mode-map (kbd "C-c C-t C-t") #'go-test-current-test)
+(define-key go-mode-map (kbd "C-c C-t c") #'go-test-current-test-cache)
+(define-key go-mode-map (kbd "C-c C-t f") #'go-test-current-file)
+#+end_src
+* Terraform support
+** Language server
+#+begin_src elisp
+;; Terraform support
+(use-package terraform-mode :ensure t)
+(add-hook 'terraform-mode-hook #'lsp)
+(add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
+#+end_src
+** Docs
+#+begin_src elisp :results none
+(use-package terraform-doc :ensure t)
+#+end_src
+* Yaml support
+#+begin_src elisp
+;; YAML support
+(use-package yaml-mode :ensure t)
+#+end_src
+* Clojure support
+#+begin_src elisp
+;; Clojure support
+(use-package paredit :ensure t)
+(use-package clojure-mode :ensure t)
+(add-hook 'clojure-mode-hook #'lsp)
+(add-hook 'clojure-mode-hook #'paredit-mode)
+(use-package cider :ensure t)
+#+end_src
+* Elisp customisations
+#+begin_src elisp :results none
+(defun ak/emacs-lisp-hook ()
+  (paredit-mode)
+  (setq fill-column 80)
+  (auto-fill-mode)
+  (display-fill-column-indicator-mode))
+(add-hook 'emacs-lisp-mode-hook #'ak/emacs-lisp-hook)
+#+end_src
+* JSON support
+#+begin_src elisp
+;; Better JSON support
+(use-package json-mode :ensure t)
+#+end_src
+* Dockerfile support
+#+begin_src elisp
+;; Dockerfile mode
+(use-package dockerfile-mode :ensure t)
+(add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
+#+end_src
+* Bazel/starlark/tiltfile support
+#+begin_src elisp
+(use-package bazel :ensure t)
+(add-to-list 'auto-mode-alist '("Tiltfile.*" . bazel-starlark-mode))
+
+(add-to-list 'lsp-language-id-configuration '(bazel-starlark-mode . "starlark"))
+(lsp-register-client
+ (make-lsp-client :new-connection (lsp-stdio-connection '("tilt" "lsp" "start"))
+		  :activation-fn (lsp-activate-on "starlark")
+		  :server-id 'tilt))
+#+end_src
+* Helm/tpl syntax higlighting
+#+begin_src elisp
+(use-package k8s-mode :ensure t)
+(add-to-list 'auto-mode-alist '("\\.tpl\\'" . k8s-mode))
+#+end_src

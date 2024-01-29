@@ -3,5 +3,6 @@
 (when (string= system-type "gnu/linux")
   (org-babel-load-file (concat user-emacs-directory "linux.org")))
 (org-babel-load-file (concat user-emacs-directory "emacs.org"))
+(org-babel-load-file (concat user-emacs-directory "languages.org"))
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'jira)
