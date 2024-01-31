@@ -7,28 +7,6 @@
 (use-package flycheck :ensure t)
 (global-flycheck-mode)
 #+end_src
-* Python support
-#+begin_src elisp :results none
-(defun ak/python-mode-hook ()
-  (lsp))
-(add-hook 'python-mode-hook #'ak/python-mode-hook)
-#+end_src
-** Use ~ipython~ as the python shell
-#+begin_src elisp
-(when (executable-find "ipython")
-  (setq python-shell-interpreter "ipython"))
-#+end_src
-** venv support
-#+begin_src elisp :results none
-(use-package pyvenv :ensure t)
-#+end_src
-** elpy
-#+begin_src elisp :results none
-(use-package elpy
-  :ensure t
-  :init
-  (elpy-enable))
-#+end_src
 * DAP mode
 #+begin_src elisp
 (use-package dap-mode :ensure t)
@@ -45,6 +23,31 @@
 (defun ak/markdown-mode-hook ()
   (flyspell-mode))
 (add-hook 'markdown-mode-hook #'ak/markdown-mode-hook)
+#+end_src
+* Python support
+#+begin_src elisp :results none
+(defun ak/python-mode-hook ()
+  (lsp))
+(add-hook 'python-mode-hook #'ak/python-mode-hook)
+(use-package elpy :ensure t)
+(require 'dap-python)
+(setq dap-python-debugger 'debugpy)
+#+end_src
+** Use ~ipython~ as the python shell
+#+begin_src elisp
+(when (executable-find "ipython")
+  (setq python-shell-interpreter "ipython"))
+#+end_src
+** venv support
+#+begin_src elisp :results none
+(use-package pyvenv :ensure t)
+#+end_src
+** elpy
+#+begin_src elisp :results none
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
 #+end_src
 * Golang support
 ** Go mode
