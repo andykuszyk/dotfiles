@@ -27,6 +27,9 @@
 * Python support
 #+begin_src elisp :results none
 (defun ak/python-mode-hook ()
+  (setq fill-column 80)
+  (auto-fill-mode)
+  (display-fill-column-indicator-mode)
   (lsp))
 (add-hook 'python-mode-hook #'ak/python-mode-hook)
 (use-package elpy :ensure t)
