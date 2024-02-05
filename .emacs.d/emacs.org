@@ -564,9 +564,14 @@ Allows emojis to easily be inserted from a completion menu.
 #+end_src
 ** Mu4e
 #+begin_src elisp :results none
-(when (executable-find "mu4e")
-  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+(when (executable-find "mu")
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
   (require 'mu4e)
+  (setq
+   mu4e-sent-folder   "/Sent"       ;; folder for sent messages
+   mu4e-drafts-folder "/Drafts"     ;; unfinished messages
+   mu4e-trash-folder  "/Trash"      ;; trashed messages
+   mu4e-refile-folder "/Archive")   ;; saved messages
   (setq mu4e-get-mail-command "mbsync -a"))
 #+end_src
 ** PDF tools
