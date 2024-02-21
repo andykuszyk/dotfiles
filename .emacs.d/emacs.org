@@ -297,6 +297,8 @@ However, I disable orderless for Company, because I find it affects performance 
 (define-key org-mode-map (kbd "C-c o a") #'org-agenda)
 (setq org-image-actual-width nil) ; allow image widths to be overridden with #+ATTR_ORG: :width 100
 (defun ak/org-mode-hook ()
+  (toggle-truncate-lines)
+  (visual-line-mode)
   (flyspell-mode))
 (add-hook 'org-mode-hook #'ak/org-mode-hook)
 (setq org-todo-keywords
