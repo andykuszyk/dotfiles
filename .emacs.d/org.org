@@ -1,0 +1,97 @@
+* Org config and key bindings
+#+begin_src elisp :results none
+;; Org mode customisation
+(setq org-startup-folded t) ; open org files folded, rather than expanded
+(setq org-edit-src-content-indentation 0) ; do not indent code in source blocks
+(setq org-startup-with-inline-images t) ; always show inline images
+(setq org-adapt-indentation nil) ; do not indent headline contents with headline
+(setq org-use-speed-commands t) ; use speed keys in org buffers
+(define-key org-mode-map (kbd "C-c C-s") #'org-insert-structure-template)
+(define-key org-mode-map (kbd "C-c o c") #'org-capture)
+(require 'org-agenda)
+(define-key org-agenda-mode-map (kbd "C-c o c") #'org-capture)
+(define-key org-mode-map (kbd "C-c o a") #'org-agenda)
+(setq org-image-actual-width nil) ; allow image widths to be overridden with #+ATTR_ORG: :width 100
+(defun ak/org-mode-hook ()
+  (toggle-truncate-lines)
+  (visual-line-mode)
+  (flyspell-mode))
+(add-hook 'org-mode-hook #'ak/org-mode-hook)
+(setq org-todo-keywords
+           '((sequence "TODO" "PROG" "|" "DONE")))
+(setq org-icalendar-store-UID t) ; export tp ical with persistent ids
+#+end_src
+* Org babel config
+#+begin_src elisp :results none
+;; Org babel support for go
+(use-package ob-go :ensure t)
+
+;; Mermaid babel support
+(use-package mermaid-mode :ensure t) ; load mermaid-mode before ob-mermaid, because ob-mermaid has a better babel function
+(use-package ob-mermaid :ensure t)
+
+;; Use python3 for python blocks
+(setq org-babel-python-command "python3")
+
+;; Org Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (go . t)
+   (mermaid . t)
+   (shell . t)
+   (emacs-lisp . t)))
+
+(defun ak/org-babel-confirm (lang body)
+  (not (or (string= lang "elisp")
+	   (string= lang "mermaid")
+	   (string= lang "shell")
+	   (string= lang "sh")
+	   (string= lang "python")
+	   (string= lang "bash"))))
+(setq org-confirm-babel-evaluate #'ak/org-babel-confirm)
+#+end_src
+* Export org files as revealjs presentations
+#+begin_src elisp
+;; Export org files to reveal.js presentations
+(use-package ox-reveal :ensure t)
+(load-library "ox-reveal")
+(use-package htmlize :ensure t) ; required for source block highlighting
+#+end_src
+* Function for copying org links
+This function was taken from [[https://emacs.stackexchange.com/questions/3981/how-to-copy-links-out-of-org-mode][StackOverflow]].
+#+begin_src elisp :results none
+(defun farynaio/org-link-copy (&optional arg)
+  "Extract URL from org-mode link and add it to kill ring."
+  (interactive "P")
+  (let* ((link (org-element-lineage (org-element-context) '(link) t))
+          (type (org-element-property :type link))
+          (url (org-element-property :path link))
+          (url (concat type ":" url)))
+    (kill-new url)
+    (message (concat "Copied URL: " url))))
+
+(define-key org-mode-map (kbd "C-c C-x l") 'farynaio/org-link-copy)
+(define-key org-mode-map (kbd "C-c x l") 'farynaio/org-link-copy)
+#+end_src
+* Org latex export
+#+begin_src elisp :results none
+(add-to-list 'org-latex-classes
+             '("letter"
+               "\\documentclass{letter}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+#+end_src
+* Function to watch exported ODTs and convert them to PDFs
+#+begin_src elisp :results none
+(defun ak/convert-odt-to-pdf ()
+  (interactive)
+  (let* ((current-buffer (buffer-name))
+	 (output-buffer (format "* %s | libreoffice PDF render *" current-buffer)))
+    (async-shell-command (format "echo -n %s | entr -c
+       /Applications/LibreOffice.app/Contents/MacOS/soffice --headless
+       -env:UserInstallation=file:///tmp/LibreOffice_Conversion_${USER}
+       --convert-to pdf:writer_pdf_Export %s" current-buffer current-buffer))))
+#+end_src
+
