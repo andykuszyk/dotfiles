@@ -87,11 +87,27 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 #+begin_src elisp :results none
 (defun ak/convert-odt-to-pdf ()
   (interactive)
-  (let* ((current-buffer (buffer-name))
-	 (output-buffer (format "* %s | libreoffice PDF render *" current-buffer)))
-    (async-shell-command (format "echo -n %s | entr -c
-       /Applications/LibreOffice.app/Contents/MacOS/soffice --headless
-       -env:UserInstallation=file:///tmp/LibreOffice_Conversion_${USER}
-       --convert-to pdf:writer_pdf_Export %s" current-buffer current-buffer))))
+  (let*
+      ((libre-office "/Applications/LibreOffice.app/Contents/MacOS/soffice")
+       (current-buffer-name (buffer-file-name (current-buffer)))
+       (buffer-file-path current-buffer-name)
+       (odt-file-path
+	(replace-regexp-in-string
+	 "\\(^.*\\)\\.org$"
+	 "\\1.odt"
+	 buffer-file-path))
+       (current-buffer-name (buffer-name (current-buffer)))
+       (output-buffer-name
+	(format
+	 "* %s | libreoffice PDF render *"
+	 current-buffer-name))
+       (output-buffer (get-buffer-create output-buffer-name)))
+    (async-shell-command
+     (format
+      "cd %s && echo -n %s | entr -c %s --headless -env:UserInstallation=file:///tmp/LibreOffice_Conversion_${USER} --convert-to pdf:writer_pdf_Export %s"
+      (file-name-directory buffer-file-path)
+      odt-file-path
+      libre-office
+      odt-file-path)
+     output-buffer-name)))
 #+end_src
-
