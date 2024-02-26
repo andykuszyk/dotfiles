@@ -1,0 +1,5 @@
+* Gnus
+** Connecting to fastmail
+#+begin_src elisp :results none
+(setq gnus-select-method '(nnimap "imap.fastmail.com"))
+#+end_src
