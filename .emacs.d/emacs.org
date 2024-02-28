@@ -379,7 +379,7 @@ This let's you copy the URL to the current line in the git forge using ~M-x git-
 #+end_src
 ** Horizontal margin padding for reading on wide screens
 These functions
-#+begin_src elisp
+#+begin_src elisp :results none
 (defun ak/reading-margin ()
   (/ (window-width) 3))
 
@@ -393,6 +393,9 @@ These functions
 (ak/reading-func "left" t nil)
 (ak/reading-func "right" nil t)
 (ak/reading-func "reset" nil nil)
+
+(global-set-key (kbd "C-x A c") #'ak/center-reading)
+(global-set-key (kbd "C-x A r") #'ak/reset-reading)
 #+end_src
 ** Vertical margin padding for reading on tall screens
 #+begin_src elisp
