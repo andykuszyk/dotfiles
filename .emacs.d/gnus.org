@@ -8,3 +8,10 @@
 (setq mail-sources
       '((imap :predicate "1:*" :fetchflag "\\Seen" :dontexpunge t)))
 #+end_src
+** SMTP
+#+begin_src elisp :results none
+(setq message-send-mail-function #'smtpmail-send-it
+      smtpmail-default-smtp-server "smtp.fastmail.com"
+      user-full-name "Andy Kuszyk"
+      user-mail-address "")
+#+end_src
