@@ -3,3 +3,8 @@
 #+begin_src elisp :results none
 (setq gnus-select-method '(nnimap "imap.fastmail.com"))
 #+end_src
+** Setting IMAP as mail source
+#+begin_src elisp :results none
+(setq mail-sources
+      '((imap :predicate "1:*" :fetchflag "\\Seen" :dontexpunge t)))
+#+end_src
