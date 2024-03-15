@@ -192,5 +192,14 @@ and EXCLUDE-DONE, or by running the query JQL."
 	(goto-char (point-min))
 	(display-buffer buffer)))))
 
+(defun jira-edit-issue-with-source-block-contents (issue-ref)
+  (interactive "sEnter issue reference: ")
+  (let ((src-block-body (nth 1 (org-babel-get-src-block-info))))
+    (shell-command (format "jira issue edit %s --no-input -b '
+%s
+'"
+			   issue-ref
+			   src-block-body))))
+
 (provide 'jira)
 ;;; jira.el ends here
