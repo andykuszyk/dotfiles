@@ -7,7 +7,7 @@ arch-pkgs:
 termux-pkgs:
 	pkg update
 	pkg upgrade
-	pkg in openssl openssh git make vim zsh wget automake pkg-config gcc clang binutils tmux zip fzf cmake libvterm bat
+	pkg in openssl openssh git make vim zsh wget automake pkg-config clang binutils tmux zip fzf cmake libvterm bat emacs which
 
 install-linux-packages:
 	sudo apt install i3 vim fonts-powerline redshift zsh tmux dconf-cli uuid-runtime bat fzf maim xclip scrot imagemagick python3-pip automake vim-gtk3 pavucontrol ruby-dev entr libjansson-dev sqlite3
