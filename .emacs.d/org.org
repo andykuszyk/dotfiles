@@ -6,7 +6,8 @@
 (setq org-startup-with-inline-images t) ; always show inline images
 (setq org-adapt-indentation nil) ; do not indent headline contents with headline
 (setq org-use-speed-commands t) ; use speed keys in org buffers
-(define-key org-mode-map (kbd "C-c C-s") #'org-insert-structure-template)
+(define-key org-mode-map (kbd "C-c C-x s") #'org-insert-structure-template)
+(define-key org-mode-map (kbd "C-c C-s") #'org-schedule)
 (define-key org-mode-map (kbd "C-c o c") #'org-capture)
 (require 'org-agenda)
 (define-key org-agenda-mode-map (kbd "C-c o c") #'org-capture)
