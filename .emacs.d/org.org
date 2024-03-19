@@ -22,6 +22,11 @@
            '((sequence "TODO" "PROG" "|" "DONE")))
 (setq org-icalendar-store-UID t) ; export tp ical with persistent ids
 #+end_src
+* Completion for navigation
+This means that ~C-c C-j~ will use completion in the minibuffer for navigating to a heading.
+#+begin_src elisp :results none
+(setq org-goto-interface "outline-path-completion")
+#+end_src
 * Org babel config
 #+begin_src elisp :results none
 ;; Org babel support for go
