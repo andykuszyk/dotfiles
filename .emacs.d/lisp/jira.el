@@ -201,5 +201,12 @@ and EXCLUDE-DONE, or by running the query JQL."
 			   issue-ref
 			   src-block-body))))
 
+(defvar-keymap jira-keymap
+  "j" #'jira
+  "e" #'jira-edit-issue-with-source-block-contents
+  "p" #'jira-set-project)
+
+(global-set-key (kbd "C-x j") jira-keymap)
+
 (provide 'jira)
 ;;; jira.el ends here
