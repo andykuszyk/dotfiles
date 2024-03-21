@@ -29,6 +29,7 @@
 ;;; Code:
 
 (require 'ansi-color)
+(require 'ob-core)
 
 (defvar jira--last-reported-flag)
 
@@ -192,18 +193,32 @@ and EXCLUDE-DONE, or by running the query JQL."
 	(goto-char (point-min))
 	(display-buffer buffer)))))
 
-(defun jira-edit-issue-with-source-block-contents (issue-ref)
-  (interactive "sEnter issue reference: ")
-  (let ((src-block-body (nth 1 (org-babel-get-src-block-info))))
-    (shell-command (format "jira issue edit %s --no-input -b '
-%s
-'"
-			   issue-ref
-			   src-block-body))))
+(defun jira-src-block-edit ()
+  (interactive)
+  (let* ((src-block-info (org-babel-get-src-block-info))
+	 (src-block-body (nth 1 src-block-info))
+	 (jira-issue (cdr (assoc :jira (nth 2 src-block-info)))))
+    (if (not jira-issue)
+	(message "jira issue could not be found!")
+      (let ((jira-cmd (format "jira issue edit %s --no-input -b '%s'"
+			     jira-issue
+			     (string-replace "'" "'\"'\"'" src-block-body))))
+	(message jira-cmd)
+	(shell-command jira-cmd)))))
+
+(defun jira-src-block-open ()
+  (interactive)
+  (let* ((src-block-info (org-babel-get-src-block-info))
+	 (jira-issue (cdr (assoc :jira (nth 2 src-block-info)))))
+    (if (not jira-issue)
+	(message "jira issue could not be found!")
+      (jira--open-in-browser jira-issue)))
+  )
 
 (defvar-keymap jira-keymap
   "j" #'jira
-  "e" #'jira-edit-issue-with-source-block-contents
+  "e" #'jira-src-block-edit
+  "o" #'jira-src-block-open
   "p" #'jira-set-project)
 
 (global-set-key (kbd "C-x j") jira-keymap)
