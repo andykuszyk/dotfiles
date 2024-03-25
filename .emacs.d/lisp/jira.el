@@ -193,18 +193,39 @@ and EXCLUDE-DONE, or by running the query JQL."
 	(goto-char (point-min))
 	(display-buffer buffer)))))
 
+(defun jira--clean-src-body (body)
+  (string-replace "%" "%%" (string-replace "'" "'\"'\"'" body)))
+
 (defun jira-src-block-edit ()
   (interactive)
   (let* ((src-block-info (org-babel-get-src-block-info))
 	 (src-block-body (nth 1 src-block-info))
 	 (jira-issue (cdr (assoc :jira (nth 2 src-block-info)))))
     (if (not jira-issue)
-	(message "jira issue could not be found!")
+	(message ":jira header argument is required")
       (let ((jira-cmd (format "jira issue edit %s --no-input -b '%s'"
 			     jira-issue
-			     (string-replace "'" "'\"'\"'" src-block-body))))
+			     (jira--clean-src-body src-block-body))))
 	(message jira-cmd)
 	(shell-command jira-cmd)))))
+
+(defun jira-src-block-new ()
+  (interactive)
+  (let* ((src-block-info (org-babel-get-src-block-info))
+	 (src-block-body (nth 1 src-block-info))
+	 (jira-issue (cdr (assoc :jira (nth 2 src-block-info))))
+	 (title (cdr (assoc :title (nth 2 src-block-info)))))
+    (if (not jira-issue)
+	(message ":jira header argument is required")
+      (if (not (string-equal "new" jira-issue))
+	  (message ":jira must be 'new' when creating a new issue")
+	(if (not title)
+	    (message ":title is required for creating issues")
+	  (let ((jira-cmd (format "jira issue create --no-input -s '%s' -t Story -b '%s'"
+				  title
+				  (jira--clean-src-body src-block-body))))
+	    (message jira-cmd)
+	    (shell-command jira-cmd)))))))
 
 (defun jira-src-block-open ()
   (interactive)
@@ -212,13 +233,23 @@ and EXCLUDE-DONE, or by running the query JQL."
 	 (jira-issue (cdr (assoc :jira (nth 2 src-block-info)))))
     (if (not jira-issue)
 	(message "jira issue could not be found!")
-      (jira--open-in-browser jira-issue)))
-  )
+      (jira--open-in-browser jira-issue))))
+
+(defun jira-src-block-kill-key ()
+  (interactive)
+  (let* ((src-block-info (org-babel-get-src-block-info))
+	 (jira-issue (cdr (assoc :jira (nth 2 src-block-info)))))
+    (if (not jira-issue)
+	(message "jira issue could not be found!")
+      (message (format "killed reference: %s" jira-issue))
+      (kill-new jira-issue))))
 
 (defvar-keymap jira-keymap
   "j" #'jira
   "e" #'jira-src-block-edit
   "o" #'jira-src-block-open
+  "n" #'jira-src-block-new
+  "w" #'jira-src-block-kill-key
   "p" #'jira-set-project)
 
 (global-set-key (kbd "C-x j") jira-keymap)
