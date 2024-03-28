@@ -1,6 +1,5 @@
 * Org config and key bindings
 #+begin_src elisp :results none
-;; Org mode customisation
 (setq org-startup-folded t) ; open org files folded, rather than expanded
 (setq org-edit-src-content-indentation 0) ; do not indent code in source blocks
 (setq org-startup-with-inline-images t) ; always show inline images
@@ -10,6 +9,7 @@
 (define-key org-mode-map (kbd "C-c C-s") #'org-schedule)
 (define-key org-mode-map (kbd "C-c o c") #'org-capture)
 (require 'org-agenda)
+(setq org-agenda-skip-deadline-prewarning-if-scheduled t)
 (define-key org-agenda-mode-map (kbd "C-c o c") #'org-capture)
 (define-key org-mode-map (kbd "C-c o a") #'org-agenda)
 (setq org-image-actual-width nil) ; allow image widths to be overridden with #+ATTR_ORG: :width 100
