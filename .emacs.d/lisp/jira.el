@@ -197,48 +197,156 @@ and EXCLUDE-DONE, or by running the query JQL."
   (string-replace "%" "%%" (string-replace "'" "'\"'\"'" body)))
 
 (defun jira-src-block-edit ()
+  "Edit a Jira issue using the contents of an \"org-mode\" source block.
+
+This function takes the contents of a Markdown source block, and edits a
+matching Jira issue based on the :jira-key header argument.  The title and
+custom fields can also be edited.  The header arguments supported by this
+function are as follows:
+
+  :jira-key      This indicates that the source block is intended to be a Jira
+                 issue.  It should be set to \"new\" when this function is
+                 executed.
+
+  :jira-title    The title/summary of the Jira issue will be taken from this
+                 header argument.
+
+  :jira-project  The project to edit the Jira issue in.  This argument is
+                 optional, and if omitted will be taken from
+                 ~/.config/.jira/.config.yml.
+
+  :jira-custom   Custom fields that should be set when creating the issue in the
+                 format field_name=field_value.
+
+For example, when invoked on the source block below, the title will be updated
+to \"foo\", and the body will be updated to \"bar\":
+
+  #+begin_src markdown :jira-key EMX-123 :jira-title foo
+  bar
+  #+end_src"
   (interactive)
   (let* ((src-block-info (org-babel-get-src-block-info))
 	 (src-block-body (nth 1 src-block-info))
-	 (jira-issue (cdr (assoc :jira (nth 2 src-block-info)))))
-    (if (not jira-issue)
-	(message ":jira header argument is required")
-      (let ((jira-cmd (format "jira issue edit %s --no-input -b '%s'"
-			     jira-issue
-			     (jira--clean-src-body src-block-body))))
+	 (jira-key (cdr (assoc :jira-key (nth 2 src-block-info))))
+	 (jira-title (cdr (assoc :jira-title (nth 2 src-block-info))))
+	 (jira-project (cdr (assoc :jira-project (nth 2 src-block-info))))
+	 (jira-custom (cdr (assoc :jira-custom (nth 2 src-block-info)))))
+    (if (not jira-key)
+	(message ":jira-key header argument is required")
+      (let ((jira-cmd (format
+		       "jira issue edit %s %s %s %s --no-input -b '%s'"
+		       jira-key
+		       (if jira-title (format "-s '%s' " jira-title) "")
+		       (if jira-project (format "-p '%s' " jira-project) "")
+		       (if jira-custom (format "--custom '%s' " jira-custom) "")
+		       (jira--clean-src-body src-block-body))))
 	(message jira-cmd)
 	(shell-command jira-cmd)))))
 
 (defun jira-src-block-new ()
+  "Create a new Jira issue from an \"org-mode\" source block.
+
+This function takes the contents of a Markdown source block, and creates a new
+issue according to the source block's header arguments.  The header arguments
+that are supported are as follows:
+
+  :jira-key      This indicates that the source block is intended to be a Jira
+                 issue.  It should be set to \"new\" when this function is
+                 executed.
+
+  :jira-title    The title/summary of the Jira issue will be taken from this
+                 header argument.
+
+  :jira-type     The type of the Jira issue to be created.  Defaults to
+                 \"Story\"', but could also be set to \"Epic\" or \"Task\"'.
+
+  :jira-project  The project to create the Jira issue in.  This argument is
+                 optional, and if omitted will be taken from
+                 ~/.config/.jira/.config.yml.
+
+  :jira-custom   Custom fields that should be set when creating the issue in the
+                 format field_name=field_value.
+
+  :jira-parent   The parent issue key (e.g. epic) of the issue to be created.
+
+For example, this when this function is invoked for the source block below, a
+new issue will be created with the title \"foo\", the body \"bar\", the type
+\"Story\":
+
+  #+begin_src markdown :jira-key new :jira-title foo :jira-type Story
+  bar
+  #+end_src
+
+The issue is created using the Jira CLI, whose output is printed in the
+minibuffer. If creating the issue was successful, the new issue key will be
+reported there. Don't forget to update the :jira-key header argument before
+making future edits."
   (interactive)
   (let* ((src-block-info (org-babel-get-src-block-info))
+	 (src-block-lang (nth 0 src-block-info))
 	 (src-block-body (nth 1 src-block-info))
-	 (jira-issue (cdr (assoc :jira (nth 2 src-block-info))))
-	 (title (cdr (assoc :title (nth 2 src-block-info)))))
-    (if (not jira-issue)
-	(message ":jira header argument is required")
-      (if (not (string-equal "new" jira-issue))
-	  (message ":jira must be 'new' when creating a new issue")
-	(if (not title)
-	    (message ":title is required for creating issues")
-	  (let ((jira-cmd (format "jira issue create --no-input -s '%s' -t Story -b '%s'"
-				  title
-				  (jira--clean-src-body src-block-body))))
-	    (message jira-cmd)
-	    (shell-command jira-cmd)))))))
+	 (jira-key (cdr (assoc :jira-key (nth 2 src-block-info))))
+	 (jira-title (cdr (assoc :jira-title (nth 2 src-block-info))))
+	 (jira-type (cdr (assoc :jira-type (nth 2 src-block-info))))
+	 (jira-project (cdr (assoc :jira-project (nth 2 src-block-info))))
+	 (jira-parent (cdr (assoc :jira-parent (nth 2 src-block-info))))
+	 (jira-custom (cdr (assoc :jira-custom (nth 2 src-block-info)))))
+        (if (not (string-equal "markdown" src-block-lang))
+	(message "the language of the source block must be 'markdown'")
+      (if (not jira-key)
+	  (message ":jira-key header argument is required")
+	(if (not (string-equal "new" jira-key))
+	    (message ":jira-key must be 'new' when creating a new issue")
+	  (if (not jira-title)
+	      (message ":jira-title is required for creating issues")
+	    (let ((jira-cmd
+		   (format
+		    "jira issue create --no-input %s %s %s -s '%s' -t '%s' -b '%s'"
+		    (if jira-parent (format "-P %s " jira-parent) "")
+		    (if jira-project (format "-p '%s' " jira-project) "")
+		    (if jira-custom (format "--custom '%s' " jira-custom) "")
+		    jira-title
+		    (if jira-type jira-type "Story")
+		    (jira--clean-src-body src-block-body))))
+	      (message jira-cmd)
+	      (shell-command jira-cmd))))))))
 
 (defun jira-src-block-open ()
+  "Open the Jira issue associated with the current source block in a browser.
+
+This function opens the Jira issue associated with the current \"org-mode\"
+source block based on its :jira-key header argument.
+
+For example, if this function was invoked on the source block below, issue
+EMX-123 would be opened in the system`s default web browser:
+
+  #+begin_src markdown :jira-key EMX-123
+  Emacs rocks!
+  #+end_src
+
+The URL of the Jira issue is constructed using the \"jira-host\" variable."
   (interactive)
   (let* ((src-block-info (org-babel-get-src-block-info))
-	 (jira-issue (cdr (assoc :jira (nth 2 src-block-info)))))
+	 (jira-issue (cdr (assoc :jira-key (nth 2 src-block-info)))))
     (if (not jira-issue)
 	(message "jira issue could not be found!")
       (jira--open-in-browser jira-issue))))
 
 (defun jira-src-block-kill-key ()
+  "Kill the issue key of the current source block to the kill ring.
+
+When invoked on a source block with the :jira-key header argument, this function
+will add the issue key to the kill ring.
+
+For example, if called on the source block below, \"EMX-123\" would be added to
+the kill ring:
+
+  #+begin_src markdown :jira-key EMX-123
+  Plain text for the win!
+  #+end_src"
   (interactive)
   (let* ((src-block-info (org-babel-get-src-block-info))
-	 (jira-issue (cdr (assoc :jira (nth 2 src-block-info)))))
+	 (jira-issue (cdr (assoc :jira-key (nth 2 src-block-info)))))
     (if (not jira-issue)
 	(message "jira issue could not be found!")
       (message (format "killed reference: %s" jira-issue))
