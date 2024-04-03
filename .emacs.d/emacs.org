@@ -405,7 +405,21 @@ These functions
 aws --profile saml --region eu-west-1
 #+end_src"))
 
+(defun ak/insert-bash-source-block ()
+  (interactive)
+  (insert "#+begin_src bash :results output verbatim
+
+#+end_src"))
+
+(defun ak/insert-elisp-source-block ()
+  (interactive)
+  (insert "#+begin_src elisp :results none
+
+#+end_src"))
+
 (global-set-key (kbd "C-x A i a") #'ak/insert-aws-source-block)
+(global-set-key (kbd "C-x A i b") #'ak/insert-bash-source-block)
+(global-set-key (kbd "C-x A i e") #'ak/insert-elisp-source-block)
 #+end_src
 ** Vertical margin padding for reading on tall screens
 #+begin_src elisp
