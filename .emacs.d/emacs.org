@@ -397,6 +397,16 @@ These functions
 (global-set-key (kbd "C-x A c") #'ak/center-reading)
 (global-set-key (kbd "C-x A r") #'ak/reset-reading)
 #+end_src
+** Functions to insert template text
+#+begin_src elisp :results none
+(defun ak/insert-aws-source-block ()
+  (interactive)
+  (insert "#+begin_src bash :results output verbatim
+aws --profile saml --region eu-west-1
+#+end_src"))
+
+(global-set-key (kbd "C-x A i a") #'ak/insert-aws-source-block)
+#+end_src
 ** Vertical margin padding for reading on tall screens
 #+begin_src elisp
 (use-package topspace :ensure t)
