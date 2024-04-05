@@ -277,6 +277,11 @@ In order for files to be autocommitted, the following ~.dir-locals.el~ file is r
   (flyspell-mode))
 (add-hook 'text-mode-hook #'ak/text-mode-hook)
 #+end_src
+** Keybindings to enable/disable flyspell and flycheck modes
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x A x s") #'flyspell-mode)
+(global-set-key (kbd "C-x A x c") #'flycheck-mode)
+#+end_src
 ** Perspective workspaces
 #+begin_src elisp
 ;; Perspective
