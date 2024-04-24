@@ -7,3 +7,4 @@
 (org-babel-load-file (concat user-emacs-directory "languages.org"))
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'jira)
+(require 'github)
