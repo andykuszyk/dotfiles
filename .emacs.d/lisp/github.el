@@ -27,7 +27,7 @@
 		       github-owner
 		       github-repo
 		       (if github-title
-			   (format "-t %s" github-title)
+			   (format "-t '%s'" github-title)
 			 "")
 		       (github--clean-src-body src-block-body))))
       (message github-cmd)
