@@ -352,9 +352,28 @@ the kill ring:
       (message (format "killed reference: %s" jira-issue))
       (kill-new jira-issue))))
 
+(defun jira-list-epics ()
+  (interactive)
+  (let ((buffer (get-buffer-create "*jira epics*"))
+	(inhibit-read-only t))
+    (with-current-buffer buffer
+      (erase-buffer)
+      (call-process
+       "sh"
+       nil
+       buffer
+       nil
+       "-c"
+       "jira epic list --plain --table")
+      (jira--set-keys)
+      (read-only-mode t)
+      (goto-char (point-min)))
+    (display-buffer buffer)))
+
 (defvar-keymap jira-keymap
   "j" #'jira
   "e" #'jira-src-block-edit
+  "E" #'jira-list-epics
   "o" #'jira-src-block-open
   "n" #'jira-src-block-new
   "w" #'jira-src-block-kill-key
