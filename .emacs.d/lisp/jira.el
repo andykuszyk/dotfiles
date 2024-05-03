@@ -240,8 +240,10 @@ to \"foo\", and the body will be updated to \"bar\":
 		       (if jira-project (format "-p '%s' " jira-project) "")
 		       (if jira-custom (format "--custom '%s' " jira-custom) "")
 		       (jira--clean-src-body src-block-body))))
-	(message jira-cmd)
-	(shell-command jira-cmd)))))
+	(let ((updated-jira-issue
+	       (jira--parse-issue-reference
+		(shell-command-to-string jira-cmd))))
+	  (message (format "Update Jira issue: %s" updated-jira-issue)))))))
 
 (defun jira-src-block-new ()
   "Create a new Jira issue from an \"org-mode\" source block.
@@ -308,8 +310,13 @@ making future edits."
 		    jira-title
 		    (if jira-type jira-type "Story")
 		    (jira--clean-src-body src-block-body))))
-	      (message jira-cmd)
-	      (shell-command jira-cmd))))))))
+	      (let ((new-jira-issue
+		     (jira--parse-issue-reference
+		      (shell-command-to-string jira-cmd))))
+		(kill-new new-jira-issue)
+		(message (format
+			  "Created Jira issue and saved key to kill ring: %s"
+			  new-jira-issue))))))))))
 
 (defun jira-src-block-open ()
   "Open the Jira issue associated with the current source block in a browser.
