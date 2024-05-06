@@ -40,6 +40,9 @@ This means that ~C-c C-j~ will use completion in the minibuffer for navigating t
 ;; Use python3 for python blocks
 (setq org-babel-python-command "python3")
 
+(setq org-plantuml-jar-path
+      (expand-file-name "~/plantuml.jar"))
+
 ;; Org Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -47,6 +50,7 @@ This means that ~C-c C-j~ will use completion in the minibuffer for navigating t
    (go . t)
    (mermaid . t)
    (shell . t)
+   (plantuml .t)
    (emacs-lisp . t)))
 
 (defun ak/org-babel-confirm (lang body)
@@ -54,6 +58,7 @@ This means that ~C-c C-j~ will use completion in the minibuffer for navigating t
 	   (string= lang "mermaid")
 	   (string= lang "shell")
 	   (string= lang "sh")
+	   (string= lang "plantuml")
 	   (string= lang "python")
 	   (string= lang "bash"))))
 (setq org-confirm-babel-evaluate #'ak/org-babel-confirm)
