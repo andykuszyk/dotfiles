@@ -8,3 +8,5 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'jira)
 (require 'github)
+(if (file-exists-p "~/.emacs.d/lisp/custom-init.el")
+    (load-file "~/.emacs.d/lisp/custom-init.el"))
