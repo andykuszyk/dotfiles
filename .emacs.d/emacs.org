@@ -163,27 +163,40 @@ However, I disable orderless for Company, because I find it affects performance 
 (setq powerline-default-separator "arrow")
 (setq spaceline-separator-dir-left '(left . left))
 (setq spaceline-separator-dir-right '(right . right))
+(defun ak/spaceline-compile ()
+  (spaceline-compile
+					; left side
+    '(
+      window-number
+      (evil-state :face highlight-face :priority 100)
+      ((buffer-modified buffer-id) :priority 98)
+      (major-mode :priority 79)
+      (process :when active)
+      (version-control :when active)
+      ((flycheck-error flycheck-warning flycheck-info) :when active :priority 89)
+      )
+					; right side
+    '(
+      (battery)
+      (time-segment)
+      (utc-segment)
+      (perspective-segment)
+      (buffer-position)
+      )
+    ))
+(ak/spaceline-compile)
+#+end_src
+** Functions for enabling light theme or darktheme
+#+begin_src elisp :results none
+(defun ak/enable-light-theme ()
+  (interactive)
+  (load-theme 'spacemacs-light t)
+  (ak/spaceline-compile))
 
-(spaceline-compile
-  ; left side
-  '(
-    window-number
-    (evil-state :face highlight-face :priority 100)
-    ((buffer-modified buffer-id) :priority 98)
-    (major-mode :priority 79)
-    (process :when active)
-    (version-control :when active)
-    ((flycheck-error flycheck-warning flycheck-info) :when active :priority 89)
-   )
-  ; right side
-  '(
-    (battery)
-    (time-segment)
-    (utc-segment)
-    (perspective-segment)
-    (buffer-position)
-   )
-  )
+(defun ak/enable-dark-theme ()
+  (interactive)
+  (load-theme 'spacemacs-dark t)
+  (ak/spaceline-compile))
 #+end_src
 ** Display line numbers
 #+begin_src elisp :results none
