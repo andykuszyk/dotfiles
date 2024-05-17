@@ -22,6 +22,19 @@
            '((sequence "TODO" "PROG" "|" "DONE")))
 (setq org-icalendar-store-UID t) ; export tp ical with persistent ids
 #+end_src
+* Function to open tree in a new perspective
+#+begin_src elisp :results none
+(defun ak/open-org-heading-in-new-persp ()
+  (interactive)
+  (let ((buffer (buffer-name)))
+    (persp-switch ())
+    (persp-add-and-switch-buffer buffer))
+  (clone-indirect-buffer nil t)
+  (delete-other-windows)
+  (org-narrow-to-subtree))
+
+(define-key org-mode-map (kbd "C-c x p") #'ak/open-org-heading-in-new-persp)
+#+end_src
 * Completion for navigation
 This means that ~C-c C-j~ will use completion in the minibuffer for navigating to a heading.
 #+begin_src elisp :results none
