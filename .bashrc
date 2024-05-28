@@ -32,11 +32,6 @@ alias gcm='git checkout master'
 alias e="emacsclient -n"
 alias ll='ls -la'
 
-# Fzf completion
-if $(which fzf > /dev/null); then
-    eval "$(fzf --bash)"
-fi
-
 # Use Emacs as default editor
 export EDITOR=emacsclient
 
