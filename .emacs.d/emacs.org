@@ -415,13 +415,13 @@ These functions
 #+begin_src elisp :results none
 (defun ak/insert-aws-source-block ()
   (interactive)
-  (insert "#+begin_src bash :results output verbatim
+  (insert "#+begin_src bash :results output verbatim :tangle temp.bash
 aws --profile saml --region eu-west-1
 #+end_src"))
 
 (defun ak/insert-bash-source-block ()
   (interactive)
-  (insert "#+begin_src bash :results output verbatim
+  (insert "#+begin_src bash :results output verbatim :tangle temp.bash
 
 #+end_src"))
 

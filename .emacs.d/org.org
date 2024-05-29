@@ -76,6 +76,12 @@ This means that ~C-c C-j~ will use completion in the minibuffer for navigating t
 	   (string= lang "bash"))))
 (setq org-confirm-babel-evaluate #'ak/org-babel-confirm)
 #+end_src
+* Enable lsp mode for bash source blocks
+#+begin_src elisp :results none
+(defun org-babel-edit-prep:bash (babel-info)
+  (setq-local buffer-file-name (->> babel-info caddr (alist-get :tangle)))
+  (lsp))
+#+end_src
 * Export org files as revealjs presentations
 #+begin_src elisp
 ;; Export org files to reveal.js presentations
