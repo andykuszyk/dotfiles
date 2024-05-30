@@ -1,0 +1,19 @@
+* install gif-screencast
+#+begin_src elisp :results none
+(use-package gif-screencast :ensure t)
+#+end_src
+* mac os configuration
+#+begin_src elisp :results none
+(when (string= system-type "darwin")
+  (with-eval-after-load 'gif-screencast
+    (setq gif-screencast-scale-factor 2.0)
+    (setq gif-screencast-args '("-x"))
+    (setq gif-screencast-cropping-program "mogrify")
+    (setq gif-screencast-capture-format "ppm")))
+#+end_src
+* keybindings
+#+begin_src elisp :results none
+(with-eval-after-load 'gif-screencast
+  (define-key gif-screencast-mode-map (kbd "<f8>") 'gif-screencast-toggle-pause)
+  (define-key gif-screencast-mode-map (kbd "<f9>") 'gif-screencast-stop))
+#+end_src
