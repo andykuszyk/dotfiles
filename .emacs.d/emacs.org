@@ -555,6 +555,11 @@ Allows emojis to easily be inserted from a completion menu.
 (global-set-key (kbd "M-j") #'join-line)
 (global-set-key (kbd "C-x V") #'visual-line-mode)
 #+end_src
+** Noman
+#+begin_src elisp :results none
+(use-package noman :ensure t)
+(setq noman-reuse-buffers nil)
+#+end_src
 ** Langtool
 #+begin_src elisp :results none
 (when (file-exists-p "/opt/homebrew/opt/languagetool/bin/languagetool")
