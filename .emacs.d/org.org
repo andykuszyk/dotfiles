@@ -27,6 +27,7 @@
 (defun ak/open-org-heading-in-new-persp ()
   (interactive)
   (let ((buffer (buffer-name)))
+    (delete-window)
     (persp-switch ())
     (persp-add-and-switch-buffer buffer))
   (clone-indirect-buffer nil t)
