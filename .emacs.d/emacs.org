@@ -1,20 +1,4 @@
-* Compilation
-** To configure with xwidgets
-#+begin_src bash
-./configure --with-xwidgets --with-json
-#+end_src
-** To configure with x11 support on mac os
-#+begin_src bash
-./configure --prefix='/opt/emacs-x11' --without-ns --with-x --with-x-toolkit='lucid' --with-xft="$WITH_XFT" --without-makeinfo --with-gif='no' --enable-symbols PKG_CONFIG_PATH='/opt/X11/lib/pkgconfig/' --with-jpeg=ifavailable --with-tiff=ifavailable --with-native-compilation
-#+end_src
-** To build and install
-#+begin_src bash
-make
-make check
-sudo make install
-#+end_src
-* Config
-** GUI customisation
+* GUI customisation
 #+begin_src elisp
 ;; Disable GUI menu bars
 (menu-bar-mode -1)
@@ -28,7 +12,7 @@ sudo make install
 (setq inhibit-startup-message t) 
 (setq initial-scratch-message nil)
 #+end_src
-** Display time configuration
+* Display time configuration
 #+begin_src elisp
 ;; Show the time in the modeline
 (setq display-time-24hr-format t)
@@ -36,7 +20,7 @@ sudo make install
 (setq display-time-day-and-date t)
 (display-time-mode)
 #+end_src
-** Backup file configuration
+* Backup file configuration
 #+begin_src elisp
 ;; Save backup files in /tmp
 (setq backup-directory-alist
@@ -44,12 +28,12 @@ sudo make install
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 #+end_src
-** Server mode
+* Server mode
 #+begin_src elisp
 ;; Always start emacs in server mode
 (server-start)
 #+end_src
-** Package manager configuration
+* Package manager configuration
 #+begin_src elisp
 ;; Install MELPA package repository
 (require 'package)
@@ -60,7 +44,7 @@ sudo make install
 (eval-when-compile
   (require 'use-package))
 #+end_src
-** Inherit environment from shell
+* Inherit environment from shell
 #+begin_src elisp
 ;; Inherit environment from default shell
 (use-package exec-path-from-shell
@@ -69,7 +53,7 @@ sudo make install
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-envs (list "GOROOT" "GOPATH")))
 #+end_src
-** Ivy
+* Ivy
 I install Ivy, because I like the buffer switcher and the file finder. The buffer switcher is compatible with Perspective, and the file finder is nice. I install the ~counsel~ package, but don't enable ~ivy-mode~.
 #+begin_src elisp
 ;; Ivy
@@ -79,26 +63,26 @@ I install Ivy, because I like the buffer switcher and the file finder. The buffe
 (global-set-key (kbd "C-x b") 'persp-ivy-switch-buffer)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 #+end_src
-** Vertico and friends
+* Vertico and friends
 I use Vertico, and its related packages, for most completion. Ivy is used just for buffer switching, and opening files.
-*** Vertico
+** Vertico
 Vertico provides vertical narrowing and completion, but is pretty basic compared to Ivy.
 #+begin_src elisp
 (use-package vertico :ensure t :init (vertico-mode))
 (global-set-key (kbd "M-x") 'execute-extended-command) ; not really necessary, but included to explicitly unset any other keybindings.
 #+end_src
-*** Marginalia
+** Marginalia
 Marginalia adds useful metadata to items in Vertico's completion results, e.g. descriptions of commands in ~M-x~.k
 #+begin_src elisp
 (use-package marginalia :ensure t :init (marginalia-mode))
 #+end_src
-*** Consult
+** Consult
 Consult offers a wide range of searching commands. I just use it as a replacement for swiper, because it feels faster.
 #+begin_src elisp :results none
 (use-package consult :ensure t)
 (global-set-key (kbd "C-s") 'consult-line)
 #+end_src
-*** Orderless
+** Orderless
 Orderless provides a completion style for Vertico that allows matches to be narrowed using space separated terms, much like Ivy does out of the box
 #+begin_src elisp
 (use-package orderless
@@ -116,21 +100,21 @@ However, I disable orderless for Company, because I find it affects performance 
     (apply capf-fn args)))
 (advice-add 'company-capf :around #'company-completion-styles)
 #+end_src
-** Avy
+* Avy
 #+begin_src elisp :results none
 (use-package avy :ensure t)
 (global-set-key (kbd "M-a") #'avy-goto-char-timer)
 (global-set-key (kbd "M-g g") #'avy-goto-line)
 #+end_src
-** Spacemacs theme
+* Spacemacs theme
 #+begin_src elisp :results none
 ;; Spacemacs theme
 (use-package spacemacs-theme
   :defer t
   :init (load-theme 'spacemacs-dark t))
 #+end_src
-** Spaceline modeline
-*** Install spaceline
+* Spaceline modeline
+** Install spaceline
 #+begin_src elisp :results none
 (use-package spaceline
   :ensure t
@@ -138,14 +122,14 @@ However, I disable orderless for Company, because I find it affects performance 
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
 #+end_src
-*** Perspective segment
+** Perspective segment
 #+begin_src elisp :results none
 (setq perspective-segment (make-symbol "perspective-segment"))
 (spaceline-define-segment perspective-segment
   "Displays the current perspective"
   (persp-current-name))
 #+end_src
-*** Time segments
+** Time segments
 #+begin_src elisp :results none
 (setq time-segment (make-symbol "time-segment"))
 (spaceline-define-segment time-segment
@@ -156,7 +140,7 @@ However, I disable orderless for Company, because I find it affects performance 
   "Displays the current utc"
   (format-time-string "%H:%M UTC" nil t))
 #+end_src
-*** Configure modeline
+** Configure modeline
 #+begin_src elisp :results none
 (spaceline-toggle-window-number-off)                                      ; otherwise the evil state indicator isn't shown
 (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state) ; colorise the modeline based on the evil state
@@ -186,7 +170,7 @@ However, I disable orderless for Company, because I find it affects performance 
     ))
 (ak/spaceline-compile)
 #+end_src
-** Functions for enabling light theme or darktheme
+* Functions for enabling light theme or darktheme
 #+begin_src elisp :results none
 (defun ak/enable-light-theme ()
   (interactive)
@@ -198,29 +182,29 @@ However, I disable orderless for Company, because I find it affects performance 
   (load-theme 'spacemacs-dark t)
   (ak/spaceline-compile))
 #+end_src
-** Display line numbers
+* Display line numbers
 #+begin_src elisp :results none
 (setq display-line-numbers-type t)
 (global-display-line-numbers-mode)
 #+end_src
-** Line highlighting
+* Line highlighting
 #+begin_src elisp
 ;; Highlight current line
 (global-hl-line-mode)
 #+end_src
-** Hash mapping for mac
+* Hash mapping for mac
 #+begin_src elisp
 ;; Re-map alt-3 to hash on mac keyboard
 (define-key key-translation-map (kbd "M-3") (kbd "#"))
 #+end_src
-** Battery indicator
+* Battery indicator
 #+begin_src elisp
 ;; Fancy battery indicator
 (use-package fancy-battery :ensure t)
 (add-hook 'after-init-hook #'fancy-battery-mode)
 (setq fancy-battery-show-percentage t)
 #+end_src
-** Vterm terminal emulator
+* Vterm terminal emulator
 #+begin_src elisp
 ;; vterm terminal emulator
 (use-package vterm :ensure t)
@@ -233,8 +217,8 @@ However, I disable orderless for Company, because I find it affects performance 
 (global-set-key (kbd "C-x v") #'vterm)
 (global-set-key (kbd "C-x m") #'multi-vterm)
 #+end_src
-** Projectile
-*** Install and configure projectile
+* Projectile
+** Install and configure projectile
 #+begin_src elisp
 ;; Projectile
 (use-package projectile
@@ -244,7 +228,7 @@ However, I disable orderless for Company, because I find it affects performance 
     :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map)))
 #+end_src
-*** Create and open PRs using ~gh~ CLI and projectile
+** Create and open PRs using ~gh~ CLI and projectile
 #+begin_src elisp
 (defun ak/gh-create-pr ()
   (interactive)
@@ -255,26 +239,26 @@ However, I disable orderless for Company, because I find it affects performance 
 (define-key projectile-mode-map (kbd "C-c p G c") #'ak/gh-create-pr)
 (define-key projectile-mode-map (kbd "C-c p G v") #'ak/gh-view-pr)
 #+end_src
+* Magit
 ** Magit
-*** Magit
 #+begin_src elisp
 (use-package magit :ensure t)
 (setq magit-diff-refine-hunk (quote all)) ; Use word diffs when showing diffs
 #+end_src
-*** Forge
+** Forge
 #+begin_src elisp :results none
 (use-package forge :ensure t :after magit)
 (setq auth-sources '("~/.authinfo.gpg"))
 ;; Open forge edit buffers in the same window
 (add-to-list 'display-buffer-alist '("[0-9]+;*[0-9]+" display-buffer-same-window))
 #+end_src
-** Auto completion with company mode
+* Auto completion with company mode
 #+begin_src elisp
 ;; Auto-completion
 (use-package company :ensure t)
 (add-hook 'after-init-hook #'global-company-mode) ; Enable company mode in all buffers
 #+end_src
-** Autocommit changes to files
+* Autocommit changes to files
 #+begin_src elisp :results none
 (use-package git-auto-commit-mode :ensure t)
 (setq-default gac-automatically-add-new-files-p t)
@@ -284,18 +268,18 @@ In order for files to be autocommitted, the following ~.dir-locals.el~ file is r
 #+begin_example
 ((nil . ((eval git-auto-commit-mode 1))))
 #+end_example
-** Flyspell in text mode
+* Flyspell in text mode
 #+begin_src elisp :results none
 (defun ak/text-mode-hook ()
   (flyspell-mode))
 (add-hook 'text-mode-hook #'ak/text-mode-hook)
 #+end_src
-** Keybindings to enable/disable flyspell and flycheck modes
+* Keybindings to enable/disable flyspell and flycheck modes
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x A x s") #'flyspell-mode)
 (global-set-key (kbd "C-x A x c") #'flycheck-mode)
 #+end_src
-** Perspective workspaces
+* Perspective workspaces
 #+begin_src elisp
 ;; Perspective
 (use-package perspective
@@ -326,7 +310,7 @@ In order for files to be autocommitted, the following ~.dir-locals.el~ file is r
 (define-key perspective-map (kbd "a") 'persp-add-and-switch-buffer)
 (define-key perspective-map (kbd "S") 'persp-switch-and-add-buffer)
 #+end_src
-*** Switch to workspace for a projectile project
+** Switch to workspace for a projectile project
 #+begin_src elisp
 (defun ak/persp-project-switch ()
   (interactive)
@@ -336,45 +320,45 @@ In order for files to be autocommitted, the following ~.dir-locals.el~ file is r
 
 (define-key perspective-map (kbd "P") #'ak/persp-project-switch)
 #+end_src
-*** Rename current perspective to current project name
+** Rename current perspective to current project name
 #+begin_src elisp :results none
 (defun ak/rename-perspective-to-current-project ()
   (interactive)
   (persp-rename (projectile-project-name)))
 (define-key perspective-map (kbd "R") #'ak/rename-perspective-to-current-project)
 #+end_src
-** Window switcher
+* Window switcher
 #+begin_src elisp
 ;; Numbered window switcher
 (use-package winum :ensure t)
 (winum-mode)
 #+end_src
-** Window management
-*** Resizing windows
+* Window management
+** Resizing windows
 #+begin_src elisp
 (use-package resize-window :ensure t)
 (global-set-key (kbd "C-x R r") #'resize-window)
 #+end_src
-*** Rotating window layouts
+** Rotating window layouts
 #+begin_src elisp
 (use-package rotate :ensure t)
 (global-set-key (kbd "C-x R l") #'rotate-layout)
 #+end_src
-*** Renaming buffers
+** Renaming buffers
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x R b") #'rename-buffer)
 #+end_src
-*** Swap windows
+** Swap windows
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x R s") #'ace-swap-window)
 #+end_src
-** Git linking
+* Git linking
 This let's you copy the URL to the current line in the git forge using ~M-x git-link~.
 #+begin_src elisp :results none
 (use-package git-link :ensure t)
 (define-key projectile-mode-map (kbd "C-c p G l") #'git-link)
 #+end_src
-** EAF
+* EAF
 #+begin_src elisp :results none
 (when (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/")
   (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
@@ -386,12 +370,12 @@ This let's you copy the URL to the current line in the git forge using ~M-x git-
   (if (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/app/markdown-previewer/")
       (require 'eaf-markdown-previewer)))
 #+end_src
-** Which key
+* Which key
 #+begin_src elisp
 (use-package which-key :ensure t)
 (which-key-mode)
 #+end_src
-** Horizontal margin padding for reading on wide screens
+* Horizontal margin padding for reading on wide screens
 These functions
 #+begin_src elisp :results none
 (defun ak/reading-margin ()
@@ -411,7 +395,7 @@ These functions
 (global-set-key (kbd "C-x A c") #'ak/center-reading)
 (global-set-key (kbd "C-x A r") #'ak/reset-reading)
 #+end_src
-** Functions to insert template text
+* Functions to insert template text
 #+begin_src elisp :results none
 (defun ak/insert-aws-source-block ()
   (interactive)
@@ -436,12 +420,12 @@ aws --profile saml --region eu-west-1
 (global-set-key (kbd "C-x A i b") #'ak/insert-bash-source-block)
 (global-set-key (kbd "C-x A i e") #'ak/insert-elisp-source-block)
 #+end_src
-** Vertical margin padding for reading on tall screens
+* Vertical margin padding for reading on tall screens
 #+begin_src elisp
 (use-package topspace :ensure t)
 #+end_src
-** Emoji support
-*** Package for inserting emojis
+* Emoji support
+** Package for inserting emojis
 Allows emojis to easily be inserted from a completion menu.
 #+begin_src elisp :results none
 (use-package emojify :ensure t)
@@ -449,13 +433,13 @@ Allows emojis to easily be inserted from a completion menu.
 (setq emojify-emoji-styles '(unicode))
 (global-set-key (kbd "C-c i") #'emojify-insert-emoji)
 #+end_src
-*** Emoji-enabled font
+** Emoji-enabled font
 #+begin_src elisp :results none
 (when (member "Noto Color Emoji" (font-family-list))
   (set-fontset-font
     t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
 #+end_src
-** Split and draft function
+* Split and draft function
 #+begin_src elisp :results none
 (defun ak/split-and-draft-exit ()
   (interactive)
@@ -473,13 +457,13 @@ Allows emojis to easily be inserted from a completion menu.
 
 (global-set-key (kbd "C-x D") #'ak/split-and-draft-enter)
 #+end_src
-** Render ansi escape codes in a log file
+* Render ansi escape codes in a log file
 #+begin_src elisp :results none
 (defun ak/display-ansi-colors ()
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
 #+end_src
-** Man customisation
+* Man customisation
 #+begin_src elisp
 (setq Man-notify-method 'pushy)
 (defun ak/man-mode-hook ()
@@ -488,11 +472,11 @@ Allows emojis to easily be inserted from a completion menu.
   (display-line-numbers-mode -1))
 (add-hook 'Man-mode-hook #'ak/man-mode-hook)
 #+end_src
-** Enable disabled commands
+* Enable disabled commands
 #+begin_src elisp
 (put 'narrow-to-region 'disabled nil)
 #+end_src
-** Info customisation
+* Info customisation
 #+begin_src elisp :results none
 (use-package adaptive-wrap :ensure t)
 (defun ak/info-mode-hook ()
@@ -501,12 +485,12 @@ Allows emojis to easily be inserted from a completion menu.
   (display-line-numbers-mode -1))
 (add-hook 'Info-mode-hook #'ak/info-mode-hook)
 #+end_src
-** Kubernetes
-*** Kubernetes overview package
+* Kubernetes
+** Kubernetes overview package
 #+begin_src elisp
 (use-package kubernetes :ensure t)
 #+end_src
-*** Function for making it easier to work with json logs
+** Function for making it easier to work with json logs
 #+begin_src elisp
 (defun ak/parse-json-logs ()
   (interactive)
@@ -520,7 +504,7 @@ Allows emojis to easily be inserted from a completion menu.
     (narrow-to-region start (+ 1 (point))))
   (json-pretty-print-buffer))
 #+end_src
-** Mu4e
+* Mu4e
 #+begin_src elisp :results none
 (when (executable-find "mu")
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
@@ -532,7 +516,7 @@ Allows emojis to easily be inserted from a completion menu.
    mu4e-refile-folder "/Archive")   ;; saved messages
   (setq mu4e-get-mail-command "mbsync -a"))
 #+end_src
-** PDF tools
+* PDF tools
 #+begin_src elisp :results none
 (when (display-graphic-p)
   (use-package pdf-tools :ensure t)
@@ -542,13 +526,13 @@ Allows emojis to easily be inserted from a completion menu.
     (pdf-view-midnight-minor-mode))
   (add-hook 'pdf-view-mode-hook #'ak/pdf-view-mode-hook))
 #+end_src
-** Display buffer customisation
+* Display buffer customisation
 #+begin_src elisp :results none
 (add-to-list 'display-buffer-alist '(".*noman.*" display-buffer-same-window))
 (add-to-list 'display-buffer-alist '("jira" display-buffer-same-window))
 (add-to-list 'display-buffer-alist '(".*onfluence.*" display-buffer-same-window))
 #+end_src
-** Custom global keybindings for common commands
+* Custom global keybindings for common commands
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x E") #'eww)
 (global-set-key (kbd "C-x y") #'yank-from-kill-ring)
@@ -557,12 +541,12 @@ Allows emojis to easily be inserted from a completion menu.
 (global-set-key (kbd "C-x A R") #'replace-string)
 (global-set-key (kbd "C-x A G") #'replace-regexp)
 #+end_src
-** Noman
+* Noman
 #+begin_src elisp :results none
 (use-package noman :ensure t)
 (setq noman-reuse-buffers nil)
 #+end_src
-** Langtool
+* Langtool
 #+begin_src elisp :results none
 (when (file-exists-p "/opt/homebrew/opt/languagetool/bin/languagetool")
   (setq langtool-bin "/opt/homebrew/opt/languagetool/bin/languagetool")
