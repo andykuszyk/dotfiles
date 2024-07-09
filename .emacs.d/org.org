@@ -106,6 +106,10 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 (define-key org-mode-map (kbd "C-c C-x l") 'farynaio/org-link-copy)
 (define-key org-mode-map (kbd "C-c x l") 'farynaio/org-link-copy)
 #+end_src
+* Enable ox-md in dispatcher
+#+begin_src elisp :results none
+(require 'ox-md)
+#+end_src
 * Org latex export
 #+begin_src elisp :results none
 (add-to-list 'org-latex-classes
