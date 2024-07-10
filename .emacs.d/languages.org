@@ -56,10 +56,12 @@
 ** Go mode
 #+begin_src elisp
 (use-package go-mode :ensure t)
+(use-package yasnippet :ensure t) ; required for function argument completion
 (defun go-set-tab-width ()
   (setq tab-width 4))
 (add-hook 'go-mode-hook #'lsp) ; enter lsp mode when entering go mode
 (add-hook 'go-mode-hook #'go-set-tab-width) ; set tab width when opening go files
+(add-hook 'go-mode-hook #'yas-minor-mode)
 (setq gofmt-command "goimports") ; format files with goimports
 (add-hook 'before-save-hook #'gofmt-before-save) ; format files on save
 #+end_src
@@ -103,6 +105,7 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (define-key go-mode-map (kbd "C-c C-t c") #'go-test-current-test-cache)
 (define-key go-mode-map (kbd "C-c C-t f") #'go-test-current-file)
 (define-key go-mode-map (kbd "C-c C-t p") #'go-test-current-project)
+(define-key go-mode-map (kbd "C-c D") #'godoc)
 #+end_src
 * Terraform support
 ** Language server
