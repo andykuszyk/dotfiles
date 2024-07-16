@@ -401,23 +401,37 @@ These functions
   (insert "#+begin_src bash :results output verbatim :tangle temp.bash
 #!/bin/bash
 aws --profile saml --region eu-west-1
-#+end_src"))
+,#+end_src"))
 
 (defun ak/insert-bash-source-block ()
   (interactive)
   (insert "#+begin_src bash :results output verbatim :tangle temp.bash
 #!/bin/bash
-#+end_src"))
+,#+end_src"))
 
 (defun ak/insert-elisp-source-block ()
   (interactive)
   (insert "#+begin_src elisp :results none
 
-#+end_src"))
+,#+end_src"))
+
+(defun ak/insert-elisp-source-block-with-results ()
+  (interactive)
+  (insert "#+begin_src elisp
+
+,#+end_src"))
+
+(defun ak/insert-python-source-block ()
+  (interactive)
+  (insert "#+begin_src python :results output verbatim
+
+,#+end_src"))
 
 (global-set-key (kbd "C-x A i a") #'ak/insert-aws-source-block)
 (global-set-key (kbd "C-x A i b") #'ak/insert-bash-source-block)
 (global-set-key (kbd "C-x A i e") #'ak/insert-elisp-source-block)
+(global-set-key (kbd "C-x A i E") #'ak/insert-elisp-source-block-with-results)
+(global-set-key (kbd "C-x A i p") #'ak/insert-python-source-block)
 #+end_src
 * Vertical margin padding for reading on tall screens
 #+begin_src elisp
