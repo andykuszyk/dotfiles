@@ -466,6 +466,7 @@ Allows emojis to easily be inserted from a completion menu.
   (other-window 1)
   (set-window-buffer nil (set-buffer (generate-new-buffer "ak/draft")))
   (markdown-mode)
+  (visual-line-mode)
   (local-set-key (kbd "C-c C-c") #'ak/split-and-draft-exit))
 
 (global-set-key (kbd "C-x D") #'ak/split-and-draft-enter)
