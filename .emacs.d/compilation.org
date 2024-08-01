@@ -1,0 +1,27 @@
+* MacOS
+** install libraries
+#+begin_src bash :results output verbatim :tangle temp.bash
+#!/bin/bash
+brew install jansson texinfo
+#+end_src
+** download emacs source
+#+begin_src bash :results output verbatim :tangle temp.bash
+#!/bin/bash
+mkdir ~/emacs
+cd ~/emacs
+wget https://mirror.ibcp.fr/pub/gnu/emacs/emacs-29.4.tar.gz
+tar xvf emacs-29.4.tar.gz
+#+end_src
+** configure and compile
+#+begin_src bash :results output verbatim :tangle temp.bash
+#!/bin/bash
+cd ~/emacs/emacs-29.4
+./configure --with-json --with-xwidgets --with-native-compilation
+make
+#+end_src
+** install
+#+begin_src bash :results output verbatim :tangle temp.bash
+#!/bin/bash
+cd ~/emacs/emacs-29.4
+make install
+#+end_src
