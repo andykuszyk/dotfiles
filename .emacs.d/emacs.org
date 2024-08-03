@@ -557,7 +557,6 @@ Allows emojis to easily be inserted from a completion menu.
 #+end_src
 * Noman
 #+begin_src elisp :results none
-(use-package noman :ensure t)
 (setq noman-reuse-buffers nil)
 #+end_src
 * Langtool
