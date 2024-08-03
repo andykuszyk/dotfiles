@@ -25,3 +25,10 @@ make
 cd ~/emacs/emacs-29.4
 make install
 #+end_src
+* Linux
+** install libraries
+*** arch
+#+begin_src bash :results output verbatim :tangle temp.bash
+#!/bin/bash
+sudo pacman -Sy libgccjit
+#+end_src
