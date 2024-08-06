@@ -357,18 +357,6 @@ This let's you copy the URL to the current line in the git forge using ~M-x git-
 (use-package git-link :ensure t)
 (define-key projectile-mode-map (kbd "C-c p G l") #'git-link)
 #+end_src
-* EAF
-#+begin_src elisp :results none
-(when (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/")
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
-  (require 'eaf)
-  (if (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/app/browser/")
-      (require 'eaf-browser))
-  (if (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/app/org-previewer/")
-      (require 'eaf-org-previewer))
-  (if (file-directory-p "~/.emacs.d/site-lisp/emacs-application-framework/app/markdown-previewer/")
-      (require 'eaf-markdown-previewer)))
-#+end_src
 * Which key
 #+begin_src elisp
 (use-package which-key :ensure t)
