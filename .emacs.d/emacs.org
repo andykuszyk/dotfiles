@@ -547,6 +547,18 @@ Allows emojis to easily be inserted from a completion menu.
 #+begin_src elisp :results none
 (setq noman-reuse-buffers nil)
 #+end_src
+* Function for selecting code block
+#+begin_src elisp :results none
+(defun ak/select-code-block ()
+  (interactive)
+  (move-beginning-of-line nil)
+  (set-mark (point))
+  (move-end-of-line nil)
+  (backward-char)
+  (forward-sexp)
+  (move-end-of-line nil))
+(global-set-key (kbd "C-x A s") #'ak/select-code-block)
+#+end_src
 * Langtool
 #+begin_src elisp :results none
 (when (file-exists-p "/opt/homebrew/opt/languagetool/bin/languagetool")
