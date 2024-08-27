@@ -153,3 +153,66 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 (setq org-priority-lowest 10)
 (setq org-priority-default 2)
 #+end_src
+* Google calendar import
+1. [[https://calendar.google.com/calendar/u/0/r/agenda?pli=1][open gcal in "schedule" view]]
+2. select all and copy
+3. paste the text into an emacs buffer
+4. run the function ~ak/gcal-to-org~
+#+begin_src elisp :results none
+(defun ak/gcal-to-org-string-month-to-number (month)
+  (cond
+   ((string-equal month "Jan") "01")
+   ((string-equal month "Feb") "02")
+   ((string-equal month "Mar") "03")
+   ((string-equal month "Apr") "04")
+   ((string-equal month "May") "05")
+   ((string-equal month "Jun") "06")
+   ((string-equal month "Jul") "07")
+   ((string-equal month "Aug") "08")
+   ((string-equal month "Sept") "09")
+   ((string-equal month "Oct") "10")
+   ((string-equal month "Nov") "11")
+   ((string-equal month "Dec") "12")))
+
+(defun ak/gcal-to-org-format-time (time-string)
+  (when (string-match "\\(.*\\) \\– \\(.*\\)" time-string)
+    (let* ((from-time (match-string 1 time-string))
+	   (to-time (match-string 2 time-string)))
+      (format "%s-%s" from-time to-time))))
+
+(defun ak/gcal-to-org ()
+  (interactive)
+  (goto-char 0)
+  (let ((org-buffer (get-buffer-create "ak/gcal-to-org"))
+	(current-day nil)
+	(current-year "2024")
+	(current-month nil)
+	(current-time nil))
+    (with-current-buffer org-buffer
+      (org-mode))
+    (while (< (line-number-at-pos) (count-lines (point-min) (point-max)))
+      (let* ((current-line
+	      (buffer-substring-no-properties
+	       (line-beginning-position)
+	       (line-end-position))))
+	(if (string-match "^[0-9][0-9]$" current-line)
+	    (setq current-day (match-string 0 current-line))
+	  (if (string-match "^\\([A-Za-z]\\{3,4\\}\\),.\\{3,4\\}$" current-line)
+	      (setq current-month (match-string 1 current-line))
+	    (if (string-match "^\\(.*[a\\|p]m\\)$" current-line)
+		(setq current-time (match-string 1 current-line))
+	      (let ((event-name current-line))
+		(when current-time
+		  (with-current-buffer org-buffer
+		    (insert (format
+			     "** %s <%s-%s-%s %s>"
+			     event-name
+			     current-year
+			     (ak/gcal-to-org-string-month-to-number current-month)
+			     current-day
+			     (ak/gcal-to-org-format-time current-time)))
+		    (newline))
+		  (setq current-time nil)))))))
+      (forward-line))
+    (display-buffer org-buffer)))
+#+end_src
