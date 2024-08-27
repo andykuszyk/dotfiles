@@ -106,6 +106,7 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (define-key go-mode-map (kbd "C-c C-t f") #'go-test-current-file)
 (define-key go-mode-map (kbd "C-c C-t p") #'go-test-current-project)
 (define-key go-mode-map (kbd "C-c D") #'godoc)
+(define-key go-mode-map (kbd "C-c d") #'godoc-at-point)
 #+end_src
 * Terraform support
 ** Language server
