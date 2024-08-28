@@ -180,10 +180,20 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
       (format "%s:00" time)
     time))
 
+(defun ak/gcal-to-org-add-am-pm (from to)
+  (if (string-match-p ".*a\\|pm" from)
+      from
+    (if (string-match "^.*\\(a\\|pm\\)$" to)
+	(format "%s%s" from (match-string 1 to))
+      from)))
+
 (defun ak/gcal-to-org-format-time (time-string)
   (when (string-match "\\(.*\\) \\– \\(.*\\)" time-string)
-    (let* ((from-time (ak/gcal-to-org-clean-from-time (match-string 1 time-string)))
-	   (to-time (match-string 2 time-string)))
+    (let* ((to-time (match-string 2 time-string))
+	   (from-time
+	    (ak/gcal-to-org-add-am-pm
+	     (ak/gcal-to-org-clean-from-time (match-string 1 time-string))
+	     to-time)))
       (format "%s-%s" from-time to-time))))
 
 (defun ak/gcal-to-org ()
