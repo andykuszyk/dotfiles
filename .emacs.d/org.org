@@ -158,6 +158,7 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 2. select all and copy
 3. paste the text into an emacs buffer
 4. run the function ~ak/gcal-to-org~
+5. put the resulting org markup in a file that is in your org-agenda
 #+begin_src elisp :results none
 (defun ak/gcal-to-org-string-month-to-number (month)
   (cond
@@ -174,9 +175,14 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
    ((string-equal month "Nov") "11")
    ((string-equal month "Dec") "12")))
 
+(defun ak/gcal-to-org-clean-from-time (time)
+  (if (< (length time) 3)
+      (format "%s:00" time)
+    time))
+
 (defun ak/gcal-to-org-format-time (time-string)
   (when (string-match "\\(.*\\) \\– \\(.*\\)" time-string)
-    (let* ((from-time (match-string 1 time-string))
+    (let* ((from-time (ak/gcal-to-org-clean-from-time (match-string 1 time-string)))
 	   (to-time (match-string 2 time-string)))
       (format "%s-%s" from-time to-time))))
 
@@ -189,7 +195,8 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 	(current-month nil)
 	(current-time nil))
     (with-current-buffer org-buffer
-      (org-mode))
+      (org-mode)
+      (erase-buffer))
     (while (< (line-number-at-pos) (count-lines (point-min) (point-max)))
       (let* ((current-line
 	      (buffer-substring-no-properties
