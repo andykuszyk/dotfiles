@@ -150,7 +150,7 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 * Numeric priorities
 #+begin_src elisp :results none
 (setq org-priority-highest 1)
-(setq org-priority-lowest 10)
+(setq org-priority-lowest 9)
 (setq org-priority-default 2)
 #+end_src
 * Google calendar import
