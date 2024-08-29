@@ -559,6 +559,10 @@ Allows emojis to easily be inserted from a completion menu.
   (move-end-of-line nil))
 (global-set-key (kbd "C-x A s") #'ak/select-code-block)
 #+end_src
+* Support for editing gpg encrypted files
+#+begin_src elisp :results none
+(setq epa-pinentry-mode 'loopback) ; allow passphrase to be entered in minibuffer
+#+end_src
 * Langtool
 #+begin_src elisp :results none
 (when (file-exists-p "/opt/homebrew/opt/languagetool/bin/languagetool")
