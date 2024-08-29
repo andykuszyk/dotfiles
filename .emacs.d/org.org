@@ -22,6 +22,10 @@
            '((sequence "TODO" "PROG" "|" "DONE")))
 (setq org-icalendar-store-UID t) ; export tp ical with persistent ids
 #+end_src
+* Keybindings for org table functionality
+#+begin_src elisp :results none
+(define-key org-mode-map (kbd "C-c T k") #'org-table-delete-column)
+#+end_src
 * Function to open tree in a new perspective
 #+begin_src elisp :results none
 (defun ak/open-org-heading-in-new-persp ()
