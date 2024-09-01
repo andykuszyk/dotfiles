@@ -148,7 +148,8 @@ However, I disable orderless for Company, because I find it affects performance 
 (setq spaceline-separator-dir-left '(left . left))
 (setq spaceline-separator-dir-right '(right . right))
 (defun ak/spaceline-compile ()
-  (scroll-bar-mode -1) ; fixes truncation of the right-hand side of the modeline
+  (if (boundp 'scroll-bar-mode)
+      (scroll-bar-mode -1)) ; fixes truncation of the right-hand side of the modeline
   (spaceline-compile
 					; left side
     '(
