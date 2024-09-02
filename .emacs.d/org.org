@@ -200,6 +200,10 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 	     to-time)))
       (format "%s-%s" from-time to-time))))
 
+(defun ak/gcal-to-org-pad-day (day)
+  (if (length= day 1)
+      (format "0%s" day)
+    day))
 (defun ak/gcal-to-org ()
   (interactive)
   (goto-char 0)
@@ -216,8 +220,10 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 	      (buffer-substring-no-properties
 	       (line-beginning-position)
 	       (line-end-position))))
-	(if (string-match "^[0-9][0-9]$" current-line)
-	    (setq current-day (match-string 0 current-line))
+	(if (string-match "^[0-9]\\{1,2\\}$" current-line)
+	    (setq current-day
+		  (ak/gcal-to-org-pad-day
+		   (match-string 0 current-line)))
 	  (if (string-match "^\\([A-Za-z]\\{3,4\\}\\),.\\{3,4\\}$" current-line)
 	      (setq current-month (match-string 1 current-line))
 	    (if (string-match "^\\(.*[a\\|p]m\\)$" current-line)
