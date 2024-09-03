@@ -562,7 +562,8 @@ Allows emojis to easily be inserted from a completion menu.
 #+end_src
 * Support for editing gpg encrypted files
 #+begin_src elisp :results none
-(setq epa-pinentry-mode 'loopback) ; allow passphrase to be entered in minibuffer
+(setq epg-pinentry-mode 'loopback) ; allow passphrase to be entered in minibuffer
+(setq epa-file-select-keys nil) ; disable message to select encryption key
 #+end_src
 * Langtool
 #+begin_src elisp :results none
