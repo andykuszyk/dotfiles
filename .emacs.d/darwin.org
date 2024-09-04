@@ -8,6 +8,10 @@
 #+begin_src elisp :results none
 (setq manual-program "gman")
 #+end_src
+** Add homebrew info manuals to info listing
+#+begin_src elisp :results none
+(add-to-list 'Info-directory-list "/opt/homebrew/share/info")
+#+end_src
 ** Always open new windows by splitting vertically
 #+begin_src elisp :results none
 (setq split-height-threshold 1000) ; this essentially means that splitting horizontally is not possible
