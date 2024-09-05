@@ -1,0 +1,42 @@
+* Documentation
+I use Emacs often to explore documentation in both ~man~ and ~info~ formats. I customise the experience a little, and also make use of a couple of other tools to explore documentation in Emacs.
+** Man customisation
+I prefer to read man pages without line numbers, and sometimes read them on narrow screens (e.g. a phone), so wrapping lines properly is important.
+#+begin_src elisp
+(setq Man-notify-method 'pushy)
+(defun ak/man-mode-hook ()
+  (visual-line-mode)
+  (adaptive-wrap-prefix-mode)
+  (display-line-numbers-mode -1))
+(add-hook 'Man-mode-hook #'ak/man-mode-hook)
+#+end_src
+** Info customisation
+Similar to man pages, I prefer to read info pages without line numbers, and sometimes read them on a phone.
+#+begin_src elisp :results none
+(use-package adaptive-wrap :ensure t)
+(defun ak/info-mode-hook ()
+  (visual-line-mode)
+  (adaptive-wrap-prefix-mode)
+  (display-line-numbers-mode -1))
+(add-hook 'Info-mode-hook #'ak/info-mode-hook)
+#+end_src
+** PDF tools
+I like to read PDF documentation in Emacs as well, but the built-in support for PDFs isn't very good. ~pdf-tools~ does a good job however.
+#+begin_src elisp :results none
+(when (display-graphic-p)
+  (use-package pdf-tools :ensure t)
+  (pdf-tools-install)
+  (defun ak/pdf-view-mode-hook ()
+    (display-line-numbers-mode -1)
+    (pdf-view-midnight-minor-mode)) ; open pdfs in dark mode by default
+  (add-hook 'pdf-view-mode-hook #'ak/pdf-view-mode-hook))
+#+end_src
+** Noman
+I've written a package for browsing command-line documentation, which I often use. It's on MELPA, but I prefer to load it locally in case I'm doing some work on it.
+#+begin_src elisp :results none
+(use-package noman
+  :load-path "~/repos/andykuszyk/noman.el"
+  :custom
+  (noman-reuse-buffers nil))
+(add-to-list 'display-buffer-alist '(".*noman.*" display-buffer-same-window))
+#+end_src

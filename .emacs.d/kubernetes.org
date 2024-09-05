@@ -1,0 +1,20 @@
+* Kubernetes
+Sometimes I use Emacs to interact with Kubernetes, but not often. I don't include this file in my standard Emacs init, but will run these source blocks as and when I want to access Kubernetes from with Emacs.
+** Kubernetes overview package
+#+begin_src elisp
+(use-package kubernetes :ensure t)
+#+end_src
+** Function for making it easier to work with json logs
+#+begin_src elisp
+(defun ak/parse-json-logs ()
+  (interactive)
+  (json-mode)
+  (read-only-mode -1)
+  (beginning-of-buffer)
+  (search-forward "{")
+  (let ((start (- (point) 1)))
+    (end-of-buffer)
+    (search-backward "}")
+    (narrow-to-region start (+ 1 (point))))
+  (json-pretty-print-buffer))
+#+end_src

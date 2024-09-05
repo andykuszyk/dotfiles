@@ -1,0 +1,119 @@
+* Personal functions
+I have a few functions that aren't big enough to be packages, but are worth including in my config because I use them regularly.
+** Split and draft function
+I often want to open a temporary buffer, draft some text, and then close it again. Typically this is so I can write a Slack message or an e-mail. Once I'm finished with the buffer, I want the contents to be copied to the clipboard.
+
+These functions make this possible in a very simple way:
+#+begin_src elisp :results none
+(defun ak/split-and-draft-exit ()
+  (interactive)
+  (mark-whole-buffer)
+  (kill-region nil nil t)
+  (kill-buffer-and-window))
+
+(defun ak/split-and-draft-enter ()
+  (interactive)
+  (split-window)
+  (other-window 1)
+  (set-window-buffer nil (set-buffer (generate-new-buffer "ak/draft")))
+  (markdown-mode)
+  (visual-line-mode)
+  (local-set-key (kbd "C-c C-c") #'ak/split-and-draft-exit))
+
+(global-set-key (kbd "C-x D") #'ak/split-and-draft-enter)
+#+end_src
+** Functions to insert template text
+I use these functions to quickly insert some simple text templates, most frequently for inserting new source blocks in org mode.
+#+begin_src elisp :results none
+(defun ak/insert-aws-source-block ()
+  (interactive)
+  (insert "#+begin_src bash :results output verbatim :tangle temp.bash
+#!/bin/bash
+aws --profile saml --region eu-west-1
+,#+end_src"))
+
+(defun ak/insert-bash-source-block ()
+  (interactive)
+  (insert "#+begin_src bash :results output verbatim :tangle temp.bash
+#!/bin/bash
+,#+end_src"))
+
+(defun ak/insert-elisp-source-block ()
+  (interactive)
+  (insert "#+begin_src elisp :results none
+
+,#+end_src"))
+
+(defun ak/insert-elisp-source-block-with-results ()
+  (interactive)
+  (insert "#+begin_src elisp
+
+,#+end_src"))
+
+(defun ak/insert-python-source-block ()
+  (interactive)
+  (insert "#+begin_src python :results output verbatim
+
+,#+end_src"))
+
+(global-set-key (kbd "C-x A i a") #'ak/insert-aws-source-block)
+(global-set-key (kbd "C-x A i b") #'ak/insert-bash-source-block)
+(global-set-key (kbd "C-x A i e") #'ak/insert-elisp-source-block)
+(global-set-key (kbd "C-x A i E") #'ak/insert-elisp-source-block-with-results)
+(global-set-key (kbd "C-x A i p") #'ak/insert-python-source-block)
+#+end_src
+** Custom global keybindings for common commands
+There are some common commands which I like to have global keybindings for:
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x E") #'eww)
+(global-set-key (kbd "C-x y") #'yank-from-kill-ring)
+(global-set-key (kbd "M-j") #'join-line)
+(global-set-key (kbd "C-x V") #'visual-line-mode)
+(global-set-key (kbd "C-x A R") #'replace-string)
+(global-set-key (kbd "C-x A G") #'replace-regexp)
+#+end_src
+** Function for selecting code block
+This function typically selects a code block for most languages, if point is on the first line of the block:
+#+begin_src elisp :results none
+(defun ak/select-code-block ()
+  (interactive)
+  (move-beginning-of-line nil)
+  (set-mark (point))
+  (move-end-of-line nil)
+  (backward-char)
+  (forward-sexp)
+  (move-end-of-line nil))
+(global-set-key (kbd "C-x A s") #'ak/select-code-block)
+#+end_src
+** Keybindings to enable/disable flyspell and flycheck modes
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x A x s") #'flyspell-mode)
+(global-set-key (kbd "C-x A x c") #'flycheck-mode)
+#+end_src
+** Horizontal margin padding for reading on wide screens
+I use these functions to resize the horizontal space used by a buffer. For example, I might be reading a single file, but Emacs is open full-screen. I don't want the lines of the file to trail over the entire screen, but want them displayed in the middle third instead.
+#+begin_src elisp :results none
+(defun ak/reading-margin ()
+  (/ (window-width) 3))
+
+(defmacro ak/reading-func (name left right)
+  (list 'defun (intern (format "ak/%s-reading" name)) ()
+    (list 'interactive)
+    (list 'visual-line-mode)
+    (list 'set-window-margins nil (if left '(ak/reading-margin) 0) (if right '(ak/reading-margin) 0))))
+
+(ak/reading-func center t t)
+(ak/reading-func "left" t nil)
+(ak/reading-func "right" nil t)
+(ak/reading-func "reset" nil nil)
+
+(global-set-key (kbd "C-x A c") #'ak/center-reading)
+(global-set-key (kbd "C-x A r") #'ak/reset-reading)
+#+end_src
+** Render ansi escape codes in a log file
+Sometimes it's necessary to render ANSI escape codes whilst viewing log files.
+#+begin_src elisp :results none
+(defun ak/display-ansi-colors ()
+  (interactive)
+  (ansi-color-apply-on-region (point-min) (point-max)))
+#+end_src

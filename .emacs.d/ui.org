@@ -118,3 +118,17 @@ I like the current line in a buffer to be highlighted.
 #+begin_src elisp
 (global-hl-line-mode)
 #+end_src
+** Avy
+Although this isn't strictly speaking a UI thing, it is very much a usability improvement. Avy makes it very easy to navigate the UI in a text-based way, and is essential to my navigation workflow.
+#+begin_src elisp :results none
+(use-package avy
+  :ensure t
+  :bind (("M-a" . avy-goto-char-timer)
+	 ("M-g g" . avy-goto-line)))
+#+end_src
+** Which key
+Again, this isn't really a UI customisation, but it is another massive usability improvement. ~which-key~ is tremendously useful at exploring keybindings in real-time, and for reminding you what a keybinding is halfway through typing it!
+#+begin_src elisp :results none
+(use-package which-key :ensure t)
+(which-key-mode)
+#+end_src

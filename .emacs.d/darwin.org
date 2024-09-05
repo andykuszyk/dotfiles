@@ -1,8 +1,4 @@
 * MacOS-specific configuration
-** Start fullscreen
-#+begin_src elisp :results none
-(toggle-frame-maximized)
-#+end_src
 ** Hash mapping for mac
 This is a hack to allow me to enter a hash on my Mac keyboard! 🍏⌨
 #+begin_src elisp

@@ -1,36 +1,18 @@
-* Avy
-#+begin_src elisp :results none
-(use-package avy :ensure t)
-(global-set-key (kbd "M-a") #'avy-goto-char-timer)
-(global-set-key (kbd "M-g g") #'avy-goto-line)
-#+end_src
-* Vterm terminal emulator
-#+begin_src elisp
-;; vterm terminal emulator
-(use-package vterm :ensure t)
-(use-package multi-vterm :ensure t)
-(defun vterm-hook()
-  (display-line-numbers-mode -1)
-  (hl-line-mode -1))
-(add-hook 'vterm-mode-hook #'vterm-hook)
-(add-hook 'multi-vterm-mode-hook #'vterm-hook)
-(global-set-key (kbd "C-x v") #'vterm)
-(global-set-key (kbd "C-x m") #'multi-vterm)
-#+end_src
-* Magit
+* General Emacs packages and customisations
 ** Magit
+*** Magit
 #+begin_src elisp
 (use-package magit :ensure t)
 (setq magit-diff-refine-hunk (quote all)) ; Use word diffs when showing diffs
 #+end_src
-** Forge
+*** Forge
 #+begin_src elisp :results none
 (use-package forge :ensure t :after magit)
 (setq auth-sources '("~/.authinfo.gpg"))
 ;; Open forge edit buffers in the same window
 (add-to-list 'display-buffer-alist '("[0-9]+;*[0-9]+" display-buffer-same-window))
 #+end_src
-* Autocommit changes to files
+** Autocommit changes to files
 #+begin_src elisp :results none
 (use-package git-auto-commit-mode :ensure t)
 (setq-default gac-automatically-add-new-files-p t)
@@ -40,87 +22,14 @@ In order for files to be autocommitted, the following ~.dir-locals.el~ file is r
 #+begin_example
 ((nil . ((eval git-auto-commit-mode 1))))
 #+end_example
-* Flyspell in text mode
+** Flyspell in text mode
 #+begin_src elisp :results none
 (defun ak/text-mode-hook ()
   (flyspell-mode))
 (add-hook 'text-mode-hook #'ak/text-mode-hook)
 #+end_src
-* Keybindings to enable/disable flyspell and flycheck modes
-#+begin_src elisp :results none
-(global-set-key (kbd "C-x A x s") #'flyspell-mode)
-(global-set-key (kbd "C-x A x c") #'flycheck-mode)
-#+end_src
-* Which key
-#+begin_src elisp
-(use-package which-key :ensure t)
-(which-key-mode)
-#+end_src
-* Horizontal margin padding for reading on wide screens
-These functions
-#+begin_src elisp :results none
-(defun ak/reading-margin ()
-  (/ (window-width) 3))
-
-(defmacro ak/reading-func (name left right)
-  (list 'defun (intern (format "ak/%s-reading" name)) ()
-    (list 'interactive)
-    (list 'visual-line-mode)
-    (list 'set-window-margins nil (if left '(ak/reading-margin) 0) (if right '(ak/reading-margin) 0))))
-
-(ak/reading-func center t t)
-(ak/reading-func "left" t nil)
-(ak/reading-func "right" nil t)
-(ak/reading-func "reset" nil nil)
-
-(global-set-key (kbd "C-x A c") #'ak/center-reading)
-(global-set-key (kbd "C-x A r") #'ak/reset-reading)
-#+end_src
-* Functions to insert template text
-#+begin_src elisp :results none
-(defun ak/insert-aws-source-block ()
-  (interactive)
-  (insert "#+begin_src bash :results output verbatim :tangle temp.bash
-#!/bin/bash
-aws --profile saml --region eu-west-1
-,#+end_src"))
-
-(defun ak/insert-bash-source-block ()
-  (interactive)
-  (insert "#+begin_src bash :results output verbatim :tangle temp.bash
-#!/bin/bash
-,#+end_src"))
-
-(defun ak/insert-elisp-source-block ()
-  (interactive)
-  (insert "#+begin_src elisp :results none
-
-,#+end_src"))
-
-(defun ak/insert-elisp-source-block-with-results ()
-  (interactive)
-  (insert "#+begin_src elisp
-
-,#+end_src"))
-
-(defun ak/insert-python-source-block ()
-  (interactive)
-  (insert "#+begin_src python :results output verbatim
-
-,#+end_src"))
-
-(global-set-key (kbd "C-x A i a") #'ak/insert-aws-source-block)
-(global-set-key (kbd "C-x A i b") #'ak/insert-bash-source-block)
-(global-set-key (kbd "C-x A i e") #'ak/insert-elisp-source-block)
-(global-set-key (kbd "C-x A i E") #'ak/insert-elisp-source-block-with-results)
-(global-set-key (kbd "C-x A i p") #'ak/insert-python-source-block)
-#+end_src
-* Vertical margin padding for reading on tall screens
-#+begin_src elisp
-(use-package topspace :ensure t)
-#+end_src
-* Emoji support
-** Package for inserting emojis
+** Emoji support
+*** Package for inserting emojis
 Allows emojis to easily be inserted from a completion menu.
 #+begin_src elisp :results none
 (use-package emojify :ensure t)
@@ -128,139 +37,23 @@ Allows emojis to easily be inserted from a completion menu.
 (setq emojify-emoji-styles '(unicode))
 (global-set-key (kbd "C-c i") #'emojify-insert-emoji)
 #+end_src
-** Emoji-enabled font
+*** Emoji-enabled font
 #+begin_src elisp :results none
 (when (member "Noto Color Emoji" (font-family-list))
   (set-fontset-font
     t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
 #+end_src
-* Split and draft function
-#+begin_src elisp :results none
-(defun ak/split-and-draft-exit ()
-  (interactive)
-  (mark-whole-buffer)
-  (kill-region nil nil t)
-  (kill-buffer-and-window))
-
-(defun ak/split-and-draft-enter ()
-  (interactive)
-  (split-window)
-  (other-window 1)
-  (set-window-buffer nil (set-buffer (generate-new-buffer "ak/draft")))
-  (markdown-mode)
-  (visual-line-mode)
-  (local-set-key (kbd "C-c C-c") #'ak/split-and-draft-exit))
-
-(global-set-key (kbd "C-x D") #'ak/split-and-draft-enter)
-#+end_src
-* Render ansi escape codes in a log file
-#+begin_src elisp :results none
-(defun ak/display-ansi-colors ()
-  (interactive)
-  (ansi-color-apply-on-region (point-min) (point-max)))
-#+end_src
-* Man customisation
-#+begin_src elisp
-(setq Man-notify-method 'pushy)
-(defun ak/man-mode-hook ()
-  (visual-line-mode)
-  (adaptive-wrap-prefix-mode)
-  (display-line-numbers-mode -1))
-(add-hook 'Man-mode-hook #'ak/man-mode-hook)
-#+end_src
-* Enable disabled commands
+** Enable disabled commands
 #+begin_src elisp
 (put 'narrow-to-region 'disabled nil)
 #+end_src
-* Info customisation
+** Display buffer customisation
 #+begin_src elisp :results none
-(use-package adaptive-wrap :ensure t)
-(defun ak/info-mode-hook ()
-  (visual-line-mode)
-  (adaptive-wrap-prefix-mode)
-  (display-line-numbers-mode -1))
-(add-hook 'Info-mode-hook #'ak/info-mode-hook)
-#+end_src
-* Kubernetes
-** Kubernetes overview package
-#+begin_src elisp
-(use-package kubernetes :ensure t)
-#+end_src
-** Function for making it easier to work with json logs
-#+begin_src elisp
-(defun ak/parse-json-logs ()
-  (interactive)
-  (json-mode)
-  (read-only-mode -1)
-  (beginning-of-buffer)
-  (search-forward "{")
-  (let ((start (- (point) 1)))
-    (end-of-buffer)
-    (search-backward "}")
-    (narrow-to-region start (+ 1 (point))))
-  (json-pretty-print-buffer))
-#+end_src
-* Mu4e
-#+begin_src elisp :results none
-(when (executable-find "mu")
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-  (require 'mu4e)
-  (setq
-   mu4e-sent-folder   "/Sent"       ;; folder for sent messages
-   mu4e-drafts-folder "/Drafts"     ;; unfinished messages
-   mu4e-trash-folder  "/Trash"      ;; trashed messages
-   mu4e-refile-folder "/Archive")   ;; saved messages
-  (setq mu4e-get-mail-command "mbsync -a"))
-#+end_src
-* PDF tools
-#+begin_src elisp :results none
-(when (display-graphic-p)
-  (use-package pdf-tools :ensure t)
-  (pdf-tools-install)
-  (defun ak/pdf-view-mode-hook ()
-    (display-line-numbers-mode -1)
-    (pdf-view-midnight-minor-mode))
-  (add-hook 'pdf-view-mode-hook #'ak/pdf-view-mode-hook))
-#+end_src
-* Display buffer customisation
-#+begin_src elisp :results none
-(add-to-list 'display-buffer-alist '(".*noman.*" display-buffer-same-window))
 (add-to-list 'display-buffer-alist '("jira" display-buffer-same-window))
 (add-to-list 'display-buffer-alist '(".*onfluence.*" display-buffer-same-window))
 #+end_src
-* Custom global keybindings for common commands
-#+begin_src elisp :results none
-(global-set-key (kbd "C-x E") #'eww)
-(global-set-key (kbd "C-x y") #'yank-from-kill-ring)
-(global-set-key (kbd "M-j") #'join-line)
-(global-set-key (kbd "C-x V") #'visual-line-mode)
-(global-set-key (kbd "C-x A R") #'replace-string)
-(global-set-key (kbd "C-x A G") #'replace-regexp)
-#+end_src
-* Noman
-#+begin_src elisp :results none
-(setq noman-reuse-buffers nil)
-#+end_src
-* Function for selecting code block
-#+begin_src elisp :results none
-(defun ak/select-code-block ()
-  (interactive)
-  (move-beginning-of-line nil)
-  (set-mark (point))
-  (move-end-of-line nil)
-  (backward-char)
-  (forward-sexp)
-  (move-end-of-line nil))
-(global-set-key (kbd "C-x A s") #'ak/select-code-block)
-#+end_src
-* Support for editing gpg encrypted files
+** Support for editing gpg encrypted files
 #+begin_src elisp :results none
 (setq epg-pinentry-mode 'loopback) ; allow passphrase to be entered in minibuffer
 (setq epa-file-select-keys nil) ; disable message to select encryption key
-#+end_src
-* Langtool
-#+begin_src elisp :results none
-(when (file-exists-p "/opt/homebrew/opt/languagetool/bin/languagetool")
-  (setq langtool-bin "/opt/homebrew/opt/languagetool/bin/languagetool")
-  (use-package langtool :ensure t))
 #+end_src

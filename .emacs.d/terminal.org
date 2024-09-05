@@ -1,0 +1,14 @@
+* Terminal emulation
+I routinely use Emacs as a terminal emulator, for which I use the ~vterm~ package. I've found it to be very fast, and to support all manner of terminal use-cases. It transforms Emacs into a fully-fledged terminal emulator, and allows you to make use of all of Emacs' great window and buffer management tools.
+#+begin_src elisp :results none
+;; vterm terminal emulator
+(use-package vterm :ensure t)
+(use-package multi-vterm :ensure t)
+(defun ak/vterm-hook()
+  (display-line-numbers-mode -1)
+  (hl-line-mode -1))
+(add-hook 'vterm-mode-hook #'ak/vterm-hook)
+(add-hook 'multi-vterm-mode-hook #'ak/vterm-hook)
+(global-set-key (kbd "C-x v") #'vterm)
+(global-set-key (kbd "C-x m") #'multi-vterm)
+#+end_src
