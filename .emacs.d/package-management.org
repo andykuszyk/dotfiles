@@ -1,0 +1,14 @@
+* Package management
+I use ~use-package~ to install and configure packages, and install packages from MELPA.
+** MELPA
+#+begin_src elisp :results none
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+#+end_src
+** ~use-package~
+This might not be necessary in the latest versions of Emacs, but I've included it for posterity:
+#+begin_src elisp :results none
+(eval-when-compile
+  (require 'use-package))
+#+end_src

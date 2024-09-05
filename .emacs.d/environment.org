@@ -1,0 +1,11 @@
+* Environment variables
+Some configuration of Emacs' environment is required to make some packages work correctly (for example ~go-mode~).
+** Copy environment from default shell
+My default shell (~zsh~) is configured to work correctly for lots of common tasks, so the simplest way to configure Emacs' environment in the same way is to inherit its environment from a shell session:
+#+begin_src elisp :results none
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-envs (list "GOROOT" "GOPATH")))
+#+end_src

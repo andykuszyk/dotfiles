@@ -1,0 +1,120 @@
+* UI
+Customisations to the appearance and user interface of Emacs.
+** Disable menu, tool, and scroll bars
+#+begin_src elisp :results none
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(add-to-list 'default-frame-alist '(vertical-scroll-bars . nil))
+(add-to-list 'default-frame-alist '(horizontal-scroll-bars . nil))
+#+end_src
+** Disable the splash screen, and startup message
+#+begin_src elisp :results none
+(setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
+#+end_src
+** Display the time in 24-hour format in the modeline
+#+begin_src elisp :results none
+(setq display-time-24hr-format t)
+(setq display-time-default-load-average nil)
+(setq display-time-day-and-date t)
+(display-time-mode)
+#+end_src
+** Display a battery indicator in the modeline
+On a laptop, it's nice to see the current battery status in the modeline.
+#+begin_src elisp
+(use-package fancy-battery :ensure t)
+(add-hook 'after-init-hook #'fancy-battery-mode)
+(setq fancy-battery-show-percentage t)
+#+end_src
+** Spaceline modeline
+I really like the appearance of the modeline in Spacemacs, and its actually really easy to configure it as I wish. Below I make use of the Spacemacs modeline in isolation, and configure its layout and segments.
+*** Install spaceline
+#+begin_src elisp :results none
+(use-package spaceline
+  :ensure t
+  :config
+  (require 'spaceline-config)
+  (spaceline-spacemacs-theme))
+#+end_src
+*** Perspective segment
+I like a custom segment that displays the name of the current ~perspective~ workspace.
+#+begin_src elisp :results none
+(setq perspective-segment (make-symbol "perspective-segment"))
+(spaceline-define-segment perspective-segment
+  "Displays the current perspective"
+  (persp-current-name))
+#+end_src
+*** Time segments
+I like to see the time in UTC, as well as the local time zone. I find it's a good reminder when I'm looking at logs in UTC 🤓
+#+begin_src elisp :results none
+(setq time-segment (make-symbol "time-segment"))
+(spaceline-define-segment time-segment
+  "Displays the current time"
+  (format-time-string "%a %b %e %H:%M"))
+(setq utc-segment (make-symbol "utc-segment"))
+(spaceline-define-segment utc-segment
+  "Displays the current utc"
+  (format-time-string "%H:%M UTC" nil t))
+#+end_src
+*** Configure modeline
+#+begin_src elisp :results none
+(spaceline-toggle-window-number-off)                                      ; otherwise the evil state indicator isn't shown
+(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state) ; colorise the modeline based on the evil state
+(setq powerline-default-separator "arrow")
+(setq spaceline-separator-dir-left '(left . left))
+(setq spaceline-separator-dir-right '(right . right))
+
+(defun ak/spaceline-compile ()
+  (if (boundp 'scroll-bar-mode)
+      (scroll-bar-mode -1)) ; fixes truncation of the right-hand side of the modeline
+  (spaceline-compile
+					; left side
+    '(
+      (window-number :priority 100)
+      ((buffer-modified buffer-id) :priority 90)
+      (major-mode :priority 90)
+      (process :when active :priority 50)
+      (version-control :when active :priority 50)
+      ((flycheck-error flycheck-warning flycheck-info) :when active :priority 80)
+      )
+					; right side
+    '(
+      (battery :priority 90)
+      (time-segment :priority 90)
+      (utc-segment :priority 50)
+      (perspective-segment :priority 100)
+      )
+    ))
+(ak/spaceline-compile)
+#+end_src
+** Spacemacs theme
+I like the themes that ship with Spacemacs, so I just use them in isolation here.
+#+begin_src elisp :results none
+(use-package spacemacs-theme
+  :ensure t
+  :init (load-theme 'spacemacs-dark t))
+#+end_src
+*** Functions for enabling light theme or darktheme
+It's handy to be able to quickly switch between light and dark themes, including recompiling the mode line. I've got a couple of helper commands for this here:
+#+begin_src elisp :results none
+(defun ak/enable-light-theme ()
+  (interactive)
+  (load-theme 'spacemacs-light t)
+  (ak/spaceline-compile))
+
+(defun ak/enable-dark-theme ()
+  (interactive)
+  (load-theme 'spacemacs-dark t)
+  (ak/spaceline-compile))
+#+end_src
+** Display line numbers
+I always like to see line numbers in files, unless explicitly disabled.
+#+begin_src elisp :results none
+(setq display-line-numbers-type t)
+(global-display-line-numbers-mode)
+#+end_src
+** Line highlighting
+I like the current line in a buffer to be highlighted.
+#+begin_src elisp
+(global-hl-line-mode)
+#+end_src

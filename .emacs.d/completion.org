@@ -1,0 +1,59 @@
+* Completion and narrowing
+I use various packages to improve the UX of completion and narrowing in the minibuffer, as well as in code files.
+** Company mode
+I use ~company-mode~ for completion in buffers. It was the first package I tried for in-buffer completion, and it seems to work seemlessly with all my other packages!
+#+begin_src elisp
+(use-package company :ensure t)
+(add-hook 'after-init-hook #'global-company-mode)
+#+end_src
+** Ivy
+I install Ivy, because I like the buffer switcher and the file finder. The buffer switcher is compatible with Perspective, and the file finder is nice. I install the ~counsel~ package, but don't enable ~ivy-mode~.
+#+begin_src elisp :results none
+(use-package counsel
+  :ensure t
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  :bind (("C-x b" . persp-ivy-switch-buffer)
+	 ("C-x C-f" . counsel-find-file)))
+#+end_src
+** Vertico and friends
+I use Vertico, and its related packages, for most completion. Ivy is used just for buffer switching, and opening files.
+*** Vertico
+Vertico provides vertical narrowing and completion, but is pretty basic compared to Ivy.
+#+begin_src elisp
+(use-package vertico
+  :ensure t
+  :init (vertico-mode)
+  :bind (("M-x" . execute-extended-command)))
+#+end_src
+The keybinding for ~M-x~ isn't really necessary, but I've included to explicitly unset any other keybindings (e.g. if I'm experimenting with other bindings).
+*** Marginalia
+Marginalia adds useful metadata to items in Vertico's completion results, e.g. descriptions of commands in ~M-x~.
+#+begin_src elisp
+(use-package marginalia :ensure t :init (marginalia-mode))
+#+end_src
+*** Consult
+Consult offers a wide range of searching commands. I just use it as a replacement for swiper, because it feels faster.
+#+begin_src elisp :results none
+(use-package consult :ensure t)
+(global-set-key (kbd "C-s") 'consult-line)
+#+end_src
+*** Orderless
+Orderless provides a completion style for Vertico that allows matches to be narrowed using space separated terms, much like Ivy does out of the box
+#+begin_src elisp
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+#+end_src
+However, I disable orderless for Company, because I find it affects performance whilst editing buffers. The function below is taken from [[https://github.com/oantolin/orderless#company][here]].
+#+begin_src elisp
+;; We follow a suggestion by company maintainer u/hvis:
+;; https://www.reddit.com/r/emacs/comments/nichkl/comment/gz1jr3s/
+(defun company-completion-styles (capf-fn &rest args)
+  (let ((completion-styles '(basic partial-completion)))
+    (apply capf-fn args)))
+(advice-add 'company-capf :around #'company-completion-styles)
+#+end_src
