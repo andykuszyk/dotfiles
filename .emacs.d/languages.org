@@ -1,4 +1,7 @@
-* LSP mode
+* Languages
+Configuration for a variety of different programming languages that I work on in Emacs.
+** LSP mode
+LSP mode provides some great, general purpose support for lots of programming languages.
 #+begin_src elisp
 (use-package lsp-mode :ensure t)
 (setq lsp-enable-file-watchers nil)
@@ -7,15 +10,16 @@
 (use-package flycheck :ensure t)
 (global-flycheck-mode)
 #+end_src
-* DAP mode
+** DAP mode
+DAP mode provides good debugging support for many languages, and integrates nicely with lsp-mode.
 #+begin_src elisp
 (use-package dap-mode :ensure t)
 (add-hook 'dap-stopped-hook
           (lambda (arg) (call-interactively #'dap-hydra)))
 #+end_src
-* Markdown support
+** Markdown support
+Support for Markdown files, which is also loaded in ~*.txt~ files. I also enable a spell-checker in Markdown mode.
 #+begin_src elisp
-;; Install markdown package
 (use-package markdown-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (setq markdown-fontify-code-blocks-natively t)
@@ -24,7 +28,8 @@
   (flyspell-mode))
 (add-hook 'markdown-mode-hook #'ak/markdown-mode-hook)
 #+end_src
-* Python support
+** Python support
+*** Enable LSP mode for Python, and set the column width by default
 #+begin_src elisp :results none
 (defun ak/python-mode-hook ()
   (setq fill-column 80)
@@ -32,28 +37,29 @@
   (display-fill-column-indicator-mode)
   (lsp))
 (add-hook 'python-mode-hook #'ak/python-mode-hook)
-(use-package elpy :ensure t)
+#+end_src
+*** Elpy
+Elpy provides a really powerful development environment for Python.
+#+begin_src elisp :results none
+(use-package elpy :ensure t :init (elpy-enable))
+#+end_src
+*** Debugging with dap-mode
+Explicitly enable debugging python with dap-mode
+#+begin_src elisp :results none
 (require 'dap-python)
 (setq dap-python-debugger 'debugpy)
 #+end_src
-** Use ~ipython~ as the python shell
+*** Use ~ipython~ as the python shell
 #+begin_src elisp
 (when (executable-find "ipython")
   (setq python-shell-interpreter "ipython"))
 #+end_src
-** venv support
+*** venv support
 #+begin_src elisp :results none
 (use-package pyvenv :ensure t)
 #+end_src
-** elpy
-#+begin_src elisp :results none
-(use-package elpy
-  :ensure t
-  :init
-  (elpy-enable))
-#+end_src
-* Golang support
-** Go mode
+** Golang support
+*** Go mode
 #+begin_src elisp
 (use-package go-mode :ensure t)
 (use-package yasnippet :ensure t) ; required for function argument completion
@@ -65,7 +71,7 @@
 (setq gofmt-command "goimports") ; format files with goimports
 (add-hook 'before-save-hook #'gofmt-before-save) ; format files on save
 #+end_src
-** Custom build flags
+*** Custom build flags
 If you change this variable, run ~M-x lsp-workspace-restart~ to restart ~gopls~.
 
 #+begin_src elisp
@@ -77,7 +83,7 @@ This will enable the language server to recognise files with build flags, althou
 Delve supports Go build flags, but not via DAP. This means that debugging a file with build flags will fail.
 
 To work around this problem, temporarily remove the build flags.
-** Go test support
+*** Go test support
 #+begin_src elisp :results none
 (use-package gotest :ensure t)
 (setq go-test-verbose t)
@@ -89,16 +95,16 @@ To run a test that the cursor is in, use ~M-x go-test-current-test~.
 If the file has a build flag on it, first set a buffer-local variable with the build flag.
 
 For example, for the build flag ~foo~, run ~(setq go-test-args "-tags='foo'")~.
-** Go debugging
+*** Go debugging
 This relies on ~dap-mode~ and ~lsp-mode~.
 #+begin_src elisp
 (require 'dap-dlv-go)
 #+end_src
 Files with build flags will fail. At the moment, the only way I know of to solve this is to temporarily remove the build flags.
-** TL;DR
+*** TL;DR
 - ~M-x go-test-current-test~ to run a test.
 - ~M-x dap-debug~ to start a debugging sesssion.
-** Keymap customisation
+*** Keymap customisation
 #+begin_src elisp :results none
 (define-key go-mode-map (kbd "C-c C-t t") #'go-test-current-test)
 (define-key go-mode-map (kbd "C-c C-t C-t") #'go-test-current-test)
@@ -108,33 +114,26 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 (define-key go-mode-map (kbd "C-c D") #'godoc)
 (define-key go-mode-map (kbd "C-c d") #'godoc-at-point)
 #+end_src
-* Terraform support
-** Language server
-#+begin_src elisp
-;; Terraform support
+** Terraform support
+Initialise lsp-mode for Terraform, and format files when they are saved:
+#+begin_src elisp :results none
 (use-package terraform-mode :ensure t)
 (add-hook 'terraform-mode-hook #'lsp)
 (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
 #+end_src
-** Docs
-#+begin_src elisp :results none
-(use-package terraform-doc :ensure t)
-#+end_src
-* Yaml support
+** Yaml support
 #+begin_src elisp
-;; YAML support
 (use-package yaml-mode :ensure t)
 #+end_src
-* Clojure support
+** Clojure support
 #+begin_src elisp
-;; Clojure support
 (use-package paredit :ensure t)
 (use-package clojure-mode :ensure t)
 (add-hook 'clojure-mode-hook #'lsp)
 (add-hook 'clojure-mode-hook #'paredit-mode)
 (use-package cider :ensure t)
 #+end_src
-* Elisp customisations
+** Elisp customisations
 #+begin_src elisp :results none
 (defun ak/emacs-lisp-hook ()
   (paredit-mode)
@@ -143,18 +142,16 @@ Files with build flags will fail. At the moment, the only way I know of to solve
   (display-fill-column-indicator-mode))
 (add-hook 'emacs-lisp-mode-hook #'ak/emacs-lisp-hook)
 #+end_src
-* JSON support
+** JSON support
 #+begin_src elisp
-;; Better JSON support
 (use-package json-mode :ensure t)
 #+end_src
-* Dockerfile support
+** Dockerfile support
 #+begin_src elisp
-;; Dockerfile mode
 (use-package dockerfile-mode :ensure t)
 (add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
 #+end_src
-* Bazel/starlark/tiltfile support
+** Bazel/starlark/tiltfile support
 #+begin_src elisp
 (use-package bazel :ensure t)
 (add-to-list 'auto-mode-alist '("Tiltfile.*" . bazel-starlark-mode))
@@ -165,7 +162,7 @@ Files with build flags will fail. At the moment, the only way I know of to solve
 		  :activation-fn (lsp-activate-on "starlark")
 		  :server-id 'tilt))
 #+end_src
-* Helm/tpl syntax higlighting
+** Helm/tpl syntax higlighting
 #+begin_src elisp
 (use-package k8s-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.tpl\\'" . k8s-mode))
