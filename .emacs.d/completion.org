@@ -6,17 +6,6 @@ I use ~company-mode~ for completion in buffers. It was the first package I tried
 (use-package company :ensure t)
 (add-hook 'after-init-hook #'global-company-mode)
 #+end_src
-** Ivy
-I install Ivy, because I like the buffer switcher and the file finder. The buffer switcher is compatible with Perspective, and the file finder is nice. I install the ~counsel~ package, but don't enable ~ivy-mode~.
-#+begin_src elisp :results none
-(use-package counsel
-  :ensure t
-  :config
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  :bind (("C-x b" . persp-ivy-switch-buffer)
-	 ("C-x C-f" . counsel-find-file)))
-#+end_src
 ** Vertico and friends
 I use Vertico, and its related packages, for most completion. Ivy is used just for buffer switching, and opening files.
 *** Vertico
