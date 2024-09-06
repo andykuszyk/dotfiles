@@ -7,9 +7,9 @@ I use ~company-mode~ for completion in buffers. It was the first package I tried
 (add-hook 'after-init-hook #'global-company-mode)
 #+end_src
 ** Vertico and friends
-I use Vertico, and its related packages, for most completion. Ivy is used just for buffer switching, and opening files.
+I use Vertico, and its related packages, for most narrowing and completion in the minibuffer.
 *** Vertico
-Vertico provides vertical narrowing and completion, but is pretty basic compared to Ivy.
+Vertico provides vertical narrowing and completion.
 #+begin_src elisp
 (use-package vertico
   :ensure t
