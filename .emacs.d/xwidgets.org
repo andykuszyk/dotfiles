@@ -1,0 +1,30 @@
+* Xwidget helper functions and configuration
+I compile Emacs with xwidgets support (see [[file:compilation.org][compilation.org]]), so that I can browse some websites from within Emacs.
+* Load useful xwidget extension
+Before installing an ~xwwp~ fork, we need to install its dependencies from MELPA to:
+#+begin_src elisp :results none
+(use-package ctable :ensure t)
+(require 'cl)
+#+end_src
+Then, install ~xwwp~ from [[https://github.com/kchanqvq/xwwp][this fork]], because the original version on MELPA is missing some useful commits:
+#+begin_src elisp :results none
+(use-package
+  xwwp-full
+  :load-path "~/repos/xwwp"
+  :custom
+  (xwwp-follow-link-completion-system 'default)
+  :bind (:map xwidget-webkit-mode-map
+	      ("f" . xwwp-follow-link)
+	      ("a" . xwwp-ace-toggle)))
+(require 'xwwp-full)
+#+end_src
+* Keybinding for launching xwidget browser
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x A b") #'xwwp)
+#+end_src
+* Disable line numbers
+#+begin_src elisp :results none
+(defun ak/xwidget-mode-hook ()
+  (display-line-numbers-mode -1))
+(add-hook 'xwidget-webkit-mode-hook #'ak/xwidget-mode-hook)
+#+end_src

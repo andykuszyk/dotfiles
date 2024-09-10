@@ -47,6 +47,10 @@
 ;; Configuration for a variety of different programming languages.
 (org-babel-load-file (concat user-emacs-directory "languages.org"))
 
+;; Load configuration for xwidgets, if it was compiled in.
+(if (featurep 'xwidget-internal)
+    (org-babel-load-file (concat user-emacs-directory "xwidgets.org")))
+
 ;; Load custom elisp packages that I haven't broken out into separate repos yet.
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'jira)
