@@ -14,7 +14,7 @@ Then, install ~xwwp~ from [[https://github.com/kchanqvq/xwwp][this fork]], becau
   :custom
   (xwwp-follow-link-completion-system 'default)
   :bind (:map xwidget-webkit-mode-map
-	      ("f" . xwwp-follow-link)
+	      ("F" . xwwp-follow-link)
 	      ("a" . xwwp-ace-toggle)))
 (require 'xwwp-full)
 #+end_src
