@@ -2,8 +2,7 @@
 I use various packages for managing windows and their layouts in Emacs.
 ** Window switching
 I use ~winum~ to allow easily switching between windows using ~C-x w <n>~ where ~<n>~ is the window number. I display each window's number in its modeline.
-#+begin_src elisp
-;; Numbered window switcher
+#+begin_src elisp :results none
 (use-package winum :ensure t)
 (winum-mode)
 #+end_src
