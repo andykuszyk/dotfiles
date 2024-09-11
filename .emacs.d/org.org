@@ -22,6 +22,12 @@
            '((sequence "TODO" "PROG" "|" "DONE")))
 (setq org-icalendar-store-UID t) ; export tp ical with persistent ids
 #+end_src
+* Org-download
+This package allows for downloaded files to be inserted as links in an org file, which is especially useful for inserting images that have been copied to the clipboard.
+#+begin_src elisp :results none
+(use-package org-download :ensure t)
+(define-key org-mode-map (kbd "C-c o d") #'org-download-clipboard)
+#+end_src
 * Keybindings for org table functionality
 #+begin_src elisp :results none
 (define-key org-mode-map (kbd "C-c T k") #'org-table-delete-column)
