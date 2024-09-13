@@ -33,6 +33,9 @@
 ;; Various custom functions and keybindings.
 (org-babel-load-file (concat user-emacs-directory "ak.org"))
 
+;; Load some personal packages for interacting with Jira
+(org-babel-load-file (concat user-emacs-directory "jira.org"))
+
 ;; Specific configuration for Mac OS, and Linux.
 (if (string= system-type "darwin")
     (org-babel-load-file (concat user-emacs-directory "darwin.org"))
@@ -50,11 +53,6 @@
 ;; Load configuration for xwidgets, if it was compiled in.
 (if (featurep 'xwidget-internal)
     (org-babel-load-file (concat user-emacs-directory "xwidgets.org")))
-
-;; Load custom elisp packages that I haven't broken out into separate repos yet.
-(add-to-list 'load-path "~/.emacs.d/lisp")
-(require 'jira)
-(require 'github)
 
 ;; Load any machine-specific initialisation, if it exists.
 (if (file-exists-p "~/.emacs.d/lisp/custom-init.el")
