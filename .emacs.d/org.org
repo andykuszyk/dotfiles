@@ -181,6 +181,7 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
    ((string-equal month "Jul") "07")
    ((string-equal month "Aug") "08")
    ((string-equal month "Sept") "09")
+   ((string-equal month "Sep") "09")
    ((string-equal month "Oct") "10")
    ((string-equal month "Nov") "11")
    ((string-equal month "Dec") "12")))
