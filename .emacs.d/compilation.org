@@ -2,7 +2,7 @@
 ** install libraries
 #+begin_src bash :results output verbatim :tangle temp.bash
 #!/bin/bash
-brew install jansson texinfo
+brew install jansson texinfo libgccjit
 #+end_src
 ** download emacs source
 #+begin_src bash :results output verbatim :tangle temp.bash
