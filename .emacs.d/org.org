@@ -162,7 +162,7 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 #+begin_src elisp :results none
 (setq org-priority-highest 1)
 (setq org-priority-lowest 9)
-(setq org-priority-default 2)
+(setq org-priority-default 1)
 #+end_src
 * Google calendar import
 1. [[https://calendar.google.com/calendar/u/0/r/agenda?pli=1][open gcal in "schedule" view]]
