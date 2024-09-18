@@ -44,4 +44,5 @@ I've written a package for browsing command-line documentation, which I often us
   :custom
   (noman-reuse-buffers nil))
 (add-to-list 'display-buffer-alist '(".*noman.*" display-buffer-same-window))
+(global-set-key (kbd "C-x A n") #'noman)
 #+end_src
