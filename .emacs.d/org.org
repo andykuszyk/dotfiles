@@ -53,6 +53,11 @@ This means that ~C-c C-j~ will use completion in the minibuffer for navigating t
 (setq org-goto-interface 'outline-path-completion)
 (setq org-outline-path-complete-in-steps nil)
 #+end_src
+* Plantuml mode for plantuml source blocks
+#+begin_src elisp :results none
+(use-package plantuml-mode :ensure t)
+(setq plantuml-indent-level 2)
+#+end_src
 * Org babel config
 #+begin_src elisp :results none
 ;; Org babel support for go
