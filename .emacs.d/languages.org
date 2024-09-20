@@ -167,3 +167,7 @@ Initialise lsp-mode for Terraform, and format files when they are saved:
 (use-package k8s-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.tpl\\'" . k8s-mode))
 #+end_src
+** Jenkinsfile support
+#+begin_src elisp :results none
+(use-package jenkinsfile-mode :ensure t)
+#+end_src
