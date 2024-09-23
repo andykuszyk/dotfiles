@@ -23,6 +23,17 @@
            '((sequence "TODO" "PROG" "|" "DONE")))
 (setq org-icalendar-store-UID t) ; export tp ical with persistent ids
 #+end_src
+* Org-refile configuration
+When I refile headings, I prefer to choose from among all the level 1-4 headings in the current buffer:
+#+begin_src elisp :results none
+(setq org-refile-targets
+      '(
+	(nil . (:level . 1))
+	(nil . (:level . 2))
+	(nil . (:level . 3))
+	(nil . (:level . 4))
+	))
+#+end_src
 * Org-download
 This package allows for downloaded files to be inserted as links in an org file, which is especially useful for inserting images that have been copied to the clipboard.
 #+begin_src elisp :results none
