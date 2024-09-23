@@ -181,11 +181,8 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 (setq org-priority-default 1)
 #+end_src
 * Google calendar import
-1. [[https://calendar.google.com/calendar/u/0/r/agenda?pli=1][open gcal in "schedule" view]]
-2. select all and copy
-3. paste the text into an emacs buffer
-4. run the function ~ak/gcal-to-org~
-5. put the resulting org markup in a file that is in your org-agenda
+I have found importing events from Google calendar using an ICS export file to be quite problematic. As a result, I've written some functions below to import relevant event information (date, time, title) from the web UI by simply copying and pasting the text, and then processing it in an Emacs buffer to convert it into org markup.
+** Function to parse copied agenda text into org markup
 #+begin_src elisp :results none
 (defun ak/gcal-to-org-string-month-to-number (month)
   (cond
@@ -228,10 +225,11 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
   (if (length= day 1)
       (format "0%s" day)
     day))
-(defun ak/gcal-to-org ()
+
+(defun ak/gcal-to-org (org-buffer-name)
   (interactive)
   (goto-char 0)
-  (let ((org-buffer (get-buffer-create "ak/gcal-to-org"))
+  (let ((org-buffer (get-buffer-create org-buffer-name))
 	(current-day nil)
 	(current-year "2024")
 	(current-month nil)
@@ -264,6 +262,34 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 			     (ak/gcal-to-org-format-time current-time)))
 		    (newline))
 		  (setq current-time nil)))))))
-      (forward-line))
-    (display-buffer org-buffer)))
+      (forward-line))))
 #+end_src
+** Function open Google calendar, parse the markup, and add the result to the kill ring
+#+begin_src elisp :results none
+(defun ak/gcal-import ()
+  (interactive)
+  (let ((raw-buffer (get-buffer-create "*ak/gcal-import-raw*")))
+    (switch-to-buffer raw-buffer)
+    (browse-url "https://calendar.google.com/calendar/u/0/r/agenda")
+    (local-set-key
+     (kbd "C-c C-c")
+     (lambda ()
+       (interactive)
+       (let ((org-buffer (get-buffer-create "*ak/gcal-import-org*")))
+	 (ak/gcal-to-org org-buffer)
+	 (with-current-buffer org-buffer
+	   (kill-region (point-min) (point-max)))
+	 (kill-buffer org-buffer)
+	 (kill-buffer "*ak/gcal-import-raw*")
+	 (message "org markup added to the kill ring"))))))
+
+(global-set-key (kbd "C-x A g") #'ak/gcal-import)
+#+end_src
+** The end result
+The end result of these functions is:
+- I can execute ~ak/gcal-import~ with ~C-x A g~, and the agenda view of my calendar will be opened in a browser.
+- I select all, copy, and paste it back into the Emacs buffer which is waiting for me.
+- ~C-c C-c~ converts the text to org markup, adds it to the kill ring, and then closes the buffers.
+- Then I just open the destination buffer, and yank the markup under the desired heading.
+
+
