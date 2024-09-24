@@ -35,6 +35,14 @@ When I refile headings, I prefer to choose from among all the level 1-4 headings
 	(nil . (:level . 4))
 	))
 #+end_src
+* Key-binding to quickly switch to the org agenda
+#+begin_src elisp :results none
+(global-set-key
+ (kbd "C-x A a")
+ (lambda ()
+   (interactive)
+   (switch-to-buffer "*Org Agenda*")))
+#+end_src
 * Org-download
 This package allows for downloaded files to be inserted as links in an org file, which is especially useful for inserting images that have been copied to the clipboard.
 #+begin_src elisp :results none
