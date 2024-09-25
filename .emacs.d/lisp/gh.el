@@ -53,4 +53,6 @@ The value of this variable is case-sensitive, and must match the case used in
 	gh-clone-path
 	repo)))))
 
+(global-set-key (kbd "C-x A h s") #'gh-search-repos)
+
 (provide 'gh)
