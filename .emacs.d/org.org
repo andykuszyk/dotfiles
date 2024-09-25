@@ -41,7 +41,9 @@ When I refile headings, I prefer to choose from among all the level 1-4 headings
  (kbd "C-x A a")
  (lambda ()
    (interactive)
-   (switch-to-buffer "*Org Agenda*")))
+   (if (get-buffer "*Org Agenda*")
+       (switch-to-buffer "*Org Agenda*")
+     (org-agenda-list))))
 #+end_src
 * Org-download
 This package allows for downloaded files to be inserted as links in an org file, which is especially useful for inserting images that have been copied to the clipboard.
