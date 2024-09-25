@@ -32,7 +32,7 @@ The value of this variable is case-sensitive, and must match the case used in
 (defun gh-kill-name ()
   (interactive)
   (let ((line (buffer-substring-no-properties (pos-bol) (pos-eol))))
-    (unless (string-match (format "^\\(%s/[A-za-z0-9\\-\\_]+\\).*" gh-owner) line)
+    (unless (string-match (format "^\\(%s/[A-za-z0-9-_]+\\).*" gh-owner) line)
       (error "Couldn't find a repo name on the current line"))
     (let ((match (match-string 1 line)))
       (message (format "Killed repo name: %s" match))
@@ -46,7 +46,7 @@ The value of this variable is case-sensitive, and must match the case used in
   (interactive)
   (let ((repo (gh-kill-name)))
     (when (yes-or-no-p
-	   (format  "Are you sure you want to clone the repo %s?" repo))
+	   (format  "Are you sure you want to clone the repo %s? " repo))
       (shell-command
        (format
 	"cd %s && git clone git@github.com:%s"
