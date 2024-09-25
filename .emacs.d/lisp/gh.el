@@ -26,6 +26,7 @@ The value of this variable is case-sensitive, and must match the case used in
       (local-set-key "w" #'gh-kill-name)
       (local-set-key "o" #'gh-open-in-browser)
       (local-set-key "C" #'gh-clone-repo)
+      (local-set-key "d" #'gh-dired-repo)
       )
     (display-buffer gh-buffer)))
 
@@ -52,6 +53,15 @@ The value of this variable is case-sensitive, and must match the case used in
 	"cd %s && git clone git@github.com:%s"
 	gh-clone-path
 	repo)))))
+
+(defun gh-dired-repo ()
+  (interactive)
+  (let* ((repo (gh-kill-name))
+	 (repo-name (string-trim repo (format "%s/" gh-owner)))
+	 (repo-path (format "%s/%s" gh-clone-path repo-name)))
+    (message repo-path)
+    (if (file-directory-p repo-path)
+	(dired repo-path))))
 
 (global-set-key (kbd "C-x A h s") #'gh-search-repos)
 
