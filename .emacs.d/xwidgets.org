@@ -16,6 +16,11 @@ Then, install ~xwwp~ from [[https://github.com/kchanqvq/xwwp][this fork]], becau
   :bind (:map xwidget-webkit-mode-map
 	      ("F" . xwwp-follow-link)
 	      ("g" . xwwp)
+	      ("n" . xwidget-webkit-scroll-up-line)
+	      ("j" . xwidget-webkit-scroll-up-line)
+	      ("p" . xwidget-webkit-scroll-down-line)
+	      ("k" . xwidget-webkit-scroll-down-line)
+	      ("l" . xwidget-webkit-back)
 	      ("a" . xwwp-ace-toggle)))
 (require 'xwwp-full)
 #+end_src
