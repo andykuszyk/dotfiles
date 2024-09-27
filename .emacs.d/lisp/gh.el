@@ -73,7 +73,7 @@ The value of this variable is case-sensitive, and must match the case used in
 	 (json-parse-string
 	  (shell-command-to-string
 	   (format
-	    "gh search repos --json 'name,description,visibility,isArchived,fullName' --owner %s %s"
+	    "gh search repos --limit 100 --json 'name,description,visibility,isArchived,fullName' --owner %s %s"
 	    gh-owner
 	    name)))))
     (with-current-buffer gh-buffer
@@ -102,6 +102,7 @@ The value of this variable is case-sensitive, and must match the case used in
       (local-set-key "o" #'gh-open-in-browser)
       (local-set-key "C" #'gh-clone-repo)
       (local-set-key "d" #'gh-dired-repo)
+      (local-set-key "s" #'gh-search-repos-json)
       )
     (display-buffer gh-buffer)) )
 
