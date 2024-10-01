@@ -171,3 +171,7 @@ Initialise lsp-mode for Terraform, and format files when they are saved:
 #+begin_src elisp :results none
 (use-package jenkinsfile-mode :ensure t)
 #+end_src
+** Javascript
+#+begin_src elisp :results none
+(add-hook 'js-mode-hook #'lsp)
+#+end_src
