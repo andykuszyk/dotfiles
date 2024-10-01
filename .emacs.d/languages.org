@@ -174,4 +174,7 @@ Initialise lsp-mode for Terraform, and format files when they are saved:
 ** Javascript
 #+begin_src elisp :results none
 (add-hook 'js-mode-hook #'lsp)
+(add-hook 'js-mode-hook
+	  (lambda ()
+	    (local-set-key (kbd "M-.") #'lsp-find-definition)))
 #+end_src
