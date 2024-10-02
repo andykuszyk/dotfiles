@@ -83,6 +83,7 @@ This means that ~C-c C-j~ will use completion in the minibuffer for navigating t
 #+begin_src elisp :results none
 (use-package plantuml-mode :ensure t)
 (setq plantuml-indent-level 2)
+(setq plantuml-default-exec-mode 'jar)
 #+end_src
 * Org babel config
 #+begin_src elisp :results none
