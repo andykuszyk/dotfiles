@@ -120,6 +120,19 @@ This means that ~C-c C-j~ will use completion in the minibuffer for navigating t
 	   (string= lang "bash"))))
 (setq org-confirm-babel-evaluate #'ak/org-babel-confirm)
 #+end_src
+* Ox-pandoc
+Sometimes, when exporting org files to HTML, I prefer to generate a self-contained HTML file with images embedded as base64 data (rather than relying on external image files). This makes it easier to distribute the HTML file as a standalone file.
+
+In order to achieve this, I export the org file using ~ox-pandoc~, rather than the built-in HTML backend.
+#+begin_src elisp :results none
+(use-package ox-pandoc :ensure t)
+(setq org-pandoc-options-for-html5 '((standalone . t) (self-contained . t)))
+(setq org-pandoc-options-for-html4 '((standalone . t) (self-contained . t)))
+#+end_src
+* Customisation of HTML export
+#+begin_src elisp :results none
+(setq org-html-postamble nil)
+#+end_src
 * Enable lsp mode for bash source blocks
 #+begin_src elisp :results none
 (defun org-babel-edit-prep:bash (babel-info)
