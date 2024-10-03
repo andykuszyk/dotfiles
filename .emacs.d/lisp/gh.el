@@ -13,23 +13,6 @@ The value of this variable is case-sensitive, and must match the case used in
 (setq gh-owner "Typeform")
 (setq gh-clone-path "~/repos/typeform")
 
-(defun gh-search-repos (name)
-  "Search github repos for `gh-owner` with the given NAME."
-  (interactive "sRepo name: ")
-  (let ((gh-buffer (get-buffer-create "*gh*")))
-    (shell-command
-     (format  "gh search repos --owner %s %s" gh-owner name)
-     gh-buffer)
-    (with-current-buffer gh-buffer
-      (special-mode)
-      (read-only-mode)
-      (local-set-key "w" #'gh-kill-name)
-      (local-set-key "o" #'gh-open-in-browser)
-      (local-set-key "C" #'gh-clone-repo)
-      (local-set-key "d" #'gh-dired-repo)
-      )
-    (display-buffer gh-buffer)))
-
 (defun gh-kill-name ()
   (interactive)
   (let ((line (buffer-substring-no-properties (pos-bol) (pos-eol))))
@@ -52,7 +35,8 @@ The value of this variable is case-sensitive, and must match the case used in
        (format
 	"cd %s && git clone git@github.com:%s"
 	gh-clone-path
-	repo)))))
+	repo))
+      (message (format "Finished cloning %s" repo)))))
 
 (defun gh-dired-repo ()
   (interactive)
@@ -64,9 +48,8 @@ The value of this variable is case-sensitive, and must match the case used in
 	(dired repo-path))))
 
 (global-set-key (kbd "C-x A h s") #'gh-search-repos)
-(global-set-key (kbd "C-x A h j") #'gh-search-repos-json)
 
-(defun gh-search-repos-json (name)
+(defun gh-search-repos (name)
   (interactive "sRepo name: ")
   (let ((gh-buffer (get-buffer-create "*gh*"))
 	(json-output
