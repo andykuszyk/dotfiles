@@ -1,65 +1,86 @@
-(defcustom gh-owner
+;;; gh-repo-search-repo-search.el --- search repos, clone them, and open them.
+
+;;; Commentary:
+;; This package provides a simple function for searching for repos in GitHub,
+;; cloning them locally, and then browsing them with `dired`.
+
+;;; Code:
+(defgroup gh-repo-search
   nil
-  "The owner or organisation to use when invoking gh.
-The value of this variable is case-sensitive, and must match the case used in
-  GitHub."
+  "Simple search for GitHub repos."
+  :group 'applications
+  :prefix "gh-repo-search")
+
+(defcustom gh-repo-search-owner
+  nil
+  "The owner or organisation to use when invoking the gh CLI."
   :type 'string)
 
-(defcustom gh-clone-path
+(defcustom gh-repo-search-clone-path
   nil
   "The path to clone repos to."
   :type 'string)
 
-(setq gh-owner "Typeform")
-(setq gh-clone-path "~/repos/typeform")
-
-(defun gh-kill-name ()
-  (interactive)
+(defun gh-repo-search--kill-name ()
+  "Kill the name of the repo on the current line."
   (let ((line (buffer-substring-no-properties (pos-bol) (pos-eol))))
-    (unless (string-match (format "^.*\\(%s/[A-za-z0-9-_]+\\).*" gh-owner) line)
+    (unless (string-match (format "^.*\\(%s/[A-za-z0-9-_]+\\).*" gh-repo-search-owner) line)
       (error "Couldn't find a repo name on the current line"))
     (let ((match (match-string 1 line)))
-      (message (format "Killed repo name: %s" match))
       match)))
 
-(defun gh-open-in-browser ()
-  (interactive)
-  (browse-url (format "https://github.com/%s" (gh-kill-name))))
+(defun gh-repo-search--open-in-browser ()
+  "Open the current repo in a browser."
+  (browse-url (format "https://github.com/%s" (gh-repo-search--kill-name))))
 
-(defun gh-clone-repo ()
-  (interactive)
-  (let ((repo (gh-kill-name)))
+(defun gh-repo-search--clone-repo ()
+  "Clone the current repo to `gh-repo-search-clone-path`."
+  (let ((repo (gh-repo-search--kill-name)))
     (when (yes-or-no-p
 	   (format  "Are you sure you want to clone the repo %s? " repo))
       (shell-command
        (format
 	"cd %s && git clone git@github.com:%s"
-	gh-clone-path
+	gh-repo-search-clone-path
 	repo))
       (message (format "Finished cloning %s" repo)))))
 
-(defun gh-dired-repo ()
-  (interactive)
-  (let* ((repo (gh-kill-name))
-	 (repo-name (string-trim repo (format "%s/" gh-owner)))
-	 (repo-path (format "%s/%s" gh-clone-path repo-name)))
-    (message repo-path)
+(defun gh-repo-search--dired-repo ()
+  "Open the current repo in `dired`."
+  (let* ((repo (gh-repo-search--kill-name))
+	 (repo-name (string-trim repo (format "%s/" gh-repo-search-owner)))
+	 (repo-path (format "%s/%s" gh-repo-search-clone-path repo-name)))
     (if (file-directory-p repo-path)
 	(dired repo-path))))
 
-(global-set-key (kbd "C-x A h s") #'gh-search-repos)
+(defun gh-repo-search--get-clone-status (name)
+  "Return whether or not NAME has been cloned into `gh-repo-search-clone-path`."
+  (let ((repo-path (format "%s/%s" gh-repo-search-clone-path name)))
+    (if (file-directory-p repo-path)
+	"Y"
+      "N")))
 
-(defun gh-search-repos (name)
+(defun gh-repo-search--get-repo-status (visibility is-archived)
+  "Format the repo's status based on VISIBILITY and IS-ARCHIVED."
+  (format
+   "%s%s"
+   visibility
+   (if (string= is-archived "t")
+       ",archived"
+     "")))
+
+(defun gh-repo-search (name)
+  "Search for repos in the organisation `gh-repo-search-owner` for NAME."
   (interactive "sRepo name: ")
-  (let ((gh-buffer (get-buffer-create "*gh*"))
+  (let ((gh-repo-search-buffer (get-buffer-create "*gh*"))
 	(json-output
 	 (json-parse-string
 	  (shell-command-to-string
 	   (format
 	    "gh search repos --limit 100 --json 'name,description,visibility,isArchived,fullName' --owner %s %s"
-	    gh-owner
+	    gh-repo-search-owner
 	    name)))))
-    (with-current-buffer gh-buffer
+    (with-current-buffer gh-repo-search-buffer
       (tabulated-list-mode)
       (setq tabulated-list-format
 	    (vector
@@ -71,9 +92,9 @@ The value of this variable is case-sensitive, and must match the case used in
       (setq tabulated-list-entries nil)
       (dolist (repo (append json-output nil))
 	(let* ((full-name (gethash "fullName" repo))
-	       (cloned (gh--get-clone-status (gethash "name" repo)))
+	       (cloned (gh-repo-search--get-clone-status (gethash "name" repo)))
 	       (description (gethash "description" repo))
-	       (status (gh--get-repo-status
+	       (status (gh-repo-search--get-repo-status
 			(gethash "visibility" repo)
 			(gethash "isArchived" repo))))
 	  (add-to-list
@@ -81,26 +102,16 @@ The value of this variable is case-sensitive, and must match the case used in
 	   (list nil (vector cloned full-name description status)))))
       (tabulated-list-init-header)
       (tabulated-list-print)
-      (local-set-key "w" #'gh-kill-name)
-      (local-set-key "o" #'gh-open-in-browser)
-      (local-set-key "C" #'gh-clone-repo)
-      (local-set-key "d" #'gh-dired-repo)
-      (local-set-key "s" #'gh-search-repos-json)
+      (local-set-key "w" #'gh-repo-search--kill-name)
+      (local-set-key "o" #'gh-repo-search--open-in-browser)
+      (local-set-key "C" #'gh-repo-search--clone-repo)
+      (local-set-key "d" #'gh-repo-search--dired-repo)
+      (local-set-key "s" #'gh-repo-search)
       )
-    (display-buffer gh-buffer)) )
+    (display-buffer gh-repo-search-buffer)) )
 
-(defun gh--get-clone-status (name)
-  (let ((repo-path (format "%s/%s" gh-clone-path name)))
-    (if (file-directory-p repo-path)
-	"Y"
-      "N")))
+(setq gh-repo-search-owner "Typeform")
+(setq gh-repo-search-clone-path "~/repos/typeform")
+(global-set-key (kbd "C-x A h s") #'gh-repo-search)
 
-(defun gh--get-repo-status (visibility is-archived)
-  (format
-   "%s%s"
-   visibility
-   (if (string= is-archived "t")
-       ",archived"
-     "")))
-
-(provide 'gh)
+(provide 'gh-repo-search)
