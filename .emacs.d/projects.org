@@ -9,6 +9,11 @@ I use ~projectile~ for project management, because it has lots of nice features 
     :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map)))
 #+end_src
+** Open dired when switching projects
+By default ~projectile~ will open a file finder when switching projects, but I prefer to jump straight into the project's root directory:
+#+begin_src elisp :results none
+(setq projectile-switch-project-action #'projectile-dired)
+#+end_src
 ** Create and open PRs using ~gh~ CLI and projectile
 I often want to create or view PRs for the current Git branch I have open. These functions make doing so easy using the GitHub CLI:
 #+begin_src elisp
