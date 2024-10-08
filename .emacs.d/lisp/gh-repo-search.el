@@ -23,6 +23,7 @@
 
 (defun gh-repo-search--kill-name ()
   "Kill the name of the repo on the current line."
+  (interactive)
   (let ((line (buffer-substring-no-properties (pos-bol) (pos-eol))))
     (unless (string-match (format "^.*\\(%s/[A-za-z0-9-_]+\\).*" gh-repo-search-owner) line)
       (error "Couldn't find a repo name on the current line"))
@@ -31,10 +32,12 @@
 
 (defun gh-repo-search--open-in-browser ()
   "Open the current repo in a browser."
+  (interactive)
   (browse-url (format "https://github.com/%s" (gh-repo-search--kill-name))))
 
 (defun gh-repo-search--clone-repo ()
   "Clone the current repo to `gh-repo-search-clone-path`."
+  (interactive)
   (let ((repo (gh-repo-search--kill-name)))
     (when (yes-or-no-p
 	   (format  "Are you sure you want to clone the repo %s? " repo))
@@ -47,6 +50,7 @@
 
 (defun gh-repo-search--dired-repo ()
   "Open the current repo in `dired`."
+  (interactive)
   (let* ((repo (gh-repo-search--kill-name))
 	 (repo-name (string-trim repo (format "%s/" gh-repo-search-owner)))
 	 (repo-path (format "%s/%s" gh-repo-search-clone-path repo-name)))
