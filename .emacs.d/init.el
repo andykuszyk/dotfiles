@@ -55,9 +55,9 @@
     (org-babel-load-file (concat user-emacs-directory "xwidgets.org")))
 
 ;; Load my draft package for the gh cli
-(when (file-exists-p "~/.emacs.d/lisp/gh.el")
-    (load-file "~/.emacs.d/lisp/gh.el")
-    (require 'gh))
+(when (file-exists-p "~/.emacs.d/lisp/gh-repo-search.el")
+    (load-file "~/.emacs.d/lisp/gh-repo-search.el")
+    (require 'gh-repo-search))
 
 ;; Load any machine-specific initialisation, if it exists.
 (if (file-exists-p "~/.emacs.d/lisp/custom-init.el")
