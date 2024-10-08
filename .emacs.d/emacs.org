@@ -52,6 +52,13 @@ Allows emojis to easily be inserted from a completion menu.
 (add-to-list 'display-buffer-alist '("jira" display-buffer-same-window))
 (add-to-list 'display-buffer-alist '(".*onfluence.*" display-buffer-same-window))
 #+end_src
+** Package and function for inserting uuids
+#+begin_src elisp :results none
+(use-package uuid :ensure t)
+(defun ak/insert-uuid ()
+  (interactive)
+  (insert (uuid-string)))
+#+end_src
 ** Support for editing gpg encrypted files
 #+begin_src elisp :results none
 (setq epg-pinentry-mode 'loopback) ; allow passphrase to be entered in minibuffer
