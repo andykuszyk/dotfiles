@@ -100,15 +100,19 @@ This means that ~C-c C-j~ will use completion in the minibuffer for navigating t
 (setq org-plantuml-jar-path
       (expand-file-name "~/plantuml.jar"))
 
+(require 'ob-js)
+
 ;; Org Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
    (go . t)
+   (js . t)
    (mermaid . t)
    (shell . t)
    (plantuml .t)
    (emacs-lisp . t)))
+(add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
 
 (defun ak/org-babel-confirm (lang body)
   (not (or (string= lang "elisp")
