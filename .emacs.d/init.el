@@ -59,6 +59,10 @@
     (load-file "~/.emacs.d/lisp/gh-repo-search.el")
     (require 'gh-repo-search))
 
+;; Configure copilot, if it is cloned locally.
+(when (file-exists-p "~/repos/copilot.el")
+  (org-babel-load-file (concat user-emacs-directory "copilot.org")))
+
 ;; Load any machine-specific initialisation, if it exists.
 (if (file-exists-p "~/.emacs.d/lisp/custom-init.el")
     (load-file "~/.emacs.d/lisp/custom-init.el"))

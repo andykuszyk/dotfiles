@@ -1,0 +1,35 @@
+* GitHub co-pilot
+This file contains configuration for using GitHub co-pilot from within Emacs.
+** Clone the repo
+The ~copilot~ package isn't available on MELPA, so needs to be manually cloned:
+#+begin_src bash :results output verbatim :tangle no
+git clone https://github.com/copilot-emacs/copilot.el ~/repos/copilot.el
+ls ~/repos/copilot.el
+#+end_src
+
+#+RESULTS:
+: Eask
+: LICENSE
+: README.md
+: assets
+: copilot-balancer.el
+: copilot.el
+** Install dependencies
+#+begin_src elisp :results none
+(use-package dash :ensure t)
+(use-package s :ensure t)
+(use-package editorconfig :ensure t)
+(use-package f :ensure t)
+#+end_src
+** Install ~copilot.el~
+#+begin_src elisp :results none
+(global-unset-key (kbd "C-x C-c"))
+(use-package copilot
+  :load-path "~/repos/copilot.el"
+  :custom (copilot-indent-offset-warning-disable t)
+  :bind (("C-x C-c RET" . copilot-accept-completion)
+	 ("C-x C-c n" . copilot-next-completion)
+	 ("C-x C-c p" . copilot-previous-completion)
+	 ("C-x C-c c" . copilot-clear-overlay)))
+(add-hook 'prog-mode-hook 'copilot-mode)
+#+end_src
