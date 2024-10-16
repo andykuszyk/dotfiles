@@ -30,4 +30,5 @@ ls ~/repos/copilot.el
 	 ("C-x A c n" . copilot-next-completion)
 	 ("C-x A c p" . copilot-previous-completion)
 	 ("C-x A c c" . copilot-clear-overlay)))
+(require 'copilot)
 #+end_src
