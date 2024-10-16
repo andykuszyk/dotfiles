@@ -27,6 +27,7 @@ ls ~/repos/copilot.el
   :load-path "~/repos/copilot.el"
   :custom (copilot-indent-offset-warning-disable t)
   :bind (("C-x A c RET" . copilot-accept-completion)
+	 ("C-x A c m" . copilot-mode)
 	 ("C-x A c n" . copilot-next-completion)
 	 ("C-x A c p" . copilot-previous-completion)
 	 ("C-x A c c" . copilot-clear-overlay)))
