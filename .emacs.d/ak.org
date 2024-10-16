@@ -107,7 +107,7 @@ I use these functions to resize the horizontal space used by a buffer. For examp
 (ak/reading-func "right" nil t)
 (ak/reading-func "reset" nil nil)
 
-(global-set-key (kbd "C-x A c") #'ak/center-reading)
+(global-set-key (kbd "C-x A C") #'ak/center-reading)
 (global-set-key (kbd "C-x A r") #'ak/reset-reading)
 #+end_src
 ** Render ansi escape codes in a log file

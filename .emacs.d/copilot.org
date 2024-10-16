@@ -23,13 +23,11 @@ ls ~/repos/copilot.el
 #+end_src
 ** Install ~copilot.el~
 #+begin_src elisp :results none
-(global-unset-key (kbd "C-x C-c"))
 (use-package copilot
   :load-path "~/repos/copilot.el"
   :custom (copilot-indent-offset-warning-disable t)
-  :bind (("C-x C-c RET" . copilot-accept-completion)
-	 ("C-x C-c n" . copilot-next-completion)
-	 ("C-x C-c p" . copilot-previous-completion)
-	 ("C-x C-c c" . copilot-clear-overlay)))
-(add-hook 'prog-mode-hook 'copilot-mode)
+  :bind (("C-x A c RET" . copilot-accept-completion)
+	 ("C-x A c n" . copilot-next-completion)
+	 ("C-x A c p" . copilot-previous-completion)
+	 ("C-x A c c" . copilot-clear-overlay)))
 #+end_src
