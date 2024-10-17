@@ -64,3 +64,12 @@ Allows emojis to easily be inserted from a completion menu.
 (setq epg-pinentry-mode 'loopback) ; allow passphrase to be entered in minibuffer
 (setq epa-file-select-keys nil) ; disable message to select encryption key
 #+end_src
+** Prompt before closing with =C-x C-c=
+#+begin_src elisp :results none
+(defun ak/quit ()
+  (interactive)
+  (if (yes-or-no-p "Are you sure you want to quit? ")
+      (save-buffers-kill-emacs)))
+
+(global-set-key (kbd "C-x C-c") 'ak/quit)
+#+end_src
