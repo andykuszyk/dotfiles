@@ -56,11 +56,18 @@ aws --profile saml --region eu-west-1
 
 ,#+end_src"))
 
+(defun ak/insert-plantuml-source-block (file-name)
+  (interactive "sFile name: ")
+  (insert (format "#+begin_src plantuml :file %s
+
+,#+end_src" file-name)))
+
 (global-set-key (kbd "C-x A i a") #'ak/insert-aws-source-block)
 (global-set-key (kbd "C-x A i b") #'ak/insert-bash-source-block)
 (global-set-key (kbd "C-x A i e") #'ak/insert-elisp-source-block)
 (global-set-key (kbd "C-x A i E") #'ak/insert-elisp-source-block-with-results)
 (global-set-key (kbd "C-x A i p") #'ak/insert-python-source-block)
+(global-set-key (kbd "C-x A i P") #'ak/insert-plantuml-source-block)
 #+end_src
 ** Custom global keybindings for common commands
 There are some common commands which I like to have global keybindings for:
