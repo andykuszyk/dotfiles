@@ -42,3 +42,37 @@ Then, install ~xwwp~ from [[https://github.com/kchanqvq/xwwp][this fork]], becau
   (display-line-numbers-mode -1))
 (add-hook 'xwidget-webkit-mode-hook #'ak/xwidget-mode-hook)
 #+end_src
+** Useful reveal.js keybindings
+By default, arrow keys are bound to scrolling keys in xwidget browser buffers. This is inconvenient when delivering reveal.js presentations, so this function rebinds the keys to trigger reveal.js Javascript functions to navigate the presentation.
+#+begin_src elisp :results none
+(defun ak/xwidget-reveal-js-bindings ()
+  (interactive)
+  (keymap-local-set
+   "<left>"
+   (lambda ()
+     (interactive)
+     (xwidget-webkit-execute-script
+      (xwidget-webkit-current-session)
+      "Reveal.left();")))
+  (keymap-local-set
+   "<right>"
+   (lambda ()
+     (interactive)
+     (xwidget-webkit-execute-script
+      (xwidget-webkit-current-session)
+      "Reveal.right();")))
+  (keymap-local-set
+   "<down>"
+   (lambda ()
+     (interactive)
+     (xwidget-webkit-execute-script
+      (xwidget-webkit-current-session)
+      "Reveal.down();")))
+  (keymap-local-set
+   "<up>"
+   (lambda ()
+     (interactive)
+     (xwidget-webkit-execute-script
+      (xwidget-webkit-current-session)
+      "Reveal.up();"))))
+#+end_src
