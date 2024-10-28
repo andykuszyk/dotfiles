@@ -28,6 +28,14 @@ Then, install ~xwwp~ from [[https://github.com/kchanqvq/xwwp][this fork]], becau
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x A b") #'xwwp)
 #+end_src
+** Keybinding for opening current html file in xwidgets browser
+#+begin_src elisp :results none
+(defun ak/open-html-in-xwidget-browser ()
+  "Open the current buffer in a xwidget browser."
+  (interactive)
+  (xwidget-webkit-browse-url (format "file://%s" (buffer-file-name))))
+(global-set-key (kbd "C-x A B") 'ak/open-html-in-xwidget-browser)
+#+end_src
 ** Disable line numbers
 #+begin_src elisp :results none
 (defun ak/xwidget-mode-hook ()
