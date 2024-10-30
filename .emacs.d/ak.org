@@ -32,6 +32,13 @@ I use these functions to quickly insert some simple text templates, most frequen
 aws --profile saml --region eu-west-1
 ,#+end_src"))
 
+(defun ak/insert-parameterised-aws-source-block (profile)
+  (interactive "sProfile: ")
+  (insert (format "#+begin_src bash :results output verbatim :tangle temp.bash
+#!/bin/bash
+aws --profile %s --region us-east-1
+,#+end_src" profile)))
+
 (defun ak/insert-bash-source-block ()
   (interactive)
   (insert "#+begin_src bash :results output verbatim :tangle temp.bash
@@ -63,6 +70,7 @@ aws --profile saml --region eu-west-1
 ,#+end_src" file-name)))
 
 (global-set-key (kbd "C-x A i a") #'ak/insert-aws-source-block)
+(global-set-key (kbd "C-x A i A") #'ak/insert-parameterised-aws-source-block)
 (global-set-key (kbd "C-x A i b") #'ak/insert-bash-source-block)
 (global-set-key (kbd "C-x A i e") #'ak/insert-elisp-source-block)
 (global-set-key (kbd "C-x A i E") #'ak/insert-elisp-source-block-with-results)
