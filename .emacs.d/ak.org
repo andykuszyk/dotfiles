@@ -124,3 +124,11 @@ Sometimes it's necessary to render ANSI escape codes whilst viewing log files.
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
 #+end_src
+** Function to change the frame title
+#+begin_src elisp :results none
+(defun ak/rename-frame (new-name)
+  "Rename the current frame to NEW-NAME."
+  (interactive "sNew frame name: ")
+  (modify-frame-parameters (selected-frame) (list (cons 'name new-name))))
+(global-set-key (kbd "C-x 5 n") 'ak/rename-frame)
+#+end_src
