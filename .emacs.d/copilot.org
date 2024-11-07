@@ -33,3 +33,8 @@ ls ~/repos/copilot.el
 	 ("C-x A c c" . copilot-clear-overlay)))
 (require 'copilot)
 #+end_src
+** Copilot chat
+This package faciliates conversations with copilot, and also allows commit messages to be generated:
+#+begin_src elisp :results none
+(use-package copilot-chat :ensure t)
+#+end_src
