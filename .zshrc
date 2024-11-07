@@ -49,13 +49,6 @@ alias e="emacsclient -n"
 # Use Emacs as default editor
 export EDITOR=emacsclient
 
-# kubectl command completion
-if $(which kubectl > /dev/null); then
-    alias k='kubectl'
-    source <(kubectl completion zsh)
-    complete -F __start_kubectl k
-fi
-
 # AWS CLI command completion
 if $(which aws > /dev/null); then
     autoload bashcompinit && bashcompinit
@@ -95,3 +88,10 @@ fi
 function ps1() {
     export PS1='$ '
 }
+
+# kubectl command completion
+if $(which kubectl > /dev/null); then
+    alias k='kubectl'
+    source <(kubectl completion zsh)
+    complete -F __start_kubectl k
+fi
