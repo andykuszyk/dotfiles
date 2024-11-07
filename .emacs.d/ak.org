@@ -140,3 +140,10 @@ Sometimes it's necessary to render ANSI escape codes whilst viewing log files.
   (modify-frame-parameters (selected-frame) (list (cons 'name new-name))))
 (global-set-key (kbd "C-x 5 n") 'ak/rename-frame)
 #+end_src
+** Adjust text size for presentations
+#+begin_src elisp :results none
+(defun ak/scale-for-presentation ()
+  (interactive)
+  (text-scale-adjust 3))
+(global-set-key (kbd "C-x A p") #'ak/scale-for-presentation)
+#+end_src
