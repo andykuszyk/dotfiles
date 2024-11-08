@@ -147,3 +147,13 @@ Sometimes it's necessary to render ANSI escape codes whilst viewing log files.
   (text-scale-adjust 3))
 (global-set-key (kbd "C-x A p") #'ak/scale-for-presentation)
 #+end_src
+** Function to collapse an open org source block
+I'm often in the middle of a source block in an org file, and want to collapse it with a single key-binding:
+#+begin_src elisp :results none
+(defun ak/collapse-src-block ()
+  (interactive)
+  (search-backward "begin_src")
+  (org-cycle))
+
+(global-set-key (kbd "C-x A TAB") #'ak/collapse-src-block)
+#+end_src
