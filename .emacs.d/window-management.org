@@ -9,9 +9,11 @@ I use ~winum~ to allow easily switching between windows using ~C-x w <n>~ where 
 ** Perspective workspaces
 I use ~perspective~ to allow arbitrary workspaces to be created in Emacs, much like virtual desktops can be used in a desktop window manager. I use ~perspective~ extensively to help manage the windows and buffers I use for different tasks, and integrate it with several other packages (such as ~projectile~, and ~ivy~).
 *** Install perspective
-#+begin_src elisp
+#+begin_src elisp :results none
 (use-package perspective
   :ensure t
+  :bind (("C-x b" . persp-switch-to-buffer*)
+         ("C-x k" . persp-kill-buffer*))
   :custom
   (setq persp-sort 'access)
   (persp-mode-prefix-key (kbd "C-x x"))
