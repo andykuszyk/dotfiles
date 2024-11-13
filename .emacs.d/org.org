@@ -24,6 +24,11 @@
            '((sequence "TODO" "PROG" "|" "DONE")))
 (setq org-icalendar-store-UID t) ; export tp ical with persistent ids
 #+end_src
+* Sticky org agenda buffers
+I often make use of different org agenda buffers, and prefer agenda commands to create new buffers, rather than re-using the existing one:
+#+begin_src elisp :results none
+(setq org-agenda-sticky t)
+#+end_src
 * Org-refile configuration
 When I refile headings, I prefer to choose from among all the level 1-4 headings in the current buffer:
 #+begin_src elisp :results none
