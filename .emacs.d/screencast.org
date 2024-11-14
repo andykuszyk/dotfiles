@@ -6,6 +6,7 @@
 #+begin_src elisp :results none
 (when (string= system-type "darwin")
   (with-eval-after-load 'gif-screencast
+    (setq gif-screencast-title-bar-pixel-height 28) ;; required on mac os to prevent echo area being cropped
     (setq gif-screencast-scale-factor 2.0)
     (setq gif-screencast-args '("-x"))
     (setq gif-screencast-cropping-program "mogrify")
