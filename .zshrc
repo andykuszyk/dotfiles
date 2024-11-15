@@ -31,20 +31,16 @@ plugins=(
 export DISABLE_AUTO_UPDATE=true
 source $ZSH/oh-my-zsh.sh
 
+# Also disable the colorful szh prompt.
+export PS1='$ '
+
 # Disable venv prompt.
 export VIRTUAL_ENV_DISABLE_PROMPT=
 
 # Aliases.
 alias ip=ipython
-alias gl='git log -n 100 --oneline --graph --all'
 alias cdr='cd ~/repos/andykuszyk'
 alias x='exit'
-alias gs='git status'
-alias gap='git add -p'
-alias gp='git push'
-alias gc='git commit'
-alias gd='git diff'
-alias gcm='git checkout master'
 alias e="emacsclient -n"
 
 # Use Emacs as default editor
@@ -84,9 +80,6 @@ if [[ -d "$HOME/.pyenv" ]]; then
     [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
 fi
-
-# Reset the prompt to something simple.
-export PS1='$ '
 
 # kubectl command completion
 if $(which kubectl > /dev/null); then
