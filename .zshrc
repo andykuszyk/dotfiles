@@ -90,3 +90,10 @@ if $(which kubectl > /dev/null); then
     source <(kubectl completion zsh)
     complete -F __start_kubectl k
 fi
+
+# Function to read stdin, and open it in an Emacs buffer.
+function ep() {
+    file=$(mktemp)
+    cat > $file
+    emacsclient -n $file
+}
