@@ -27,7 +27,8 @@ plugins=(
     fzf-tab             # Fuzzy file finding with tab.
 )
 
-# Include oh my zsh.
+# Include oh my zsh, but disable auto-update checking
+export DISABLE_AUTO_UPDATE=true
 source $ZSH/oh-my-zsh.sh
 
 # Disable venv prompt.
@@ -84,10 +85,8 @@ if [[ -d "$HOME/.pyenv" ]]; then
     eval "$(pyenv init -)"
 fi
 
-# Function to customise prompt
-function ps1() {
-    export PS1='$ '
-}
+# Reset the prompt to something simple.
+export PS1='$ '
 
 # kubectl command completion
 if $(which kubectl > /dev/null); then
