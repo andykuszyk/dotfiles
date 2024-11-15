@@ -64,6 +64,9 @@ if [[ -a $HOME/.gvm/scripts/gvm ]]; then
     source $HOME/.gvm/scripts/gvm
 fi
 
+# Use private Go imports for my current company
+export GOPRIVATE='github.com/Typeform/*'
+
 # Disable auto-update on every brew command
 export HOMEBREW_NO_AUTO_UPDATE=1
 
