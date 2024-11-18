@@ -18,3 +18,7 @@
   (define-key gif-screencast-mode-map (kbd "<f8>") 'gif-screencast-toggle-pause)
   (define-key gif-screencast-mode-map (kbd "<f9>") 'gif-screencast-stop))
 #+end_src
+* increase delay between frames
+#+begin_src elisp :results none
+(setq gif-screencast-convert-args '("-delay" "500" "-loop" "0" "-dither" "None" "-colors" "80" "-fuzz" "40%" "-layers" "OptimizeFrame"))
+#+end_src
