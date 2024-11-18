@@ -215,7 +215,7 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 #+end_src
 * Numeric priorities
 #+begin_src elisp :results none
-(setq org-priority-highest 1)
+(setq org-priority-highest 0)
 (setq org-priority-lowest 9)
 (setq org-priority-default 1)
 #+end_src
