@@ -1,3 +1,9 @@
+# Uncomment this line, and the last line in the file, to enable
+# profiling Zsh startup. With these lines uncommented, run
+# `time zsh -i -c exit` in a terminal to see what steps take a
+# lot of time to load.
+# zmodload zsh/zprof
+
 # Add executable locations to PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/usr/local/bin:/home/andy/go/bin"
@@ -70,12 +76,16 @@ export GOPRIVATE='github.com/Typeform/*'
 # Disable auto-update on every brew command
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-# Initialise nvm
-if [[ -d "$HOME/.nvm" ]]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
+# Initialise nvm. This is implemented as a function, so that it can
+# optionally be executed. It can take a little time, and unduly delays
+# shell starting times.
+function load_nvm() {
+    if [[ -d "$HOME/.nvm" ]]; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    fi
+}
 
 # Initialise pyvm
 if [[ -d "$HOME/.pyenv" ]]; then
@@ -97,3 +107,6 @@ function ep() {
     cat > $file
     emacsclient -n $file
 }
+
+# See the comment at the start of this file.
+# zprof
