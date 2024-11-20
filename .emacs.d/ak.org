@@ -157,3 +157,17 @@ I'm often in the middle of a source block in an org file, and want to collapse i
 
 (global-set-key (kbd "C-x A TAB") #'ak/collapse-src-block)
 #+end_src
+** Function to capitalise first letter, and add full stop at the end of each line, in a region
+#+begin_src elisp :results none
+(defun ak/capitalise-and-stop-region ()
+  (interactive)
+  (narrow-to-region (mark) (point))
+  (goto-char (point-min))
+  (while (< (point) (point-max))
+    (capitalize-word 1)
+    (end-of-line)
+    (insert "."))
+  (widen))
+
+(global-set-key (kbd "C-x A U") #'ak/capitalise-and-stop-region)
+#+end_src
