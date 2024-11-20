@@ -217,7 +217,7 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 #+begin_src elisp :results none
 (setq org-priority-highest 0)
 (setq org-priority-lowest 9)
-(setq org-priority-default 1)
+(setq org-priority-default 0)
 #+end_src
 * Google calendar import
 I have found importing events from Google calendar using an ICS export file to be quite problematic. As a result, I've written some functions below to import relevant event information (date, time, title) from the web UI by simply copying and pasting the text, and then processing it in an Emacs buffer to convert it into org markup.
