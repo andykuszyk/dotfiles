@@ -330,5 +330,12 @@ The end result of these functions is:
 - I select all, copy, and paste it back into the Emacs buffer which is waiting for me.
 - ~C-c C-c~ converts the text to org markup, adds it to the kill ring, and then closes the buffers.
 - Then I just open the destination buffer, and yank the markup under the desired heading.
+* Command to update agenda list, even if it isn't currently selected
+#+begin_src elisp :results none
+(defun ak/refresh-agenda-list ()
+  (interactive)
+  (with-current-buffer (get-buffer "*Org Agenda(a)*")
+    (org-agenda-redo "")))
 
-
+(global-set-key (kbd "C-x A v") 'ak/refresh-agenda-list)
+#+end_src
