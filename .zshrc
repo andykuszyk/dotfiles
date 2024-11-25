@@ -97,6 +97,7 @@ fi
 # kubectl command completion
 if $(which kubectl > /dev/null); then
     alias k='kubectl'
+    alias kc='k config get-contexts $(k config current-context)'
     source <(kubectl completion zsh)
     complete -F __start_kubectl k
 fi
