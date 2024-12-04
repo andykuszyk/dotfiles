@@ -54,6 +54,14 @@ When I have vterm buffers open, I like to know if I'm on copy mode or not
       "vterm-copy-mode"
     ""))
 #+end_src
+*** Current project segment
+I like to know what the current =projectile= project is for the active buffer:
+#+begin_src elisp :results none
+(setq projectile-segment (make-symbol "projectile-segment"))
+(spaceline-define-segment projectile-segment
+  "Displays the current project"
+  (projectile-project-name))
+#+end_src
 *** Time segments
 I like to see the time in UTC, as well as the local time zone. I find it's a good reminder when I'm looking at logs in UTC 🤓
 #+begin_src elisp :results none
@@ -84,6 +92,7 @@ I like to see the time in UTC, as well as the local time zone. I find it's a goo
       ((buffer-modified buffer-id) :priority 90)
       (major-mode :priority 90)
       (vterm-copy-mode-segment :when active)
+      (projectile-segment :when active)
       (process :when active :priority 50)
       (version-control :when active :priority 50)
       ((flycheck-error flycheck-warning flycheck-info) :when active :priority 80)
