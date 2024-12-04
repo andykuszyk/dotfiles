@@ -46,8 +46,8 @@ When I refile headings, I prefer to choose from among all the level 1-4 headings
  (kbd "C-x A a")
  (lambda ()
    (interactive)
-   (if (get-buffer "*Org Agenda*")
-       (switch-to-buffer "*Org Agenda*")
+   (if (get-buffer "*Org Agenda(a)*")
+       (switch-to-buffer "*Org Agenda(a)*")
      (org-agenda-list))))
 #+end_src
 * Key binding to capture from anywhere
