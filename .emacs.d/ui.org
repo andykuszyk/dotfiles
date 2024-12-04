@@ -44,6 +44,16 @@ I like a custom segment that displays the name of the current ~perspective~ work
   "Displays the current perspective"
   (persp-current-name))
 #+end_src
+*** Vterm copy mode indicator segment
+When I have vterm buffers open, I like to know if I'm on copy mode or not
+#+begin_src elisp :results none
+(setq vterm-copy-mode-segment (make-symbol "vterm-copy-mode-segment"))
+(spaceline-define-segment vterm-copy-mode-segment
+  "Displays the current vterm-copy-mode"
+  (if vterm-copy-mode
+      "vterm-copy-mode"
+    ""))
+#+end_src
 *** Time segments
 I like to see the time in UTC, as well as the local time zone. I find it's a good reminder when I'm looking at logs in UTC 🤓
 #+begin_src elisp :results none
@@ -73,6 +83,7 @@ I like to see the time in UTC, as well as the local time zone. I find it's a goo
       (window-number :priority 100)
       ((buffer-modified buffer-id) :priority 90)
       (major-mode :priority 90)
+      (vterm-copy-mode-segment :when active)
       (process :when active :priority 50)
       (version-control :when active :priority 50)
       ((flycheck-error flycheck-warning flycheck-info) :when active :priority 80)
