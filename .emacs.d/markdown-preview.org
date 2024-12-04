@@ -1,0 +1,29 @@
+* Markdown preview
+Whilst I normally author documents in Org-mode, sometimes I need to author or preview them directly in Markdown. Often these Markdown files contain Mermaid diagrams, and I like to see a preview of the diagram rendered as well. The package and configuration below help to achieve this.
+** Clone package
+This package isn't on MELPA yet, so I have to clone it locally:
+#+begin_src bash :results output verbatim :tangle temp.bash
+#!/bin/bash
+git clone https://github.com/cfclrk/markdown-xwidget ~/repos/markdown-xwidget
+ls -lh ~/repos/markdown-xwidget
+#+end_src
+
+#+RESULTS:
+: total 112
+: -rw-r--r--  1 andy.kuszyk  staff   114B  4 Dec 09:27 Eldev
+: -rw-r--r--  1 andy.kuszyk  staff    34K  4 Dec 09:27 LICENSE
+: -rw-r--r--  1 andy.kuszyk  staff   7.2K  4 Dec 09:27 README.md
+: drwxr-xr-x  6 andy.kuszyk  staff   192B  4 Dec 09:27 doc
+: -rw-r--r--  1 andy.kuszyk  staff   7.8K  4 Dec 09:27 markdown-xwidget.el
+: drwxr-xr-x  8 andy.kuszyk  staff   256B  4 Dec 09:27 resources
+: drwxr-xr-x  4 andy.kuszyk  staff   128B  4 Dec 09:27 scripts
+** Install package
+#+begin_src elisp :results none
+(use-package mustache :ensure t)
+(use-package markdown-xwidget :load-path "~/repos/markdown-xwidget")
+#+end_src
+** Use =markdown= for conversion
+Using =pandoc= has issues with Mermaid, so =multimarkdown= (=brew install multimarkdown=) needs to be used instead:
+#+begin_src elisp :results none
+(setq markdown-xwidget-command "multimarkdown")
+#+end_src
