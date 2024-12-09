@@ -66,7 +66,7 @@
 ;; Install an xwidget markdown previewer, if it is cloned locally.
 (when (and (featurep 'xwidget-internal)
 	   (file-exists-p "~/repos/markdown-xwidget"))
-  (load-file (concat user-emacs-directory "markdown-preview.org")))
+  (org-babel-load-file (concat user-emacs-directory "markdown-preview.org")))
 
 ;; Load any machine-specific initialisation, if it exists.
 (if (file-exists-p "~/.emacs.d/lisp/custom-init.el")
