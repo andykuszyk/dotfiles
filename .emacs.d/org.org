@@ -46,9 +46,9 @@ When I refile headings, I prefer to choose from among all the level 1-4 headings
  (kbd "C-x A a")
  (lambda ()
    (interactive)
-   (if (get-buffer "*Org Agenda(a)*")
-       (switch-to-buffer "*Org Agenda(a)*")
-     (org-agenda-list))))
+   (if (get-buffer "*Org Agenda(o)*")
+       (switch-to-buffer "*Org Agenda(o)*")
+     (org-agenda nil "o"))))
 #+end_src
 * Key binding to capture from anywhere
 #+begin_src elisp :results none
@@ -334,8 +334,17 @@ The end result of these functions is:
 #+begin_src elisp :results none
 (defun ak/refresh-agenda-list ()
   (interactive)
-  (with-current-buffer (get-buffer "*Org Agenda(a)*")
+  (with-current-buffer (get-buffer "*Org Agenda(o)*")
     (org-agenda-redo "")))
 
 (global-set-key (kbd "C-x A v") 'ak/refresh-agenda-list)
+#+end_src
+* Custom agenda
+I like to see my weekly agenda alongside a list of current "objective" tasks:
+#+begin_src elisp :results none
+(setq org-agenda-custom-commands
+      '(("o" "Agenda and objectives"
+         ((agenda "")
+          (tags-todo "objective")
+          ))))
 #+end_src
