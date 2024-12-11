@@ -171,3 +171,12 @@ I'm often in the middle of a source block in an org file, and want to collapse i
 
 (global-set-key (kbd "C-x A U") #'ak/capitalise-and-stop-region)
 #+end_src
+** Miscellaneous Docker commands
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x A D p") (lambda ()
+				    (interactive)
+				    (shell-command "docker ps")))
+(global-set-key (kbd "C-x A D k") (lambda ()
+				    (interactive)
+				    (shell-command "docker ps -q | xargs docker kill")))
+#+end_src
