@@ -69,6 +69,12 @@ aws --profile %s --region us-east-1
 
 ,#+end_src" file-name)))
 
+(defun ak/insert-markdown-source-block ()
+  (interactive)
+  (insert "#+begin_src markdown
+
+,#+end_src"))
+
 (global-set-key (kbd "C-x A i a") #'ak/insert-aws-source-block)
 (global-set-key (kbd "C-x A i A") #'ak/insert-parameterised-aws-source-block)
 (global-set-key (kbd "C-x A i b") #'ak/insert-bash-source-block)
@@ -76,6 +82,7 @@ aws --profile %s --region us-east-1
 (global-set-key (kbd "C-x A i E") #'ak/insert-elisp-source-block-with-results)
 (global-set-key (kbd "C-x A i p") #'ak/insert-python-source-block)
 (global-set-key (kbd "C-x A i P") #'ak/insert-plantuml-source-block)
+(global-set-key (kbd "C-x A i m") #'ak/insert-markdown-source-block)
 #+end_src
 ** Custom global keybindings for common commands
 There are some common commands which I like to have global keybindings for:
