@@ -270,7 +270,7 @@ I have found importing events from Google calendar using an ICS export file to b
   (goto-char 0)
   (let ((org-buffer (get-buffer-create org-buffer-name))
 	(current-day nil)
-	(current-year "2024")
+	(current-year "2025")
 	(current-month nil)
 	(current-time nil))
     (with-current-buffer org-buffer
