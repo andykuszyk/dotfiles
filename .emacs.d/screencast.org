@@ -2,6 +2,10 @@
 #+begin_src elisp :results none
 (use-package gif-screencast :ensure t)
 #+end_src
+* install keycast
+#+begin_src elisp :results none
+(use-package keycast :ensure t)
+#+end_src
 * mac os configuration
 #+begin_src elisp :results none
 (when (string= system-type "darwin")
