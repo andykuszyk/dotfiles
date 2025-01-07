@@ -182,6 +182,11 @@ And set indentation to 2 spaces:
 #+begin_src elisp :results none
 (setq js-indent-level 2)
 #+end_src
+** Typescript
+#+begin_src elisp :results none
+(use-package typescript-mode)
+(add-hook 'typescript-mode-hook #'lsp)
+#+end_src
 ** Java
 #+begin_src elisp :results none
 (use-package lsp-java :ensure t)
