@@ -2,7 +2,7 @@
 ** install libraries
 #+begin_src bash :results output verbatim :tangle temp.bash
 #!/bin/bash
-brew install jansson texinfo libgccjit
+brew install jansson texinfo libgccjit tree-sitter
 #+end_src
 ** download emacs source
 #+begin_src bash :results output verbatim :tangle temp.bash
@@ -16,7 +16,7 @@ tar xvf emacs-29.4.tar.gz
 #+begin_src bash :results output verbatim :tangle temp.bash
 #!/bin/bash
 cd ~/emacs/emacs-29.4
-./configure --with-json --with-xwidgets --with-native-compilation
+./configure --with-json --with-xwidgets --with-native-compilation --with-tree-sitter
 make
 #+end_src
 ** install
