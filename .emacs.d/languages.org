@@ -120,7 +120,6 @@ Initialise lsp-mode for Terraform, and format files when they are saved:
 (use-package terraform-mode :ensure t)
 (add-hook 'terraform-mode-hook #'lsp)
 (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
-(add-hook 'hcl-mode-hook #'lsp)
 (add-hook 'hcl-mode-hook #'terraform-format-on-save-mode)
 #+end_src
 ** Yaml support
