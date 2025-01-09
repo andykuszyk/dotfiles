@@ -85,3 +85,21 @@ This allows the minibuffer to be used when entering text in the minibuffer.
 #+begin_src elisp :results none
 (setq enable-recursive-minibuffers t)
 #+end_src
+** GPG pinentry
+To use Emacs as a GPG pinentry client, I need to:
+*** Install the pinentry libary
+#+begin_src bash :results output verbatim :tangle no
+brew install pinentry
+#+end_src
+*** Install the pinentry pack
+#+begin_src elisp :results none
+(use-package pinentry :ensure t)
+#+end_src
+*** Start the emacs server
+#+begin_src elisp :results none
+(pinentry-start)
+#+end_src
+*** And don't forget to configure gpg to use Emacs
+#+begin_src bash :results output verbatim :tangle no
+echo "allow-emacs-pinentry" >> ~/.gnupg/gpg-agent.conf 
+#+end_src
