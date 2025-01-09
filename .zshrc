@@ -109,5 +109,8 @@ function ep() {
     emacsclient -n $file
 }
 
+# Configure GPG pinentry
+export GPG_TTY=$(tty)
+
 # See the comment at the start of this file.
 # zprof
