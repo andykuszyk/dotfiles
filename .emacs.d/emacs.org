@@ -50,7 +50,7 @@ Allows emojis to easily be inserted from a completion menu.
 ** Display buffer customisation
 #+begin_src elisp :results none
 (add-to-list 'display-buffer-alist '("jira" display-buffer-same-window))
-(add-to-list 'display-buffer-alist '("*gh*" display-buffer-same-window))
+(add-to-list 'display-buffer-alist '("\\*gh\\*" display-buffer-same-window))
 (add-to-list 'display-buffer-alist '(".*onfluence.*" display-buffer-same-window))
 #+end_src
 ** Package and function for inserting uuids
