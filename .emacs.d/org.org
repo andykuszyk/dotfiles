@@ -60,6 +60,15 @@ This package allows for downloaded files to be inserted as links in an org file,
 (use-package org-download :ensure t)
 (define-key org-mode-map (kbd "C-c o d") #'org-download-clipboard)
 #+end_src
+** Always store images in a local =./images= directory
+#+begin_src elisp :results none
+(defun ak/set-org-download-vars ()
+  (interactive)
+  (setq org-download-image-dir "./images")
+  (setq org-download-heading-lvl nil))
+
+(add-hook 'org-mode-hook #'ak/set-org-download-vars)
+#+end_src
 * Keybindings for org table functionality
 #+begin_src elisp :results none
 (define-key org-mode-map (kbd "C-c T k") #'org-table-delete-column)
