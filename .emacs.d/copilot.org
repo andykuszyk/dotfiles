@@ -36,5 +36,7 @@ ls ~/repos/copilot.el
 ** Copilot chat
 This package faciliates conversations with copilot, and also allows commit messages to be generated:
 #+begin_src elisp :results none
-(use-package copilot-chat :ensure t)
+(use-package copilot-chat
+  :ensure t
+  :bind (("C-x A c x" . copilot-chat-display)))
 #+end_src
