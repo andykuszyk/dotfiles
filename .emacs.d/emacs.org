@@ -103,3 +103,9 @@ brew install pinentry
 #+begin_src bash :results output verbatim :tangle no
 echo "allow-emacs-pinentry" >> ~/.gnupg/gpg-agent.conf 
 #+end_src
+** Keybindings for profiling
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x A P s") #'profiler-start)
+(global-set-key (kbd "C-x A P S") #'profiler-stop)
+(global-set-key (kbd "C-x A P r") #'profiler-report)
+#+end_src
