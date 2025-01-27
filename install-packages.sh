@@ -3,7 +3,7 @@ set -euo pipefail
 
 os="linux"
 package_manager="sudo apt install"
-packages="git zsh wget fzf bat automake entr pkg-config imagemagick unzip zip cmake"
+packages="git zsh wget fzf bat automake entr pkg-config imagemagick unzip zip cmake libtool"
 additional_packages=""
 if [[ "$(uname)" == "Darwin" ]]; then
     os="darwin"
