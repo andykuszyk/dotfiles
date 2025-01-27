@@ -1,54 +1,31 @@
 # Andy Kuszyk's dotfiles
+These are my dotfiles--primarily for Zsh and Emacs--organised for ease of distribution and installation on new machines.
+
+Most of my Emacs configuration is documented as literate org files in the `.emacs.d` directory. You can see how the files are loaded in [`.emacs.d/init.el`](.emacs.d/init.el).
+
 This repo contains the dotfiles that I use for Emacs, Vim, Zsh, i3wm, and a few other tools. I use these files on Ubuntu, Fedora, Mac OS, and Termux.
 
-## Usage
-* Clone this repo somewhere.
-* Run `make` to copy the files into your home directory.
-
-> Check out the other Make targets for platform-specific instructions, e.g. for fedora or termux.
-
-## Emacs
-Some hacking might be required to get the Emacs config to work first time, since I rarely apply it from the beginning. My Emacs config takes the form of an Org file which is tangled into an init file by org-babel. See the [config](./.emacs.d/emacs.org) for more details.
-
-I use Emacs with EXWM as a window manager on Linux. For this to work, the `emacs.desktop` file needs to be copied to the xsessions directory, e.g:
+## Installation
+First, clone this repo. I typically clone it to `~/repos/andykuszyk/dotfiles`:
 
 ```sh
-$ sudo cp emacs.desktop /usr/share/xsessions
+mkdir -p ~/repos/andykuszyk
+cd ~/repos/andykuszyk
+git clone https://github.com/andykuszyk/dotfiles
 ```
 
-## EXWM on Mac OS
-Some special configuration is required to use Emacs as an X11 window manager on Mac OS.
+Next, ensure you have `make`.
 
-### Key re-bindings
-Add these key bindings to `~/.Xmodmap`:
+Then, install the dotfiles by simply running `make`:
 
-```
-keycode 66 = Super_L
-keycode 69 = Super_L
-clear mod1
-add mod1 = Super_L
+```sh
+cd ~/repos/andykuszyk/dotfiles
+make
 ```
 
-## Vim
-* Vim plugins use [`vim-plug`](https://github.com/junegunn/vim-plug). To install run `curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`, open Vim and run `:PlugInstall`.
+## Package installation
+The instructions above will install the dotfiles stored in this repo. However, some of this configuration may require additional packages to be installed on you system. These can be installed with:
 
-Tag generation is handled by [`ctags`](https://github.com/universal-ctags/ctags).
-
-After installing the plugins, install these `coc` specific extentions:
-- `:CocInstall coc-java`
-- `:CocInstall coc-go`
-
-For the Terraform langauge server, install https://github.com/hashicorp/terraform-ls.
-
-## Terminal theme
-Terminal themes provided by https://github.com/Mayccoll/Gogh. Current theme is `One Dark`.
-
-## Dependencies
-* Clone https://github.com/superbrothers/zsh-kubectl-prompt into `$HOME/repos/`
-* `pip3 install powerline-status`
-
-## Useful utilities
-* Adjusting colour balance at night: `redshift`
-* Managing network connections: `nmtui`
-* [`gvm`](https://github.com/moovweb/gvm) for managing Go versions
-* [`tfenv`](https://github.com/tfutils/tfenv) for managing Terraform versions
+```
+make install-packages
+```
