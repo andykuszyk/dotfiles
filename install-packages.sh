@@ -2,7 +2,7 @@
 set -euo pipefail
 
 os="linux"
-package_manager="apt install"
+package_manager="sudo apt install"
 packages="git zsh wget fzf bat automake entr pkg-config imagemagick"
 additional_packages=""
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -11,7 +11,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     additional_packages="jansson texinfo libgccjit tree-sitter"
 elif command pacman; then
     os="arch-linux"
-    package_manager="pacman -Syu"
+    package_manager="sudo pacman -Syu"
     additional_packages="which openssh dmenu firefox maim xclip scrot pavucontrol libjansson-dev"
 elif uname -r | grep -q android; then
     os="termux"
