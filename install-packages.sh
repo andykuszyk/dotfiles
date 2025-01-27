@@ -3,7 +3,7 @@ set -euo pipefail
 
 os="linux"
 package_manager="sudo apt install"
-packages="git zsh wget fzf bat automake entr pkg-config imagemagick unzip"
+packages="git zsh wget fzf bat automake entr pkg-config imagemagick unzip zip"
 additional_packages=""
 if [[ "$(uname)" == "Darwin" ]]; then
     os="darwin"
@@ -16,7 +16,7 @@ elif command pacman; then
 elif uname -r | grep -q android; then
     os="termux"
     package_manager="pkg install"
-    additional_packages="which openssl openssh clang binutils zip libvterm emacs"
+    additional_packages="which openssl openssh clang binutils libvterm emacs"
 fi
 
 echo "About to install packages on $os using $package_manager..."
