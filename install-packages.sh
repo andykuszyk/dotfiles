@@ -41,7 +41,7 @@ fi
 
 # Fzf tab-based completion for Zsh.
 if [[ ! -d ~/.oh-my-zsh/custom/plugins/fzf-tab/ ]]; then
-    git clone https://github.com/Aloxaf/fzf-tab $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+    git clone https://github.com/Aloxaf/fzf-tab ~/.oh-my-zsh/custom/plugins/fzf-tab
 fi
 
 # Sdkman java package manager.
