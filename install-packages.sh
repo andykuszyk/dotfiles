@@ -19,7 +19,7 @@ elif uname -r | grep -q android; then
     additional_packages="which openssl openssh clang binutils zip libvterm emacs"
 fi
 
-exec $package_manager $packages $additional_packages
+eval $package_manager $packages $additional_packages
 
 # Install oh-my-zsh.
 if [[ ! -d ~/.oh-my-zsh/ ]]; then
@@ -27,10 +27,12 @@ if [[ ! -d ~/.oh-my-zsh/ ]]; then
 fi
 
 # Set the default shell to be Zsh.
-chsh -s $(which zsh)
+if [[ $os != "darwin" ]]; then
+    chsh -s $(which zsh)
+fi
 
 # Symlink bat to a more convenient command name.
-if [[ ! -a ~/.local/bin/bat ]]; then
+if [[ ! -h ~/.local/bin/bat ]]; then
     ln -s /usr/bin/batcat ~/.local/bin/bat
 fi
 
