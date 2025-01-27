@@ -13,6 +13,7 @@ mkdir -p ~/.local/bin
 mkdir -p ~/.vim/swapfiles
 mkdir -p ~/.ctags.d
 mkdir -p ~/.termux/
+mkdir -p ~/.gnupg/
 
 for f in $(find . -type f | grep -v git); do
     cp $f $HOME/$(echo $f | sed 's/\.\///g');
