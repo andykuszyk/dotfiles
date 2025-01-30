@@ -1,0 +1,43 @@
+* Configuration to display my org entries in a calendar view
+** Calfw
+This package provides the base calendar view I use:
+#+begin_src elisp :results none
+(use-package calfw :ensure t)
+#+end_src
+** Calfw-org
+This package integrates entries in the org agenda with calfw:
+#+begin_src elisp :results none
+(use-package calfw-org :ensure t)
+#+end_src
+** Calfw-blocks
+This package renders the calendar events in calfw in time blocks each day.
+*** Clone the repo
+#+begin_src bash :tangle no :results verbatim
+git clone https://github.com/ml729/calfw-blocks ~/repos/calfw-blocks
+ls ~/repos/calfw-blocks
+#+end_src
+
+#+RESULTS:
+| LICENSE.md               |
+| README.org               |
+| calfw-blocks.el          |
+| screenshot-transpose.png |
+| screenshot.png           |
+*** Install the package
+#+begin_src elisp :results none
+(use-package calfw-blocks :load-path "~/repos/calfw-blocks")
+#+end_src
+*** Function to open day view
+#+begin_src elisp :results none
+(defun ak/day-calfw ()
+  (interactive)
+  (cfw:open-calendar-buffer
+   :contents-sources
+   (list
+    (cfw:org-create-source "yellow"))
+   :view 'block-day))
+#+end_src
+*** Set custom colors
+#+begin_src elisp :results none
+(setq calfw-blocks-colors-list '("yellow"))
+#+end_src
