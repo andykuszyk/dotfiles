@@ -76,8 +76,6 @@ I like to see the time in UTC, as well as the local time zone. I find it's a goo
 #+end_src
 *** Configure modeline
 #+begin_src elisp :results none
-(spaceline-toggle-window-number-off)                                      ; otherwise the evil state indicator isn't shown
-(setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state) ; colorise the modeline based on the evil state
 (setq powerline-default-separator "arrow")
 (setq spaceline-separator-dir-left '(left . left))
 (setq spaceline-separator-dir-right '(right . right))
