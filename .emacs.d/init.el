@@ -6,6 +6,9 @@
 ;; configuration.
 (org-babel-load-file (concat user-emacs-directory "package-management.org"))
 
+;; Code project management tools.
+(org-babel-load-file (concat user-emacs-directory "projects.org"))
+
 ;; Configure tools and keybindings for managing Emacs windows.
 (org-babel-load-file (concat user-emacs-directory "window-management.org"))
 
@@ -17,9 +20,6 @@
 
 ;; Configure Emacs' environment.
 (org-babel-load-file (concat user-emacs-directory "environment.org"))
-
-;; Code project management tools.
-(org-babel-load-file (concat user-emacs-directory "projects.org"))
 
 ;; Narrowing and completion tools for the minibuffer, and buffers.
 (org-babel-load-file (concat user-emacs-directory "completion.org"))
