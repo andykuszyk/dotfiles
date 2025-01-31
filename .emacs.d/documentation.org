@@ -40,6 +40,11 @@ This is a handy package which downloads documentation for Terraform providers, a
 #+begin_src elisp :results none
 (use-package terraform-doc :ensure t)
 #+end_src
+** Devdocs
+The =devdocs= package allows [[ https://devdocs.io][devdocs]] documentation to be browsed from within Emacs with ease:
+#+begin_src elisp :results none
+(use-package devdocs :ensure t)
+#+end_src
 ** Noman
 I've written a package for browsing command-line documentation, which I often use. It's on MELPA, but I prefer to load it locally in case I'm doing some work on it.
 #+begin_src elisp :results none
