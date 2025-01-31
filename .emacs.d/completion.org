@@ -46,3 +46,11 @@ However, I disable orderless for Company, because I find it affects performance 
     (apply capf-fn args)))
 (advice-add 'company-capf :around #'company-completion-styles)
 #+end_src
+*** Embark
+Embark is a handy package for performing actions on one or many candidates either in a buffer, or in the minibuffer. For example, it allows you kill a buffer whilst in the middle of switching to another buffer.
+#+begin_src elisp :results none
+(use-package embark
+  :ensure t
+  :bind
+  ("C-." . embark-act))
+#+end_src
