@@ -6,7 +6,8 @@ This package facilitates interacting with the Jira CLI from within Emacs:
 (when (file-directory-p "~/repos/andykuszyk/jira-cli.el")
   (use-package jira-cli
     :load-path "~/repos/andykuszyk/jira-cli.el/"
-    :bind (("C-x j j" . jira-cli))))
+    :bind (("C-x j j" . jira-cli)))
+  (require 'jira-cli))
 #+end_src
 ** ob-jira-markdown
 I like to write and edit Jira issues as org-babel source blocks, and this package lets me easily create and edit issues directly from org-mode:
