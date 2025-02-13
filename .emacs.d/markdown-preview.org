@@ -22,8 +22,14 @@ ls -lh ~/repos/markdown-xwidget
 (use-package mustache :ensure t)
 (use-package markdown-xwidget :load-path "~/repos/markdown-xwidget")
 #+end_src
-** Use =markdown= for conversion
+** Use =multimarkdown= for conversion
 Using =pandoc= has issues with Mermaid, so =multimarkdown= (=brew install multimarkdown=) needs to be used instead:
 #+begin_src elisp :results none
 (setq markdown-xwidget-command "multimarkdown")
+#+end_src
+** Configure color themes
+By default, Mermaid diagrams aren't rendered well, so explicitly set the colour themes to use:
+#+begin_src elisp :results none
+(setq markdown-xwidget-github-theme "dark")
+(setq markdown-xwidget-mermaid-theme "dark")
 #+end_src
