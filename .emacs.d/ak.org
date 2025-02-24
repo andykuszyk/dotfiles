@@ -64,10 +64,10 @@ aws --profile %s --region us-east-1
 ,#+end_src"))
 
 (defun ak/insert-plantuml-source-block (file-name)
-  (interactive "sFile name: ")
-  (insert (format "#+begin_src plantuml :file %s
+  (interactive "sImage name: ")
+  (insert (format "#+begin_src plantuml :file %s-%s.png
 
-,#+end_src" file-name)))
+,#+end_src" (buffer-name (current-buffer)) file-name)))
 
 (defun ak/insert-markdown-source-block ()
   (interactive)
