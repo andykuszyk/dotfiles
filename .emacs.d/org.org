@@ -156,7 +156,7 @@ In order to achieve this, I export the org file using ~ox-pandoc~, rather than t
 #+begin_src elisp :results none
 (defun org-babel-edit-prep:bash (babel-info)
   (setq-local buffer-file-name (->> babel-info caddr (alist-get :tangle)))
-  (lsp))
+  )
 #+end_src
 * Export org files as revealjs presentations
 #+begin_src elisp
