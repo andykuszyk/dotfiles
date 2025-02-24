@@ -44,6 +44,8 @@ This is a handy package which downloads documentation for Terraform providers, a
 The =devdocs= package allows [[ https://devdocs.io][devdocs]] documentation to be browsed from within Emacs with ease:
 #+begin_src elisp :results none
 (use-package devdocs :ensure t)
+(global-set-key (kbd "C-x A d i") #'devdocs-install)
+(global-set-key (kbd "C-x A d d") #'devdocs-lookup)
 #+end_src
 ** RFC mode
 I often read RFCs in Emacs, since they are a great primary source of documentation:
