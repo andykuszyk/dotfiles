@@ -32,3 +32,7 @@ This let's you copy the URL to the current line in the git forge (e.g. GitHub) u
 (use-package git-link :ensure t)
 (define-key projectile-mode-map (kbd "C-c p G l") #'git-link)
 #+end_src
+** Add key-binding for git grep
+#+begin_src elisp :results none
+(define-key projectile-mode-map (kbd "C-c p s v") #'vc-git-grep)
+#+end_src
