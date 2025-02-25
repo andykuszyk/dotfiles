@@ -152,12 +152,6 @@ In order to achieve this, I export the org file using ~ox-pandoc~, rather than t
 #+begin_src elisp :results none
 (setq org-html-postamble nil)
 #+end_src
-* Enable lsp mode for bash source blocks
-#+begin_src elisp :results none
-(defun org-babel-edit-prep:bash (babel-info)
-  (setq-local buffer-file-name (->> babel-info caddr (alist-get :tangle)))
-  )
-#+end_src
 * Export org files as revealjs presentations
 #+begin_src elisp
 ;; Export org files to reveal.js presentations
