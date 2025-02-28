@@ -12,3 +12,9 @@ I routinely use Emacs as a terminal emulator, for which I use the ~vterm~ packag
 (global-set-key (kbd "C-x v") #'vterm)
 (global-set-key (kbd "C-x m") #'multi-vterm)
 #+end_src
+** Function to rename vterm buffer based on current directory
+#+begin_src elisp :results none
+(defun ak/rename-vterm-buffer ()
+  (interactive)
+  (rename-buffer (format "*vterm-%s*" (pwd)) t))
+#+end_src
