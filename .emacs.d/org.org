@@ -179,6 +179,10 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 #+begin_src elisp :results none
 (require 'ox-md)
 #+end_src
+* GitHub flavoured markdown exporter for org files
+#+begin_src elisp :results none
+(use-package ox-gfm :ensure t)
+#+end_src
 * Org latex export
 #+begin_src elisp :results none
 (add-to-list 'org-latex-classes
