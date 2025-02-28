@@ -69,6 +69,12 @@ aws --profile %s --region us-east-1
 
 ,#+end_src" (buffer-name (current-buffer)) file-name)))
 
+(defun ak/insert-mermaid-source-block (file-name)
+  (interactive "sImage name: ")
+  (insert (format "#+begin_src mermaid :file %s-%s.png :theme dark :background-color transparent :width \"1000\"
+
+,#+end_src" (buffer-name (current-buffer)) file-name)))
+
 (defun ak/insert-markdown-source-block ()
   (interactive)
   (insert "#+begin_src markdown
@@ -83,6 +89,7 @@ aws --profile %s --region us-east-1
 (global-set-key (kbd "C-x A i p") #'ak/insert-python-source-block)
 (global-set-key (kbd "C-x A i P") #'ak/insert-plantuml-source-block)
 (global-set-key (kbd "C-x A i m") #'ak/insert-markdown-source-block)
+(global-set-key (kbd "C-x A i M") #'ak/insert-mermaid-source-block)
 #+end_src
 ** Custom global keybindings for common commands
 There are some common commands which I like to have global keybindings for:
