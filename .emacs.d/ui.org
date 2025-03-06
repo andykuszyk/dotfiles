@@ -90,15 +90,15 @@ I like to see the time in UTC, as well as the local time zone. I find it's a goo
       ((buffer-modified buffer-id) :priority 90)
       (major-mode :priority 90)
       (vterm-copy-mode-segment :when active)
-      (projectile-segment :when active)
+      (projectile-segment :when active :priority 70)
       (process :when active :priority 50)
       (version-control :when active :priority 50)
       ((flycheck-error flycheck-warning flycheck-info) :when active :priority 80)
       )
 					; right side
     '(
-      (battery :priority 90)
-      (time-segment :priority 90)
+      (battery :priority 40)
+      (time-segment :priority 60)
       (utc-segment :priority 50)
       (perspective-segment :priority 100)
       )
