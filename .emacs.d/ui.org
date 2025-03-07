@@ -89,7 +89,7 @@ I like to see the time in UTC, as well as the local time zone. I find it's a goo
       (window-number :priority 100)
       ((buffer-modified buffer-id) :priority 90)
       (major-mode :priority 90)
-      (vterm-copy-mode-segment :when active)
+      (vterm-copy-mode-segment :when active :priority 80)
       (projectile-segment :when active :priority 70)
       (process :when active :priority 50)
       (version-control :when active :priority 50)
