@@ -9,9 +9,13 @@ brew install jansson texinfo libgccjit tree-sitter
 #!/bin/bash
 mkdir ~/emacs
 cd ~/emacs
-wget https://mirror.ibcp.fr/pub/gnu/emacs/emacs-29.4.tar.gz
-tar xvf emacs-29.4.tar.gz
+wget http://ftp.gnu.org/gnu/emacs/emacs-30.1.tar.gz
+tar xvf emacs-30.1.tar.gz
+ls -la ~/emacs/emacs-30.1
 #+end_src
+
+#+RESULTS:
+
 ** configure and compile
 #+begin_src bash :results output verbatim :tangle temp.bash
 #!/bin/bash
