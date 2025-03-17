@@ -51,6 +51,11 @@ The =devdocs= package allows [[ https://devdocs.io][devdocs]] documentation to b
 I often read RFCs in Emacs, since they are a great primary source of documentation:
 #+begin_src elisp :results none
 (use-package rfc-mode :ensure t)
+(defun ak/rfc-mode-hook ()
+  (visual-line-mode)
+  (adaptive-wrap-prefix-mode)
+  (display-line-numbers-mode -1))
+(add-hook 'rfc-mode-hook #'ak/rfc-mode-hook)
 #+end_src
 ** Noman
 I've written a package for browsing command-line documentation, which I often use. It's on MELPA, but I prefer to load it locally in case I'm doing some work on it.
