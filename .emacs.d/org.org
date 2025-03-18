@@ -353,7 +353,7 @@ I like to see my weekly agenda alongside a list of current "objective" tasks:
       '(("o" "Agenda and objectives"
          ((agenda "")
           (tags-todo "objective")
-	  (tags-todo "CATEGORY=\"goals\"-future")
-	  (tags-todo "CATEGORY=\"goals\"+future")
+	  (tags-todo "CATEGORY=\"goals\"-future-objective")
+	  (tags-todo "CATEGORY=\"goals\"+future-objective")
           ))))
 #+end_src
