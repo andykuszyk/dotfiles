@@ -19,8 +19,8 @@ ls -la ~/emacs/emacs-30.1
 ** configure and compile
 #+begin_src bash :results output verbatim :tangle temp.bash
 #!/bin/bash
-cd ~/emacs/emacs-29.4
-./configure --with-json --with-xwidgets --with-native-compilation --with-tree-sitter
+cd ~/emacs/emacs-30.1
+./configure --with-xwidgets --with-native-compilation --with-tree-sitter
 make
 #+end_src
 ** install
