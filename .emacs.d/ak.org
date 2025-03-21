@@ -27,22 +27,19 @@ I use these functions to quickly insert some simple text templates, most frequen
 #+begin_src elisp :results none
 (defun ak/insert-aws-source-block ()
   (interactive)
-  (insert "#+begin_src bash :results output verbatim :tangle temp.bash
-#!/bin/bash
+  (insert "#+begin_src bash :results output verbatim
 aws --profile saml --region eu-west-1
 ,#+end_src"))
 
 (defun ak/insert-parameterised-aws-source-block (profile)
   (interactive "sProfile: ")
-  (insert (format "#+begin_src bash :results output verbatim :tangle temp.bash
-#!/bin/bash
+  (insert (format "#+begin_src bash :results output verbatim
 aws --profile %s --region us-east-1
 ,#+end_src" profile)))
 
 (defun ak/insert-bash-source-block ()
   (interactive)
-  (insert "#+begin_src bash :results output verbatim :tangle temp.bash
-#!/bin/bash
+  (insert "#+begin_src bash :results output verbatim
 ,#+end_src"))
 
 (defun ak/insert-elisp-source-block ()
