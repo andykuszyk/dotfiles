@@ -99,21 +99,22 @@ This means that ~C-c C-j~ will use completion in the minibuffer for navigating t
 (setq plantuml-indent-level 2)
 (setq plantuml-default-exec-mode 'jar)
 (setq plantuml-output-type "png")
+(setq org-plantuml-jar-path
+      (expand-file-name "~/plantuml.jar"))
+#+end_src
+* Mermaid source blocks
+#+begin_src elisp :results none
+(use-package mermaid-mode :ensure t) ; load mermaid-mode before ob-mermaid, because ob-mermaid has a better babel function
+(use-package ob-mermaid :ensure t)
+(require 'ob-mermaid)
+(setq ob-mermaid-cli-path (executable-find "mmdc"))
 #+end_src
 * Org babel config
 #+begin_src elisp :results none
-;; Org babel support for go
 (use-package ob-go :ensure t)
-
-;; Mermaid babel support
-(use-package mermaid-mode :ensure t) ; load mermaid-mode before ob-mermaid, because ob-mermaid has a better babel function
-(use-package ob-mermaid :ensure t)
 
 ;; Use python3 for python blocks
 (setq org-babel-python-command "python3")
-
-(setq org-plantuml-jar-path
-      (expand-file-name "~/plantuml.jar"))
 
 (require 'ob-js)
 
