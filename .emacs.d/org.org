@@ -357,3 +357,10 @@ I like to see my weekly agenda alongside a list of current "objective" tasks:
 	  (tags-todo "CATEGORY=\"goals\"-future-objective" ((org-agenda-sorting-strategy '(priority-down))))
 	  (tags-todo "CATEGORY=\"goals\"+future-objective" ((org-agenda-sorting-strategy '(priority-down))))))))
 #+end_src
+* Strikethrough done headlines in org agenda
+#+begin_src elisp :results none
+(custom-set-faces
+ '(org-agenda-done ((t (:foreground "#42ae2c" :strike-through t :height 1.0))))
+ '(org-done ((t (:inherit bold :background "#edf2e9" :foreground "#42ae2c" :strike-through t))))
+ '(org-headline-done ((t (:foreground "#2d9574" :strike-through t)))))
+#+end_src
