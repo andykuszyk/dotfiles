@@ -78,6 +78,21 @@ aws --profile %s --region us-east-1
 
 ,#+end_src"))
 
+(defun ak/insert-jira-source-block (title type project parent)
+  (interactive "sTitle: 
+sType: 
+sProject: 
+sParent: ")
+  (insert
+   (format
+    "#+begin_src jira-markdown :title %s :type %s :project %s :parent %s :command create :execute script
+
+,#+end_src"
+    title
+    type
+    project
+    parent)))
+
 (global-set-key (kbd "C-x A i a") #'ak/insert-aws-source-block)
 (global-set-key (kbd "C-x A i A") #'ak/insert-parameterised-aws-source-block)
 (global-set-key (kbd "C-x A i b") #'ak/insert-bash-source-block)
@@ -87,6 +102,7 @@ aws --profile %s --region us-east-1
 (global-set-key (kbd "C-x A i P") #'ak/insert-plantuml-source-block)
 (global-set-key (kbd "C-x A i m") #'ak/insert-markdown-source-block)
 (global-set-key (kbd "C-x A i M") #'ak/insert-mermaid-source-block)
+(global-set-key (kbd "C-x A i j") #'ak/insert-jira-source-block)
 #+end_src
 ** Custom global keybindings for common commands
 There are some common commands which I like to have global keybindings for:
