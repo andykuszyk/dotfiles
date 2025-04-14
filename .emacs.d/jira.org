@@ -16,5 +16,7 @@ I like to write and edit Jira issues as org-babel source blocks, and this packag
   (use-package ob-jira-markdown
     :load-path "~/repos/andykuszyk/ob-jira-markdown.el/"
     :bind (("C-x j o" . ob-jira-markdown-open-in-browser)
-	   ("C-x j w" . ob-jira-markdown-kill-issue))))
+	   ("C-x j w" . ob-jira-markdown-kill-issue)))
+  (require 'ob-jira-markdown)
+  (require 'jira-markdown-mode))
 #+end_src
