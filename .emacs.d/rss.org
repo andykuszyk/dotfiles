@@ -1,0 +1,21 @@
+* Install elfeed
+I use the =elfeed= to consume RSS feeds in Emacs, because it seems like the most popular one.
+#+begin_src elisp :results none
+(use-package elfeed :ensure t)
+#+end_src
+* Feeds
+I mainly use RSS for news. Here is the BBC
+#+begin_src elisp :results none
+(setq
+ elfeed-feeds
+ '("http://feeds.bbci.co.uk/news/world/rss.xml"))
+#+end_src
+* Feed filter
+I prefer to filter out unsavoury content that I have no interest in reading. The below is a list of keywords that are excluded from my feeds. They are stored base64 encoded in this file to avoid offending the casual reader (the keywords are unpleasant, because I wish to avoid unpleasant news).
+#+begin_src elisp :results none
+(setq-default
+ elfeed-search-filter (base64-decode-string "
+QDEtd2Vlay1hZ28KK3VucmVhZCAKIWRlYWQKIWRlYXRoCiFraWxsCiFjaGlsZAohZ2lybAohYm95
+CiFzZXgKIXJhcGUKIW11cmRlcgohYm9tYgohYXR0YWNrCiF2aW9sZW5jZQohZmF0YWw=
+"))
+#+end_src
