@@ -86,7 +86,9 @@ sParent: ")
   (insert
    (format
     "#+begin_src jira-markdown :title %s :type %s :project %s :parent %s :command create :execute script
+## Context
 
+## Acceptance criteria
 ,#+end_src"
     title
     type
