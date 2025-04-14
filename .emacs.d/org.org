@@ -361,6 +361,6 @@ I like to see my weekly agenda alongside a list of current "objective" tasks:
 #+begin_src elisp :results none
 (custom-set-faces
  '(org-agenda-done ((t (:foreground "#42ae2c" :strike-through t :height 1.0))))
- '(org-done ((t (:inherit bold :background "#edf2e9" :foreground "#42ae2c" :strike-through t))))
+ '(org-done ((t (:inherit bold :foreground "#42ae2c" :strike-through t))))
  '(org-headline-done ((t (:foreground "#2d9574" :strike-through t)))))
 #+end_src
