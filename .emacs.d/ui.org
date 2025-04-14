@@ -118,12 +118,20 @@ It's handy to be able to quickly switch between light and dark themes, including
 (defun ak/enable-light-theme ()
   (interactive)
   (load-theme 'spacemacs-light t)
-  (ak/spaceline-compile))
+  (ak/spaceline-compile)
+  (custom-set-faces
+   '(org-agenda-done ((t (:foreground "#42ae2c" :strike-through t :height 1.0))))
+   '(org-done ((t (:inherit bold :foreground "#42ae2c" :strike-through t))))
+   '(org-headline-done ((t (:foreground "#2d9574" :strike-through t))))))
 
 (defun ak/enable-dark-theme ()
   (interactive)
   (load-theme 'spacemacs-dark t)
-  (ak/spaceline-compile))
+  (ak/spaceline-compile)
+  (custom-set-faces
+   '(org-agenda-done ((t (:foreground "#42ae2c" :strike-through nil :height 1.0))))
+   '(org-done ((t (:inherit bold :foreground "#42ae2c" :strike-through nil))))
+   '(org-headline-done ((t (:foreground "#2d9574" :strike-through nil))))))
 #+end_src
 ** Display line numbers
 I always like to see line numbers in files, unless explicitly disabled.
