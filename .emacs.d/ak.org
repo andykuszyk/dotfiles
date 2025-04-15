@@ -154,6 +154,7 @@ I use these functions to resize the horizontal space used by a buffer. For examp
 (global-set-key (kbd "C-x A C") #'ak/center-reading)
 (global-set-key (kbd "C-x A r") #'ak/reset-reading)
 #+end_src
+Other packages that offer similar features are [[https://github.com/rnkn/olivetti][olivetti]] and [[https://github.com/protesilaos/spacious-padding][spacious-padding]].
 ** Render ansi escape codes in a log file
 Sometimes it's necessary to render ANSI escape codes whilst viewing log files.
 #+begin_src elisp :results none
