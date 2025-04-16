@@ -8,7 +8,8 @@ I mainly use RSS for news. Here is the BBC
 #+begin_src elisp :results none
 (setq
  elfeed-feeds
- '("http://feeds.bbci.co.uk/news/world/rss.xml"))
+ '(("http://feeds.bbci.co.uk/news/world/rss.xml" world)
+   ("http://feeds.bbci.co.uk/news/politics/rss.xml" politics)))
 #+end_src
 * Feed filter
 I prefer to filter out unsavoury content that I have no interest in reading. The below is a list of keywords that are excluded from my feeds. They are stored base64 encoded in this file to avoid offending the casual reader (the keywords are unpleasant, because I wish to avoid unpleasant news).
