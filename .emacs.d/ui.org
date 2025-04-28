@@ -100,7 +100,7 @@ I like to see the time in UTC, as well as the local time zone. I find it's a goo
       (battery :priority 40)
       (time-segment :priority 60)
       (utc-segment :priority 50)
-      (perspective-segment :priority 100)
+      (perspective-segment :priority 20)
       )
     ))
 (ak/spaceline-compile)
