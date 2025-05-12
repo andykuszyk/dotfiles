@@ -14,6 +14,12 @@ I prefer to read man pages without line numbers, and sometimes read them on narr
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x A m") #'man)
 #+end_src
+*** Use gsed on mac os
+=sed= doesn't seem to work well for me on Mac OS, whereas GNU =sed= behaves as expected. Install it with =brew install gsed=.
+#+begin_src elisp :results none
+(if (string= system-type "darwin")
+    (setq Man-sed-command "gsed"))
+#+end_src
 ** Info customisation
 Similar to man pages, I prefer to read info pages without line numbers, and sometimes read them on a phone.
 #+begin_src elisp :results none
