@@ -15,7 +15,7 @@ after-startup-command = []
 start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
-enable-normalization-flatten-containers = true
+enable-normalization-flatten-containers = false
 enable-normalization-opposite-orientation-for-nested-containers = true
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
@@ -98,8 +98,9 @@ automatically-unhide-macos-hidden-apps = false
     # '''
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    cmd-slash = 'layout tiles horizontal vertical'
-    cmd-shift-slash = 'layout accordion horizontal vertical'
+    cmd-8 = 'layout tiles horizontal vertical'
+    cmd-9 = 'layout accordion vertical horizontal'
+    cmd-0 = 'split vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     cmd-left = 'focus left'
