@@ -130,6 +130,23 @@ Initialise lsp-mode for Terraform, and format files when they are saved:
 #+begin_src elisp
 (use-package yaml-mode :ensure t)
 #+end_src
+*** Custom function to move to the next/previous root field
+#+begin_src elisp :results none
+(defun ak/yaml-move-next ()
+  (interactive)
+  (next-line)
+  (search-forward-regexp "^[a-zA-Z].*:$")
+  (move-beginning-of-line nil))
+
+(defun ak/yaml-move-previous ()
+  (interactive)
+  (previous-line)
+  (search-backward-regexp "^[a-zA-Z].*:$")
+  (move-beginning-of-line nil))
+
+(define-key yaml-mode-map (kbd "C-c C-n") #'ak/yaml-move-next)
+(define-key yaml-mode-map (kbd "C-c C-p") #'ak/yaml-move-previous)
+#+end_src
 ** Clojure support
 #+begin_src elisp
 (use-package paredit :ensure t)
