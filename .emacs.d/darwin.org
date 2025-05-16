@@ -17,3 +17,18 @@ This is a hack to allow me to enter a hash on my Mac keyboard! 🍏⌨
 #+begin_src elisp :results none
 (setq split-height-threshold 1000) ; this essentially means that splitting horizontally is not possible
 #+end_src
+** Function for switching between light and dark mode
+#+begin_src elisp :results none
+(defun ak/toggle-system-appearance ()
+  (interactive)
+  (if (eq 'spacemacs-light (car custom-enabled-themes))
+      (ak/enable-dark-theme)
+    (ak/enable-light-theme))
+  (shell-command "osascript <<EOF
+tell application \"System Events\"
+   tell appearance preferences
+      set dark mode to not dark mode
+   end tell
+end tell
+EOF"))
+#+end_src
