@@ -111,6 +111,8 @@ automatically-unhide-macos-hidden-apps = false
     cmd-1 = "workspace 1"
     cmd-2 = "workspace 2"
     cmd-3 = "workspace 3"
+    cmd-4 = "workspace 4"
+    cmd-5 = "workspace 5"
     cmd-shift-1 = "move-node-to-workspace 1"
     cmd-shift-2 = "move-node-to-workspace 2"
     cmd-shift-3 = "move-node-to-workspace 3"
@@ -143,3 +145,9 @@ automatically-unhide-macos-hidden-apps = false
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
+
+[workspace-to-monitor-force-assignment]
+    1 = 'main'
+    2 = 'dell.*'
+    3 = 'built-in.*'
+    
