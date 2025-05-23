@@ -38,5 +38,9 @@ This package faciliates conversations with copilot, and also allows commit messa
 #+begin_src elisp :results none
 (use-package copilot-chat
   :ensure t
-  :bind (("C-x A c x" . copilot-chat-display)))
+  :bind (("C-x A c x" . copilot-chat-transient)))
+#+end_src
+*** Set the copilot chat frontend
+#+begin_src elisp :results none
+(setq copilot-chat-frontend 'org)
 #+end_src
