@@ -1,0 +1,11 @@
+* Aider
+** Install aider
+#+begin_src bash :results output verbatim
+pipx install aider-chat
+#+end_src
+** Install aidermacs
+#+begin_src elisp :results none
+(use-package aidermacs
+  :ensure t
+  :bind (("C-x A A" . aidermacs-transient-menu)))
+#+end_src
