@@ -44,3 +44,7 @@ This package faciliates conversations with copilot, and also allows commit messa
 #+begin_src elisp :results none
 (setq copilot-chat-frontend 'org)
 #+end_src
+*** Use copilot to auto-generate commit messages
+#+begin_src elisp :results none
+(add-hook 'git-commit-setup-hook 'copilot-chat-insert-commit-message)
+#+end_src
