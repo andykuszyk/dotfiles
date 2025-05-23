@@ -1,0 +1,14 @@
+* Claude code
+** Install the package
+#+begin_src elisp :results none
+(use-package claude-code
+  :ensure t
+  :vc (:url "https://github.com/stevemolitor/claude-code.el")
+  :bind-keymap
+  ("C-x A C" . claude-code-command-map)
+  :config
+  (setenv "CLAUDE_CODE_USE_BEDROCK" "1")
+  (setenv "ANTHROPIC_MODEL" "us.anthropic.claude-3-7-sonnet-20250219-v1:0")
+  (setenv "AWS_PROFILE" "tools")
+  (claude-code-mode))
+#+end_src
