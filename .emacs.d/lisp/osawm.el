@@ -1,13 +1,27 @@
+;;; osawm.el --- a Mac OS window manager for Emacs  -*- lexical-binding:t; -*-
+;;; Commentary:
+;;; Code:
+
+(require 'f)
+
+(defgroup osawm
+  nil
+  "A Mac OS window manager for Emacs."
+  :group 'applications
+  :prefix "osawm-")
+
 (defcustom osawm-titlebar-height
   68
-  "The height of the title bar, which is taken into account when resizing
-  windows")
+  "The height of the title bar, which is taken into account when resizing windows."
+  :type 'number)
 
 (defcustom osawm-modeline-height
   20
-  "The height of the modeline, which is taken into account when resizing windows")
+  "The height of the modeline, which is taken into account when resizing windows."
+  :type 'number)
 
 (defun osawm--list-installed-applications ()
+  "Lists installed applications."
   (interactive)
   (mapcar
    (lambda (s)
@@ -22,21 +36,17 @@ return appList
 EOF
 ") ",")))
 
-(defun osawm-launch-application (application)
-  (interactive
-   (list
-    (completing-read
-     "Application: "
-     (osawm--list-installed-applications)
-     nil
-     t)))
-  (message application)
+(defun osawm--start-application (application)
+  "Start APPLICATION."
   (shell-command (format "
 osascript <<EOF
 tell application \"%s\"
 	activate
 end tell
-EOF" application))
+EOF" application)))
+
+(defun osawm--resize-application (application left top right bottom)
+  "Resize APPLICATION to LEFT, RIGHT, BOTTOM, TOP."
   (shell-command
    (format
     "
@@ -48,63 +58,43 @@ tell application \"%s\"
 	end tell
 end tell
 EOF"
-    application
-    (window-pixel-left)
-    (+  (window-pixel-top) osawm-titlebar-height)
-    (+ (window-pixel-left) (window-pixel-width))
-    (- (+ (window-pixel-top) (window-pixel-height) osawm-titlebar-height)
-  osawm-modeline-height)))
-  (let* ((new-buffer-name (format "*osawm %s*" application))
-	 (window-id (shell-command-to-string (format "
-osascript <<EOF
-set appName to \"%s\"
+    application left top right bottom)))
 
-if appName is equal to \"Google Chrome\" then
-	-- Special handling for Google Chrome
-	tell application \"System Events\"
-		if not (exists application process appName) then
-			return \"The application is not running.\"
-		end if
-	end tell
-	
-	tell application \"Google Chrome\"
-		if (count of windows) > 0 then
-			set windowID to id of front window
-			return windowID
-		else
-			return \"The application has no open windows.\"
-		end if
-	end tell
-else
-	-- General approach for other applications
-	tell application \"System Events\"
-		if exists (application process appName) then
-			tell application process appName
-				if (count of windows) > 0 then
-					set windowID to id of window 1
-					return windowID
-				else
-					return \"The application has no open windows.\"
-				end if
-			end tell
-		else
-			return \"The application is not running.\"
-		end if
-	end tell
-end if
-EOF" application)))
-	 (temp-file-name (f-join (temporary-file-directory) window-id ".png")))
-    (message (format "window id is %s" window-id))
-    (if (or
-	 (s-contains? "The application has no open windows." window-id)
-	 (s-contains? "The application is not running." window-id))
-	(error window-id))
+(defun osawm-launch-application (application)
+  "Launch application APPLICATION."
+  (interactive
+   (list
+    (completing-read
+     "Application: "
+     (osawm--list-installed-applications)
+     nil
+     t)))
+  (osawm--start-application application)
+  (let* ((left (window-pixel-left))
+	 (right (+ (window-pixel-left) (window-pixel-width)))
+	 (top (+  (window-pixel-top) osawm-titlebar-height))
+	 (bottom (- (+
+		     (window-pixel-top)
+		     (window-pixel-height)
+		     osawm-titlebar-height)
+		    osawm-modeline-height))
+	 (new-buffer-name (format "*osawm %s*" application))
+	 (temp-file-name
+	  (f-join
+	   (temporary-file-directory)
+	   (format "%s.png" application))))
+    (osawm--resize-application application left top right bottom)
     (shell-command
-     (format "screencapture -l \"%s\" \"%s\"" window-id temp-file-name))
+     (format
+      "screencapture -R %d,%d,%d,%d \"%s\""
+      left
+      top
+      (- right left)
+      (- bottom top)
+      temp-file-name))
     (find-file temp-file-name)
     (display-line-numbers-mode -1)
-    (rename-buffer new-buffer-name))
-  )
+    (rename-buffer new-buffer-name)))
 
 (defun osawm-select-application (application)
   "Select APPLICATION and display it."
