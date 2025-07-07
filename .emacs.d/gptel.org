@@ -1,0 +1,22 @@
+* gptel for interacting with LLMs
+** Installation
+#+begin_src elisp :results none
+(use-package gptel :ensure t)
+(setq gptel-default-mode 'org-mode)
+#+end_src
+** Claude
+#+begin_src elisp :results none
+(setq
+ gptel-model 'claude-opus-4-20250514
+ gptel-backend
+ (gptel-make-anthropic
+     "Claude"
+   :stream t
+   :key (with-temp-buffer
+	  (insert-file-contents "~/.anthropic-api-key.gpg")
+	  (buffer-string))))
+#+end_src
+** Global key binding
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x A c c") #'gptel)
+#+end_src

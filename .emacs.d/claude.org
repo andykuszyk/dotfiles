@@ -2,10 +2,22 @@
 ** Install the package
 #+begin_src elisp :results none
 (use-package claude-code-ide
-  :vc (:url "https://github.com/manzaltu/claude-code-ide.el"))
+  :load-path "~/repos/andykuszyk/claude-code-ide.el")
 #+end_src
 ** Side window placement
 #+begin_src elisp :results none
-(setq claude-code-ide-window-side 'bottom
-      claude-code-ide-window-height 30)
+(setq claude-code-ide-use-side-window nil)
+#+end_src
+** Debugging
+#+begin_src elisp :results none
+(setq claude-code-ide-debug t)
+#+end_src
+** Global key binding
+#+begin_src elisp :results none
+(global-set-key (kbd "C-x A c C") #'claude-code-ide)
+#+end_src
+** Enable global revert mode
+This ensures that files =claude= modifies automatically update in Emacs:
+#+begin_src elisp :results none
+(global-auto-revert-mode)
 #+end_src

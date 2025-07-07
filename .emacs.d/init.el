@@ -59,9 +59,13 @@
     (load-file "~/.emacs.d/lisp/gh-repo-search.el")
     (require 'gh-repo-search))
 
-;; Configure copilot, if it is cloned locally.
-(when (file-exists-p "~/repos/copilot.el")
-  (org-babel-load-file (concat user-emacs-directory "copilot.org")))
+;; Configure gptel if an anthropic API key is stored on disk.
+(when (file-exists-p "~/.anthropic-api-key.gpg")
+  (org-babel-load-file (concat user-emacs-directory "gptel.org")))
+
+;; Configure claude-code-ide if claude is installed
+(when (executable-find "claude")
+  (org-babel-load-file (concat user-emacs-directory "claude.org")))
 
 ;; Install an xwidget markdown previewer, if it is cloned locally.
 (when (and (featurep 'xwidget-internal)
