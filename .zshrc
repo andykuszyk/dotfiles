@@ -14,6 +14,7 @@ export PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.0.0/bin"
 export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:$HOME/.claude/local"
 
 # Oh my zsh configuration.
 export ZSH="$HOME/.oh-my-zsh"
