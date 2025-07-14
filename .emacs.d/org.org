@@ -361,3 +361,49 @@ I like to see my weekly agenda alongside a list of current "objective" tasks:
 #+begin_src elisp :results none
 (setq org-deadline-warning-days 2)
 #+end_src
+* Functions to navigate between sections in org-agenda
+#+begin_src elisp :results none
+(defun ak/org-agenda-next-section ()
+  "Jump to the next section/block in org-agenda."
+  (interactive)
+  (when (derived-mode-p 'org-agenda-mode)
+    (let ((pos (point)))
+      (forward-line 1)
+      ;; Look for separator lines (usually a line of dashes or equals)
+      ;; or lines that start with a non-whitespace char in column 0
+      (if (re-search-forward "^[^[:space:]\n]\\|^[=-]+$" nil t)
+          (progn
+            (beginning-of-line)
+            ;; Skip over the separator line if we're on one
+            (when (looking-at "^[=-]+$")
+              (forward-line 1))
+            ;; Skip any blank lines
+            (while (and (not (eobp)) (looking-at "^\\s-*$"))
+              (forward-line 1)))
+        (goto-char pos)
+        (message "No more sections")))))
+
+(defun ak/org-agenda-previous-section ()
+  "Jump to the previous section/block in org-agenda."
+  (interactive)
+  (when (derived-mode-p 'org-agenda-mode)
+    (let ((pos (point)))
+      (forward-line -1)
+      ;; Search backwards for section headers
+      (if (re-search-backward "^[^[:space:]\n]\\|^[=-]+$" nil t)
+          (progn
+            ;; If we found a separator, go to the line after it
+            (if (looking-at "^[=-]+$")
+                (forward-line 1)
+              ;; Otherwise we're on a header, stay here
+              (beginning-of-line))
+            ;; Skip any blank lines
+            (while (and (not (eobp)) (looking-at "^\\s-*$"))
+              (forward-line 1)))
+        (goto-char pos)
+        (message "No previous sections")))))
+
+(with-eval-after-load 'org-agenda
+  (define-key org-agenda-mode-map (kbd "C-n") #'ak/org-agenda-next-section)
+  (define-key org-agenda-mode-map (kbd "C-p") #'ak/org-agenda-previous-section))
+#+end_src
