@@ -16,6 +16,19 @@
 	  (insert-file-contents "~/.anthropic-api-key.gpg")
 	  (buffer-string))))
 #+end_src
+** Claude via Bedrock
+#+begin_src elisp :results none
+(setq gptel-model   'claude-sonnet-4-20250514
+      gptel-backend
+      (gptel-make-bedrock "AWS"
+	:stream t
+	:region "eu-north-1"
+	:models '(claude-sonnet-4-20250514)
+	:model-region 'eu
+	:api-key (with-temp-buffer
+	  (insert-file-contents "~/.bedrock-api-key.gpg")
+	  (buffer-string))))
+#+end_src
 ** Global key binding
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x A c c") #'gptel)
