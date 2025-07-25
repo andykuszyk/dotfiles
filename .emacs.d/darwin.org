@@ -32,3 +32,34 @@ tell application \"System Events\"
 end tell
 EOF"))
 #+end_src
+** Functions for controlling AWS VPN client
+*** function to disconnect
+#+begin_src elisp :results none
+(defun ak/aws-vpn-disconnect ()
+  "Disconnect from AWS VPN using AppleScript to interact with the GUI."
+  (interactive)
+  (shell-command "osascript -e '
+tell application \"System Events\"
+  tell process \"AWS VPN Client\"
+    set frontmost to true
+    -- Click the disconnect button in the VPN connection group
+    click button \"Disconnect\" of group 1 of group 1 of list 1 of list 1 of scroll area 2 of window 1
+    set visible to false
+  end tell
+end tell'"))
+#+end_src
+*** function to connect
+#+begin_src elisp :results none
+(defun ak/aws-vpn-connect ()
+  "Connect to AWS VPN using AppleScript to interact with the GUI."
+  (interactive)
+  (shell-command "osascript -e '
+tell application \"System Events\"
+  tell process \"AWS VPN Client\"
+    set frontmost to true
+    -- Click the connect button in the VPN connection group
+    click button \"Connect\" of group 1 of group 1 of list 1 of list 1 of scroll area 1 of window 1
+    set visible to false
+  end tell
+end tell'"))
+#+end_src
