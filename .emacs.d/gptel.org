@@ -18,6 +18,7 @@
 #+end_src
 ** Claude via Bedrock
 #+begin_src elisp :results none
+(require 'gptel-bedrock)
 (setq gptel-model   'claude-sonnet-4-20250514
       gptel-backend
       (gptel-make-bedrock "AWS"
