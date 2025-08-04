@@ -26,9 +26,14 @@ This ensures that files =claude= modifies automatically update in Emacs:
 ** Configure claude to use AWS bedrock
 #+begin_src elisp :results none
 (setenv "ANTHROPIC_MODEL" "us.anthropic.claude-sonnet-4-20250514-v1:0")
-(setenv "AWS_REGION" "us-east-1")
 (setenv "AWS_BEARER_TOKEN_BEDROCK" (with-temp-buffer
 	  (insert-file-contents "~/.bedrock-api-key.gpg")
 	  (buffer-string)))
 (setenv "CLAUDE_CODE_USE_BEDROCK" "1")
+#+end_src
+** Shell export statements
+#+begin_src bash :tangle no
+export ANTHROPIC_MODEL="us.anthropic.claude-sonnet-4-20250514-v1:0"
+export AWS_BEARER_TOKEN_BEDROCK=$(gpg -d ~/.bedrock-api-key.gpg)
+export CLAUDE_CODE_USE_BEDROCK="1"
 #+end_src
