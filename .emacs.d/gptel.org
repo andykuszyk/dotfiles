@@ -4,7 +4,7 @@
 (use-package gptel :load-path "~/repos/andykuszyk/gptel/")
 (setq gptel-default-mode 'org-mode)
 #+end_src
-** Claude
+** Claude                                                          :noexport:
 #+begin_src elisp :results none
 (setq
  gptel-model 'claude-opus-4-20250514
@@ -23,9 +23,9 @@
       gptel-backend
       (gptel-make-bedrock "AWS"
 	:stream t
-	:region "eu-north-1"
+	:region "us-east-1"
 	:models '(claude-sonnet-4-20250514)
-	:model-region 'eu
+	:model-region 'us
 	:api-key (with-temp-buffer
 	  (insert-file-contents "~/.bedrock-api-key.gpg")
 	  (buffer-string))))
