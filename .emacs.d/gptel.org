@@ -26,7 +26,7 @@
 	:region "us-east-1"
 	:models '(claude-sonnet-4-20250514)
 	:model-region 'us
-	:api-key (with-temp-buffer
+	:bedrock-api-key (with-temp-buffer
 	  (insert-file-contents "~/.bedrock-api-key.gpg")
 	  (buffer-string))))
 #+end_src
