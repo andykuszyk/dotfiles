@@ -353,7 +353,7 @@ I like to see my weekly agenda alongside a list of current "objective" tasks:
 (setq org-agenda-custom-commands
       '(("o" "Agenda and objectives"
          ((tags-todo "objective" ((org-agenda-sorting-strategy '(priority-down))))
-	  (agenda "")
+	  (agenda "" ((org-agenda-span 1)))
 	  (tags-todo "CATEGORY=\"goals\"-future-objective" ((org-agenda-sorting-strategy '(priority-down))))
 	  (tags-todo "CATEGORY=\"goals\"+future-objective" ((org-agenda-sorting-strategy '(priority-down))))))))
 #+end_src
