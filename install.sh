@@ -20,5 +20,5 @@ for f in $(find . -type f | grep -v git); do
 done
 
 if [[ -d /usr/share/xsessions ]]; then
-    cp emacs.desktop /usr/share/xsessions
+    sudo cp emacs.desktop /usr/share/xsessions
 fi
