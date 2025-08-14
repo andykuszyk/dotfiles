@@ -3,11 +3,13 @@
 #+begin_src elisp :results none
 (use-package gptel :load-path "~/repos/andykuszyk/gptel/")
 (setq gptel-default-mode 'org-mode)
+(require 'gptel)
 #+end_src
-** Claude                                                          :noexport:
+** Claude
 #+begin_src elisp :results none
+(require 'gptel-anthropic)
 (setq
- gptel-model 'claude-opus-4-20250514
+ gptel-model 'claude-sonnet-4-20250514
  gptel-backend
  (gptel-make-anthropic
      "Claude"
