@@ -77,3 +77,13 @@ I use Perspective for managing workspaces.
 #+begin_src elisp
 (exwm-enable)
 #+end_src
+** Functions to change brightness
+#+begin_src elisp :results none
+(defun ak/increase-brightness ()
+  (interactive)
+  (shell-command "brightnessctl s +5"))
+
+(defun ak/decrease-brightness ()
+  (interactive)
+  (shell-command "brightnessctl s 5-"))
+#+end_src
