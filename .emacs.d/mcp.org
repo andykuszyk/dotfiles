@@ -1,0 +1,30 @@
+* MCP
+Configuration for an MCP client inside Emacs.
+** Installation and configuration
+#+begin_src elisp :results none
+(use-package mcp
+  :ensure t
+  :after gptel
+  :custom (mcp-hub-servers
+           `(
+	     ("github"
+	      :command "docker"
+	      :args ("run"
+		     "-i"
+		     "--rm"
+		     "-e" ,(format
+			   "GITHUB_PERSONAL_ACCESS_TOKEN=%s"
+			   (with-temp-buffer
+			     (insert-file-contents "~/.github-mcp-pat.gpg")
+			     (buffer-string)))
+		     "-e" "GITHUB_READ_ONLY=1"
+		     "ghcr.io/github/github-mcp-server"))
+	     ))
+  :config (require 'mcp-hub)
+  :hook (after-init . mcp-hub-start-all-server))
+#+end_src
+** Gptel configuration
+#+begin_src elisp :results none
+(require 'gptel-integrations)
+#+end_src
+After this configuration is complete, run =gptel-mcp-connect= to connect to an MCP server configured above.
