@@ -1,7 +1,7 @@
 * gptel for interacting with LLMs
 ** Installation
 #+begin_src elisp :results none
-(use-package gptel :load-path "~/repos/andykuszyk/gptel/")
+(use-package gptel :load-path "~/repos/gptel/")
 (setq gptel-default-mode 'org-mode)
 (require 'gptel)
 #+end_src
@@ -19,6 +19,7 @@
 	  (buffer-string))))
 #+end_src
 ** Claude via Bedrock
+Using Bedrock via an API key currently depends on [[https://github.com/karthink/gptel/pull/1053][this PR]].
 #+begin_src elisp :results none
 (when (file-exists-p "~/.bedrock-api-key.gpg")
   (require 'gptel-bedrock)
@@ -28,10 +29,10 @@
 	  :stream t
 	  :region "us-east-1"
 	  :models '(claude-sonnet-4-20250514)
-	  :model-region 'us
-	  :bedrock-api-key (with-temp-buffer
+	  :aws-bearer-token (with-temp-buffer
 			     (insert-file-contents "~/.bedrock-api-key.gpg")
-			     (buffer-string)))))
+			     (buffer-string))
+	  :model-region 'us)))
 #+end_src
 ** Global key binding
 #+begin_src elisp :results none
