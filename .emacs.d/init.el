@@ -50,6 +50,9 @@
 ;; Configuration for a variety of different programming languages.
 (org-babel-load-file (concat user-emacs-directory "languages.org"))
 
+;; Configuration for writing prose
+(org-babel-load-file (concat user-emacs-directory "writing.org"))
+
 ;; Load configuration for xwidgets, if it was compiled in.
 (if (featurep 'xwidget-internal)
     (org-babel-load-file (concat user-emacs-directory "xwidgets.org")))

@@ -1,0 +1,27 @@
+* Packages and configuration for writing
+** Olivetti
+Olivetti mode balances margins so that the text you are writing is centered in the window.
+#+begin_src elisp :results none
+(use-package olivetti :ensure t)
+#+end_src
+** Functions for modifying appearance for writing mode
+#+begin_src elisp :results none
+(defun ak/enable-writing-mode ()
+  (interactive)
+  (variable-pitch-mode 1)
+  (ak/enable-light-theme)
+  (olivetti-mode 1)
+  (display-line-numbers-mode -1)
+  (text-scale-increase 2)
+  (set-face-attribute 'variable-pitch nil :family "IBM Plex Serif"))
+
+(defun ak/disable-writing-mode ()
+  (interactive)
+  (ak/enable-dark-theme)
+  (olivetti-mode -1)
+  (display-line-numbers-mode)
+  (text-scale-increase -2)
+  (variable-pitch-mode -1))
+#+end_src
+** Some sample prose
+This is prose, and /this/ is prose *too*!
