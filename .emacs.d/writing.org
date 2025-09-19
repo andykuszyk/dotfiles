@@ -4,6 +4,11 @@ Olivetti mode balances margins so that the text you are writing is centered in t
 #+begin_src elisp :results none
 (use-package olivetti :ensure t)
 #+end_src
+** Install fonts
+I use the Computer Modern font from Latex. To install it on Mac OS:
+#+begin_src bash :results none :tangle no
+brew install --cask font-computer-modern
+#+end_src
 ** Functions for modifying appearance for writing mode
 #+begin_src elisp :results none
 (defun ak/enable-writing-mode ()
@@ -13,12 +18,14 @@ Olivetti mode balances margins so that the text you are writing is centered in t
   (olivetti-mode 1)
   (display-line-numbers-mode -1)
   (text-scale-increase 2)
-  (set-face-attribute 'variable-pitch nil :family "IBM Plex Serif"))
+  (hl-line-mode -1)
+  (set-face-attribute 'variable-pitch nil :family "CMU Serif"))
 
 (defun ak/disable-writing-mode ()
   (interactive)
   (ak/enable-dark-theme)
   (olivetti-mode -1)
+  (hl-line-mode 1)
   (display-line-numbers-mode)
   (text-scale-increase -2)
   (variable-pitch-mode -1))
