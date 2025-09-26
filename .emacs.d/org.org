@@ -407,3 +407,10 @@ I like to see my weekly agenda alongside a list of current "objective" tasks:
   (define-key org-agenda-mode-map (kbd "M-n") #'ak/org-agenda-next-section)
   (define-key org-agenda-mode-map (kbd "M-p") #'ak/org-agenda-previous-section))
 #+end_src
+* Hide line numbers in the org agenda
+#+begin_src elisp :results none
+(defun ak/org-agenda-mode-hook ()
+  (display-line-numbers-mode -1))
+
+(add-hook 'org-agenda-mode-hook #'ak/org-agenda-mode-hook)
+#+end_src
