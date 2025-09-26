@@ -210,3 +210,10 @@ I'm often in the middle of a source block in an org file, and want to collapse i
 				    (interactive)
 				    (shell-command "docker ps -q | xargs docker kill")))
 #+end_src
+** Function to make an empty commit
+Often in the morning I need to enter my GPG signing key passphrase before making commits via =git-commit-mode=. This can be a little awkward, so I run this function to create an empty commit first, and enter my passphrase:
+#+begin_src elisp :results none
+(defun ak/create-empty-commit ()
+  (interactive)
+  (magit-commit-create '("--allow-empty" "-m" "update")))
+#+end_src
