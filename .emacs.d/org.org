@@ -186,6 +186,7 @@ This function was taken from [[https://emacs.stackexchange.com/questions/3981/ho
 #+end_src
 * Org latex export
 #+begin_src elisp :results none
+(require 'ox-beamer)
 (add-to-list 'org-latex-classes
              '("letter"
                "\\documentclass{letter}"
