@@ -353,7 +353,8 @@ I like to see my weekly agenda alongside a list of current "objective" tasks:
 #+begin_src elisp :results none
 (setq org-agenda-custom-commands
       '(("o" "Agenda and objectives"
-         ((tags-todo "objective" ((org-agenda-sorting-strategy '(priority-down))))
+         ((tags-todo "objective+radar" ((org-agenda-sorting-strategy '(priority-down))))
+	  (tags-todo "objective-radar" ((org-agenda-sorting-strategy '(priority-down))))
 	  (agenda "" ((org-agenda-span 1)))
 	  (tags-todo "CATEGORY=\"goals\"-future-objective" ((org-agenda-sorting-strategy '(priority-down))))
 	  (tags-todo "CATEGORY=\"goals\"+future-objective" ((org-agenda-sorting-strategy '(priority-down))))))))
