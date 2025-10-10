@@ -33,7 +33,7 @@ This ensures that files =claude= modifies automatically update in Emacs:
 #+end_src
 ** Shell export statements
 #+begin_src bash :tangle no
-export ANTHROPIC_MODEL="us.anthropic.claude-sonnet-4-20250514-v1:0"
+export ANTHROPIC_MODEL="global.anthropic.claude-sonnet-4-5-20250929-v1:0"
 export AWS_BEARER_TOKEN_BEDROCK=$(gpg -d ~/.bedrock-api-key.gpg)
 export CLAUDE_CODE_USE_BEDROCK="1"
 #+end_src
