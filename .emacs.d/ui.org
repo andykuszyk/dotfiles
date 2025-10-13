@@ -157,4 +157,5 @@ Again, this isn't really a UI customisation, but it is another massive usability
 #+begin_src elisp :results none
 (use-package which-key :ensure t)
 (which-key-mode)
+(setq which-key-idle-delay 5.0) ; only display the which-key popup after 5 seconds of indecision!
 #+end_src
