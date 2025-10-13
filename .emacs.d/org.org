@@ -417,6 +417,7 @@ I like to see my weekly agenda alongside a list of current "objective" tasks:
 (add-hook 'org-agenda-mode-hook #'ak/org-agenda-mode-hook)
 #+end_src
 * Open org buffers from the agenda in a horizontal split
+Commented out for now, because it wasn't quite the behaviour I was looking for.
 #+begin_src elisp :results none
-(add-to-list 'display-buffer-alist '(".*org.*+" display-buffer-below-selected))
+; (add-to-list 'display-buffer-alist '(".*org.*+" display-buffer-below-selected))
 #+end_src
