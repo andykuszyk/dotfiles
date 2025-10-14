@@ -221,3 +221,7 @@ Often in the morning I need to enter my GPG signing key passphrase before making
 #+begin_src elisp :results none
 (global-set-key (kbd "C-x A E") #'eshell)
 #+end_src
+** Unbind =S-k= from killing buffers
+#+begin_src elisp :results none
+(unbind-key (kbd "s-k"))
+#+end_src
