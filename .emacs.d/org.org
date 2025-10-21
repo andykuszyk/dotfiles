@@ -24,6 +24,13 @@
            '((sequence "TODO" "PROG" "|" "DONE")))
 (setq org-icalendar-store-UID t) ; export tp ical with persistent ids
 #+end_src
+* Log timestamps when closing items, and show them in the agenda
+#+begin_src elisp :results none
+(setq org-log-done 'time) ; log the timestamp when an item is set to DONE
+(setq org-agenda-log-mode-items '(closed clock state)) ; show the timestamp of closed items in the agenda
+(setq org-agenda-show-log t) ; show log timestamps in the agenda
+(setq org-agenda-skip-scheduled-if-done t) ; hide scheduled items that are closed (they will still show at their closed time)
+#+end_src
 * Sticky org agenda buffers
 I often make use of different org agenda buffers, and prefer agenda commands to create new buffers, rather than re-using the existing one:
 #+begin_src elisp :results none
