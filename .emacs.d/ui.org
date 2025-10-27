@@ -131,9 +131,11 @@ It's handy to be able to quickly switch between light and dark themes, including
   (custom-set-faces
    '(org-scheduled-previously ((t (:foreground "#bc6ec5"))))
    '(org-scheduled-today ((t (:foreground "#b2b2b2"))))
-   '(org-agenda-done ((t (:strike-through t :height 1.0))))
+   '(org-agenda-done ((t (:strike-through nil :height 1.0))))
    '(org-done ((t (:inherit bold :strike-through nil))))
    '(org-headline-done ((t ( :strike-through nil))))))
+
+(ak/enable-dark-theme) ; enable dark theme to apply the org face changes
 #+end_src
 ** Display line numbers
 I always like to see line numbers in files, unless explicitly disabled.
