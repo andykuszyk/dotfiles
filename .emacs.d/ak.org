@@ -64,7 +64,7 @@ aws --profile %s --region us-east-1
   (interactive "sImage name: ")
   (insert (format "#+begin_src plantuml :file %s-%s.png
 
-,#+end_src" (buffer-name (current-buffer)) file-name)))
+,#+end_src" (buffer-name (current-buffer)) (string-replace " " "-" file-name))))
 
 (defun ak/insert-mermaid-source-block (file-name)
   (interactive "sImage name: ")
