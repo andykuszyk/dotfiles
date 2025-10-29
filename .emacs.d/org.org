@@ -366,9 +366,9 @@ I like to see my weekly agenda alongside a list of current "objective" tasks:
 	  (tags-todo "CATEGORY=\"goals\"-future-objective" ((org-agenda-sorting-strategy '(priority-down))))
 	  (tags-todo "CATEGORY=\"goals\"+future-objective" ((org-agenda-sorting-strategy '(priority-down))))))))
 #+end_src
-* Only show deadline reminders for tasks due in 2 days
+* Only show deadline reminders for tasks on the day they are due
 #+begin_src elisp :results none
-(setq org-deadline-warning-days 2)
+(setq org-deadline-warning-days 0)
 #+end_src
 * Functions to navigate between sections in org-agenda
 #+begin_src elisp :results none
