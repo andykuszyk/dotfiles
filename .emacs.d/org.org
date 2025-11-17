@@ -10,6 +10,8 @@
 (define-key org-mode-map (kbd "C-c C-s") #'org-schedule)
 (define-key org-mode-map (kbd "C-c o c") #'org-capture)
 (define-key org-mode-map (kbd "C-c o s") #'org-store-link)
+(define-key org-mode-map (kbd "M-p") #'org-up-element)
+(define-key org-mode-map (kbd "M-n") #'org-down-element)
 (require 'org-agenda)
 (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
 (define-key org-agenda-mode-map (kbd "C-c o c") #'org-capture)
