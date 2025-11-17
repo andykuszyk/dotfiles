@@ -120,6 +120,7 @@ It's handy to be able to quickly switch between light and dark themes, including
   (load-theme 'spacemacs-light t)
   (ak/spaceline-compile)
   (custom-set-faces
+   '(org-scheduled-today ((t (:foreground "#6c4173"))))
    '(org-agenda-done ((t (:foreground "#42ae2c" :strike-through t :height 1.0))))
    '(org-done ((t (:inherit bold :foreground "#42ae2c" :strike-through t))))
    '(org-headline-done ((t (:foreground "#2d9574" :strike-through t))))))
