@@ -109,3 +109,11 @@ echo "allow-emacs-pinentry" >> ~/.gnupg/gpg-agent.conf
 (global-set-key (kbd "C-x A P S") #'profiler-stop)
 (global-set-key (kbd "C-x A P r") #'profiler-report)
 #+end_src
+** Disable line numbers in image mode
+#+begin_src elisp :results none
+(defun ak/image-mode-hook ()
+  (display-line-numbers-mode -1)
+  (image-transform-fit-to-window))
+
+(add-hook 'image-mode-hook #'ak/image-mode-hook)
+#+end_src
