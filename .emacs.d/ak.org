@@ -226,3 +226,9 @@ Often in the morning I need to enter my GPG signing key passphrase before making
 #+begin_src elisp :results none
 (unbind-key (kbd "s-k"))
 #+end_src
+** Display a random wallpaper
+#+begin_src elisp :results none
+(defun ak/open-wallpaper ()
+  (interactive)
+  (find-file (seq-random-elt (directory-files "~/repos/andykuszyk/dotfiles/wallpaper/" t))))
+#+end_src
