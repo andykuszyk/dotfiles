@@ -2,6 +2,7 @@
 set -euo pipefail
 
 mkdir -p ~/.emacs.d/lisp
+mkdir -p ~/wallpaper
 mkdir -p ~/.config/i3
 mkdir -p ~/.config/gtk-3.0
 mkdir -p ~/.config/powerline/themes/wm
