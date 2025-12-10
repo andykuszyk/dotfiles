@@ -41,5 +41,5 @@ increases text scale, and disables line highlighting."
 This is prose, and /this/ is prose *too*!
 ** Keybinding for writing mode
 #+begin_src elisp :results none
-(global-set-key (kbd "C-x A W") #'ak/writing-mode)
+(global-set-key (kbd "C-x A w") #'ak/writing-mode)
 #+end_src
