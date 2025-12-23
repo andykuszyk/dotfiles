@@ -34,7 +34,21 @@ Using Bedrock via an API key currently depends on [[https://github.com/karthink/
 			     (buffer-string))
 	  :model-region 'us)))
 #+end_src
-** Global key binding
+** Global key bindings
 #+begin_src elisp :results none
-(global-set-key (kbd "C-x A c c") #'gptel)
+(defun ak/gptel (name)
+  (interactive
+   (list
+    (completing-read
+     "Gptel session: "
+     (seq-map #'buffer-name
+	      (seq-filter
+	       (lambda (b) (s-contains-p "*gptel" (buffer-name b)))
+	       (buffer-list))))))
+  (if (s-contains-p "*gptel" name)
+    (switch-to-buffer (gptel name))
+    (switch-to-buffer (gptel (format "*gptel %s*" name)))))
+
+(global-set-key (kbd "C-x G g") #'ak/gptel)
+(global-set-key (kbd "C-x G s") #'gptel-send)
 #+end_src
