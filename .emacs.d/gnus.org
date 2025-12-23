@@ -1,5 +1,5 @@
 * Gnus
-** Gnus wishlist [6/8]
+** Gnus wishlist [7/8]
 *** DONE see all fastmail imap folders in gnus
 CLOSED: [2025-11-28 Fri 17:43]
 This can be done from the group buffer with =L= (=gnus-group-list-all-groups=)
@@ -18,8 +18,10 @@ CLOSED: [2025-11-28 Fri 17:43]
 By default this can be achieved with =B DEL= (=gnus-summary-delete-article=)
 *** DONE compose a message, and send it from a fastmail address
 CLOSED: [2025-11-28 Fri 18:30]
-*** TODO read messages from the =andykuszyk= group
-*** TODO add rss/atom feeds from https://arxiv.org/
+*** DONE read messages from the =andykuszyk= group
+CLOSED: [2025-11-28 Fri 18:35]
+(It had a trailing space in fastmail)
+*** PROG add rss/atom feeds from https://arxiv.org/
 ** Connecting to fastmail
 #+begin_src elisp :results none
 (setq gnus-select-method '(nnimap "imap.fastmail.com"))
@@ -42,3 +44,10 @@ CLOSED: [2025-11-28 Fri 18:30]
 #+begin_src elisp :results none
 (setq gnus-auto-subscribed-groups ".*")
 #+end_src
+** RSS
+#+begin_src elisp :results none
+(setq gnus-secondary-select-methods
+      '((nnrss "rss.arxiv.org/rss/cs.SE") ; fails
+	(nnatom "rss.arxiv.org/atom/cs.SE"))) ; fails
+#+end_src
+
