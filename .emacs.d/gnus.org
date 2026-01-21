@@ -44,10 +44,10 @@ CLOSED: [2025-11-28 Fri 18:35]
 #+begin_src elisp :results none
 (setq gnus-auto-subscribed-groups ".*")
 #+end_src
-** RSS
+** Atom feeds
 #+begin_src elisp :results none
+(require 'nnatom)
 (setq gnus-secondary-select-methods
-      '((nnrss "rss.arxiv.org/rss/cs.SE") ; fails
-	(nnatom "rss.arxiv.org/atom/cs.SE"))) ; fails
+      '((nnatom "rss.arxiv.org/atom/cs.SE")))
 #+end_src
 
