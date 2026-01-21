@@ -6,7 +6,7 @@ This package facilitates interacting with the Jira CLI from within Emacs:
 (when (file-directory-p "~/repos/andykuszyk/jira-cli.el")
   (use-package jira-cli
     :load-path "~/repos/andykuszyk/jira-cli.el/"
-    :bind (("C-x j j" . jira-cli)))
+    :bind (("C-x j j" . jira-cli-list-issues-jql)))
   (require 'jira-cli))
 #+end_src
 ** ob-jira-markdown
@@ -19,4 +19,20 @@ I like to write and edit Jira issues as org-babel source blocks, and this packag
 	   ("C-x j w" . ob-jira-markdown-kill-issue)))
   (require 'ob-jira-markdown)
   (require 'jira-markdown-mode))
+#+end_src
+** The jira.el package
+#+begin_src elisp :results none
+(use-package jira
+  :ensure t
+  :config
+  (setq jira-base-url "https://typeform.atlassian.net")
+  (setq jira-issues-table-fields
+	'(:key
+	  :summary
+	  :assignee-name
+	  :status-name
+	  :labels
+	  :parent-summary
+	  ))
+  (setq jira-issues-max-results 100))
 #+end_src
