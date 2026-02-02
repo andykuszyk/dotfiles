@@ -1,12 +1,28 @@
 * MCP
 Configuration for an MCP client inside Emacs.
-** Installation and configuration
+** MCP client configuration
+oI use the =mcp= package as an MCP client within Emacs. This allows me to connect an LLM client running in Emacs (e.g. =gptel=) to external MCP servers.
 #+begin_src elisp :results none
 (use-package mcp
   :ensure t
   :after gptel
   :custom (mcp-hub-servers
            `(
+	     ("glean"
+	      :command "npx"
+	      :args ("-y"
+		     "@gleanwork/local-mcp-server"
+		     "-i"
+		     "typeform-prod"
+		     "-t"
+		     ,(with-temp-buffer
+		      (insert-file-contents "~/.glean-token.gpg")
+		      (buffer-string))))
+	     ("emacs"
+	      :command "socat"
+	      :args
+	      ("-"
+	       "UNIX-CONNECT:/Users/andy.kuszyk/.emacs.d/emacs-mcp-server.sock"))
 	     ("github"
 	      :command "docker"
 	      :args ("run"
@@ -24,7 +40,16 @@ Configuration for an MCP client inside Emacs.
   :hook (after-init . mcp-hub-start-all-server))
 #+end_src
 ** Gptel configuration
+A special =gptel= package is required to enable the interoperability between =gptel= and =mcp=:
 #+begin_src elisp :results none
 (require 'gptel-integrations)
 #+end_src
 After this configuration is complete, run =gptel-mcp-connect= to connect to an MCP server configured above.
+** Emacs MCP server
+I also run an MCP server from /within/ Emacs, so that I can expose the functionality of my running Emacs instance to an LLM client (e.g.  =gptel=; so the LLM client in Emacs can interact with its host Emacs instance).
+#+begin_src elisp :results none
+(use-package mcp-server
+  :ensure t
+  :vc (:url "https://github.com/rhblind/emacs-mcp-server" :rev :newest))
+(mcp-server-start-unix)
+#+end_src
