@@ -435,3 +435,7 @@ Commented out for now, because it wasn't quite the behaviour I was looking for.
 (setq org-agenda-scheduled-leaders '("0d"
 				     "%dd"))
 #+end_src
+* Show recursive cookies for checkboxes
+#+begin_src elisp :results none
+(setq org-checkbox-hierarchical-statistics nil)
+#+end_src
