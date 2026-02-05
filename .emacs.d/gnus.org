@@ -50,4 +50,8 @@ CLOSED: [2025-11-28 Fri 18:35]
 (setq gnus-secondary-select-methods
       '((nnatom "rss.arxiv.org/atom/cs.SE")))
 #+end_src
-
+** Storing sent messages via IMAP
+#+begin_src elisp :results none
+(setq gnus-message-archive-method "nnimap:imap.fastmail.com"
+      gnus-message-archive-group "Sent")
+#+end_src
