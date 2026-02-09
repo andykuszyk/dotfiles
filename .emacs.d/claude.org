@@ -2,8 +2,7 @@
 ** Install the package
 #+begin_src elisp :results none
 (use-package web-server :ensure t) ; dependency
-(use-package claude-code-ide
-  :load-path "~/repos/andykuszyk/claude-code-ide.el")
+(use-package claude-code-ide :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest))
 (claude-code-ide-emacs-tools-setup)
 #+end_src
 ** Side window placement
