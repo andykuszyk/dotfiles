@@ -16,8 +16,8 @@ oI use the =mcp= package as an MCP client within Emacs. This allows me to connec
 		     "typeform-prod"
 		     "-t"
 		     ,(with-temp-buffer
-		      (insert-file-contents "~/.glean-token.gpg")
-		      (buffer-string))))
+			(insert-file-contents "~/.glean-token.gpg")
+			(buffer-string))))
 	     ("emacs"
 	      :command "socat"
 	      :args
@@ -29,10 +29,10 @@ oI use the =mcp= package as an MCP client within Emacs. This allows me to connec
 		     "-i"
 		     "--rm"
 		     "-e" ,(format
-			   "GITHUB_PERSONAL_ACCESS_TOKEN=%s"
-			   (with-temp-buffer
-			     (insert-file-contents "~/.github-mcp-pat.gpg")
-			     (buffer-string)))
+			    "GITHUB_PERSONAL_ACCESS_TOKEN=%s"
+			    (with-temp-buffer
+			      (insert-file-contents "~/.github-mcp-pat.gpg")
+			      (buffer-string)))
 		     "-e" "GITHUB_READ_ONLY=1"
 		     "ghcr.io/github/github-mcp-server"))
 	     ))
