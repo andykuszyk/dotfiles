@@ -30,16 +30,16 @@ Similar to man pages, I prefer to read info pages without line numbers, and some
   (display-line-numbers-mode -1))
 (add-hook 'Info-mode-hook #'ak/info-mode-hook)
 #+end_src
-** PDF tools
-I like to read PDF documentation in Emacs as well, but the built-in support for PDFs isn't very good. ~pdf-tools~ does a good job however.
+** Emacs reader for PDFs
 #+begin_src elisp :results none
-(when (display-graphic-p)
-  (use-package pdf-tools :ensure t)
-  (pdf-tools-install)
-  (defun ak/pdf-view-mode-hook ()
-    (display-line-numbers-mode -1)
-    (pdf-view-midnight-minor-mode)) ; open pdfs in dark mode by default
-  (add-hook 'pdf-view-mode-hook #'ak/pdf-view-mode-hook))
+(setq package-vc-allow-build-commands t)
+(use-package reader
+    :vc (:url "https://codeberg.org/divyaranjan/emacs-reader"
+  	    :make "all"))
+(defun ak/reader-mode-hook ()
+  (display-line-numbers-mode -1)
+  (reader-dark-mode)) ; open pdfs in dark mode by default
+(add-hook 'reader-mode-hook #'ak/reader-mode-hook))
 #+end_src
 ** Terraform docs
 This is a handy package which downloads documentation for Terraform providers, and makes them browsable in Emacs.
