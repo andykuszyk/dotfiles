@@ -27,9 +27,6 @@
 ;; Configure Emacs as a terminal emulator.
 (org-babel-load-file (concat user-emacs-directory "terminal.org"))
 
-;; Configure various tools for viewing documentaiton in Emacs.
-(org-babel-load-file (concat user-emacs-directory "documentation.org"))
-
 ;; Various custom functions and keybindings.
 (org-babel-load-file (concat user-emacs-directory "ak.org"))
 
@@ -40,6 +37,9 @@
 (if (string= system-type "darwin")
     (org-babel-load-file (concat user-emacs-directory "darwin.org"))
   (org-babel-load-file (concat user-emacs-directory "linux.org")))
+
+;; Configure various tools for viewing documentaiton in Emacs.
+(org-babel-load-file (concat user-emacs-directory "documentation.org"))
 
 ;; General and miscellaneous Emacs configuration.
 (org-babel-load-file (concat user-emacs-directory "emacs.org"))

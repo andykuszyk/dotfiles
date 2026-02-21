@@ -72,3 +72,11 @@ end tell'"))
   (global-set-key (kbd "C-x A W o") #'osawm-open-chrome)
   (global-set-key (kbd "C-x A W S") #'osawm-search-chrome))
 #+end_src
+** Set PKG_CONFIG_PATH
+Setting this variable fixes some problems with the compilation of pdf tools on Mac OS:
+#+begin_src elisp :results none
+(setenv "PKG_CONFIG_PATH"
+	(format
+	 "/opt/homebrew/lib/pkgconfig:%s"
+	 (getenv "PKG_CONFIG_PATH")))
+#+end_src
