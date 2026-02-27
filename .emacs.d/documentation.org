@@ -39,7 +39,7 @@ Similar to man pages, I prefer to read info pages without line numbers, and some
 (defun ak/reader-mode-hook ()
   (display-line-numbers-mode -1)
   (reader-dark-mode)) ; open pdfs in dark mode by default
-(add-hook 'reader-mode-hook #'ak/reader-mode-hook))
+(add-hook 'reader-mode-hook #'ak/reader-mode-hook)
 #+end_src
 ** Terraform docs
 This is a handy package which downloads documentation for Terraform providers, and makes them browsable in Emacs.
