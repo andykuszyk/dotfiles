@@ -1,7 +1,8 @@
 * gptel for interacting with LLMs
 ** Installation
 #+begin_src elisp :results none
-(use-package gptel :load-path "~/repos/gptel/")
+(use-package gptel :ensure t)
+(use-package gptel-agent :ensure t)
 (setq gptel-default-mode 'org-mode)
 (require 'gptel)
 #+end_src
