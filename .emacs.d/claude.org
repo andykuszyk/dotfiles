@@ -41,17 +41,9 @@ export CLAUDE_CODE_USE_BEDROCK="1"
 Agent shell is an emacs package that provides a native client to the underlying Claude Code agent.
 ** Install claude code ACP support
 Support for the Agent Client Protocol needs to be installed first:
-#+begin_src bash :results output verbatim
+#+begin_src bash :results output verbatim :results none
 npm install -g @zed-industries/claude-agent-acp
 #+end_src
-
-#+RESULTS:
-: 
-: added 20 packages in 2s
-: 
-: 17 packages are looking for funding
-:   run `npm fund` for details
-
 ** Install agent shell
 #+begin_src elisp :results none
 (use-package agent-shell :ensure t)
