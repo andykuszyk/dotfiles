@@ -34,3 +34,30 @@ export ANTHROPIC_MODEL="global.anthropic.claude-sonnet-4-5-20250929-v1:0"
 export AWS_BEARER_TOKEN_BEDROCK=$(gpg -d ~/.bedrock-api-key.gpg)
 export CLAUDE_CODE_USE_BEDROCK="1"
 #+end_src
+
+#+RESULTS:
+
+* Agent shell
+Agent shell is an emacs package that provides a native client to the underlying Claude Code agent.
+** Install claude code ACP support
+Support for the Agent Client Protocol needs to be installed first:
+#+begin_src bash :results output verbatim
+npm install -g @zed-industries/claude-agent-acp
+#+end_src
+
+#+RESULTS:
+: 
+: added 20 packages in 2s
+: 
+: 17 packages are looking for funding
+:   run `npm fund` for details
+
+** Install agent shell
+#+begin_src elisp :results none
+(use-package agent-shell :ensure t)
+#+end_src
+** Inherit agent shell environment from emacs
+#+begin_src elisp :results none
+(setq agent-shell-anthropic-claude-environment
+      (agent-shell-make-environment-variables :inherit-env t))
+#+end_src
