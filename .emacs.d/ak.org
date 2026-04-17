@@ -232,3 +232,15 @@ Often in the morning I need to enter my GPG signing key passphrase before making
   (interactive)
   (find-file (seq-random-elt (seq-filter (lambda (s) (or (s-ends-with-p ".png" s) (s-ends-with-p ".jpg" s))) (directory-files "~/repos/andykuszyk/dotfiles/wallpaper/" t)))))
 #+end_src
+** Function to format a slack message to request a review on a pr
+#+begin_src elisp :results none
+(defun ak/format-pr-slack-message (url desc)
+  (interactive "MPR URL: \nMwhich... ")
+  (kill-new
+   (format
+    "Hi team 👋
+
+Please could I ask for a review on [this PR](%s) which %s 🙏"
+    url
+    desc)))
+#+end_src
