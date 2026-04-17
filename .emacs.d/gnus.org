@@ -18,6 +18,7 @@ CLOSED: [2025-11-28 Fri 17:43]
 By default this can be achieved with =B DEL= (=gnus-summary-delete-article=)
 *** DONE compose a message, and send it from a fastmail address
 CLOSED: [2025-11-28 Fri 18:30]
+Start composing by pressing =m= in the group buffer.
 *** DONE read messages from the =andykuszyk= group
 CLOSED: [2025-11-28 Fri 18:35]
 (It had a trailing space in fastmail)
