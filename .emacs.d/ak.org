@@ -244,3 +244,12 @@ Please could I ask for a review on [this PR](%s) which %s 🙏"
     url
     desc)))
 #+end_src
+** Function to add a cookie at the end of an org mode heading
+#+begin_src elisp :results none
+(defun ak/add-org-mode-cookie ()
+  (interactive)
+  (end-of-line)
+  (search-backward " ")
+  (insert " [/]")
+  (beginning-of-line))
+#+end_src
