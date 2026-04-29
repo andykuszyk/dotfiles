@@ -439,3 +439,11 @@ Commented out for now, because it wasn't quite the behaviour I was looking for.
 #+begin_src elisp :results none
 (setq org-checkbox-hierarchical-statistics nil)
 #+end_src
+* Custom function to set in-progress status on checkboxes
+#+begin_src elisp :results none
+(defun ak/org-mode-set-checkbox-in-progress ()
+  (interactive)
+  (replace-string "- [ ] " "- [-] " nil (pos-bol) (pos-eol)))
+
+(define-key org-mode-map (kbd "C-c C--") #'ak/org-mode-set-checkbox-in-progress)
+#+end_src
