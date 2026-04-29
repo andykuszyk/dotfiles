@@ -15,6 +15,7 @@ export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:$HOME/.claude/local"
+export PATH="$HOME/.rd/bin:$PATH"
 
 # Oh my zsh configuration.
 export ZSH="$HOME/.oh-my-zsh"
