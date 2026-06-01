@@ -96,13 +96,16 @@ if [[ -d "$HOME/.pyenv" ]]; then
     eval "$(pyenv init -)"
 fi
 
-# kubectl command completion
-if $(which kubectl > /dev/null); then
-    alias k='kubectl'
-    alias kc='k config get-contexts $(k config current-context)'
-    source <(kubectl completion zsh)
-    complete -F __start_kubectl k
-fi
+# kubectl command completion. This is implemented as a function, because
+# it can make network calls that might slow-down terminal start-up.
+function load_kubectl() {
+    if $(which kubectl > /dev/null); then
+	alias k='kubectl'
+	alias kc='k config get-contexts $(k config current-context)'
+	source <(kubectl completion zsh)
+	complete -F __start_kubectl k
+    fi
+}
 
 # Function to read stdin, and open it in an Emacs buffer.
 function ep() {
