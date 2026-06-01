@@ -253,3 +253,23 @@ Please could I ask for a review on [this PR](%s) which %s 🙏"
   (insert " [/]")
   (beginning-of-line))
 #+end_src
+** Function to replace characters in region with italic unicode variants
+#+begin_src elisp :results none
+(defun ak/replace-region-italics ()
+  (interactive)
+  (when (use-region-p)
+    (let* ((start (region-beginning))
+           (end (region-end))
+           (text (buffer-substring-no-properties start end))
+           (result (mapconcat
+                    (lambda (c)
+                      (cond
+                       ((= c ?h) (string #x210E))
+                       ((and (>= c ?a) (<= c ?z)) (string (+ c #x1D3ED)))
+                       ((and (>= c ?A) (<= c ?Z)) (string (+ c #x1D3F3)))
+                       (t (string c))))
+                    text
+                    "")))
+      (delete-region start end)
+      (insert result))))
+#+end_src
