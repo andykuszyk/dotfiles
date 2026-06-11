@@ -253,6 +253,25 @@ Please could I ask for a review on [this PR](%s) which %s 🙏"
   (insert " [/]")
   (beginning-of-line))
 #+end_src
+** Function to replace characters in region with bold unicode variants
+#+begin_src elisp :results none
+(defun ak/replace-region-bold ()
+  (interactive)
+  (when (use-region-p)
+    (let* ((start (region-beginning))
+           (end (region-end))
+           (text (buffer-substring-no-properties start end))
+           (result (mapconcat
+                    (lambda (c)
+                      (cond
+                       ((and (>= c ?a) (<= c ?z)) (string (+ c #x1D3B9)))
+                       ((and (>= c ?A) (<= c ?Z)) (string (+ c #x1D3BF)))
+                       (t (string c))))
+                    text
+                    "")))
+      (delete-region start end)
+      (insert result))))
+#+end_src
 ** Function to replace characters in region with italic unicode variants
 #+begin_src elisp :results none
 (defun ak/replace-region-italics ()
