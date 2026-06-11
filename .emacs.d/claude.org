@@ -15,7 +15,7 @@
 #+end_src
 ** Global key binding
 #+begin_src elisp :results none
-(global-set-key (kbd "C-x A c C") #'claude-code-ide)
+(define-key projectile-mode-map (kbd "C-c p c c") #'claude-code-ide)
 #+end_src
 ** Enable global revert mode
 This ensures that files =claude= modifies automatically update in Emacs:
