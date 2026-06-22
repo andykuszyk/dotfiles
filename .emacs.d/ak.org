@@ -292,3 +292,14 @@ Please could I ask for a review on [this PR](%s) which %s 🙏"
       (delete-region start end)
       (insert result))))
 #+end_src
+** Function to copy a file's absolute file path in a dired buffer
+This function allows you to copy a file's absolute file path by pressing =W= in a dired buffer:
+#+begin_src elisp :results none
+(defun ak/dired-kill-absolute-path ()
+  (interactive)
+  (let* ((filename (dired-get-filename)))
+    (kill-new filename)
+    (message filename)))
+
+(define-key dired-mode-map (kbd "W") #'ak/dired-kill-absolute-path)
+#+end_src
