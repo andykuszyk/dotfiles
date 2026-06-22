@@ -460,3 +460,13 @@ ensures they stay monospace regardless of the default face.
   (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
   (set-face-attribute 'org-verbatim nil :inherit 'fixed-pitch))
 #+end_src
+
+The same applies in ~markdown-mode~: code spans, code blocks, and tables should stay
+monospace when ~variable-pitch-mode~ is active.
+#+begin_src elisp :results none
+(with-eval-after-load 'markdown-mode
+  (set-face-attribute 'markdown-code-face nil :inherit 'fixed-pitch)
+  (set-face-attribute 'markdown-pre-face nil :inherit 'fixed-pitch)
+  (set-face-attribute 'markdown-table-face nil :inherit 'fixed-pitch)
+  (set-face-attribute 'markdown-inline-code-face nil :inherit 'fixed-pitch))
+#+end_src
