@@ -447,26 +447,3 @@ Commented out for now, because it wasn't quite the behaviour I was looking for.
 
 (define-key org-mode-map (kbd "C-c C--") #'ak/org-mode-set-checkbox-in-progress)
 #+end_src
-* Keep tables and source blocks in fixed-pitch font
-When ~variable-pitch-mode~ is active (e.g. via ~ak/writing-mode~), org tables and
-source blocks should remain monospace. Setting these faces to inherit ~fixed-pitch~
-ensures they stay monospace regardless of the default face.
-#+begin_src elisp :results none
-(with-eval-after-load 'org
-  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-block-end-line nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-verbatim nil :inherit 'fixed-pitch))
-#+end_src
-
-The same applies in ~markdown-mode~: code spans, code blocks, and tables should stay
-monospace when ~variable-pitch-mode~ is active.
-#+begin_src elisp :results none
-(with-eval-after-load 'markdown-mode
-  (set-face-attribute 'markdown-code-face nil :inherit 'fixed-pitch)
-  (set-face-attribute 'markdown-pre-face nil :inherit 'fixed-pitch)
-  (set-face-attribute 'markdown-table-face nil :inherit 'fixed-pitch)
-  (set-face-attribute 'markdown-inline-code-face nil :inherit 'fixed-pitch))
-#+end_src
