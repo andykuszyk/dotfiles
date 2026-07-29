@@ -62,7 +62,7 @@ aws --profile %s --region us-east-1
 
 (defun ak/insert-plantuml-source-block (file-name)
   (interactive "sImage name: ")
-  (insert (format "#+begin_src plantuml :file %s-%s.png
+  (insert (format "#+begin_src plantuml :file %s-%s.png :noweb yes
 
 ,#+end_src" (buffer-name (current-buffer)) (string-replace " " "-" file-name))))
 
