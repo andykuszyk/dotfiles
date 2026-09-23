@@ -28,6 +28,19 @@
            '((sequence "TODO" "PROG" "|" "DONE")))
 (setq org-icalendar-store-UID t) ; export tp ical with persistent ids
 #+end_src
+* Custom functions and keybindings for navigating description lists
+#+begin_src elisp :results none
+(defun ak/next-description-list-item ()
+  (interactive)
+  (re-search-forward "^.* \:\:"))
+
+(defun ak/previous-description-list-item ()
+  (interactive)
+  (re-search-backward "^.* \:\:"))
+
+(define-key org-mode-map (kbd "C-c M-n") #'ak/next-description-list-item)
+(define-key org-mode-map (kbd "C-c M-p") #'ak/previous-description-list-item)
+#+end_src
 * Log timestamps when closing items, and show them in the agenda
 #+begin_src elisp :results none
 (setq org-log-done 'time) ; log the timestamp when an item is set to DONE
