@@ -39,7 +39,7 @@ aws --profile %s --region us-east-1
 
 (defun ak/insert-bash-source-block ()
   (interactive)
-  (insert "#+begin_src bash :results output verbatim
+  (insert "#+begin_src bash :results output verbatim :noweb yes
 ,#+end_src"))
 
 (defun ak/insert-elisp-source-block ()
