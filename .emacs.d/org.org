@@ -138,7 +138,7 @@ This means that ~C-c C-j~ will use completion in the minibuffer for navigating t
 (use-package ob-go :ensure t)
 
 ;; Use python3 for python blocks
-(setq org-babel-python-command "python3")
+(setq org-babel-python-command "~/.venv/bin/python3")
 
 (require 'ob-js)
 
