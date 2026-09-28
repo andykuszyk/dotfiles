@@ -56,7 +56,7 @@ aws --profile %s --region us-east-1
 
 (defun ak/insert-python-source-block ()
   (interactive)
-  (insert "#+begin_src python :results output verbatim
+  (insert "#+begin_src python :results output verbatim :noweb yes
 
 ,#+end_src"))
 
