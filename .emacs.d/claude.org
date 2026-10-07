@@ -42,7 +42,7 @@ Agent shell is an emacs package that provides a native client to the underlying 
 ** Install claude code ACP support
 Support for the Agent Client Protocol needs to be installed first:
 #+begin_src bash :results output verbatim :results none
-npm install -g @zed-industries/claude-agent-acp
+npm install -g @agentclientprotocol/claude-agent-acp
 #+end_src
 ** Install agent shell
 #+begin_src elisp :results none
@@ -52,4 +52,20 @@ npm install -g @zed-industries/claude-agent-acp
 #+begin_src elisp :results none
 (setq agent-shell-anthropic-claude-environment
       (agent-shell-make-environment-variables :inherit-env t))
+#+end_src
+** Configure agent shell for claude code
+#+begin_src elisp :results none
+(setq agent-shell-anthropic-authentication
+      (agent-shell-anthropic-make-authentication :login t))
+#+end_src
+** Hide line numbers in agent-shell-mode
+#+begin_src elisp :results none
+(defun ak/agent-shell-mode-hook ()
+  (display-line-numbers-mode -1))
+
+(add-hook 'agent-shell-mode-hook #'ak/agent-shell-mode-hook)
+#+end_src
+** Global key binding
+#+begin_src elisp :results none
+(define-key projectile-mode-map (kbd "C-c p c c") #'agent-shell-anthropic-start-claude-code)
 #+end_src
