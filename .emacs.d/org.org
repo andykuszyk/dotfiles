@@ -471,3 +471,10 @@ Commented out for now, because it wasn't quite the behaviour I was looking for.
 
 (define-key org-agenda-mode-map (kbd "<tab>") #'ak/org-agenda-goto)
 #+end_src
+* Function to create buffer from heading
+#+begin_src elisp :results none
+(defun ak/buffer-from-heading ()
+  (interactive)
+  (clone-indirect-buffer (org-get-heading t t t t) t)
+  (org-narrow-to-subtree))
+#+end_src
