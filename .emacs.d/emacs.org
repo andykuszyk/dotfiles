@@ -72,7 +72,7 @@ Allows emojis to easily be inserted from a completion menu.
   (if (yes-or-no-p "Are you sure you want to quit? ")
       (save-buffers-kill-emacs)))
 
-(global-set-key (kbd "C-x C-c") 'ak/quit)
+(global-set-key (kbd "C-x C-c") nil) ; never quit emacs on a keybinding, do it manually
 #+end_src
 ** Unbind frame suspension keys
 I occasionally hit ~C-z~ by accident, and find it annoying that the frame is suspended or minimised in some fashion. I prefer to unbind suspension keys:
