@@ -65,7 +65,8 @@ npm install -g @agentclientprotocol/claude-agent-acp
 
 (add-hook 'agent-shell-mode-hook #'ak/agent-shell-mode-hook)
 #+end_src
-** Global key binding
+** Global key bindings
 #+begin_src elisp :results none
 (define-key projectile-mode-map (kbd "C-c p c c") #'agent-shell-anthropic-start-claude-code)
+(define-key projectile-mode-map (kbd "C-c p c s") #'agent-shell-send-region)
 #+end_src
