@@ -70,3 +70,7 @@ npm install -g @agentclientprotocol/claude-agent-acp
 (define-key projectile-mode-map (kbd "C-c p c c") #'agent-shell-anthropic-start-claude-code)
 (define-key projectile-mode-map (kbd "C-c p c s") #'agent-shell-send-region)
 #+end_src
+** Agent shell customisations
+#+begin_src elisp :results none
+(setq agent-shell-header-style "text")
+#+end_src
