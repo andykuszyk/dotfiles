@@ -47,6 +47,7 @@ npm install -g @agentclientprotocol/claude-agent-acp
 ** Install agent shell
 #+begin_src elisp :results none
 (use-package agent-shell :ensure t)
+(require 'agent-shell)
 #+end_src
 ** Inherit agent shell environment from emacs
 #+begin_src elisp :results none
