@@ -1,44 +1,10 @@
-* Claude code
-** Install the package
-#+begin_src elisp :results none
-(use-package web-server :ensure t) ; dependency
-(use-package claude-code-ide :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest))
-(claude-code-ide-emacs-tools-setup)
-#+end_src
-** Side window placement
-#+begin_src elisp :results none
-(setq claude-code-ide-use-side-window nil)
-#+end_src
-** Debugging
-#+begin_src elisp :results none
-(setq claude-code-ide-debug t)
-#+end_src
-** Global key binding
-#+begin_src elisp :results none
-(define-key projectile-mode-map (kbd "C-c p c c") #'claude-code-ide)
-#+end_src
+* Agent shell
+Agent shell is an emacs package that provides a native client to the underlying Claude Code agent.
 ** Enable global revert mode
 This ensures that files =claude= modifies automatically update in Emacs:
 #+begin_src elisp :results none
 (global-auto-revert-mode)
 #+end_src
-** Configure claude to use AWS bedrock
-#+begin_src elisp :results none
-(setenv "ANTHROPIC_MODEL" "")
-(setenv "AWS_BEARER_TOKEN_BEDROCK" "")
-(setenv "CLAUDE_CODE_USE_BEDROCK" "")
-#+end_src
-** Shell export statements
-#+begin_src bash :tangle no
-export ANTHROPIC_MODEL="global.anthropic.claude-sonnet-4-5-20250929-v1:0"
-export AWS_BEARER_TOKEN_BEDROCK=$(gpg -d ~/.bedrock-api-key.gpg)
-export CLAUDE_CODE_USE_BEDROCK="1"
-#+end_src
-
-#+RESULTS:
-
-* Agent shell
-Agent shell is an emacs package that provides a native client to the underlying Claude Code agent.
 ** Install claude code ACP support
 Support for the Agent Client Protocol needs to be installed first:
 #+begin_src bash :results output verbatim :results none

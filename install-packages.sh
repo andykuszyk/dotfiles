@@ -9,7 +9,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     os="darwin"
     package_manager="brew install"
     additional_packages="jansson texinfo libgccjit tree-sitter"
-elif command pacman; then
+elif which pacman; then
     os="arch-linux"
     package_manager="sudo pacman -Syu"
     additional_packages="which openssh dmenu firefox maim xclip scrot pavucontrol libjansson-dev"
@@ -22,7 +22,6 @@ fi
 echo "About to install packages on $os using $package_manager..."
 sleep 2
 
-eval $package_manager $packages $additional_packages
 
 # Install oh-my-zsh.
 if [[ ! -d ~/.oh-my-zsh/ ]]; then

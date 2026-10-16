@@ -35,8 +35,12 @@
 
 ;; Specific configuration for Mac OS, and Linux.
 (if (string= system-type "darwin")
-    (org-babel-load-file (concat user-emacs-directory "darwin.org"))
-  (org-babel-load-file (concat user-emacs-directory "linux.org")))
+    (org-babel-load-file (concat user-emacs-directory "darwin.org")))
+
+;; Optionally load exwm settings
+(defvar ak/load-exwm nil)
+(if ak/load-exwm
+    (org-babel-load-file (concat user-emacs-directory "exwm.org")))
 
 ;; Configure various tools for viewing documentaiton in Emacs.
 (org-babel-load-file (concat user-emacs-directory "documentation.org"))
@@ -62,11 +66,7 @@
     (load-file "~/.emacs.d/lisp/gh-repo-search.el")
     (require 'gh-repo-search))
 
-;; Configure gptel if an anthropic API key is stored on disk.
-(when (file-exists-p "~/.anthropic-api-key.gpg")
-  (org-babel-load-file (concat user-emacs-directory "gptel.org")))
-
-;; Configure claude-code-ide if claude is installed
+;; Configure claude code support if claude is installed
 (when (executable-find "claude")
   (org-babel-load-file (concat user-emacs-directory "claude.org")))
 
