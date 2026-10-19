@@ -164,3 +164,8 @@ Again, this isn't really a UI customisation, but it is another massive usability
 (which-key-mode)
 (setq which-key-idle-delay 5.0) ; only display the which-key popup after 5 seconds of indecision!
 #+end_src
+*** Disable which-key
+These days i actually prefer to disable which-key, and use =C-h= after typing an incomplete key chord to find out what the possible options are.
+#+begin_src elisp :results none
+(which-key-mode -1)
+#+end_src
