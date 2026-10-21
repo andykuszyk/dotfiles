@@ -24,6 +24,7 @@ In order for files to be autocommitted, the following ~.dir-locals.el~ file is r
 #+end_example
 ** Flyspell in text mode
 #+begin_src elisp :results none
+(setq ispell-dictionary "english")
 (defun ak/text-mode-hook ()
   (flyspell-mode))
 (add-hook 'text-mode-hook #'ak/text-mode-hook)
