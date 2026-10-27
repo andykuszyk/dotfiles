@@ -73,3 +73,8 @@ I've written a package for browsing command-line documentation, which I often us
 (add-to-list 'display-buffer-alist '(".*noman.*" display-buffer-same-window))
 (global-set-key (kbd "C-x A n") #'noman)
 #+end_src
+** Markdown mermaid previews
+This package allows Mermaid diagrams in Markdown files to be rendered on demand:
+#+begin_src elisp :results none
+(package-install 'markdown-mermaid)
+#+end_src
