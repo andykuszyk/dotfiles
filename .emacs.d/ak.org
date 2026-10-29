@@ -264,8 +264,8 @@ Please could I ask for a review on [this PR](%s) which %s 🙏"
            (result (mapconcat
                     (lambda (c)
                       (cond
-                       ((and (>= c ?a) (<= c ?z)) (string (+ c #x1D3B9)))
-                       ((and (>= c ?A) (<= c ?Z)) (string (+ c #x1D3BF)))
+                       ((and (>= c ?a) (<= c ?z)) (string (+ c #x1D58D)))
+                       ((and (>= c ?A) (<= c ?Z)) (string (+ c #x1D593)))
                        (t (string c))))
                     text
                     "")))
