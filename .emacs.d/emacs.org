@@ -118,3 +118,7 @@ echo "allow-emacs-pinentry" >> ~/.gnupg/gpg-agent.conf
 
 (add-hook 'image-mode-hook #'ak/image-mode-hook)
 #+end_src
+** Display file sizes in human-readable format in dired
+#+begin_src elisp :results none
+(setq dired-listing-switches "-alh")
+#+end_src
